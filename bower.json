@@ -1,0 +1,22 @@
+{
+  "name": "cm",
+  "description": "",
+  "main": "",
+  "authors": [
+    "bhurivaj"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3"
+  }
+}
