@@ -8,7 +8,7 @@ class Home extends CI_Controller {
 		$data['title'] = 'Dashboard';
 
 
-		$this->load->view('parts/head');
+		$this->load->view('parts/head',$data);
 		$this->load->view('home',$data);
 		$this->load->view('parts/footer');	}
 
@@ -17,7 +17,7 @@ class Home extends CI_Controller {
 		$data['title'] = 'Rental';
 
 
-		$this->load->view('parts/head');
+		$this->load->view('parts/head',$data);
 		$this->load->view('rental/rental_list',$data);
 		$this->load->view('parts/footer');	}
 }

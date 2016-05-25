@@ -1,63 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
-
-    <!-- Bootstrap -->
-    <link href="<?php echo asset_url().'bower/bootstrap/dist/css/bootstrap.css'; ?>" rel="stylesheet">
-    <link href="<?php echo asset_url().'css/dashboard.css'; ?>" rel="stylesheet">
-
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.css'; ?>">
+    <link rel="stylesheet" href="<?php echo asset_url().'css/app.css'; ?>">
   </head>
-  
   <body>
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
+ 
+<div class="top-bar">
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="<?php echo site_url(); ?>">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="<?php echo site_url('home/rental/'); ?>">Rental</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li class="menu-text">Classmat co., ltd.</li>
+    </ul>
+  </div>
+
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li><a href="#">Username</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Log out</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="medium-3 columns" data-sticky-container>
+    <div class="sticky" data-sticky data-anchor="content">
+
+      <ul class="vertical menu" data-accordion-menu>
+        <li><h4>Module</h4>
+          <ul class="vertical menu nested">
+            <li><a href="<?php echo site_url(); ?>">Dashboard</a></li>
+            <li><a href="<?php echo site_url().'/home/rental'; ?>">Rental</a></li>
+            <li><a href="#">Partner</a></li>
+            <li><a href="#">Product</a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
+        </li>
+        <li><h4>Settings</h4>
+          <ul class="vertical menu nested">
+            <li><a href="#">Partner Type</a></li>
+            <li><a href="#">Partner Industry</a></li>
+            <li><a href="#">Product Category</a></li>
+            <li><a href="#">Product Attribute</a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="medium-9 columns">
+

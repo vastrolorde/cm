@@ -7,20 +7,42 @@ class Rental extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('welcome_message');
-	}
+		$data['title'] = 'สร้างผู้เช่าใหม่';
+
+
+		$this->load->view('parts/head',$data);
+		$this->load->view('rental/rental_form',$data);
+		$this->load->view('parts/footer');	
+}
 
 
 	/******			Form			******/
 
 	public function create()
 	{
-		$this->load->view('welcome_message');
+		$data['title'] = 'สร้างรายการเช่าใหม่';
+		$data['execute'] = '
+              <a class="btn btn-default" href="#" role="button">บันทึก</a>
+              <a class="btn btn-default" href="#" role="button">ยกเลิก</a>
+              <a class="btn btn-default" href="#" role="button">พิมพ์</a>';
+
+		$this->load->view('parts/head',$data);
+		$this->load->view('rental/rental_form',$data);
+		$this->load->view('parts/footer');	
 	}
 
 	public function data()
 	{
-		$this->load->view('welcome_message');
+		$data['title'] = 'แก้ไขรายการเช่า';
+		$data['execute'] = '
+              <a class="btn btn-default" href="#" role="button">บันทึก</a>
+              <a class="btn btn-default" href="#" role="button">ยกเลิก</a>
+              <a class="btn btn-default" href="#" role="button">ลบ</a>
+              <a class="btn btn-default" href="#" role="button">พิมพ์</a>';
+
+		$this->load->view('parts/head');
+		$this->load->view('rental/rental_form',$data);
+		$this->load->view('parts/footer');	
 	}
 
 	/******			Database			******/
