@@ -7,13 +7,13 @@ class Rental extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'สร้างผู้เช่าใหม่';
+		$data['title'] = 'Rental';
 
 
 		$this->load->view('parts/head',$data);
-		$this->load->view('rental/rental_form',$data);
-		$this->load->view('parts/footer');	
-}
+		$this->load->view('rental/rental_list',$data);
+		$this->load->view('parts/footer');
+	}
 
 
 	/******			Form			******/
@@ -21,24 +21,25 @@ class Rental extends CI_Controller {
 	public function create()
 	{
 		$data['title'] = 'สร้างรายการเช่าใหม่';
-		$data['execute'] = '
-              <a class="btn btn-default" href="#" role="button">บันทึก</a>
-              <a class="btn btn-default" href="#" role="button">ยกเลิก</a>
-              <a class="btn btn-default" href="#" role="button">พิมพ์</a>';
+		$data['execute'] = 
+			'<li><input class="button hollow success" type="submit"></li>
+			<li><a class="button hollow warning" href="'.site_url('/rental').'">ยกเลิก</a></li>
+			<li><a class="button hollow" href="'.site_url('/rental/create').'">พิมพ์รายงาน</a></li>';
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('rental/rental_form',$data);
-		$this->load->view('parts/footer');	
+		$this->load->view('parts/footer');
+		$this->load->view('scripts/rental_script');
 	}
 
 	public function data()
 	{
 		$data['title'] = 'แก้ไขรายการเช่า';
-		$data['execute'] = '
-              <a class="btn btn-default" href="#" role="button">บันทึก</a>
-              <a class="btn btn-default" href="#" role="button">ยกเลิก</a>
-              <a class="btn btn-default" href="#" role="button">ลบ</a>
-              <a class="btn btn-default" href="#" role="button">พิมพ์</a>';
+		$data['execute'] = 
+			'<li><input class="button hollow success" type="submit"></li>
+			<li><a class="button hollow warning" href="'.site_url('/rental').'">ยกเลิก</a></li>
+			<li><a class="button hollow alert" href="'.site_url('/rental').'">ลบ</a></li>
+			<li><a class="button hollow" href="'.site_url('/rental/create').'">พิมพ์รายงาน</a></li>';
 
 		$this->load->view('parts/head');
 		$this->load->view('rental/rental_form',$data);

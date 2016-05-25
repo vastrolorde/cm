@@ -28,29 +28,26 @@
 </div>
 
 <div class="row">
-  <div class="medium-3 columns" data-sticky-container>
-    <div class="sticky" data-sticky data-anchor="content">
+  <div class="medium-3 columns">
 
       <ul class="vertical menu" data-accordion-menu>
-        <li><h4>Module</h4>
+        <li><a href="#">Module</a>
           <ul class="vertical menu nested">
             <li><a href="<?php echo site_url(); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url().'/home/rental'; ?>">Rental</a></li>
-            <li><a href="#">Partner</a></li>
-            <li><a href="#">Product</a></li>
+            <li><a href="<?php echo site_url().'/rental'; ?>">Rental</a></li>
+            <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
+            <li><a href="<?php echo site_url().'/Product'; ?>">Product</a></li>
           </ul>
         </li>
-        <li><h4>Settings</h4>
+        <li><a href="#">Settings</a>
           <ul class="vertical menu nested">
-            <li><a href="#">Partner Type</a></li>
-            <li><a href="#">Partner Industry</a></li>
             <li><a href="#">Product Category</a></li>
             <li><a href="#">Product Attribute</a></li>
           </ul>
         </li>
       </ul>
 
-    </div>
+    
   </div>
 
   <div class="medium-9 columns">
