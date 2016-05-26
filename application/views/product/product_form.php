@@ -36,7 +36,8 @@
 
           $fields = array(
             'product code' => 'partner_id',
-            'ชื่อสินค้า' => 'product_name'
+            'ชื่อสินค้า' => 'product_name',
+            'หน่วยนับ' => 'product_unit',
           );
 
           foreach ($fields as $key => $value) {
@@ -82,49 +83,16 @@
       <div class="tabs-panel" id="Price">
 
         <h4>ราคา</h4>
-
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>ชื่อผู้ติดต่อ</th>
-              <th>ตำแหน่ง</th>
-              <th>เบอร์โทรศัพท์</th>
-              <th>e-mail</th>
-              <th>หมายเหตุ</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td><input type="text" name="" placeholder="กรอก ชื่อผู้ติดต่อ"></td>
-              <td><input type="text" name="" placeholder="กรอก ตำแหน่ง"></td>
-              <td><input type="text" name="" placeholder="กรอก เบอร์โทรศัพท์"></td>
-              <td><input type="text" name="" placeholder="กรอก e-mail"></td>
-              <td><input type="text" name="" placeholder="กรอก หมายเหตุ"></td>
-              <td><a href="#">เพิ่ม</a></td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-
-    <!-- Attribute -->
-
-      <div class="tabs-panel" id="Attribute">
-        <h4>รายระเอียด Attribute</h4>
-
         <div class="row">
           <div class="large-12 columns">
-        <?php
+          <?php
 
           $fields = array(
-            'Bank' => 'bank',
-            'ชื่อบัญชี' => 'Acc_name',
-            'เลขที่บัญชี' => 'Acc_no',
-            'ประเภทบัญชี' => 'Acc_type',
-            'สาขาบัญชี' => 'Acc_branch',
+            'ต้นทุน' => 'Cost',
+            'ราคาขายมือ1' => '1stSalePrice',
+            'ราคาขายมือ2' => '2stSalePrice',
+            'ราคาเช่ารายวัน' => 'dRentPrice',
+            'ราคาค้ำประกัน' => 'GuaranteePrice',
           );
 
           foreach ($fields as $key => $value) {
@@ -134,6 +102,32 @@
         ?>
           </div>
         </div>
+
+      </div>
+
+    <!-- Attribute -->
+
+      <div class="tabs-panel" id="Attribute">
+        <h4>รายระเอียด Attribute</h4>
+
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>คุณลักษณะ</th>
+              <th>รายละเอียด</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td><input type="text" name="AttrName" placeholder="คุณลักษณะ"></td>
+              <td><input type="text" name="AttrDesc" placeholder="รายละเอียด"></td>
+              <td><a href="#">Create</a></td>
+            </tr>
+          </tbody>
+        </table>
 
       </div>
 
