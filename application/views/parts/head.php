@@ -34,15 +34,15 @@
         <li><a href="#">Module</a>
           <ul class="vertical menu nested">
             <li><a href="<?php echo site_url(); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url().'/rental'; ?>">Rental</a></li>
+            <li><a href="<?php echo site_url().'/rental'; ?>">งานเช่า</a></li>
             <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
-            <li><a href="<?php echo site_url().'/Product'; ?>">Product</a></li>
+            <li><a href="<?php echo site_url().'/Product'; ?>">สินค้า</a></li>
           </ul>
         </li>
         <li><a href="#">Settings</a>
           <ul class="vertical menu nested">
-            <li><a href="#">Product Category</a></li>
-            <li><a href="#">Product Attribute</a></li>
+            <li><a href="#">จัดการหมวดประเภทสินค้า</a></li>
+            <li><a href="#">จัดการคุณลักษณะสินค้า</a></li>
           </ul>
         </li>
       </ul>

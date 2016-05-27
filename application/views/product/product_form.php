@@ -1,3 +1,10 @@
+<?php
+  if(!isset($data)){
+    echo form_open('/product/add');
+  }else{
+    echo form_open('/product/edit/');
+  }
+?>
 <div class="row">
   <div class="large-12 column">
 
@@ -27,28 +34,43 @@
 
     <!-- Info -->
       <div class="tabs-panel is-active" id="info">
-
-        <?php echo form_open('/product/add') ?>
-
         <div class="row">
           <div class="large-6 columns">
+
         <?php
+          
+          if(isset($data)){
+            //Assign Variable
+            $product_id = $data[0]->product_id;
+            $product_unit = $data[0]->product_unit;
 
-          $fields = array(
-            'product code' => 'partner_id',
-            'ชื่อสินค้า' => 'product_name',
-            'หน่วยนับ' => 'product_unit',
-          );
 
-          foreach ($fields as $key => $value) {
-            echo form_label($key).form_input($value);
+            echo form_label('product code').form_input('product_id',$product_id);
+            echo form_label('หน่วยนับ').form_input('product_unit',$product_unit);
+          }else{
+            echo form_label('product code').form_input('product_id');
+            echo form_label('หน่วยนับ').form_input('product_unit');
           }
-
         ?>
 
           </div>
           <div class="large-6 columns">
 
+        <?php
+          
+          if(isset($data)){
+            //Assign Variable
+            $product_name = $data[0]->product_name;
+            $product_weight = $data[0]->product_weight;
+
+
+            echo form_label('ชื่อสินค้า').form_input('product_name',$product_name);
+            echo form_label('น้ำหนักต่อชิ้น').form_input('product_weight',$product_weight);
+          }else{
+            echo form_label('ชื่อสินค้า').form_input('product_name');
+            echo form_label('น้ำหนักต่อชิ้น').form_input('product_weight');
+          }
+        ?>
           </div>                                                                     
         </div>
 
@@ -58,22 +80,49 @@
           <div class="large-12 columns">
           <h5>ประเภท Product</h5>
 
-            <?php
+        <?php
 
-            $options = array(
-                'Assets' =>'สินทรัพย์',
-                'Product' => 'สินค้าเพื่อขาย',
-                'Supply_Asset' => 'วัสดุสิ้นเปลือง',
-                'sparePart' => 'วัสดุเพื่อการผลิต'
-              );
+          $options = array(
+            'Assets' =>'สินทรัพย์',
+            'Product' => 'สินค้าเพื่อขาย',
+            'Supply_Asset' => 'วัสดุสิ้นเปลือง',
+            'sparePart' => 'วัสดุเพื่อการผลิต'
+          );
 
-              
-              echo form_dropdown('ProductType',$options);
-            ?>
+          if(isset($data)){
+            //Assign Variable
+            $product_type = $data[0]->product_type;
+
+            echo form_dropdown('product_type',$options,$product_type);
+          }else{
+
+            echo form_dropdown('product_type',$options);
+
+          }
+
+        ?>
 
           </div>
         </div>
 
+        <div class="row">
+          <div class="large-12 columns">
+
+        <?php
+
+          if(isset($data)){
+            //Assign Variable
+            $product_Desc = $data[0]->product_Desc;
+
+            echo form_label('รายละเอียด').form_textarea('product_Desc',$product_Desc);
+          }else{
+            echo form_label('รายละเอียด').form_textarea('product_Desc');
+          }
+
+        ?>
+
+          </div>
+        </div>
 
       </div>
 
@@ -87,16 +136,26 @@
           <div class="large-12 columns">
           <?php
 
-          $fields = array(
-            'ต้นทุน' => 'Cost',
-            'ราคาขายมือ1' => '1stSalePrice',
-            'ราคาขายมือ2' => '2stSalePrice',
-            'ราคาเช่ารายวัน' => 'dRentPrice',
-            'ราคาค้ำประกัน' => 'GuaranteePrice',
-          );
+          if(isset($data)){
+            //Assign Variable
+            $product_Desc           = $data[0]->product_Desc;
+            $product_cost           = $data[0]->product_cost;
+            $product_1stSalePrice   = $data[0]->product_1stSalePrice;
+            $product_2ndSalePrice   = $data[0]->product_2ndSalePrice;
+            $product_d_RentalPrice  = $data[0]->product_d_RentalPrice;
+            $product_GuaranteePrice = $data[0]->product_GuaranteePrice;
 
-          foreach ($fields as $key => $value) {
-            echo form_label($key).form_input($value);
+            echo form_label('ต้นทุน').form_input('product_cost',$product_cost);
+            echo form_label('ราคาขายมือ1').form_input('product_1stSalePrice',$product_1stSalePrice);
+            echo form_label('ราคาขายมือ2').form_input('product_2ndSalePrice',$product_2ndSalePrice);
+            echo form_label('ราคาเช่ารายวัน').form_input('product_d_RentalPrice',$product_d_RentalPrice);
+            echo form_label('ราคาค้ำประกัน').form_input('product_GuaranteePrice',$product_GuaranteePrice);
+          }else{
+            echo form_label('ต้นทุน').form_input('product_cost');
+            echo form_label('ราคาขายมือ1').form_input('product_1stSalePrice');
+            echo form_label('ราคาขายมือ2').form_input('product_2ndSalePrice');
+            echo form_label('ราคาเช่ารายวัน').form_input('product_d_RentalPrice');
+            echo form_label('ราคาค้ำประกัน').form_input('product_GuaranteePrice');
           }
 
         ?>
@@ -119,12 +178,12 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="Product_detail">
             <tr>
-              <td></td>
-              <td><input type="text" name="AttrName" placeholder="คุณลักษณะ"></td>
-              <td><input type="text" name="AttrDesc" placeholder="รายละเอียด"></td>
-              <td><a href="#">Create</a></td>
+              <td><input type="hidden" id="product_AttrID[]" value="<?php echo random_string('alnum',5); ?>" name="AttrID"></td>
+              <td><input type="text" id="product_AttrName" name="product_AttrName[]" placeholder="คุณลักษณะ"></td>
+              <td><input type="text" id="product_AttrDesc" name="product_AttrDesc[]" placeholder="รายละเอียด"></td>
+              <td><a href="#" id="Add_Product_row">Create</a></td>
             </tr>
           </tbody>
         </table>

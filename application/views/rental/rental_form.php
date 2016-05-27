@@ -85,13 +85,13 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><input type="text" name="" placeholder=""></td>
-                    <td><input type="text" name="" placeholder=""></td>
-                    <td><input type="text" name="" placeholder=""></td>
-                    <td><input type="text" name="" placeholder=""></td>
-                    <td><input type="text" name="" placeholder=""></td>
-                    <td><input type="text" name="" placeholder=""></td>
-                    <td><input type="text" name="" placeholder=""></td>
+                    <td></td>
+                    <td><input type="text" name="product_name" placeholder=""></td>
+                    <td><input type="text" name="product_amount" placeholder=""></td>
+                    <td><input type="text" name="product_unit" placeholder=""></td>
+                    <td><input type="text" name="product_rentalPrice" placeholder=""></td>
+                    <td><input type="text" name="product_GuaranteePrice" placeholder=""></td>
+                    <td></td>
                     <td><a href="#">Add</a></td>
                   </tr>
                   <tr>
@@ -189,11 +189,11 @@
           <tbody>
             <tr>
               <td></td>
-              <td><input type="text" name="" placeholder="กรอก เลขที่ Invoice"></td>
-              <td><input type="text" name="" placeholder="กรอก วันที่ของ Invoice"></td>
-              <td><input type="text" name="" placeholder="กรอก จำนวนเงิน"></td>
-              <td><input type="text" name="" placeholder="กรอก วิธีการชำระเงิน"></td>
-              <td><input type="text" name="" placeholder="กรอก หมายเหตุ"></td>
+              <td><input type="text" name="inv_id" placeholder="กรอก เลขที่ Invoice"></td>
+              <td><input type="text" name="inv_date" placeholder="กรอก วันที่ของ Invoice"></td>
+              <td><input type="text" name="inv_amount" placeholder="กรอก จำนวนเงิน"></td>
+              <td><input type="text" name="inv_payment" placeholder="กรอก วิธีการชำระเงิน"></td>
+              <td><input type="text" name="inv_remark" placeholder="กรอก หมายเหตุ"></td>
               <td><a href="#">เพิ่ม</a></td>
             </tr>
           </tbody>
@@ -218,9 +218,9 @@
               <tbody>
                 <tr>
                   <td></td>
-                  <td><input type="text" name="old_exp_date"></td>
-                  <td><input type="text" name="new_exp_date"></td>
-                  <td><input type="text" name="mod_date"></td>
+                  <td><input type="text" name="cont_old_expdate"></td>
+                  <td><input type="text" name="cont_new_expdate"></td>
+                  <td><input type="text" name="cont_moddate"></td>
                   <td><a href="#">Create</a></td>
                 </tr>
               </tbody>

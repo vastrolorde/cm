@@ -31,27 +31,24 @@
   </thead>
 
   <tbody>
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
+  <?php
+    $i = 1;
+    foreach ($result as $key){
+      echo '
+    <tr>
+      <td>'.$i.'</td>
+      <td>'.$key->product_id.'</td>
+      <td>'.$key->product_name.'</td>
+      <td>'.$key->product_type.'</td>
+      <td><a href="'.site_url("product/data/".$key->product_id).'">Edit</a></td>
+    </tr>
+      ';
+
+      $i++;
+
+    }
+
+  ?>
   </tbody>
 </table>
 
