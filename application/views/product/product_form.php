@@ -168,6 +168,8 @@
 
       <div class="tabs-panel" id="Attribute">
         <h4>รายระเอียด Attribute</h4>
+        <hr />
+        <a href="#" id="Add_Product_row" class="button">Add row</a>
 
         <table>
           <thead>
@@ -179,12 +181,34 @@
             </tr>
           </thead>
           <tbody id="Product_detail">
-            <tr>
-              <td><input type="hidden" id="product_AttrID[]" value="<?php echo random_string('alnum',5); ?>" name="AttrID"></td>
-              <td><input type="text" id="product_AttrName" name="product_AttrName[]" placeholder="คุณลักษณะ"></td>
-              <td><input type="text" id="product_AttrDesc" name="product_AttrDesc[]" placeholder="รายละเอียด"></td>
-              <td><a href="#" id="Add_Product_row">Create</a></td>
-            </tr>
+            <?php
+              $i=0;
+              
+              if(isset($data2)){
+                $count = count($data2);
+                foreach ($data2 as $row) {
+                  $i++;
+                  echo '
+                    <tr>
+                      <td>'.$i.'</td>
+                      <td><input type="text" id="product_AttrName" name="product_AttrName[]" value="'.$row->product_AttrName.'" placeholder="คุณลักษณะ"></td>
+                      <td><input type="text" id="product_AttrDesc" name="product_AttrDesc[]" value="'.$row->product_AttrDesc.'"  placeholder="รายละเอียด"></td>
+                      <td><a onClick="$(this).closest(\'tr\').remove();">Delete</a></td>
+                    </tr>
+                  ';
+                }
+              }else{
+                $i++;
+                echo '
+                  <tr>
+                    <td>'.$i.'</td>
+                    <td><input type="text" id="product_AttrName" name="product_AttrName[]" placeholder="คุณลักษณะ"></td>
+                    <td><input type="text" id="product_AttrDesc" name="product_AttrName[]" placeholder="รายละเอียด"></td>
+                    <td><a class="Del_Product_row">Delete</a></td>
+                  </tr>
+                ';
+              }
+            ?>
           </tbody>
         </table>
 

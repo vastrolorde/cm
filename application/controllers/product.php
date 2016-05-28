@@ -50,7 +50,8 @@ class Product extends CI_Controller {
 			<li><a class="button hollow warning" href="'.site_url('/product').'">ยกเลิก</a></li>
 			<li><a class="button hollow alert delitem" href="'.site_url('/product').'">ลบ</a></li>
 			<li><a class="button hollow" href="'.site_url('/product/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->product_m->get($id);
+		$data['data'] = $this->product_m->get($id,'product');
+		$data['data2'] = $this->product_m->get($id,'product_attr_transaction');
 
 		$this->load->view('parts/head');
 		$this->load->view('product/product_form',$data);
@@ -84,19 +85,20 @@ class Product extends CI_Controller {
 
 		$data2 = '';
 
-		for($i=0; $i<count($id);$i++){
+		for($i=0; $i<count($product_AttrName);$i++){
 			$data2[] = array(
 				'id'               =>	$id[$i],
-				'product_id'       =>	$product_id[$i],
+				'product_id'       =>	$product_id,
 				'product_AttrName' =>	$product_AttrName[$i],
 				'product_AttrDesc' =>	$product_AttrDesc[$i]
 			);
 		}
 		
 
-		$this->product_m->create($data,$data2);
+		$this->product_m->create($data);
+		$this->product_m->create_batch($data2);
 
-		// redirect('/product');
+		redirect('/product');
 
 	}
 

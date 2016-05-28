@@ -9,17 +9,19 @@ class Product_model extends CI_Model {
 		return $result = $query->result();
 	}
 
-	public function get($id){
+	public function get($id,$tbl){
 		$this->db->select("*");
 		$this->db->where("product_id",$id);
-		$query = $this->db->get("product");
+		$query = $this->db->get($tbl);
 		return $result = $query->result();
 	}
 
-	public function create($data,$data2){
+	public function create($data){
 		$this->db->insert('product',$data);
-		$this->db->insert('product_attr_transaction',$data2);
-		
+	}
+
+	public function create_batch($data2){
+		$this->db->insert_batch('product_attr_transaction',$data2);
 	}
 
 	public function update(){}
