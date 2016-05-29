@@ -24,7 +24,13 @@ class Product_model extends CI_Model {
 		$this->db->insert_batch('product_attr_transaction',$data2);
 	}
 
-	public function update(){}
-	public function delete(){}
+	public function update($data,$id){
+		$this->db->where('product_id',$id);
+		$this->db->update('product',$data);
+	}
+	public function delete($col,$id,$table){
+		$this->db->where($col, $id);
+		$this->db->delete($table);
+	}
 
 }

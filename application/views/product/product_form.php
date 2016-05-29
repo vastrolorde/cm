@@ -2,7 +2,7 @@
   if(!isset($data)){
     echo form_open('/product/add');
   }else{
-    echo form_open('/product/edit/');
+    echo form_open('/product/edit/'.$data[0]->product_id);
   }
 ?>
 <div class="row">
@@ -45,11 +45,11 @@
             $product_unit = $data[0]->product_unit;
 
 
-            echo form_label('product code').form_input('product_id',$product_id);
-            echo form_label('หน่วยนับ').form_input('product_unit',$product_unit);
+            echo form_label('product code *').form_input('product_id',$product_id,'disabled').form_hidden('product_id',$product_id);
+            echo form_label('หน่วยนับ *').form_input('product_unit',$product_unit);
           }else{
-            echo form_label('product code').form_input('product_id');
-            echo form_label('หน่วยนับ').form_input('product_unit');
+            echo form_label('product code *').form_input('product_id');
+            echo form_label('หน่วยนับ *').form_input('product_unit');
           }
         ?>
 
@@ -64,10 +64,10 @@
             $product_weight = $data[0]->product_weight;
 
 
-            echo form_label('ชื่อสินค้า').form_input('product_name',$product_name);
+            echo form_label('ชื่อสินค้า *').form_input('product_name',$product_name);
             echo form_label('น้ำหนักต่อชิ้น').form_input('product_weight',$product_weight);
           }else{
-            echo form_label('ชื่อสินค้า').form_input('product_name');
+            echo form_label('ชื่อสินค้า *').form_input('product_name');
             echo form_label('น้ำหนักต่อชิ้น').form_input('product_weight');
           }
         ?>
@@ -78,7 +78,7 @@
 
         <div class="row">
           <div class="large-12 columns">
-          <h5>ประเภท Product</h5>
+          <h5>ประเภท Product *</h5>
 
         <?php
 
@@ -190,7 +190,7 @@
                   $i++;
                   echo '
                     <tr>
-                      <td>'.$i.'</td>
+                      <td>'.$i.'<input type="hidden" id="product_AttrID" value='.$row->id.' name="product_AttrID[]"></td>
                       <td><input type="text" id="product_AttrName" name="product_AttrName[]" value="'.$row->product_AttrName.'" placeholder="คุณลักษณะ"></td>
                       <td><input type="text" id="product_AttrDesc" name="product_AttrDesc[]" value="'.$row->product_AttrDesc.'"  placeholder="รายละเอียด"></td>
                       <td><a onClick="$(this).closest(\'tr\').remove();">Delete</a></td>
@@ -201,9 +201,9 @@
                 $i++;
                 echo '
                   <tr>
-                    <td>'.$i.'</td>
+                    <td>'.$i.'<input type="hidden" id="product_AttrID" value='.random_string("alpha",5).' name="product_AttrID[]"></td>
                     <td><input type="text" id="product_AttrName" name="product_AttrName[]" placeholder="คุณลักษณะ"></td>
-                    <td><input type="text" id="product_AttrDesc" name="product_AttrName[]" placeholder="รายละเอียด"></td>
+                    <td><input type="text" id="product_AttrDesc" name="product_AttrDesc[]" placeholder="รายละเอียด"></td>
                     <td><a class="Del_Product_row">Delete</a></td>
                   </tr>
                 ';
