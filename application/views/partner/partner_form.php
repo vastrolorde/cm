@@ -1,3 +1,11 @@
+<?php
+  if(!isset($data)){
+    echo form_open('/partner/add');
+  }else{
+    echo form_open('/partner/edit/'.$data[0]->id);
+  }
+?>
+
 <div class="row">
   <div class="large-12 column">
 
@@ -28,67 +36,9 @@
     <!-- Info -->
       <div class="tabs-panel is-active" id="info">
 
-        <?php echo form_open('/partner/add') ?>
-
         <div class="row">
-          <div class="large-6 columns">
-        <?php
+          <h4>ข้อมูลทั่วไป</h4>
 
-          $fields = array(
-            'partner' => 'partner_id',
-            'ที่อยู่' => 'address',
-            'แขวง/ตำบล' => 'subDist',
-            'จังหวัด' => 'Province',
-          );
-
-          foreach ($fields as $key => $value) {
-            echo form_label($key).form_input($value);
-          }
-
-        ?>
-
-          </div>
-          <div class="large-6 columns">
-        <?php
-
-          $fields = array(
-            'ชื่อ partner' => 'partner_name',
-            'ที่อยู่2' => 'address2',
-            'เขต/อำเภอ' => 'Dist',
-            'รหัสไปรษณีย์' => 'Postal'
-          );
-
-          foreach ($fields as $key => $value) {
-            echo form_label($key).form_input($value);
-          }
-
-        ?>
-          </div>                                                                     
-        </div>
-
-<hr />
-
-<div class="row">
-  <div class="large-8 columns">
-    <?php
-
-      $fields = array(
-        'เบอร์โทรศัพท์' => 'tel',
-        'Fax' => 'Fax',
-        'E-mail' => 'e-mail'
-      );
-
-      foreach ($fields as $key => $value) {
-        echo form_label($key).form_input($value);
-      }
-
-    ?>
-  </div>
-</div>
-
-<hr />
-
-        <div class="row">
           <div class="large-12 columns">
           <h5>ประเภท Partner</h5>
 
@@ -106,33 +56,34 @@
             <div class="row">
 
         <?php
-
-          $checkbox = array(
-'ธุรกิจการเกษตร‎',
-'ธุรกิจการท่องเที่ยวและนันทนาการ‎',
-'ธุรกิจการแพทย์‎',
-'ธุรกิจขนส่งและโลจิสติกส์‎',
-'ธุรกิจของใช้ส่วนตัวและเวชภัณฑ์‎',
-'ธุรกิจเครื่องใช้ในครัวเรือน‎',
-'ธุรกิจเงินทุนและหลักทรัพย์‎',
-'ธุรกิจเทคโนโลยีสารสนเทศและการสื่อสาร‎',
-'ธุรกิจแฟชั่น‎',
-'ธุรกิจวัสดุก่อสร้าง‎',
-'ธุรกิจเหมืองแร่‎',
-'ธุรกิจประกันภัยและประกันชีวิต‎',
-'ธุรกิจปิโตรเลียมและเคมีภัณฑ์‎',
-'ธุรกิจพลังงานและสาธารณูปโภค‎',
-'ธุรกิจพัฒนาอสังหาริมทรัพย์‎',
-'ธุรกิจพาณิชย์‎',
-'ธุรกิจยานยนต์‎',
-'ธุรกิจวัสดุอุตสาหกรรมและเครื่องจักร‎',
-'ธุรกิจสื่อและสิ่งพิมพ์‎',
-'ธุรกิจอาหารและเครื่องดื่ม‎'
+          $options = array(
+              'ธุรกิจการเกษตร‎' =>  'ธุรกิจการเกษตร‎',
+              'ธุรกิจการท่องเที่ยวและนันทนาการ‎'  =>  'ธุรกิจการท่องเที่ยวและนันทนาการ‎',
+              'ธุรกิจการแพทย์‎' =>  'ธุรกิจการแพทย์‎',
+              'ธุรกิจขนส่งและโลจิสติกส์‎' =>  'ธุรกิจขนส่งและโลจิสติกส์‎',
+              'ธุรกิจของใช้ส่วนตัวและเวชภัณฑ์‎' =>  'ธุรกิจของใช้ส่วนตัวและเวชภัณฑ์‎',
+              'ธุรกิจเครื่องใช้ในครัวเรือน‎'  =>  'ธุรกิจเครื่องใช้ในครัวเรือน‎',
+              'ธุรกิจเงินทุนและหลักทรัพย์‎' =>  'ธุรกิจเงินทุนและหลักทรัพย์‎',
+              'ธุรกิจเทคโนโลยีสารสนเทศและการสื่อสาร‎' =>  'ธุรกิจเทคโนโลยีสารสนเทศและการสื่อสาร‎',
+              'ธุรกิจแฟชั่น‎' =>  'ธุรกิจแฟชั่น‎',
+              'ธุรกิจวัสดุก่อสร้าง‎'  =>  'ธุรกิจวัสดุก่อสร้าง‎',
+              'ธุรกิจเหมืองแร่‎'  =>  'ธุรกิจเหมืองแร่‎',
+              'ธุรกิจประกันภัยและประกันชีวิต‎'  =>  'ธุรกิจประกันภัยและประกันชีวิต‎',
+              'ธุรกิจปิโตรเลียมและเคมีภัณฑ์‎' =>  'ธุรกิจปิโตรเลียมและเคมีภัณฑ์‎',
+              'ธุรกิจพลังงานและสาธารณูปโภค‎'  =>  'ธุรกิจพลังงานและสาธารณูปโภค‎',
+              'ธุรกิจพัฒนาอสังหาริมทรัพย์‎' =>  'ธุรกิจพัฒนาอสังหาริมทรัพย์‎',
+              'ธุรกิจพาณิชย์‎'  =>  'ธุรกิจพาณิชย์‎',
+              'ธุรกิจยานยนต์‎'  =>  'ธุรกิจยานยนต์‎',
+              'ธุรกิจวัสดุอุตสาหกรรมและเครื่องจักร‎'  =>  'ธุรกิจวัสดุอุตสาหกรรมและเครื่องจักร‎',
+              'ธุรกิจสื่อและสิ่งพิมพ์‎' =>  'ธุรกิจสื่อและสิ่งพิมพ์‎',
+              'ธุรกิจอาหารและเครื่องดื่ม‎'  =>  'ธุรกิจอาหารและเครื่องดื่ม‎'
           );
 
-          foreach ($checkbox as $value) {
-            echo '<div class="large-6 columns">'.form_checkbox('partner_business[]',$value).form_label($value).'</div>';
-          }
+          if(isset($data)){
+              $Type_select = $data[0]->Sector;
+            }
+
+            echo '<div class="large-6 columns">'.form_dropdown('Sector',$options,(isset($data))? $Type_select : 'ธุรกิจการเกษตร‎').'</div>';
         ?>
             </div>
 
@@ -140,6 +91,86 @@
           </div>
         </div>
 
+
+        <div class="row">
+          <div class="large-6 columns">
+
+        <?php
+          
+          if(isset($data)){
+            //Assign Variable
+            $partner_id = $data[0]->id;
+            $add1 = $data[0]->add1;
+            $SubDist = $data[0]->SubDist;
+            $Province = $data[0]->Province;
+
+
+            echo form_label('partner *').form_input('id',$partner_id,'disabled').form_hidden('partner_id',$partner_id);
+            echo form_label('ที่อยู่ *').form_input('add1',$add1);
+            echo form_label('แขวง/ตำบล *').form_input('SubDist',$SubDist);
+            echo form_label('จังหวัด *').form_input('Province',$Province);
+          }else{
+            echo form_label('partner *').form_input('id');
+            echo form_label('ที่อยู่ *').form_input('add1');
+            echo form_label('แขวง/ตำบล *').form_input('SubDist');
+            echo form_label('จังหวัด *').form_input('Province');
+          }
+        ?>
+          </div>
+          <div class="large-6 columns">
+
+        <?php
+          
+          if(isset($data)){
+            //Assign Variable
+            $partner_name = $data[0]->partner_name;
+            $add2 = $data[0]->add2;
+            $Dist = $data[0]->Dist;
+            $Postal = $data[0]->Postal;
+
+
+            echo form_label('ชื่อ partner *').form_input('partner_name',$partner_name);
+            echo form_label('ที่อยู่2 *').form_input('add2',$add2);
+            echo form_label('เขต/อำเภอ *').form_input('Dist',$Dist);
+            echo form_label('รหัสไปรษณีย์ *').form_input('Postal',$Postal);
+          }else{
+            echo form_label('ชื่อ partner *').form_input('partner_name');
+            echo form_label('ที่อยู่2 *').form_input('add2');
+            echo form_label('เขต/อำเภอ *').form_input('Dist');
+            echo form_label('รหัสไปรษณีย์ *').form_input('Postal');
+          }
+        ?>
+
+          </div>                                                                     
+        </div>
+
+<hr />
+
+<div class="row">
+  <div class="large-8 columns">
+
+    <?php
+      
+      if(isset($data)){
+        //Assign Variable
+        $tel = $data[0]->tel;
+        $Fax = $data[0]->Fax;
+        $Email = $data[0]->email;
+
+        echo form_label('เบอร์โทรศัพท์').form_input('tel',$tel);
+        echo form_label('Fax').form_input('Fax',$Fax);
+        echo form_label('E-mail').form_input('email',$Email);
+      }else{
+        echo form_label('เบอร์โทรศัพท์').form_input('tel');
+        echo form_label('Fax').form_input('Fax');
+        echo form_label('E-mail').form_input('email');
+      }
+    ?>
+
+  </div>
+</div>
+
+<hr />
 
       </div>
 
@@ -149,8 +180,10 @@
       <div class="tabs-panel" id="Contact">
 
         <h4>ผู้ติดต่อ</h4>
+        <hr />
+        <a href="#" id="Add_contactor_row" class="button">Add row</a>
 
-        <table>
+        <table id="contactor">
           <thead>
             <tr>
               <th>#</th>
@@ -163,15 +196,44 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td><input type="text" name="contactor_name[]" placeholder="กรอก ชื่อผู้ติดต่อ"></td>
-              <td><input type="text" name="contactor_position[]" placeholder="กรอก ตำแหน่ง"></td>
-              <td><input type="text" name="contactor_tel[]" placeholder="กรอก เบอร์โทรศัพท์"></td>
-              <td><input type="text" name="contactor_e-mail[]" placeholder="กรอก e-mail"></td>
-              <td><input type="text" name="contactor_remark[]" placeholder="กรอก หมายเหตุ"></td>
-              <td><a href="#">เพิ่ม</a></td>
-            </tr>
+
+            <?php
+              $i=0;
+              
+              if(isset($data)){
+
+                $a = json_decode($data[0]->partner_contactor);
+
+                foreach ($a as $row) {
+                  $i++;
+                  echo '
+                    <tr>
+                      <td>'.$i.'</td>
+                      <td><input type="text" name="partner_contactor['.$i.'][name]" value="'.$row->name.'" placeholder="กรอก ชื่อผู้ติดต่อ"></td>
+                      <td><input type="text" name="partner_contactor['.$i.'][position]" value="'.$row->position.'" placeholder="กรอก ตำแหน่ง"></td>
+                      <td><input type="text" name="partner_contactor['.$i.'][tel]" value="'.$row->tel.'" placeholder="กรอก เบอร์โทรศัพท์"></td>
+                      <td><input type="text" name="partner_contactor['.$i.'][email]" value="'.$row->email.'" placeholder="กรอก email"></td>
+                      <td><input type="text" name="partner_contactor['.$i.'][remark]" value="'.$row->remark.'" placeholder="กรอก หมายเหตุ"></td>
+                      <td><a href="#" class="Del_contactor_row">ลบ</a></td>
+                    </tr>
+                  ';
+                }
+              }else{
+                $i++;
+                echo '
+                  <tr>
+                    <td>'.$i.'</td>
+                    <td><input type="text" name="partner_contactor['.$i.'][name]" placeholder="กรอก ชื่อผู้ติดต่อ"></td>
+                    <td><input type="text" name="partner_contactor['.$i.'][position]" placeholder="กรอก ตำแหน่ง"></td>
+                    <td><input type="text" name="partner_contactor['.$i.'][tel]" placeholder="กรอก เบอร์โทรศัพท์"></td>
+                    <td><input type="text" name="partner_contactor['.$i.'][email]" placeholder="กรอก email"></td>
+                    <td><input type="text" name="partner_contactor['.$i.'][remark]" placeholder="กรอก หมายเหตุ"></td>
+                    <td><a href="#" class="Del_contactor_row">ลบ</a></td>
+                  </tr>
+                ';
+              }
+            ?>
+
           </tbody>
         </table>
 
@@ -186,17 +248,28 @@
           <div class="large-12 columns">
         <?php
 
-          $fields = array(
-            'Bank' => 'bank',
-            'ชื่อบัญชี' => 'Acc_name',
-            'เลขที่บัญชี' => 'Acc_no',
-            'ประเภทบัญชี' => 'Acc_type',
-            'สาขาบัญชี' => 'Acc_branch',
+          $options = array(
+            'ออมทรัพย์' =>  'ออมทรัพย์',
+            'ฝากประจำ' =>  'ฝากประจำ',
+            'กระแสรายวัน' =>  'กระแสรายวัน'
           );
 
-          foreach ($fields as $key => $value) {
-            echo form_label($key).form_input($value);
-          }
+            $i = 0;
+            foreach ($bank as $key) {
+              $banklist[$bank[$i]['id']] = $bank[$i]['name'];
+              $i++;
+            }
+
+            if(isset($data)){
+              $bank_select = $data[0]->Bank;
+              $Acc_type_select = $data[0]->Acc_type;
+            }
+
+            echo form_label('Bank').form_dropdown('Bank',$banklist,(isset($data))? $bank_select : 'AGR');
+            echo form_label('ชื่อบัญชี').form_input('Acc_name');
+            echo form_label('เลขที่บัญชี').form_input('Acc_no');
+            echo form_label('เลขที่บัญชี').form_dropdown('Acc_type',$options,(isset($data))? $Acc_type_select : 'กระแสรายวัน');
+            echo form_label('สาขาบัญชี').form_input('Acc_branch');
 
         ?>
           </div>

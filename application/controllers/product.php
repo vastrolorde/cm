@@ -48,10 +48,9 @@ class Product extends CI_Controller {
 		$data['execute'] = 
 			'<li><input class="button hollow success" type="submit"></li>
 			<li><a class="button hollow warning" href="'.site_url('/product').'">ยกเลิก</a></li>
-			<li><a class="button hollow alert delitem" href="'.site_url('/product').'">ลบ</a></li>
+			<li><a class="button hollow alert delitem" href="'.site_url('/product/delete').'/'.$id.'">ลบ</a></li>
 			<li><a class="button hollow" href="'.site_url('/product/create').'">พิมพ์รายงาน</a></li>';
 		$data['data'] = $this->product_m->get($id,'product');
-		$data['data2'] = $this->product_m->get($id,'product_attr_transaction');
 
 		$this->load->view('parts/head');
 		$this->load->view('product/product_form',$data);
@@ -76,31 +75,11 @@ class Product extends CI_Controller {
 		'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),
 		'product_d_RentalPrice'  =>	$this->input->post('product_d_RentalPrice'),
 		'product_GuaranteePrice' =>	$this->input->post('product_GuaranteePrice'),
+		'product_Attr'           =>	json_encode($this->input->post('product_Attr'))
 		);
 
 		$this->product_m->create($data);
-
-		// --------------- Product Detail ---------------
-
-		$id               = $this->input->post('product_AttrID');
-		$product_id       = $this->input->post('product_id');
-		$product_AttrName = $this->input->post('product_AttrName');
-		$product_AttrDesc = $this->input->post('product_AttrDesc');
-
-		$data2 = '';
-
-		for($i=0; $i<count($product_AttrName);$i++){
-			$data2[] = array(
-				'id'               =>	$id[$i],
-				'product_id'       =>	$product_id,
-				'product_AttrName' =>	$product_AttrName[$i],
-				'product_AttrDesc' =>	$product_AttrDesc[$i]
-			);
-		}
 		
-
-
-		$this->product_m->create_batch($data2);
 
 		redirect('/product');
 
@@ -122,64 +101,15 @@ class Product extends CI_Controller {
 		'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),
 		'product_d_RentalPrice'  =>	$this->input->post('product_d_RentalPrice'),
 		'product_GuaranteePrice' =>	$this->input->post('product_GuaranteePrice'),
+		'product_Attr'           =>	json_encode($this->input->post('product_Attr'))
 		);
 
 		$this->product_m->update($data,$id);
-
-		// --------------- Product Detail ---------------
-
-		$id               = $this->input->post('product_AttrID');
-		$product_id       = $this->input->post('product_id');
-		$product_AttrName = $this->input->post('product_AttrName');
-		$product_AttrDesc = $this->input->post('product_AttrDesc');
-
-		$data2 = '';
-
-		for($i=0; $i<count($product_AttrName);$i++){
-			$data2[] = array(
-				'id'               =>	$id[$i],
-				'product_id'       =>	$product_id,
-				'product_AttrName' =>	$product_AttrName[$i],
-				'product_AttrDesc' =>	$product_AttrDesc[$i]
-			);
-		}
-
-		// print_r($data2);
-
-		$i = 0;
-		foreach($data2 as $row){
-			$this->db->where('id',$row['id']);
-			$qry = $this->db->get('product_attr_transaction');
-
-			/*
-				ตรวจสอบว่าใน db กับในข้อมูล มีข้อมูลตรงกันหรือไม่
-					ถ้าในข้อมูลมี 		แต่ db ไม่มี 	insert
-					ถ้าในข้อมูลไมี 		และ db มี 		update
-
-			*/
-
-			if ($qry->num_rows() == 0) {
-
-				// ถ้าในข้อมูลมี 		แต่ db ไม่มี 	insert
-				$this->db->insert('product_attr_transaction',$row);
-
-			}elseif($qry->num_rows() == 1){
-
-				// ถ้าในข้อมูลไมี 		และ db มี 		update
-				$this->db->where('id',$row['id']);
-				$this->db->update('product_attr_transaction',$row);
-
-			}
-
-			$i++;
-		}
-
-
 		redirect('/product');
 	}
 
-	public function delete($col,$id,$table){
-		$this->product_m->delete($col,$id,$table);
+	public function delete($id){
+		$this->product_m->delete($id);
 
 		redirect('/product');
 	}

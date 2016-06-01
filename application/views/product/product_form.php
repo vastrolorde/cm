@@ -184,16 +184,18 @@
             <?php
               $i=0;
               
-              if(isset($data2)){
-                $count = count($data2);
-                foreach ($data2 as $row) {
+              if(isset($data)){
+
+                $a = json_decode($data[0]->product_Attr);
+
+                foreach ($a as $row) {
                   $i++;
                   echo '
                     <tr>
-                      <td>'.$i.'<input type="hidden" id="product_AttrID" value='.$row->id.' name="product_AttrID[]"></td>
-                      <td><input type="text" id="product_AttrName" name="product_AttrName[]" value="'.$row->product_AttrName.'" placeholder="คุณลักษณะ"></td>
-                      <td><input type="text" id="product_AttrDesc" name="product_AttrDesc[]" value="'.$row->product_AttrDesc.'"  placeholder="รายละเอียด"></td>
-                      <td><a onClick="$(this).closest(\'tr\').remove();">Delete</a></td>
+                      <td>'.$i.'</td>
+                      <td><input type="text" id="product_AttrName" name="product_Attr['.$i.'][Name]" value="'.$row->Name.'" placeholder="คุณลักษณะ"></td>
+                      <td><input type="text" id="product_AttrDesc" name="product_Attr['.$i.'][Desc]" value="'.$row->Desc.'"  placeholder="รายละเอียด"></td>
+                      <td><a class="Del_Product_row">Delete</a></td>
                     </tr>
                   ';
                 }
@@ -201,9 +203,9 @@
                 $i++;
                 echo '
                   <tr>
-                    <td>'.$i.'<input type="hidden" id="product_AttrID" value='.random_string("alpha",5).' name="product_AttrID[]"></td>
-                    <td><input type="text" id="product_AttrName" name="product_AttrName[]" placeholder="คุณลักษณะ"></td>
-                    <td><input type="text" id="product_AttrDesc" name="product_AttrDesc[]" placeholder="รายละเอียด"></td>
+                    <td>'.$i.'</td>
+                    <td><input type="text" id="product_AttrName" name="product_Attr['.$i.'][Name]" placeholder="คุณลักษณะ"></td>
+                    <td><input type="text" id="product_AttrDesc" name="product_Attr['.$i.'][Desc]" placeholder="รายละเอียด"></td>
                     <td><a class="Del_Product_row">Delete</a></td>
                   </tr>
                 ';
