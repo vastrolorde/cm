@@ -200,7 +200,7 @@
             <?php
               $i=0;
               
-              if(isset($data)){
+              if(isset($data[0]->partner_contactor)){
 
                 $a = json_decode($data[0]->partner_contactor);
 

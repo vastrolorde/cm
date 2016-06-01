@@ -68,7 +68,11 @@
             echo form_label('น้ำหนักต่อชิ้น').form_input('product_weight',$product_weight);
           }else{
             echo form_label('ชื่อสินค้า *').form_input('product_name');
-            echo form_label('น้ำหนักต่อชิ้น').form_input('product_weight');
+            echo form_label('น้ำหนักต่อชิ้น').
+                  '<div class="input-group">'.
+                    form_input('product_weight','','class=input-group-field').'<span class="input-group-label">kg</span>
+                  </div>
+            ';
           }
         ?>
           </div>                                                                     
@@ -184,7 +188,7 @@
             <?php
               $i=0;
               
-              if(isset($data)){
+              if(isset($data[0]->product_Attr)){
 
                 $a = json_decode($data[0]->product_Attr);
 
