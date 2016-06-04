@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="<?php echo asset_url().'bower/jquery-ui/themes/base/jquery-ui.css'; ?>">
     <link rel="stylesheet" href="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.css'; ?>">
     <link rel="stylesheet" href="<?php echo asset_url().'css/app.css'; ?>">
   </head>
@@ -41,8 +42,7 @@
         </li>
         <li><a href="#">Settings</a>
           <ul class="vertical menu nested">
-            <li><a href="#">จัดการหมวดประเภทสินค้า</a></li>
-            <li><a href="#">จัดการคุณลักษณะสินค้า</a></li>
+            <li>-- blank --</li>
           </ul>
         </li>
       </ul>

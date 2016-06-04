@@ -11,8 +11,9 @@
     <ul class="menu">
       <li><a class="hollow button" href="<?php echo site_url('/partner/create'); ?>">เพิ่ม</a></li>
       <li><a class="hollow button" href="#">พิมพ์</a></li>
-      <li><input type="search" placeholder="Search"></li>
-      <li><button type="button" class="button">Search</button></li>
+      <li>
+        <input id="search" type="text" name="search" placeholder="Search">
+      </li>
     </ul>
   </div>
 </div>
@@ -31,15 +32,35 @@
   </thead>
 
   <tbody>
+  
   <?php
     $i = 1;
     foreach ($result as $key){
+
+      $a = json_decode($key->Type);
+
+      if (!is_null($a)) {
+        if(in_array('customer',$a) && in_array('supplier',$a)) {
+          $Type = "Partner";
+        }elseif (in_array('supplier',$a) || in_array('customer',$a)) {
+          if (in_array('customer',$a)) {
+            $Type = "customer";
+          }elseif (in_array('supplier',$a)) {
+            $Type = "supplier";
+          }
+        }
+      }else{
+        $Type = "Not Set";
+      }
+
+
+
       echo '
     <tr>
       <td>'.$i.'</td>
       <td>'.$key->id.'</td>
       <td>'.$key->partner_name.'</td>
-      <td>'.$key->Type.'</td>
+      <td>'.$Type.'</td>
       <td>'.$key->Sector.'</td>
       <td><a href="'.site_url("partner/data/".$key->id).'">Edit</a></td>
     </tr>

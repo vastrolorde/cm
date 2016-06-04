@@ -42,13 +42,33 @@
           <div class="large-12 columns">
           <h5>ประเภท Partner</h5>
 
-            <?php
+          <?php
 
-            $checkbox = array('ลูกค้า','supplier');
+            if(isset($data)){
+            //Assign Variable
+              $partner_id = $data[0]->id;
+              $partner_name = $data[0]->partner_name;
 
-            foreach ($checkbox as $value) {
-              
-              echo form_checkbox('partner_type[]',$value).form_label($value);
+
+              echo form_label('partner *').form_input('id',$partner_id,'disabled').form_hidden('partner_id',$partner_id);
+              echo form_label('ชื่อ partner *').form_input('partner_name',$partner_name);
+            }else{
+              echo form_label('partner *').form_input('id');
+              echo form_label('ชื่อ partner *').form_input('partner_name');
+            }
+            
+            if(isset($data)){
+              if(!is_null($data[0]->Type) && !empty($data[0]->Type) && $data[0]->Type != 'null'){
+                $a = json_decode($data[0]->Type);
+
+                echo form_checkbox('Type[]','customer',(in_array('customer',$a))? TRUE : FALSE ).form_label('ลูกค้า');
+                echo form_checkbox('Type[]','supplier',(in_array('supplier',$a))? TRUE : FALSE).form_label('supplier');
+
+              }
+            }else{
+
+              echo form_checkbox('Type[]','customer').form_label('ลูกค้า');
+              echo form_checkbox('Type[]','supplier').form_label('supplier');
             }
             ?>
 
@@ -91,7 +111,7 @@
           </div>
         </div>
 
-
+<hr />
         <div class="row">
           <div class="large-6 columns">
 
@@ -99,18 +119,15 @@
           
           if(isset($data)){
             //Assign Variable
-            $partner_id = $data[0]->id;
             $add1 = $data[0]->add1;
             $SubDist = $data[0]->SubDist;
             $Province = $data[0]->Province;
 
 
-            echo form_label('partner *').form_input('id',$partner_id,'disabled').form_hidden('partner_id',$partner_id);
             echo form_label('ที่อยู่ *').form_input('add1',$add1);
             echo form_label('แขวง/ตำบล *').form_input('SubDist',$SubDist);
             echo form_label('จังหวัด *').form_input('Province',$Province);
           }else{
-            echo form_label('partner *').form_input('id');
             echo form_label('ที่อยู่ *').form_input('add1');
             echo form_label('แขวง/ตำบล *').form_input('SubDist');
             echo form_label('จังหวัด *').form_input('Province');
@@ -123,18 +140,15 @@
           
           if(isset($data)){
             //Assign Variable
-            $partner_name = $data[0]->partner_name;
             $add2 = $data[0]->add2;
             $Dist = $data[0]->Dist;
             $Postal = $data[0]->Postal;
 
 
-            echo form_label('ชื่อ partner *').form_input('partner_name',$partner_name);
             echo form_label('ที่อยู่2 *').form_input('add2',$add2);
             echo form_label('เขต/อำเภอ *').form_input('Dist',$Dist);
             echo form_label('รหัสไปรษณีย์ *').form_input('Postal',$Postal);
           }else{
-            echo form_label('ชื่อ partner *').form_input('partner_name');
             echo form_label('ที่อยู่2 *').form_input('add2');
             echo form_label('เขต/อำเภอ *').form_input('Dist');
             echo form_label('รหัสไปรษณีย์ *').form_input('Postal');

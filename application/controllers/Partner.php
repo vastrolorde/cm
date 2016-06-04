@@ -21,6 +21,7 @@ class Partner extends CI_Controller {
 		$this->load->view('parts/head',$data);
 		$this->load->view('partner/partner_list',$data);
 		$this->load->view('parts/footer');
+		$this->load->view('scripts/partner_script');
 	}
 
 
@@ -79,7 +80,7 @@ class Partner extends CI_Controller {
 		'Dist'              =>	$this->input->post('Dist'),
 		'Province'          =>	$this->input->post('Province'),
 		'Postal'            =>	$this->input->post('Postal'),
-		'Type'              =>	$this->input->post('Type'),
+		'Type'              =>	json_encode($this->input->post('Type')),
 		'Bank'              =>	$this->input->post('Bank'),
 		'Acc_no'            =>	$this->input->post('Acc_no'),
 		'Acc_type'          =>	$this->input->post('Acc_type'),
@@ -112,7 +113,7 @@ class Partner extends CI_Controller {
 		'Dist'              =>	$this->input->post('Dist'),
 		'Province'          =>	$this->input->post('Province'),
 		'Postal'            =>	$this->input->post('Postal'),
-		'Type'              =>	$this->input->post('Type'),
+		'Type'              =>	json_encode($this->input->post('Type')),
 		'Bank'              =>	$this->input->post('Bank'),
 		'Acc_no'            =>	$this->input->post('Acc_no'),
 		'Acc_type'          =>	$this->input->post('Acc_type'),
@@ -130,5 +131,13 @@ class Partner extends CI_Controller {
 		$this->partner_m->delete($id);
 
 		redirect('/partner');
+	}
+
+	public function lookup(){
+		$keyword = $this->input->post('search');
+		$query = $this->partner_m->lookup($keyword);
+
+		echo json_encode($query);
+
 	}
 }

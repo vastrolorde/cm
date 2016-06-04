@@ -12,8 +12,7 @@
     <ul class="menu">
       <li><a class="hollow button" href="<?php echo site_url('/product/create'); ?>">เพิ่ม</a></li>
       <li><a class="hollow button" href="#">พิมพ์</a></li>
-      <li><input type="search" placeholder="Search"></li>
-      <li><button type="button" class="button">Search</button></li>
+      <li><input id="search" type="text" name="search" placeholder="Search"></li>
     </ul>
   </div>
 </div>

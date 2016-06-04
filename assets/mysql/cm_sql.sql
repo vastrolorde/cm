@@ -11,7 +11,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping structure for table cm.bank
-DROP TABLE IF EXISTS `bank`;
 CREATE TABLE IF NOT EXISTS `bank` (
   `id` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -21,23 +20,7 @@ CREATE TABLE IF NOT EXISTS `bank` (
 -- Data exporting was unselected.
 
 
--- Dumping structure for table cm.contactor
-DROP TABLE IF EXISTS `contactor`;
-CREATE TABLE IF NOT EXISTS `contactor` (
-  `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `partner_id` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contact_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contact_tel` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contact_email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contact_position` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Data exporting was unselected.
-
-
 -- Dumping structure for table cm.dist
-DROP TABLE IF EXISTS `dist`;
 CREATE TABLE IF NOT EXISTS `dist` (
   `Dist_ID` int(5) NOT NULL AUTO_INCREMENT,
   `Dist_CODE` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
@@ -52,7 +35,6 @@ CREATE TABLE IF NOT EXISTS `dist` (
 
 
 -- Dumping structure for table cm.employee_data
-DROP TABLE IF EXISTS `employee_data`;
 CREATE TABLE IF NOT EXISTS `employee_data` (
   `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `emp_prefix` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -75,7 +57,6 @@ CREATE TABLE IF NOT EXISTS `employee_data` (
 
 
 -- Dumping structure for table cm.geography
-DROP TABLE IF EXISTS `geography`;
 CREATE TABLE IF NOT EXISTS `geography` (
   `GEO_ID` int(5) NOT NULL AUTO_INCREMENT,
   `GEO_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -86,14 +67,12 @@ CREATE TABLE IF NOT EXISTS `geography` (
 
 
 -- Dumping structure for table cm.partner
-DROP TABLE IF EXISTS `partner`;
 CREATE TABLE IF NOT EXISTS `partner` (
   `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `taxID` int(15) NOT NULL,
+  `taxID` int(15) DEFAULT NULL,
   `partner_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `contactor` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `mobile` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Fax` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `add1` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `add2` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -101,17 +80,13 @@ CREATE TABLE IF NOT EXISTS `partner` (
   `Dist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Postal` int(5) DEFAULT NULL,
-  `Invadd1` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Invadd2` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `InvSubDist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `InvDist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `InvProvince` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `InvPostal` int(5) DEFAULT NULL,
-  `Sector` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Type` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ProductDesc` longtext COLLATE utf8_unicode_ci,
-  `accNo` int(10) DEFAULT NULL,
+  `Type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Bank` varchar(3) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Acc_no` int(10) DEFAULT NULL,
+  `Acc_type` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Acc_branch` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Sector` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `partner_contactor` longtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `Bank` (`Bank`),
   KEY `Bank_2` (`Bank`),
@@ -123,7 +98,6 @@ CREATE TABLE IF NOT EXISTS `partner` (
 
 
 -- Dumping structure for table cm.product
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `product_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -136,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `product_d_RentalPrice` int(20) NOT NULL,
   `product_GuaranteePrice` int(20) NOT NULL,
   `product_Desc` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `product_Attr` longtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -143,7 +118,6 @@ CREATE TABLE IF NOT EXISTS `product` (
 
 
 -- Dumping structure for table cm.product_attr
-DROP TABLE IF EXISTS `product_attr`;
 CREATE TABLE IF NOT EXISTS `product_attr` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
@@ -152,22 +126,7 @@ CREATE TABLE IF NOT EXISTS `product_attr` (
 -- Data exporting was unselected.
 
 
--- Dumping structure for table cm.product_attr_transaction
-DROP TABLE IF EXISTS `product_attr_transaction`;
-CREATE TABLE IF NOT EXISTS `product_attr_transaction` (
-  `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `product_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `product_AttrName` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `product_AttrDesc` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `attr_id` (`product_AttrName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Data exporting was unselected.
-
-
 -- Dumping structure for table cm.product_unit
-DROP TABLE IF EXISTS `product_unit`;
 CREATE TABLE IF NOT EXISTS `product_unit` (
   `UnitID` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `UnitName` varchar(50) COLLATE utf8_unicode_ci NOT NULL
@@ -177,7 +136,6 @@ CREATE TABLE IF NOT EXISTS `product_unit` (
 
 
 -- Dumping structure for table cm.province
-DROP TABLE IF EXISTS `province`;
 CREATE TABLE IF NOT EXISTS `province` (
   `Province_ID` int(5) NOT NULL AUTO_INCREMENT,
   `Province_CODE` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
@@ -190,7 +148,6 @@ CREATE TABLE IF NOT EXISTS `province` (
 
 
 -- Dumping structure for table cm.rental
-DROP TABLE IF EXISTS `rental`;
 CREATE TABLE IF NOT EXISTS `rental` (
   `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `partner_id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
@@ -213,7 +170,6 @@ CREATE TABLE IF NOT EXISTS `rental` (
 
 
 -- Dumping structure for table cm.rentaltransaction
-DROP TABLE IF EXISTS `rentaltransaction`;
 CREATE TABLE IF NOT EXISTS `rentaltransaction` (
   `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Rentalid` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -232,7 +188,6 @@ CREATE TABLE IF NOT EXISTS `rentaltransaction` (
 
 
 -- Dumping structure for table cm.subdist
-DROP TABLE IF EXISTS `subdist`;
 CREATE TABLE IF NOT EXISTS `subdist` (
   `SubDist_ID` int(5) NOT NULL AUTO_INCREMENT,
   `SubDist_CODE` varchar(6) COLLATE utf8_unicode_ci NOT NULL,

@@ -27,14 +27,33 @@
 		});
 
 	// Alert Popup
-    $('.delitem').click(function (){
-       var answer = confirm("คุณต้องการลบหรือไม่?");
-          if (answer) {
-             return true;
-          }else{
-             return false;
-          }
-    });
+	    $('.delitem').click(function (){
+	       var answer = confirm("คุณต้องการลบหรือไม่?");
+	          if (answer) {
+	             return true;
+	          }else{
+	             return false;
+	          }
+	    });
+
+$("#search").autocomplete({
+	source: function(request, response) {
+		$.ajax({
+			url: "<?php echo site_url().'/partner/lookup'; ?>",
+			data: {
+				search:	$("#search").val()
+			},
+			dataType: "json",
+			type: "POST",
+			success: function(data){
+				response(data);
+				console.log(data);
+			}
+		});
+	},
+	minLength: 2
+});
+
 
 	});	
 </script>
