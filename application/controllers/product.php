@@ -50,7 +50,7 @@ class Product extends CI_Controller {
 			<li><a class="button hollow warning" href="'.site_url('/product').'">ยกเลิก</a></li>
 			<li><a class="button hollow alert delitem" href="'.site_url('/product/delete').'/'.$id.'">ลบ</a></li>
 			<li><a class="button hollow" href="'.site_url('/product/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->product_m->get($id,'product');
+		$data['data'] = $this->product_m->get($id);
 
 		$this->load->view('parts/head');
 		$this->load->view('product/product_form',$data);

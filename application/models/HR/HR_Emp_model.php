@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Partner_model extends CI_Model {
+class HR_Emp_model extends CI_Model {
 
 	public function getAll(){
 		$this->db->select("*");
-		$query = $this->db->get("partner");
+		$query = $this->db->get("employee_data");
 		$this->db->order_by('id', 'ASC');
 		return $result = $query->result();
 	}
@@ -13,22 +13,22 @@ class Partner_model extends CI_Model {
 	public function get($id){
 		$this->db->select("*");
 		$this->db->where("id",$id);
-		$query = $this->db->get('partner');
+		$query = $this->db->get('employee_data');
 		return $result = $query->result();
 	}
 
 	public function create($data){
-		$this->db->insert('partner',$data);
+		$this->db->insert('employee_data',$data);
 	}
 
 	public function update($data,$id){
 		$this->db->where('id',$id);
-		$this->db->update('partner',$data);
+		$this->db->update('employee_data',$data);
 	}
 
 	public function delete($id){
 		$this->db->where('id',$id);
-		$this->db->delete('partner');
+		$this->db->delete('employee_data');
 	}
 
 	// Other
@@ -42,7 +42,7 @@ class Partner_model extends CI_Model {
 	public function lookup($keyword){
 		// $this->db->query('SELECT partner_name FROM partner WHERE partner_name LIKE '.$keyword);
 		$this->db->select('partner_name');
-		$this->db->from('partner');
+		$this->db->from('employee_data');
 		$this->db->like('partner_name',$keyword);
 		return $this->db->get()->result();
 	}

@@ -51,7 +51,7 @@ class Partner extends CI_Controller {
 			<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
 			<li><a class="button hollow alert delitem" href="'.site_url('/partner/delete').'/'.$id.'">ลบ</a></li>
 			<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->partner_m->get($id,'partner');
+		$data['data'] = $this->partner_m->get($id);
 		$data['bank'] = $this->partner_m->bank();
 
 		$this->load->view('parts/head');

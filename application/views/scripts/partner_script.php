@@ -36,24 +36,28 @@
 	          }
 	    });
 
-$("#search").autocomplete({
-	source: function(request, response) {
-		$.ajax({
-			url: "<?php echo site_url().'/partner/lookup'; ?>",
-			data: {
-				search:	$("#search").val()
+	// Autocomplete
+		$("#search").autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: "<?php echo site_url().'/partner/lookup'; ?>",
+					data: {
+						search:	$("#search").val()
+					},
+					dataType: "json",
+					type: "POST",
+					success: function (data) {
+		                response(data.map(function (value) {
+		                    return {
+		                        'label': value.partner_name,
+		                        'value': value.partner_name
+		                    };
+		            	}))
+		            }
+				});
 			},
-			dataType: "json",
-			type: "POST",
-			success: function(data){
-				response(data);
-				console.log(data);
-			}
+			minLength: 3
 		});
-	},
-	minLength: 2
-});
-
 
 	});	
 </script>

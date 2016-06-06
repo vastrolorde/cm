@@ -38,6 +38,12 @@
             <li><a href="<?php echo site_url().'/rental'; ?>">งานเช่า</a></li>
             <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
             <li><a href="<?php echo site_url().'/Product'; ?>">สินค้า</a></li>
+            <li><a href="#">HR</a>
+              <ul class="vertical menu nested">
+                <li><a href="<?php echo site_url().'/HR/Employee'; ?>">พนักงาน</a></li>
+              </ul>
+            </li>
+
           </ul>
         </li>
         <li><a href="#">Settings</a>

@@ -1,4 +1,3 @@
-
 <div class="row">
   <div class="large-12 columns">
 
@@ -10,7 +9,7 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-      <li><a class="hollow button" href="<?php echo site_url('/product/create'); ?>">เพิ่ม</a></li>
+      <li><a class="hollow button" href="<?php echo site_url('/HR/Employee/create'); ?>">เพิ่ม</a></li>
       <li><a class="hollow button" href="#">พิมพ์</a></li>
       <li>
         <input id="search" type="text" name="search" placeholder="Search">
@@ -25,24 +24,28 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>รหัส Product</th>
-      <th>ชื่อ Product</th>
-      <th>ประเภท Product</th>
+      <th>รหัสพนักงาน</th>
+      <th>ชื่อพนักงาน</th>
+      <th>แผนก</th>
+      <th>สถานะพนักงาน</th>
       <th>actions</th>
     </tr>
   </thead>
 
   <tbody>
+  
   <?php
     $i = 1;
     foreach ($result as $key){
+
       echo '
     <tr>
       <td>'.$i.'</td>
-      <td>'.$key->product_id.'</td>
-      <td>'.$key->product_name.'</td>
-      <td>'.$key->product_type.'</td>
-      <td><a href="'.site_url("product/data/".$key->product_id).'">Edit</a></td>
+      <td>'.$key->id.'</td>
+      <td>'.$key->emp_prefix.' '.$key->emp_fname.' '.$key->emp_lname.'</td>
+      <td>'.$key->emp_dept.'</td>
+      <td>'.$key->emp_status.'</td>
+      <td><a href="'.site_url("HR/Employee/data/".$key->id).'">Edit</a></td>
     </tr>
       ';
 

@@ -9,10 +9,10 @@ class Product_model extends CI_Model {
 		return $result = $query->result();
 	}
 
-	public function get($id,$tbl){
+	public function get($id){
 		$this->db->select("*");
 		$this->db->where("product_id",$id);
-		$query = $this->db->get($tbl);
+		$query = $this->db->get("product");
 		return $result = $query->result();
 	}
 

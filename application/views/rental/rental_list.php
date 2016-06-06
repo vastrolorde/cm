@@ -12,7 +12,7 @@
       <li><a class="hollow button" href="<?php echo site_url('/rental/create'); ?>">เพิ่ม</a></li>
       <li><a class="hollow button" href="#">พิมพ์</a></li>
       <li><input type="search" placeholder="Search"></li>
-      <li><button type="button" class="button">Search</button></li>
+      <li><button id="submitsearch" type="button" class="button">Search</button></li>
     </ul>
   </div>
 </div>

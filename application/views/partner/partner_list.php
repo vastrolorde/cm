@@ -14,6 +14,7 @@
       <li>
         <input id="search" type="text" name="search" placeholder="Search">
       </li>
+      <li><button id="submitsearch" type="button" class="button">Search</button></li>
     </ul>
   </div>
 </div>
