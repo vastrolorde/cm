@@ -53,6 +53,7 @@ class Employee extends CI_Controller {
 		$this->load->view('parts/head',$data);
 		$this->load->view('HR/HR_Emp_form',$data);
 		$this->load->view('parts/footer');
+		$this->load->view('scripts/employee_script');
 	}
 
 
@@ -71,8 +72,7 @@ class Employee extends CI_Controller {
 			'emp_sex'          =>	$this->input->post('emp_sex'),
 			'emp_position_now' =>	$this->input->post('emp_position_now'),
 			'emp_dept_now'     =>	$this->input->post('emp_dept_now'),
-			'emp_position'     =>	$this->input->post('emp_position'),
-			'emp_dept'         =>	$this->input->post('emp_dept'),
+			'emp_position'     =>	json_encode($this->input->post('emp_position')),
 			'emp_type'         =>	$this->input->post('emp_type'),
 			'emp_startdate'    =>	$this->input->post('emp_startdate'),
 			'emp_enddate'      =>	$this->input->post('emp_enddate'),
@@ -91,7 +91,7 @@ class Employee extends CI_Controller {
 			'emp_emergency' =>	$this->input->post('emp_emergency'),
 			'emp_emer_call' =>	$this->input->post('emp_emer_call'),
 
-			'emp_training'    =>	$this->input->post('emp_training'),
+			'emp_training'    =>	json_encode($this->input->post('emp_training')),
 			
 			'emp_cid'          =>	$this->input->post('emp_cid'),
 			'emp_cid_exp'      =>	$this->input->post('emp_cid_exp'),
@@ -113,7 +113,7 @@ class Employee extends CI_Controller {
 		$this->hr_emp_m->create($data);
 		
 
-		redirect('/HR');
+		redirect('/HR/Employee/');
 
 	}
 
@@ -121,19 +121,20 @@ class Employee extends CI_Controller {
 	{
 
 		$data = array(
-			'emp_prefix'      =>	$this->input->post('emp_prefix'),
-			'emp_fname'       =>	$this->input->post('emp_fname'),
-			'emp_lname'       =>	$this->input->post('emp_lname'),
-			'emp_nickname'    =>	$this->input->post('emp_nickname'),
-			'emp_nation'      =>	$this->input->post('emp_nation'),
-			'emp_DOB'         =>	$this->input->post('emp_DOB'),
-			'emp_sex'         =>	$this->input->post('emp_sex'),
-			'emp_position'    =>	$this->input->post('emp_position'),
-			'emp_dept'        =>	$this->input->post('emp_dept'),
-			'emp_type'        =>	$this->input->post('emp_type'),
-			'emp_startdate'   =>	$this->input->post('emp_startdate'),
-			'emp_enddate'     =>	$this->input->post('emp_enddate'),
-			'emp_status'      =>	$this->input->post('emp_status'),
+			'emp_prefix'       =>	$this->input->post('emp_prefix'),
+			'emp_fname'        =>	$this->input->post('emp_fname'),
+			'emp_lname'        =>	$this->input->post('emp_lname'),
+			'emp_nickname'     =>	$this->input->post('emp_nickname'),
+			'emp_nation'       =>	$this->input->post('emp_nation'),
+			'emp_DOB'          =>	$this->input->post('emp_DOB'),
+			'emp_sex'          =>	$this->input->post('emp_sex'),
+			'emp_position_now' =>	$this->input->post('emp_position_now'),
+			'emp_dept_now'     =>	$this->input->post('emp_dept_now'),
+			'emp_position'     =>	json_encode($this->input->post('emp_position')),
+			'emp_type'         =>	$this->input->post('emp_type'),
+			'emp_startdate'    =>	$this->input->post('emp_startdate'),
+			'emp_enddate'      =>	$this->input->post('emp_enddate'),
+			'emp_status'       =>	$this->input->post('emp_status'),
 
 			'emp_add1'        =>	$this->input->post('emp_add1'),
 			'emp_add2'        =>	$this->input->post('emp_add2'),
@@ -148,7 +149,7 @@ class Employee extends CI_Controller {
 			'emp_emergency' =>	$this->input->post('emp_emergency'),
 			'emp_emer_call' =>	$this->input->post('emp_emer_call'),
 
-			'emp_training'    =>	$this->input->post('emp_training'),
+			'emp_training'    =>	json_encode($this->input->post('emp_training')),
 			
 			'emp_cid'          =>	$this->input->post('emp_cid'),
 			'emp_cid_exp'      =>	$this->input->post('emp_cid_exp'),
@@ -169,13 +170,13 @@ class Employee extends CI_Controller {
 
 
 		$this->hr_emp_m->update($data,$id);
-		redirect('/HR');
+		redirect('/HR/Employee/');
 	}
 
 	public function delete($id){
 		$this->hr_emp_m->delete($id);
 
-		redirect('/HR');
+		redirect('/HR/Employee/');
 	}
 
 	public function lookup(){

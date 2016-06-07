@@ -1,8 +1,8 @@
 <?php
   if(!isset($data)){
-    echo form_open('/partner/add');
+    echo form_open('/HR/Employee/add');
   }else{
-    echo form_open('/partner/edit/'.$data[0]->id);
+    echo form_open('/HR/Employee/edit/'.$data[0]->id);
   }
 ?>
 
@@ -31,6 +31,8 @@
       <li class="tabs-title"><a href="#Positions">Positions</a></li>
       <li class="tabs-title"><a href="#Auth_Card">Auth. Card</a></li>
       <li class="tabs-title"><a href="#Training">Training</a></li>
+      <li class="tabs-title"><a href="#Education">Education</a></li>
+      <li class="tabs-title"><a href="#Working_Experiences">Working Experiences</a></li>
     </ul>
 
     <div class="tabs-content" data-tabs-content="employee-tabs">
@@ -140,48 +142,68 @@
         <div class="row">
           <div class="large-6 columns">
 
-        <?php
-          
-          if(isset($data)){
-            //Assign Variable
-            $emp_startdate = $data[0]->emp_startdate;
-            $emp_enddate = $data[0]->emp_enddate;
-            $emp_status = $data[0]->emp_status;
+            <?php
+
+                $emp_status_list = array(
+                    'ทดลองงาน' => 'ทดลองงาน', 
+                    'บรรจุแล้ว' => 'บรรจุแล้ว', 
+                    'ลาออก' => 'ลาออก', 
+                    'ไล่ออก' => 'ไล่ออก'
+                  );
+              
+              if(isset($data)){
+                //Assign Variable
+
+                $emp_startdate = $data[0]->emp_startdate;
+                $emp_enddate = $data[0]->emp_enddate;
+                $emp_status = $data[0]->emp_status;
 
 
-            echo form_label('วันเริ่มทำงาน *').form_input('emp_startdate',$emp_startdate);
-            echo form_label('วันสิ้นสุดการทำงาน *').form_input('emp_enddate',$emp_enddate);
-            echo form_label('สถานะ').form_input('emp_status',$emp_status);
-          }else{
-            echo form_label('วันเริ่มทำงาน *').form_input('emp_startdate');
-            echo form_label('วันสิ้นสุดการทำงาน *').form_input('emp_enddate');
-            echo form_label('สถานะ *').form_input('emp_status');
-          }
-        ?>
+                echo form_label('วันเริ่มทำงาน *').form_input('emp_startdate',$emp_startdate);
+                echo form_label('วันสิ้นสุดการทำงาน *').form_input('emp_enddate',$emp_enddate);
+                echo form_label('สถานะ').form_dropdown('emp_status',$emp_status_list,$emp_status);
+              }else{
+                echo form_label('วันเริ่มทำงาน *').form_input('emp_startdate');
+                echo form_label('วันสิ้นสุดการทำงาน *').form_input('emp_enddate');
+                echo form_label('สถานะ *').form_dropdown('emp_status',$emp_status_list);
+              }
+            ?>
           </div>
           <div class="large-6 columns">
 
-        <?php
-          
-          if(isset($data)){
-            //Assign Variable
-            $position_now = $data[0]->position_now;
-            $dept_now = $data[0]->dept_now;
+            <?php
+
+                $emp_type_list = array(
+                    'พนักงานรายวัน' => 'พนักงานรายวัน',
+                    'พนักงานรายเดือน' => 'พนักงานรายเดือน',
+                    'พนักงานชั่วคราวรายวัน' => 'พนักงานชั่วคราวรายวัน',
+                    'พนักงานชั่วคราวรายเดือน' => 'พนักงานชั่วคราวรายเดือน',
+                    'พนักงานฝึกงาน' => 'พนักงานฝึกงาน'
+                  );
+              
+              if(isset($data)){
+                //Assign Variable
+
+                $emp_position_now = $data[0]->emp_position_now;
+                $emp_dept_now = $data[0]->emp_dept_now;
+                $emp_type = $data[0]->emp_type;
 
 
-            echo form_label('ตำแหน่งปัจจุบัน').form_input('position_now',$position_now);
-            echo form_label('แผนกปัจจุบัน').form_input('dept_now',$dept_now);
-          }else{
-            echo form_label('ตำแหน่งปัจจุบัน').form_input('position_now');
-            echo form_label('แผนกปัจจุบัน').form_input('dept_now');
-          }
-        ?>
+                echo form_label('ตำแหน่งปัจจุบัน').form_input('emp_position_now',$emp_position_now);
+                echo form_label('แผนกปัจจุบัน').form_input('emp_dept_now',$emp_dept_now);
+                echo form_label('ประเภทพนักงาน').form_dropdown('emp_type',$emp_type_list,$emp_type);
+              }else{
+                echo form_label('ตำแหน่งปัจจุบัน').form_input('emp_position_now');
+                echo form_label('แผนกปัจจุบัน').form_input('emp_dept_now');
+                echo form_label('ประเภทพนักงาน').form_dropdown('emp_type',$emp_type_list);
+              }
+            ?>
           </div>
         </div>
 
       </div>
 
-      <div class="tabs-panel is-active" id="contact">
+      <div class="tabs-panel" id="contact">
         <h4>Contact</h4>
         <div class="row">
           <div class="large-12 columns">
@@ -307,7 +329,7 @@
               $i=0;
               
               if(isset($data[0]->emp_position)){
-
+                
                 $a = json_decode($data[0]->emp_position);
 
                 foreach ($a as $row) {
@@ -545,7 +567,19 @@
 
       </div>
 
+      <div class="tabs-panel" id="Education">
 
+        <h4>ประวัติการศึกษา</h4>
+        <hr />
+
+      </div>
+
+      <div class="tabs-panel" id="Working_Experiences">
+
+        <h4>ประวัติการทำงาน</h4>
+        <hr />
+
+      </div>
 
     </div>
 

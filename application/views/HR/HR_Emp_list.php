@@ -26,6 +26,7 @@
       <th>#</th>
       <th>รหัสพนักงาน</th>
       <th>ชื่อพนักงาน</th>
+      <th>ตำแหน่ง</th>
       <th>แผนก</th>
       <th>สถานะพนักงาน</th>
       <th>actions</th>
@@ -43,7 +44,8 @@
       <td>'.$i.'</td>
       <td>'.$key->id.'</td>
       <td>'.$key->emp_prefix.' '.$key->emp_fname.' '.$key->emp_lname.'</td>
-      <td>'.$key->emp_dept.'</td>
+      <td>'.$key->emp_position_now.'</td>
+      <td>'.$key->emp_dept_now.'</td>
       <td>'.$key->emp_status.'</td>
       <td><a href="'.site_url("HR/Employee/data/".$key->id).'">Edit</a></td>
     </tr>
