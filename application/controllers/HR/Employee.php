@@ -14,8 +14,25 @@ class Employee extends CI_Controller {
 
 	public function index()
 	{
+
+		$this->load->library('pagination');
+
+		$config['base_url'] = site_url().'/HR/Employee';
+		$config['total_rows'] = $this->hr_emp_m->countAll();
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 3;
+
+		$this->pagination->initialize($config);
+
+		if($this->uri->segment(3)){
+			$page = ($this->uri->segment(3)) ;
+		}else{
+			$page = 1;
+		}
+
 		$data['title'] = 'ฐานข้อมูลพนักงาน';
-		$data['result'] = $this->hr_emp_m->getAll();
+		$data['result'] = $this->hr_emp_m->getAll($config['per_page'],$page);
+		$data['pagination'] = $this->pagination->create_links();
 
 
 		$this->load->view('parts/head',$data);

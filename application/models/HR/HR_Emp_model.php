@@ -3,11 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class HR_Emp_model extends CI_Model {
 
-	public function getAll(){
+	public function getAll($limit,$page){
+		$this->db->limit($limit, $page);
 		$this->db->select("*");
 		$query = $this->db->get("employee_data");
 		$this->db->order_by('id', 'ASC');
-		return $result = $query->result();
+
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				$data[] = $row;
+			}
+			return $data;
+		}
+
+		return false;
+
 	}
 
 	public function get($id){
@@ -33,10 +43,9 @@ class HR_Emp_model extends CI_Model {
 
 	// Other
 
-	public function bank(){
-		$this->db->select();
-		$query = $this->db->get('bank');
-		return $result = $query->result_array();
+	public function countAll(){
+		$result = $this->db->count_all('employee_data');
+		return $result;
 	}
 
 	public function lookup($keyword){
