@@ -10,7 +10,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+-- Dumping database structure for cm
+DROP DATABASE IF EXISTS `cm`;
+CREATE DATABASE IF NOT EXISTS `cm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `cm`;
+
+
 -- Dumping structure for table cm.bank
+DROP TABLE IF EXISTS `bank`;
 CREATE TABLE IF NOT EXISTS `bank` (
   `id` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -18,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `bank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.bank: ~34 rows (approximately)
+DELETE FROM `bank`;
 /*!40000 ALTER TABLE `bank` DISABLE KEYS */;
 INSERT INTO `bank` (`id`, `name`) VALUES
 	('AGR', 'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร'),
@@ -58,6 +66,7 @@ INSERT INTO `bank` (`id`, `name`) VALUES
 
 
 -- Dumping structure for table cm.dist
+DROP TABLE IF EXISTS `dist`;
 CREATE TABLE IF NOT EXISTS `dist` (
   `Dist_ID` int(5) NOT NULL AUTO_INCREMENT,
   `Dist_CODE` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
@@ -69,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `dist` (
 ) ENGINE=InnoDB AUTO_INCREMENT=999 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.dist: ~993 rows (approximately)
+DELETE FROM `dist`;
 /*!40000 ALTER TABLE `dist` DISABLE KEYS */;
 INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `Province_ID`) VALUES
 	(1, '1001', 'เขตพระนคร   ', '10200', 2, 1),
@@ -1068,6 +1078,7 @@ INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `
 
 
 -- Dumping structure for table cm.employee_data
+DROP TABLE IF EXISTS `employee_data`;
 CREATE TABLE IF NOT EXISTS `employee_data` (
   `id` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_prefix` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -1077,10 +1088,9 @@ CREATE TABLE IF NOT EXISTS `employee_data` (
   `emp_nation` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_DOB` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_sex` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `emp_position_now` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emp_dept_now` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emp_position` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `emp_dept` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `emp_position` text COLLATE utf8_unicode_ci,
+  `emp_position_now` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `emp_dept_now` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_startdate` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_enddate` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1096,7 +1106,7 @@ CREATE TABLE IF NOT EXISTS `employee_data` (
   `emp_email` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_emergency` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_emer_call` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emp_training` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emp_training` text COLLATE utf8_unicode_ci,
   `emp_cid` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_cid_exp` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_passport` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1114,50 +1124,53 @@ CREATE TABLE IF NOT EXISTS `employee_data` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.employee_data: ~37 rows (approximately)
+-- Dumping data for table cm.employee_data: ~38 rows (approximately)
+DELETE FROM `employee_data`;
 /*!40000 ALTER TABLE `employee_data` DISABLE KEYS */;
-INSERT INTO `employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `emp_nickname`, `emp_nation`, `emp_DOB`, `emp_sex`, `emp_position_now`, `emp_dept_now`, `emp_position`, `emp_dept`, `emp_type`, `emp_startdate`, `emp_enddate`, `emp_status`, `emp_add1`, `emp_add2`, `emp_SubDist`, `emp_Dist`, `emp_Province`, `emp_Postal`, `emp_tel1`, `emp_tel2`, `emp_email`, `emp_emergency`, `emp_emer_call`, `emp_training`, `emp_cid`, `emp_cid_exp`, `emp_passport`, `emp_passport_exp`, `emp_visa`, `emp_visa_exp`, `emp_wp`, `emp_wp_exp`, `emp_driver_license`, `emp_driver_license_exp`, `emp_bike_license`, `emp_bike_license_exp`, `emp_truck_license`, `emp_truck_license_exp`) VALUES
-	('CM-1001', 'นาย', 'ธนิตศักดิ์ ', 'พัชรดิษฐ์ฐากุล', 'มาร์ก', 'ไทย', '24/06/49', 'Male', NULL, NULL, 'President', 'Management', 'รายเดือน', '01/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1002', 'นาง', 'ยุวรินทร์  ', 'พัชรดิษฐ์ฐากุล', 'กลาง', 'ไทย', '10/06/52', 'Female', NULL, NULL, 'Vice President', 'Management', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1003', 'นาย', 'ภูริวัจน์  ', 'พัชรดิษฐ์ฐากุล', 'ไอซ์', 'ไทย', '19/05/90', 'Male', NULL, NULL, 'Corporate Director', 'Management', 'รายเดือน', '01/06/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1004', 'นาง', 'นางทัศนีย์', 'มัลลิกาพิพัฒน์', 'ตาล', 'ไทย', '15/11/82', 'Female', NULL, NULL, 'Account Recieviable/Cashier', 'Office', 'รายเดือน', '01/06/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1005', 'นาย', 'ประพันธ์ ', 'วงษ์อุบล', 'พันธ์', 'ไทย', '01/05/71', 'Male', NULL, NULL, 'General Supervisor', 'Factory', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1007', 'น.ส.', 'กัลฐิกา', 'บุญเปรื่อง', 'ฟาง', 'ไทย', '20/11/85', 'Female', NULL, NULL, 'Account Payable/Assistant Mana', 'Office', 'รายเดือน', '05/08/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1008', 'นาย', 'นนท์ตการ', 'มัลลิกาพิพัฒน์', 'มิกซ์', 'ไทย', '30/11/76', 'Male', NULL, NULL, 'Messenger', 'Office', 'รายเดือน', '01/01/11', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1009', 'นาย', 'เกษม', 'พิมพ์จันทร์', 'เกษม', 'ไทย', '23/07/69', 'Male', NULL, NULL, 'Messenger', 'Office', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1010', 'นาย', 'ธนพล', 'จันมีชัย', 'ทอง', 'ไทย', '05/10/60', 'Male', NULL, NULL, 'Scaffold Inspector', 'Factory', 'รายเดือน', '08/07/13', '20/02/16', 'ให้ออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1011', 'นาย', 'อุทัย', 'ทองเฟื้อง', 'ทัย', 'ไทย', '28/10/81', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '21/07/06', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1013', 'นาย', 'Soe Win Than', '', 'แสน', 'พม่า', '04/02/84', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1014', 'นาง', 'Zar Ni Tun', '', 'ปู', 'พม่า', '17/08/83', 'Female', NULL, NULL, 'worker', 'Factory', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1015', 'นาย', 'Aw Lan', '', 'ชาติ', 'พม่า', '30/04/86', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '02/12/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1016', 'น.ส.', 'Mi Yin Thein', '', 'นุ้ย', 'พม่า', '06/05/87', 'Female', NULL, NULL, 'worker', 'Factory', 'รายวัน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1017', 'น.ส.', 'Kyi Kyi Nyan', '', 'สา', 'พม่า', '19/04/95', 'Female', NULL, NULL, 'worker', 'Factory', 'รายวัน', '14/03/16', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1019', 'นาย', 'Aung Tin', '', 'อ๋อง', 'พม่า', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1020', 'นาย', 'Zin Maung Htun', '', 'ซี', 'พม่า', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '13/08/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1021', 'นาย', 'Tun Kyaw', '', 'ทุนโจ', 'พม่า', '29/05/84', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1022', 'นาย', 'Hlawn Moe Naing', '', 'นาย', 'พม่า', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/02/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1023', 'นาย', 'Zaw Moe', '', 'ซอม', 'พม่า', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1024', 'นาง', 'พูมะลี', 'สิริปันยา', 'เจ', 'ลาว', '06/11/73', 'Female', NULL, NULL, 'worker', 'Factory', 'รายวัน', '01/06/09', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1025', 'นาย', 'นาริน', 'กีม', 'นาริน', 'เขมร', '13/07/78', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '07/10/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1026', 'นาย', 'Foe Sae', '', 'โพ', 'พม่า', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1027', 'นาย', 'Maung Kyaw', '', 'ม่องโจ', 'พม่า', '12/02/87', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1028', 'น.ส.', 'เพ็ญโสม ', 'ใจวงค์', 'แคท', 'ไทย', '31/08/90', 'Female', NULL, NULL, 'General Manager', 'Management', 'รายเดือน', '01/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1029', 'นาย', 'Myat San', '', 'ซ่า', 'พม่า', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '15/01/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1030', 'นาย', 'เอ๊าท์', ' เม็ท', 'เอ๊าท์', 'เขมร', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '05/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1031', 'นาย', 'เล็ท', ' เม็ท', 'เล็ท', 'เขมร', '00/01/00', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '22/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1032', 'นาย', 'มิน', '', 'มิน', 'เขมร', '11/02/75', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '05/01/16', '', 'ทดลองงาน', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1033', 'นาย', 'จักรพันธ์', 'นาคนชม', 'โต้', 'ไทย', '29/01/91', 'Male', NULL, NULL, 'Accountant', 'Office', 'รายเดือน', '07/05/15', '01/07/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1034', 'นาย', 'สมพงศ์  ', 'นันทไพบูลย์', 'สมพงศ์', 'ไทย', '11/12/52', 'Male', NULL, NULL, 'Consultant', 'Management', 'รายเดือน', '01/04/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1035', 'น.ส.', 'ทอง', 'ทองทา', 'ทอง', 'ไทย', '25/01/54', 'Female', NULL, NULL, 'Maid', 'Office', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1036', 'นาย', 'Way Lin Tun', '', '', 'พม่า', '08/11/89', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '24/08/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1037', 'นาย', 'อัศวเทพ ', 'เริงสำราญ', 'พฤกษ์', 'ไทย', '12/12/90', 'Male', NULL, NULL, 'Sales Project Manager', 'Office', 'รายเดือน', '01/09/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1038', 'นาย', 'ทักษ์ดนัย', 'ชวาลารัตน์', 'ทักษ์', 'ไทย', '22/08/92', 'Male', NULL, NULL, 'Store Supervisor', 'Office', 'รายเดือน', '16/11/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1039', 'น.ส.', 'Kimsean', 'Sem', 'เซียน', 'เขมร', '16/03/87', 'Female', NULL, NULL, 'worker', 'Factory', 'รายวัน', '05/01/16', '', 'ทดลองงาน', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1041', 'นาย', 'ปอย', '', 'ปอย', 'เขมร', '04/04/91', 'Male', NULL, NULL, 'worker', 'Factory', 'รายวัน', '13/01/16', '', 'ทดลองงาน', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `emp_nickname`, `emp_nation`, `emp_DOB`, `emp_sex`, `emp_position`, `emp_position_now`, `emp_dept_now`, `emp_type`, `emp_startdate`, `emp_enddate`, `emp_status`, `emp_add1`, `emp_add2`, `emp_SubDist`, `emp_Dist`, `emp_Province`, `emp_Postal`, `emp_tel1`, `emp_tel2`, `emp_email`, `emp_emergency`, `emp_emer_call`, `emp_training`, `emp_cid`, `emp_cid_exp`, `emp_passport`, `emp_passport_exp`, `emp_visa`, `emp_visa_exp`, `emp_wp`, `emp_wp_exp`, `emp_driver_license`, `emp_driver_license_exp`, `emp_bike_license`, `emp_bike_license_exp`, `emp_truck_license`, `emp_truck_license_exp`) VALUES
+	('CM-1001', 'นาย', 'ธนิตศักดิ์ ', 'พัชรดิษฐ์ฐากุล', 'มาร์ก', 'ไทย', '24/06/49', 'Male', NULL, 'President', 'Management', 'รายเดือน', '01/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1002', 'นาง', 'ยุวรินทร์  ', 'พัชรดิษฐ์ฐากุล', 'กลาง', 'ไทย', '10/06/52', 'Female', NULL, 'Vice President', 'Management', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1003', 'นาย', 'ภูริวัจน์  ', 'พัชรดิษฐ์ฐากุล', 'ไอซ์', 'ไทย', '19/05/90', 'Male', NULL, 'Corporate Director', 'Management', 'รายเดือน', '01/06/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1004', 'นาง', 'นางทัศนีย์', 'มัลลิกาพิพัฒน์', 'ตาล', 'ไทย', '15/11/82', 'Female', NULL, 'Account Recieviable/Cashier', 'Office', 'รายเดือน', '01/06/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1005', 'นาย', 'ประพันธ์ ', 'วงษ์อุบล', 'พันธ์', 'ไทย', '01/05/71', 'Male', NULL, 'General Supervisor', 'Factory', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1007', 'น.ส.', 'กัลฐิกา', 'บุญเปรื่อง', 'ฟาง', 'ไทย', '20/11/85', 'Female', NULL, 'Account Payable/Assistant Mana', 'Office', 'รายเดือน', '05/08/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1008', 'นาย', 'นนท์ตการ', 'มัลลิกาพิพัฒน์', 'มิกซ์', 'ไทย', '30/11/76', 'Male', NULL, 'Messenger', 'Office', 'รายเดือน', '01/01/11', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1009', 'นาย', 'เกษม', 'พิมพ์จันทร์', 'เกษม', 'ไทย', '23/07/69', 'Male', NULL, 'Messenger', 'Office', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1010', 'นาย', 'ธนพล', 'จันมีชัย', 'ทอง', 'ไทย', '05/10/60', 'Male', NULL, 'Scaffold Inspector', 'Factory', 'รายเดือน', '08/07/13', '20/02/16', 'ไล่ออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1011', 'นาย', 'อุทัย', 'ทองเฟื้อง', 'ทัย', 'ไทย', '28/10/81', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '21/07/06', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1013', 'นาย', 'Soe Win Than', '', 'แสน', 'พม่า', '04/02/84', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1014', 'นาง', 'Zar Ni Tun', '', 'ปู', 'พม่า', '17/08/83', 'Female', NULL, 'worker', 'Factory', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1015', 'นาย', 'Aw Lan', '', 'ชาติ', 'พม่า', '30/04/86', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '02/12/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1016', 'น.ส.', 'Mi Yin Thein', '', 'นุ้ย', 'พม่า', '06/05/87', 'Female', NULL, 'worker', 'Factory', 'รายวัน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1017', 'น.ส.', 'Kyi Kyi Nyan', '', 'สา', 'พม่า', '19/04/95', 'Female', NULL, 'worker', 'Factory', 'รายวัน', '14/03/16', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1019', 'นาย', 'Aung Tin', '', 'อ๋อง', 'พม่า', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1020', 'นาย', 'Zin Maung Htun', '', 'ซี', 'พม่า', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '13/08/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1021', 'นาย', 'Tun Kyaw', '', 'ทุนโจ', 'พม่า', '29/05/84', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1022', 'นาย', 'Hlawn Moe Naing', '', 'นาย', 'พม่า', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/02/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1023', 'นาย', 'Zaw Moe', '', 'ซอม', 'พม่า', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1024', 'นาง', 'พูมะลี', 'สิริปันยา', 'เจ', 'ลาว', '06/11/73', 'Female', NULL, 'worker', 'Factory', 'รายวัน', '01/06/09', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1025', 'นาย', 'นาริน', 'กีม', 'นาริน', 'เขมร', '13/07/78', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '07/10/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1026', 'นาย', 'Foe Sae', '', 'โพ', 'พม่า', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1027', 'นาย', 'Maung Kyaw', '', 'ม่องโจ', 'พม่า', '12/02/87', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1028', 'น.ส.', 'เพ็ญโสม ', 'ใจวงค์', 'แคท', 'ไทย', '31/08/90', 'Female', NULL, 'General Manager', 'Management', 'รายเดือน', '01/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1029', 'นาย', 'Myat San', '', 'ซ่า', 'พม่า', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '15/01/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1030', 'นาย', 'เอ๊าท์', ' เม็ท', 'เอ๊าท์', 'เขมร', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '05/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1031', 'นาย', 'เล็ท', ' เม็ท', 'เล็ท', 'เขมร', '00/01/00', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '22/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1032', 'นาย', 'มิน', '', 'มิน', 'เขมร', '11/02/75', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '05/01/16', '', 'ทดลองงาน', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1033', 'นาย', 'จักรพันธ์', 'นาคนชม', 'โต้', 'ไทย', '29/01/91', 'Male', NULL, 'Accountant', 'Office', 'รายเดือน', '07/05/15', '01/07/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1034', 'นาย', 'สมพงศ์  ', 'นันทไพบูลย์', 'สมพงศ์', 'ไทย', '11/12/52', 'Male', NULL, 'Consultant', 'Management', 'รายเดือน', '01/04/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1035', 'น.ส.', 'ทอง', 'ทองทา', 'ทอง', 'ไทย', '25/01/54', 'Female', NULL, 'Maid', 'Office', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1036', 'นาย', 'Way Lin Tun', '', '', 'พม่า', '08/11/89', 'Male', NULL, 'worker', 'Factory', 'รายวัน', '24/08/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1037', 'นาย', 'อัศวเทพ ', 'เริงสำราญ', 'พฤกษ์', 'ไทย', '12/12/90', 'Male', NULL, 'Sales Project Manager', 'Office', 'รายเดือน', '01/09/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1038', 'นาย', 'ทักษ์ดนัย', 'ชวาลารัตน์', 'ทักษ์', 'ไทย', '22/08/92', 'Male', NULL, 'Store Supervisor', 'Office', 'รายเดือน', '16/11/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1039', 'น.ส.', 'Kimsean', 'Sem', 'เซียน', 'เขมร', '16/03/87', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', 'worker', 'Factory', 'พนักงานรายวัน', '05/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1041', 'นาย', 'ปอย', '', 'ปอย', 'เขมร', '04/04/91', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', 'worker', 'Factory', 'พนักงานรายวัน', '13/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1042', 'นาย', 'ดอนสาม', '', '', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', 'worker', 'Factory', 'พนักงานรายวัน', '9/6/2016', '', 'ทดลองงาน', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '');
 /*!40000 ALTER TABLE `employee_data` ENABLE KEYS */;
 
 
 -- Dumping structure for table cm.geography
+DROP TABLE IF EXISTS `geography`;
 CREATE TABLE IF NOT EXISTS `geography` (
   `GEO_ID` int(5) NOT NULL AUTO_INCREMENT,
   `GEO_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -1165,6 +1178,7 @@ CREATE TABLE IF NOT EXISTS `geography` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.geography: ~6 rows (approximately)
+DELETE FROM `geography`;
 /*!40000 ALTER TABLE `geography` DISABLE KEYS */;
 INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
 	(1, 'ภาคเหนือ'),
@@ -1177,6 +1191,7 @@ INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
 
 
 -- Dumping structure for table cm.partner
+DROP TABLE IF EXISTS `partner`;
 CREATE TABLE IF NOT EXISTS `partner` (
   `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `taxID` int(15) DEFAULT NULL,
@@ -1204,10 +1219,11 @@ CREATE TABLE IF NOT EXISTS `partner` (
   CONSTRAINT `fk_bank` FOREIGN KEY (`Bank`) REFERENCES `bank` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.partner: ~5 rows (approximately)
+-- Dumping data for table cm.partner: ~4 rows (approximately)
+DELETE FROM `partner`;
 /*!40000 ALTER TABLE `partner` DISABLE KEYS */;
 INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `add1`, `add2`, `SubDist`, `Dist`, `Province`, `Postal`, `Type`, `Bank`, `Acc_no`, `Acc_type`, `Acc_branch`, `Sector`, `partner_contactor`) VALUES
-	('101', NULL, 'บริษัท บีแอนด์เอ็มการชุบ จำกัด', '02 123 4567', '', '', '20/213 หมู่ 6 ถนนพระราม 2', '', 'คอกกระบือ', 'อำเภอเมืองสมุทรสาคร', 'สมุทรสาคร', 11110, '["customer"]', 'LHB', 0, 'ฝากประจำ', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
+	('101', NULL, 'บริษัท บีแอนด์เอ็มการชุบ จำกัด', '02 123 4567', '', '', '20/213 หมู่ 6 ถนนพระราม 2', '', 'คอกกระบือ', 'อำเภอเมืองสมุทรสาคร', 'สมุทรสาคร', 11110, '["customer"]', 'LHB', 0, 'ฝากประจำ', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"ABC","position":"Sales","tel":"12345","email":"","remark":""},"2":{"name":"DEF","position":"Account","tel":"3213","email":"","remark":""},"3":{"name":"GHI","position":"Purchase","tel":"31232","email":"","remark":""}}'),
 	('102', NULL, 'เอ.ที. เอ็นจิเนียร์ ซัพพลาย บจก.', '02 925 8485', '', '', '14/1929 หมู่ 13 ตลิ่งชัน ถนนสุพรรณบุรี', '', 'บางบัวทอง', 'บางบัวทอง', 'นนทบุรี', 12310, '["customer"]', 'JPM', 0, 'ออมทรัพย์', '', 'ธุรกิจการเกษตร‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('103', NULL, ' บริษัท ทาคาโอะ อีสเทิร์น จำกัด', '038 954 670', '', '', '58/1 หมู่ 4 อาคาร นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด', '', 'ปลวกแดง', 'ปลวกแดง', 'ระยอง', 12400, 'null', 'GSB', 0, 'ออมทรัพย์', '', 'ธุรกิจเงินทุนและหลักทรัพย์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('104', NULL, 'บริษัท ไทยโพลิเอททีลีน จำกัด', '', '', '', '1 ถ.ปูนซิเมนต์ไทย', '', '17', '29', '1', 0, '["supplier"]', 'GHB', 0, 'ฝากประจำ', '', 'ธุรกิจยานยนต์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
@@ -1215,6 +1231,7 @@ INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `ad
 
 
 -- Dumping structure for table cm.product
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `product_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1228,28 +1245,226 @@ CREATE TABLE IF NOT EXISTS `product` (
   `product_GuaranteePrice` int(20) NOT NULL,
   `product_Desc` longtext COLLATE utf8_unicode_ci NOT NULL,
   `product_Attr` longtext COLLATE utf8_unicode_ci,
+  `product_family` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.product: ~6 rows (approximately)
+-- Dumping data for table cm.product: ~200 rows (approximately)
+DELETE FROM `product`;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` (`product_id`, `product_name`, `product_type`, `product_unit`, `product_weight`, `product_cost`, `product_1stSalePrice`, `product_2ndSalePrice`, `product_d_RentalPrice`, `product_GuaranteePrice`, `product_Desc`, `product_Attr`) VALUES
-	('BM-4212', 'คาน Ø1-1/4" 1.22 m', 'Product', '0001', 0, 0, 0, 0, 0, 0, '', '{"1":{"Name":"\\u0e22\\u0e32\\u0e27","Desc":"1.22 \\u0e21."}}'),
-	('BM-4218', 'คาน Ø1-1/4', 'Assets', '0001', NULL, 500, 0, 0, 0, 0, '', NULL),
-	('BM-4224', 'คาน ยาว 2.44 ม. Ø1-1/4', 'Product', '0004', NULL, 0, 0, 0, 0, 0, '', NULL),
-	('VC-4203', 'เสา Ø1-1/4', 'Product', '0003', NULL, 0, 0, 0, 0, 0, '', NULL),
-	('VC-4204', 'เสา Ø1-1/4" 0.4 m', 'Assets', '0001', NULL, 0, 0, 0, 0, 0, '', NULL),
-	('VC-4206', 'เสา Ø1-1/4" 0.6 m', 'Assets', 'ต้น', 0, 650, 0, 0, 0, 0, '', NULL);
+INSERT INTO `product` (`product_id`, `product_name`, `product_type`, `product_unit`, `product_weight`, `product_cost`, `product_1stSalePrice`, `product_2ndSalePrice`, `product_d_RentalPrice`, `product_GuaranteePrice`, `product_Desc`, `product_Attr`, `product_family`) VALUES
+	('BB-4224', 'คานหัวงอ Ø1-1/4" 2.44 m', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BC-4207', 'คาน Ø1-1/4" 0.7 m หัว Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BC-4218', 'คาน Ø1-1/4" 1.83 m หัว Clamp', 'Assets', NULL, 6, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BD-4211', 'คานTrussขนาดเล็ก Ø1-1/4" หัวลิ่ม 1 คู่ 1.17 m', 'Assets', NULL, 7, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BD-4218', 'คานTrussขนาดเล็ก Ø1-1/4" หัวลิ่ม 1 คู่ 1.83 m', 'Assets', NULL, 9, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BD-4224', 'คานTrussขนาดเล็ก Ø1-1/4" หัวลิ่ม 1 คู่ 2.44 m', 'Assets', NULL, 13, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BL-4218', 'คานTrussตัวใหญ่ Ø1-1/4" หัวลิ่ม 2 คู่ 1.83 m', 'Assets', NULL, 15, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BL-4224', 'คานTrussตัวใหญ่ Ø1-1/4" หัวลิ่ม 2 คู่ 2.44 m', 'Assets', NULL, 20, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4205', 'คาน Ø1-1/4" 0.54 m', 'Assets', NULL, 2, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4206', 'คาน Ø1-1/4" 0.65 m', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4209', 'คาน Ø1-1/4" 0.915 m', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4210', 'คาน Ø1-1/4" 1.07 m', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4211', 'คาน Ø1-1/4" 1.17 m', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4212', 'คาน Ø1-1/4" 1.22 m', 'Assets', NULL, 4, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4218', 'คาน Ø1-1/4" 1.83 m', 'Assets', NULL, 6, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('BM-4224', 'คาน Ø1-1/4" 2.44 m', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'Beam'),
+	('CB-1202', 'Cross Brace 1219x280x1251', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CB-1206', 'Cross Brace 1219x610x1363', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CB-1209', 'Cross Brace 1219x914x1524', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CB-1212', 'Cross Brace 1219x1219x1724', 'Assets', NULL, 2, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CB-1802', 'Cross Brace 1829x280x1850', 'Assets', NULL, 2, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CB-1806', 'Cross Brace 1829x610x1928', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CB-1809', 'Cross Brace 1829x914x2045', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CB-1812', 'Cross Brace 1829x1219x2198', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'CB'),
+	('CC-BS', 'Beam Swivel Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CC-F', 'Clamp - Fix Clamp', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CC-HF', 'Heavy Duty Clamp - Fix Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CC-HS', 'Heavy Duty Clamp - Swivel Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CC-PC', 'Plank Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CC-S', 'Clamp - Swivel Clamp', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CJ-42I', 'Joint Pin - Inner', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CJ-48IF', 'Joint Pin - Inner Fitting', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CJ-48OF', 'Joint Pin - Outer Fitting', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'Connection'),
+	('CMP-CLMP', 'หัวแคลมป์', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('CMP-SP-FM', 'เฟรมเวที', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('CMP-TRI.FD', 'หัวเหล็กพับ 3 เหลี่ยมเจาะรูกลม', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('CMP-W.FDPN', 'หัวเหล็กพับ+ลิ่มล็อค', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('CMP-W.H', 'หัวเหล็กหล่อ+ลิ่มล็อค', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('CMP2-42232', 'ท่อกลมปั๊มหัวสำหรีบทำตัว Bracing ตาย', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('CPT-S', 'แผ่นพรมรอง JB', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('DF-0617', 'Frame กว้าง 610x1700', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('DF-0912', 'Frame กว้าง 914x1219', 'Assets', NULL, 5, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('DF-1004.GS', 'Frame กว้าง 1070x400', 'Assets', NULL, 13, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('DF-1016.GS', 'Frame กว้าง 1070x1600', 'Assets', NULL, 9, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('DF-1204', 'Frame กว้าง 1219x490', 'Assets', NULL, 11, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('DF-1209', 'Frame กว้าง 1219x915', 'Assets', NULL, 11, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('DF-1212', 'Frame กว้าง 1219x1219', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('DF-1217', 'Frame กว้าง 1219x1700', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('F-1503-B', 'ผ้าเนื้อ สีดำ 1.5x03', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('F-1504-B', 'ผ้าเนื้อ สีดำ 1.5x04', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('F-1505-B', 'ผ้าเนื้อ สีดำ 1.5x05', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('F-1515-B', 'ผ้าเนื้อ สีดำ 1.5x15', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('FM-0618', 'Frame Ø1-1/4" 0.3@2 Step', 'Assets', NULL, 17, NULL, 0, 0, 0, 0, '', NULL, 'Frame'),
+	('FM-1224', 'Frame Ø1-1/4" 0.4@3 Step', 'Assets', NULL, 29, NULL, 0, 0, 0, 0, '', NULL, 'Frame'),
+	('GR-0514', 'รั้วตรง ขนาด 0.53x1.48 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-0713', 'รั้วตรง ขนาด 0.53x1.48 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-110806', 'รั้วทแยง ขนาด 1.1x0.8 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-1114', 'รั้วตรง ขนาด 1.17x1.48 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-111616', 'รั้วทแยง ขนาด 1.1x1.6 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-1814', 'รั้วตรง ขนาด 1.83x1.48 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-B121', 'ราวกันตกนั่งร้านญี่ปุ่น 1219', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-B182', 'ราวกันตกนั่งร้านญี่ปุ่น 1829', 'Assets', NULL, 13, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('GR-C091', 'เสากันตกนั่งร้านญี่ปุ่น', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Guard Rail'),
+	('H-1717-6', 'H 175x175x7.5x11x6', 'Assets', NULL, 241, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('H-2020-6', 'H 200x200x8x12x6', 'Assets', NULL, 299, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('HB-1118', 'สำหรับระยะนั้งร้าน 1.17x1.83 m', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('HB-1124', 'สำหรับระยะนั้งร้าน 1.17x2.44 m', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('HB-1224', 'สำหรับระยะนั้งร้าน 1.22x2.44 m', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('HB-1818', 'สำหรับระยะนั้งร้าน 1.83x1.83 m', 'Assets', NULL, 9, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('HB-1824', 'สำหรับระยะนั้งร้าน 1.83x2.44 m', 'Assets', NULL, 9, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('HF-0518', 'Frame ฝาครอบ กว้าง 490x1829', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('HF-1018', 'Frame ฝาครอบ กว้าง 1050x1829', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'DF'),
+	('I-1515-6', 'I 150x75x5.5x9.5x6', 'Assets', NULL, 103, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('I-2020-2', 'I 200x100x7x10x2', 'Assets', NULL, 52, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('I-2020-3', 'I 200x100x7x10x3', 'Assets', NULL, 78, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('I-2020-4', 'I 200x100x7x10x4', 'Assets', NULL, 104, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('I-2020-5', 'I 200x100x7x10x5', 'Assets', NULL, 130, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('I-2020-6', 'I 200x100x7x10x6', 'Assets', NULL, 156, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('I-2525-6', 'I 250x125x7.5x12.5x6', 'Assets', NULL, 230, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('IN-01', 'น็อตร้อยเสากันตกตัวสั้น', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('IN-02', 'น็อตร้อยเสากันตกตัวยาว', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('JB-02', 'แจ็คเบสยาว 0.2 m', 'Assets', NULL, 2, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('JB-04', 'แจ็คเบสยาว 0.4 m', 'Assets', NULL, 4, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('JB-06', 'แจ็คเบสยาว 0.6 m', 'Assets', NULL, 5, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('LF-01.CMP', 'Stair Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-0502', 'Ladder Frame 2 Step', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-0504', 'Bracket S Size', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-0601.CM', 'Short L-arm Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-0704.FD', 'Ladder-arm 1 Step Folding Plate', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-0705.CM', 'Bracket L Size', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-0903', 'Bracket M Size', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-1004', 'Ladder Frame 0.45@2 Step', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-11.FDP', 'Floor-arm Folding Plate', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-1101.CM', 'Long L-arm Clamp', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-4512', 'Scaffold Ledder Short Standard', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-4517', 'Scaffold Ledder Standard', 'Assets', NULL, 23, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-5017', 'Scaffold Ledder Standard', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LF-5848.CM', 'Small Ledder Panel', 'Assets', NULL, 9, NULL, 0, 0, 0, 0, '', NULL, 'Ladder&Floor'),
+	('LL-50502.3', 'LL 150x50x20x2.3x6', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('LL-50503.2', 'LL 150x50x20x3.2x6', 'Assets', NULL, 41, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-21186', 'O 1/2" x6 ม.', 'Assets', NULL, 6, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-27156', 'O 3/4" x6 ม.', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-34.9156', 'O 1-3/8" x6 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-34206', 'O 1" x6 ม.', 'Assets', NULL, 11, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-422304', 'O 1-1/4" x0.4 แบบมี Pinlock', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-482068', 'O 1-1/2" x6.85 ม.', 'Assets', NULL, 18, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-48231', 'O 1-1/2" x1 ม.', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-48232', 'O 1-1/2" x2 ม.', 'Assets', NULL, 5, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-48232.5', 'O 1-1/2" x2.5 ม.', 'Assets', NULL, 7, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-48233', 'O 1-1/2" x3 ม.', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-482336', 'O 1-1/4" x3.66 ม.', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-48234', 'O 1-1/2" x4 ม.', 'Assets', NULL, 11, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-48235', 'O 1-1/2" x5 ม.', 'Assets', NULL, 13, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-482354', 'O 1-1/4" x5.49 ม.', 'Assets', NULL, 13, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('O-48236', 'O 1-1/2" x6 ม.', 'Assets', NULL, 16, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PLY-012012', 'ไม้อัด 0.12,0.12x0.004 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PLY-121220', 'ไม้อัด 1.22x1.22x0.02 ม.', 'Assets', NULL, 14, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PLY-121820', 'ไม้อัด 1.22x1.83x0.02 ม.', 'Assets', NULL, 20, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PLY-122420', 'ไม้อัด 1.22x2.44x0.02 ม.', 'Assets', NULL, 27, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PLY-S', 'แผ่นไม้อัดรอง JB', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('PP-2035', 'เสา Prop ค้ำยัน OD นอก 60.8 ใน 48.6', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('PT-428PNCH', 'แผ่นจาน Ringlock', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PT-488PNCH', 'แผ่นจาน Ringlock', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PT-FD', 'หัว Bracing', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PT-HCAST', 'หัวเหล็กหล่อ', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PT-PINL', 'Pinlock', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('PT-WCAST', 'ลิ่มล็อค', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('RF-1', 'หัวเสียบเสาขึงผ้าใบ', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Roof Part'),
+	('RF-1-2', 'คาน Ø1-1/4" ยาว 1.83 มีหัวเสียบเสา 1 ข้าง', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Roof Part'),
+	('RF-2', 'คาน Ø1-1/4" ยาว 1.83 มีหัวเสียบเสา 2 ข้าง', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Roof Part'),
+	('RF-VNL', 'แผ่นผืนผ้าใบ 1.83x2.44', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Roof Part'),
+	('RS-1123', 'แผ่นผ้ายาง 1x1.23', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('RS-1173', 'แผ่นผ้ายาง 1x1.73', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('RS-118', 'แผ่นผ้ายาง 1x18', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('RS-1212', 'แผ่นผ้ายาง 1x2.12', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('RS-1350', 'แผ่นผ้ายาง 1x3.5', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('RS-1390', 'แผ่นผ้ายาง 1x.39', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('RS-1549', 'แผ่นผ้ายาง 1x5.49', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('RT-1010266', 'Rectangle 2"x4" (100x50x2.6)', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('SP-1212-LK', 'Linker 1 ขา สูง 1.2', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-1218', 'พื้นเวที 1.22x1.83', 'Assets', NULL, 35, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-1712-LK', 'Linker 1 ขา สูง 1.7', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-512-LK', 'Linker 1 ขา สูง 0.49', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-912-LK', 'Linker 1 ขา สูง 0.9', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-CLW', 'แป้นรับแผ่นเวที', 'Assets', NULL, 2, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-RG', 'เสาข้องอกันตกเวที', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-SS12', 'ขอบใส่ข้างเวที 1.22', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP-SS18', 'ขอบใส่ข้างเวที 1.83', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP12-FP', 'Linker', 'Assets', NULL, 5, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SP12-HK', 'Locker', 'Assets', NULL, 4, NULL, 0, 0, 0, 0, '', NULL, 'Stage Part'),
+	('SPS-', 'Span Set', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('SQ-1010186', 'Square 4"x4" (100x100x1.8)', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('SQ-1010236', 'Square 4"x4" (100x100x2.3)', 'Assets', NULL, 42, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('SQ-1010286', 'Square 4"x4" (100x100x2.8)', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('ST-03031', 'Truss 0.3x0.3x1 ม.', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('ST-BGR', 'เก้าอี้อัฒจันทร์สีเขียวน้ำทะเล', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('ST-BL', 'เก้าอี้อัฒจันทร์สีน้ำเงิน', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('ST-LGR', 'เก้าอี้อัฒจันทร์สีเขียวใบตองอ่อน', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('TB-EE', 'เกลียวเร่ง ห่วง-ห่วง Turnbuckle Eye-Eye', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('TB-HE', 'เกลียวเร่ง ตะขอ-ห่วง Turnbuckle Hook-Eye', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('TB-HH', 'เกลียวเร่ง ตะขอ-ตะขอ Turnbuckle Hook-Hook', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('TNK-1000', 'Water Cube Tank', 'Assets', NULL, 62, NULL, 0, 0, 0, 0, '', NULL, 'Others'),
+	('U-001', 'Bolt รัด I-Beam', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('UJ-04', 'U Head  0.4 m', 'Assets', NULL, 4, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('UJ-06', 'U Head  0.6 m', 'Assets', NULL, 5, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('VB-1818', 'Bracing ระยะ1.83x1.8', 'Assets', NULL, 7, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('VB-1818-X-', 'คานกากบาทจับฉาก หัวแคลมป์', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('VB-2418', 'Bracing ระยะ2.44x1.8', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('VB-3019', 'Bracing สั้น แบบชักได้ 308.5-194 cm', 'Assets', NULL, 7, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('VB-3422', 'Bracing ยาว แบบชักได้ 345-227.8 cm', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'Bracing'),
+	('VC-4203', 'เสา Ø1-1/4" 0.3 m', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4204', 'เสา Ø1-1/4" 0.4 m', 'Assets', NULL, 1, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4206', 'เสา Ø1-1/4" 0.6 m', 'Assets', NULL, 2, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4208', 'เสา Ø1-1/4" 0.8 m', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4209', 'เสา Ø1-1/4" 0.9 m', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4212', 'เสา Ø1-1/4" 1.2 m', 'Assets', NULL, 4, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4224', 'เสา Ø1-1/4" 2.4 m', 'Assets', NULL, 10, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4803', 'เสา Ø1-1/2" 0.3 m', 'Assets', NULL, 2, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4806', 'เสา Ø1-1/2" 0.6 m', 'Assets', NULL, 3, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4809', 'เสา Ø1-1/2" 0.9 m', 'Assets', NULL, 4, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4812', 'เสา Ø1-1/2" 1.2 m', 'Assets', NULL, 6, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4815', 'เสา Ø1-1/2" 1.5 m', 'Assets', NULL, 4, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4818.3', 'เสา Ø1-1/2" 1.8 m', 'Assets', NULL, 7, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4818.6', 'เสา Ø1-1/2" 1.8 m', 'Assets', NULL, 8, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4830.10', 'เสา Ø1-1/2" 3 m', 'Assets', NULL, 13, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('VC-4830.5', 'เสา Ø1-1/2" 3 m', 'Assets', NULL, 13, NULL, 0, 0, 0, 0, '', NULL, 'col'),
+	('WF-1515-6', 'WF 150x75x5x7x6', 'Assets', NULL, 84, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('WF-2020-6', 'WF 200x100x5.5x8x6', 'Assets', NULL, 128, NULL, 0, 0, 0, 0, '', NULL, 'Material'),
+	('WH-06.B', 'ล้อ 6" แบบมีเบรค', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('WH-08.B', 'ล้อ 8" แบบมีเบรค', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('WH-08.U', 'ล้อ 8" ยูรีเธน', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Support'),
+	('WP-2120', 'แผ่นปู 2x.21 m แผ่นไม้กระดาน', 'Assets', NULL, 7, NULL, 0, 0, 0, 0, '', NULL, 'Panel'),
+	('WP-2130', 'แผ่นปู 3x.21 m แผ่นไม้กระดาน', 'Assets', NULL, 11, NULL, 0, 0, 0, 0, '', NULL, 'Panel'),
+	('WP-2418.W', 'แผ่นปู 1.83x0.24 m มีปีกหัวท้าย', 'Assets', NULL, 12, NULL, 0, 0, 0, 0, '', NULL, 'Panel'),
+	('WP-4518.W', 'แผ่นปู 1.17x0.45 m มีปีกหัวท้าย', 'Assets', NULL, 17, NULL, 0, 0, 0, 0, '', NULL, 'Panel'),
+	('WP-5011.W', 'แผ่นปู 1.17x0.5 m มีปีกหัวท้าย', 'Assets', NULL, 11, NULL, 0, 0, 0, 0, '', NULL, 'Panel'),
+	('WP-5018', 'แผ่นปู 1.83x0.5 m ปกติ', 'Assets', NULL, 20, NULL, 0, 0, 0, 0, '', NULL, 'Panel'),
+	('WP-5018.W', 'แผ่นปู 1.83x0.5 m มีปีกหัวท้าย', 'Assets', NULL, 23, NULL, 0, 0, 0, 0, '', NULL, 'Panel'),
+	('WR-0', 'สลิง Wire Rope', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment'),
+	('WR-C', 'สเก็นสลิง  Wire Rope Clip', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', NULL, 'Equipment');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 
 -- Dumping structure for table cm.product_attr
+DROP TABLE IF EXISTS `product_attr`;
 CREATE TABLE IF NOT EXISTS `product_attr` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.product_attr: ~4 rows (approximately)
+DELETE FROM `product_attr`;
 /*!40000 ALTER TABLE `product_attr` DISABLE KEYS */;
 INSERT INTO `product_attr` (`id`) VALUES
 	('กว้าง'),
@@ -1261,12 +1476,14 @@ INSERT INTO `product_attr` (`id`) VALUES
 
 
 -- Dumping structure for table cm.product_unit
+DROP TABLE IF EXISTS `product_unit`;
 CREATE TABLE IF NOT EXISTS `product_unit` (
   `UnitID` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `UnitName` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.product_unit: ~5 rows (approximately)
+DELETE FROM `product_unit`;
 /*!40000 ALTER TABLE `product_unit` DISABLE KEYS */;
 INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
 	('0001', 'อัน'),
@@ -1279,6 +1496,7 @@ INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
 
 
 -- Dumping structure for table cm.province
+DROP TABLE IF EXISTS `province`;
 CREATE TABLE IF NOT EXISTS `province` (
   `Province_ID` int(5) NOT NULL AUTO_INCREMENT,
   `Province_CODE` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
@@ -1288,6 +1506,7 @@ CREATE TABLE IF NOT EXISTS `province` (
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.province: ~77 rows (approximately)
+DELETE FROM `province`;
 /*!40000 ALTER TABLE `province` DISABLE KEYS */;
 INSERT INTO `province` (`Province_ID`, `Province_CODE`, `Province_NAME`, `GEO_ID`) VALUES
 	(1, '10', 'กรุงเทพมหานคร   ', 2),
@@ -1371,6 +1590,7 @@ INSERT INTO `province` (`Province_ID`, `Province_CODE`, `Province_NAME`, `GEO_ID
 
 
 -- Dumping structure for table cm.rental
+DROP TABLE IF EXISTS `rental`;
 CREATE TABLE IF NOT EXISTS `rental` (
   `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `partner_id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
@@ -1390,11 +1610,13 @@ CREATE TABLE IF NOT EXISTS `rental` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.rental: ~0 rows (approximately)
+DELETE FROM `rental`;
 /*!40000 ALTER TABLE `rental` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rental` ENABLE KEYS */;
 
 
 -- Dumping structure for table cm.rentaltransaction
+DROP TABLE IF EXISTS `rentaltransaction`;
 CREATE TABLE IF NOT EXISTS `rentaltransaction` (
   `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Rentalid` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1410,11 +1632,13 @@ CREATE TABLE IF NOT EXISTS `rentaltransaction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.rentaltransaction: ~0 rows (approximately)
+DELETE FROM `rentaltransaction`;
 /*!40000 ALTER TABLE `rentaltransaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rentaltransaction` ENABLE KEYS */;
 
 
 -- Dumping structure for table cm.subdist
+DROP TABLE IF EXISTS `subdist`;
 CREATE TABLE IF NOT EXISTS `subdist` (
   `SubDist_ID` int(5) NOT NULL AUTO_INCREMENT,
   `SubDist_CODE` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
@@ -1426,6 +1650,7 @@ CREATE TABLE IF NOT EXISTS `subdist` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8861 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.subdist: ~8,073 rows (approximately)
+DELETE FROM `subdist`;
 /*!40000 ALTER TABLE `subdist` DISABLE KEYS */;
 INSERT INTO `subdist` (`SubDist_ID`, `SubDist_CODE`, `SubDist_NAME`, `Dist_ID`, `Province_ID`, `GEO_ID`) VALUES
 	(1, '100101', 'พระบรมมหาราชวัง', 1, 1, 2),

@@ -28,6 +28,7 @@
       <th>รหัส Product</th>
       <th>ชื่อ Product</th>
       <th>ประเภท Product</th>
+      <th>Family</th>
       <th>actions</th>
     </tr>
   </thead>
@@ -42,6 +43,7 @@
       <td>'.$key->product_id.'</td>
       <td>'.$key->product_name.'</td>
       <td>'.$key->product_type.'</td>
+      <td>'.$key->product_family.'</td>
       <td><a href="'.site_url("product/data/".$key->product_id).'">Edit</a></td>
     </tr>
       ';
@@ -53,6 +55,12 @@
   ?>
   </tbody>
 </table>
+
+<div class="row">
+  <div class="large-12 columns">
+      <span class="text-center"><?php echo $pagination; ?></span>
+  </div>
+</div>
 
   </div>
 </div>

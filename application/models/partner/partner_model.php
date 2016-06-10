@@ -3,13 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Partner_model extends CI_Model {
 
-	public function getAll(){
+	public function getAll($limit,$page){
+		$this->db->limit($limit, $page);
 		$this->db->select("*");
 		$query = $this->db->get("partner");
-		$this->db->order_by('id', 'ASC');
-		return $result = $query->result();
-	}
+		$this->db->order_by('id', 'DESC');
 
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				$data[] = $row;
+			}
+			return $data;
+		}
+
+		return false;
+
+	}
 	public function get($id){
 		$this->db->select("*");
 		$this->db->where("id",$id);
@@ -33,6 +42,11 @@ class Partner_model extends CI_Model {
 
 	// Other
 
+	public function countAll(){
+		$result = $this->db->count_all('partner');
+		return $result;
+	}
+	
 	public function bank(){
 		$this->db->select();
 		$query = $this->db->get('bank');

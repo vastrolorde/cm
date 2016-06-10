@@ -22,6 +22,16 @@
           </div>
         </div>
 
+        <?php
+          if(validation_errors()){
+            echo '<div class="callout alert">
+                    <h5>Error</h5>
+                    <p>มีการกรอกข้อมูลผิดพลาด โปรดตรวจสอบ</p>
+                  </div>';
+          }
+
+        ?>
+
 <!-- Tab -->
 
     <ul class="tabs" data-tabs id="partner-tabs">
@@ -45,11 +55,20 @@
             $product_unit = $data[0]->product_unit;
 
 
-            echo form_label('product code *').form_input('product_id',$product_id,'disabled').form_hidden('product_id',$product_id);
-            echo form_label('หน่วยนับ *').form_input('product_unit',$product_unit);
+            echo form_label('product code *')
+                .form_error('product_id')
+                .form_input('product_id',$product_id,'disabled')
+                .form_hidden('product_id',$product_id);
+            echo form_label('หน่วยนับ *')
+                .form_error('product_unit')
+                .form_input('product_unit',$product_unit);
           }else{
-            echo form_label('product code *').form_input('product_id');
-            echo form_label('หน่วยนับ *').form_input('product_unit');
+            echo form_label('product code *')
+                .form_error('product_id')
+                .form_input('product_id');
+            echo form_label('หน่วยนับ *')
+                .form_error('product_unit')
+                .form_input('product_unit');
           }
         ?>
 
@@ -64,13 +83,22 @@
             $product_weight = $data[0]->product_weight;
 
 
-            echo form_label('ชื่อสินค้า *').form_input('product_name',$product_name);
-            echo form_label('น้ำหนักต่อชิ้น').form_input('product_weight',$product_weight);
+            echo form_label('ชื่อสินค้า *')
+                .form_error('product_name')
+                .form_input('product_name',$product_name);
+            echo form_label('น้ำหนักต่อชิ้น')
+                .form_error('product_weight')
+                .'<div class="input-group">'
+                .form_input('product_weight',$product_weight,'class=input-group-field').'<span class="input-group-label">kg</span>
+                  </div>';
           }else{
-            echo form_label('ชื่อสินค้า *').form_input('product_name');
-            echo form_label('น้ำหนักต่อชิ้น').
-                  '<div class="input-group">'.
-                    form_input('product_weight','','class=input-group-field').'<span class="input-group-label">kg</span>
+            echo form_label('ชื่อสินค้า *')
+                .form_error('product_name')
+                .form_input('product_name');
+            echo form_label('น้ำหนักต่อชิ้น')
+                .form_error('product_weight')
+                .'<div class="input-group">'
+                .form_input('product_weight','','class=input-group-field').'<span class="input-group-label">kg</span>
                   </div>
             ';
           }
@@ -82,7 +110,7 @@
 
         <div class="row">
           <div class="large-12 columns">
-          <h5>ประเภท Product *</h5>
+          <h5>รายละเอียด Product *</h5>
 
         <?php
 
@@ -96,11 +124,12 @@
           if(isset($data)){
             //Assign Variable
             $product_type = $data[0]->product_type;
-
-            echo form_dropdown('product_type',$options,$product_type);
+            echo form_label('ประเภท Product *')
+                .form_dropdown('product_type',$options,$product_type);
           }else{
 
-            echo form_dropdown('product_type',$options);
+            echo form_label('ประเภท Product *')
+                .form_dropdown('product_type',$options);
 
           }
 

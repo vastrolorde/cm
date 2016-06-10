@@ -23,15 +23,28 @@
 			}
 		});
 
-	// Alert Popup
-    $('.delitem').click(function (){
-       var answer = confirm("คุณต้องการลบหรือไม่?");
-          if (answer) {
-             return true;
-          }else{
-             return false;
-          }
-    });
+	// Autocomplete
+		$("#search").autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: "<?php echo site_url().'/product/lookup'; ?>",
+					data: {
+						search:	$("#search").val()
+					},
+					dataType: "json",
+					type: "POST",
+					success: function (data) {
+		                response(data.map(function (value) {
+		                    return {
+		                        'label': value.product_name,
+		                        'value': value.product_name
+		                    };
+		            	}))
+		            }
+				});
+			},
+			minLength: 3
+		});
 
 	});	
 </script>

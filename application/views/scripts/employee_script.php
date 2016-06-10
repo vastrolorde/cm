@@ -9,7 +9,7 @@
                   <tr> \
                     <td>'+$i1+'</td> \
                     <td><input type="text" name="emp_position['+$i1+'][position]" placeholder="กรอก ตำแหน่ง"></td> \
-                    <td><input type="text" name="emp_position['+$i1+'][date]" placeholder="กรอก วันที่"></td> \
+                    <td><input type="text" class="datepicker" name="emp_position['+$i1+'][date]" placeholder="กรอก วันที่"></td> \
                     <td><input type="text" name="emp_position['+$i1+'][dept]" placeholder="กรอก แผนก"></td> \
                     <td><input type="text" name="emp_position['+$i1+'][salary]" placeholder="กรอก เงินเดือน"></td> \
                     <td><input type="text" name="emp_position['+$i1+'][remark]" placeholder="กรอก หมายเหตุ"></td> \
@@ -26,7 +26,7 @@
                     <tr> \
                       <td>'+$i2+'</td> \
                       <td><input type="text" name="emp_training['+$i2+'][subject]" placeholder="กรอก หลักสูตร"></td> \
-                      <td><input type="text" name="emp_training['+$i2+'][date]" placeholder="กรอก วันที่อบรม"></td> \
+                      <td><input type="text" class="datepicker" name="emp_training['+$i2+'][date]" placeholder="กรอก วันที่อบรม"></td> \
                       <td><input type="text" name="emp_training['+$i2+'][institute]" placeholder="กรอก สถาบันอบรม"></td> \
                       <td><input type="text" name="emp_training['+$i2+'][cert_no]" placeholder="กรอก Cert. ID"></td> \
                       <td><input type="text" name="emp_training['+$i2+'][remark]" placeholder="กรอก หมายเหตุ"></td> \
@@ -52,16 +52,6 @@
 				alert('เหลือแถวสุดท้ายแล้ว ไม่สามารถลบได้');
 			}
 		});
-
-	// Alert Popup
-    $('.delitem').click(function (){
-       var answer = confirm("คุณต้องการลบหรือไม่?");
-          if (answer) {
-             return true;
-          }else{
-             return false;
-          }
-    });
 
 	});	
 </script>

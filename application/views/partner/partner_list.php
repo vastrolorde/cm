@@ -75,5 +75,11 @@
   </tbody>
 </table>
 
+<div class="row">
+  <div class="large-12 columns">
+      <span class="text-center"><?php echo $pagination; ?></span>
+  </div>
+</div>
+
   </div>
 </div>

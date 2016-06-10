@@ -26,16 +26,6 @@
 			}
 		});
 
-	// Alert Popup
-	    $('.delitem').click(function (){
-	       var answer = confirm("คุณต้องการลบหรือไม่?");
-	          if (answer) {
-	             return true;
-	          }else{
-	             return false;
-	          }
-	    });
-
 	// Autocomplete
 		$("#search").autocomplete({
 			source: function(request, response) {
