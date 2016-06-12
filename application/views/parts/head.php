@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="<?php echo asset_url().'bower/jquery-ui/themes/base/jquery-ui.css'; ?>">
     <link rel="stylesheet" href="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.css'; ?>">
     <link rel="stylesheet" href="<?php echo asset_url().'css/app.css'; ?>">
+
+    <script src="<?php echo asset_url().'bower/jquery/dist/jquery.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/jquery-ui/jquery-ui.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/foundation-sites/js/foundation.accordion.js'; ?>"></script>
+
+    <style type="text/css">
+      .no-js .top-bar {
+          display: none;
+        }
+
+      @media screen and (min-width: 40em) {
+        .no-js .top-bar {
+          display: block;
+        }
+
+        .no-js .title-bar {
+          display: none;
+        }
+      }
+    </style>
   </head>
   <body>
  
@@ -35,10 +56,20 @@
         <li><a href="<?php echo site_url(); ?>">Dashboard</a></li>
         <li><a href="<?php echo site_url().'/rental'; ?>">งานเช่า</a></li>
         <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
-        <li><a href="<?php echo site_url().'/Product'; ?>">สินค้า</a></li>
+        <li><a href="#">สินค้าคงคลัง</a>
+            <ul class="vertical menu nested">
+              <li><a href="<?php echo site_url().'/Inventory'; ?>">รายการสินค้าคงคลัง</a></li>
+              <li><a href="<?php echo site_url().'/Product'; ?>">สินค้า</a></li>
+              <li><a href="<?php echo site_url().'/Inventory/Warehouse'; ?>">คลังสินค้า</a></li>
+              <li></li>
+              <li></li>
+            </ul>
+        </li>
         <li><a href="#">HR</a>
           <ul class="vertical menu nested">
             <li><a href="<?php echo site_url().'/HR/Employee'; ?>">พนักงาน</a></li>
+            <li><a href="<?php echo site_url().'/HR/Dept'; ?>">แผนก</a></li>
+            <li><a href="<?php echo site_url().'/HR/Position'; ?>">ตำแหน่ง</a></li>
           </ul>
         </li>
       </ul>

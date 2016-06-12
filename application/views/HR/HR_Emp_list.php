@@ -37,22 +37,31 @@
   
   <?php
     $i = 1;
-    foreach ($result as $key){
+    
+    if($result != null){
+      foreach ($result as $key){
 
+        echo '
+          <tr>
+            <td>'.$i.'</td>
+            <td>'.$key->id.'</td>
+            <td>'.$key->emp_prefix.' '.$key->emp_fname.' '.$key->emp_lname.'</td>
+            <td>'.$key->emp_position_now.'</td>
+            <td>'.$key->emp_dept_now.'</td>
+            <td>'.$key->emp_status.'</td>
+            <td><a href="'.site_url("HR/Employee/data/".$key->id).'">Edit</a></td>
+          </tr>
+            ';
+
+            $i++;
+
+      }
+    }else{
       echo '
-    <tr>
-      <td>'.$i.'</td>
-      <td>'.$key->id.'</td>
-      <td>'.$key->emp_prefix.' '.$key->emp_fname.' '.$key->emp_lname.'</td>
-      <td>'.$key->emp_position_now.'</td>
-      <td>'.$key->emp_dept_now.'</td>
-      <td>'.$key->emp_status.'</td>
-      <td><a href="'.site_url("HR/Employee/data/".$key->id).'">Edit</a></td>
-    </tr>
+        <tr>
+          <td colspan="7"> No Data </td>
+        </tr>
       ';
-
-      $i++;
-
     }
 
   ?>

@@ -36,8 +36,6 @@
   <tbody>
   <?php
     $i = 1;
-
-    if($result != null){
     foreach ($result as $key){
       echo '
     <tr>
@@ -52,13 +50,6 @@
 
       $i++;
 
-      }
-    }else{
-      echo '
-        <tr>
-          <td colspan="6"> No Data </td>
-        </tr>
-      ';
     }
 
   ?>

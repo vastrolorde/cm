@@ -53,6 +53,7 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['HR/Employee/:num'] = 'HR/Employee';
+$route['Inventory'] = 'Inventory/Inventory';
 $route['rental/:num'] = 'rental';
 $route['Product/:num'] = 'Product';
 $route['Partner/:num'] = 'Partner';

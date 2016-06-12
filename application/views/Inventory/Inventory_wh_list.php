@@ -10,7 +10,7 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-      <li><a class="hollow button" href="<?php echo site_url('/product/create'); ?>">เพิ่ม</a></li>
+      <li><a class="hollow button" href="<?php echo site_url('Inventory/Warehouse/create'); ?>">เพิ่ม</a></li>
       <li><a class="hollow button" href="#">พิมพ์</a></li>
       <li>
         <input id="search" type="text" name="search" placeholder="Search">
@@ -25,10 +25,8 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>รหัส Product</th>
-      <th>ชื่อ Product</th>
-      <th>ประเภท Product</th>
-      <th>Family</th>
+      <th>รหัสคลังสินค้า</th>
+      <th>ชื่อคลังสินค้า</th>
       <th>actions</th>
     </tr>
   </thead>
@@ -38,25 +36,23 @@
     $i = 1;
 
     if($result != null){
-    foreach ($result as $key){
-      echo '
-    <tr>
-      <td>'.$i.'</td>
-      <td>'.$key->product_id.'</td>
-      <td>'.$key->product_name.'</td>
-      <td>'.$key->product_type.'</td>
-      <td>'.$key->product_family.'</td>
-      <td><a href="'.site_url("product/data/".$key->product_id).'">Edit</a></td>
-    </tr>
-      ';
+      foreach ($result as $key){
+        echo '
+          <tr>
+            <td>'.$i.'</td>
+            <td>'.$key->id.'</td>
+            <td>'.$key->wh_name.'</td>
+            <td><a href="'.site_url("Inventory/Warehouse/data/".$key->id).'">Edit</a></td>
+          </tr>
+        ';
 
-      $i++;
+        $i++;
 
       }
     }else{
       echo '
         <tr>
-          <td colspan="6"> No Data </td>
+          <td colspan="4"> No Data </td>
         </tr>
       ';
     }

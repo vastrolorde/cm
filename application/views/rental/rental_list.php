@@ -31,30 +31,34 @@
   </thead>
 
   <tbody>
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
+<?php
+  $i=1;
+
+  if($result != null){
+
+    for ($i; $i < 5; $i++) { 
+      echo '
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      ';
+    }
+
+  }else{
+      echo '
+        <tr>
+          <td colspan="6"> No Data </td>
+        </tr>
+      ';
+  }
+
+
+?>
   </tbody>
 </table>
 
