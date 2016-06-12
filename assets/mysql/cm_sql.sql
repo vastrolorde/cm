@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         localhost
--- Server version:               10.1.9-MariaDB - mariadb.org binary distribution
+-- Server version:               10.1.10-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
 -- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
@@ -9,12 +9,6 @@
 /*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- Dumping database structure for cm
-DROP DATABASE IF EXISTS `cm`;
-CREATE DATABASE IF NOT EXISTS `cm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `cm`;
-
 
 -- Dumping structure for table cm.bank
 DROP TABLE IF EXISTS `bank`;
@@ -1077,9 +1071,45 @@ INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `
 /*!40000 ALTER TABLE `dist` ENABLE KEYS */;
 
 
--- Dumping structure for table cm.employee_data
-DROP TABLE IF EXISTS `employee_data`;
-CREATE TABLE IF NOT EXISTS `employee_data` (
+-- Dumping structure for table cm.geography
+DROP TABLE IF EXISTS `geography`;
+CREATE TABLE IF NOT EXISTS `geography` (
+  `GEO_ID` int(5) NOT NULL AUTO_INCREMENT,
+  `GEO_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`GEO_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table cm.geography: ~6 rows (approximately)
+DELETE FROM `geography`;
+/*!40000 ALTER TABLE `geography` DISABLE KEYS */;
+INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
+	(1, 'ภาคเหนือ'),
+	(2, 'ภาคกลาง'),
+	(3, 'ภาคตะวันออกเฉียงเหนือ'),
+	(4, 'ภาคตะวันตก'),
+	(5, 'ภาคตะวันออก'),
+	(6, 'ภาคใต้');
+/*!40000 ALTER TABLE `geography` ENABLE KEYS */;
+
+
+-- Dumping structure for table cm.hr_dept
+DROP TABLE IF EXISTS `hr_dept`;
+CREATE TABLE IF NOT EXISTS `hr_dept` (
+  `id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dept_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dept_mother` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dept_manager` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table cm.hr_dept: ~0 rows (approximately)
+DELETE FROM `hr_dept`;
+/*!40000 ALTER TABLE `hr_dept` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hr_dept` ENABLE KEYS */;
+
+
+-- Dumping structure for table cm.hr_employee_data
+DROP TABLE IF EXISTS `hr_employee_data`;
+CREATE TABLE IF NOT EXISTS `hr_employee_data` (
   `id` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_prefix` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_fname` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -1124,10 +1154,10 @@ CREATE TABLE IF NOT EXISTS `employee_data` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.employee_data: ~38 rows (approximately)
-DELETE FROM `employee_data`;
-/*!40000 ALTER TABLE `employee_data` DISABLE KEYS */;
-INSERT INTO `employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `emp_nickname`, `emp_nation`, `emp_DOB`, `emp_sex`, `emp_position`, `emp_position_now`, `emp_dept_now`, `emp_type`, `emp_startdate`, `emp_enddate`, `emp_status`, `emp_add1`, `emp_add2`, `emp_SubDist`, `emp_Dist`, `emp_Province`, `emp_Postal`, `emp_tel1`, `emp_tel2`, `emp_email`, `emp_emergency`, `emp_emer_call`, `emp_training`, `emp_cid`, `emp_cid_exp`, `emp_passport`, `emp_passport_exp`, `emp_visa`, `emp_visa_exp`, `emp_wp`, `emp_wp_exp`, `emp_driver_license`, `emp_driver_license_exp`, `emp_bike_license`, `emp_bike_license_exp`, `emp_truck_license`, `emp_truck_license_exp`) VALUES
+-- Dumping data for table cm.hr_employee_data: ~38 rows (approximately)
+DELETE FROM `hr_employee_data`;
+/*!40000 ALTER TABLE `hr_employee_data` DISABLE KEYS */;
+INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `emp_nickname`, `emp_nation`, `emp_DOB`, `emp_sex`, `emp_position`, `emp_position_now`, `emp_dept_now`, `emp_type`, `emp_startdate`, `emp_enddate`, `emp_status`, `emp_add1`, `emp_add2`, `emp_SubDist`, `emp_Dist`, `emp_Province`, `emp_Postal`, `emp_tel1`, `emp_tel2`, `emp_email`, `emp_emergency`, `emp_emer_call`, `emp_training`, `emp_cid`, `emp_cid_exp`, `emp_passport`, `emp_passport_exp`, `emp_visa`, `emp_visa_exp`, `emp_wp`, `emp_wp_exp`, `emp_driver_license`, `emp_driver_license_exp`, `emp_bike_license`, `emp_bike_license_exp`, `emp_truck_license`, `emp_truck_license_exp`) VALUES
 	('CM-1001', 'นาย', 'ธนิตศักดิ์ ', 'พัชรดิษฐ์ฐากุล', 'มาร์ก', 'ไทย', '24/06/49', 'Male', NULL, 'President', 'Management', 'รายเดือน', '01/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1002', 'นาง', 'ยุวรินทร์  ', 'พัชรดิษฐ์ฐากุล', 'กลาง', 'ไทย', '10/06/52', 'Female', NULL, 'Vice President', 'Management', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1003', 'นาย', 'ภูริวัจน์  ', 'พัชรดิษฐ์ฐากุล', 'ไอซ์', 'ไทย', '19/05/90', 'Male', NULL, 'Corporate Director', 'Management', 'รายเดือน', '01/06/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1166,28 +1196,43 @@ INSERT INTO `employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `emp_
 	('CM-1039', 'น.ส.', 'Kimsean', 'Sem', 'เซียน', 'เขมร', '16/03/87', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', 'worker', 'Factory', 'พนักงานรายวัน', '05/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1041', 'นาย', 'ปอย', '', 'ปอย', 'เขมร', '04/04/91', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', 'worker', 'Factory', 'พนักงานรายวัน', '13/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1042', 'นาย', 'ดอนสาม', '', '', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', 'worker', 'Factory', 'พนักงานรายวัน', '9/6/2016', '', 'ทดลองงาน', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '');
-/*!40000 ALTER TABLE `employee_data` ENABLE KEYS */;
+/*!40000 ALTER TABLE `hr_employee_data` ENABLE KEYS */;
 
 
--- Dumping structure for table cm.geography
-DROP TABLE IF EXISTS `geography`;
-CREATE TABLE IF NOT EXISTS `geography` (
-  `GEO_ID` int(5) NOT NULL AUTO_INCREMENT,
-  `GEO_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`GEO_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+-- Dumping structure for table cm.hr_position
+DROP TABLE IF EXISTS `hr_position`;
+CREATE TABLE IF NOT EXISTS `hr_position` (
+  `id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `position_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dept_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `position_manager` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.geography: ~6 rows (approximately)
-DELETE FROM `geography`;
-/*!40000 ALTER TABLE `geography` DISABLE KEYS */;
-INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
-	(1, 'ภาคเหนือ'),
-	(2, 'ภาคกลาง'),
-	(3, 'ภาคตะวันออกเฉียงเหนือ'),
-	(4, 'ภาคตะวันตก'),
-	(5, 'ภาคตะวันออก'),
-	(6, 'ภาคใต้');
-/*!40000 ALTER TABLE `geography` ENABLE KEYS */;
+-- Dumping data for table cm.hr_position: ~0 rows (approximately)
+DELETE FROM `hr_position`;
+/*!40000 ALTER TABLE `hr_position` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
+
+
+-- Dumping structure for table cm.inventory_wh
+DROP TABLE IF EXISTS `inventory_wh`;
+CREATE TABLE IF NOT EXISTS `inventory_wh` (
+  `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `wh_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `wh_add1` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wh_add2` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wh_subDist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wh_Dist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wh_Province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wh_Postal` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table cm.inventory_wh: ~1 rows (approximately)
+DELETE FROM `inventory_wh`;
+/*!40000 ALTER TABLE `inventory_wh` DISABLE KEYS */;
+INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`, `wh_Dist`, `wh_Province`, `wh_Postal`) VALUES
+	('WH-001', 'โกดังอุดมสุข', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท 103', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260);
+/*!40000 ALTER TABLE `inventory_wh` ENABLE KEYS */;
 
 
 -- Dumping structure for table cm.partner
@@ -1463,7 +1508,7 @@ CREATE TABLE IF NOT EXISTS `product_attr` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.product_attr: ~4 rows (approximately)
+-- Dumping data for table cm.product_attr: ~5 rows (approximately)
 DELETE FROM `product_attr`;
 /*!40000 ALTER TABLE `product_attr` DISABLE KEYS */;
 INSERT INTO `product_attr` (`id`) VALUES
@@ -1482,7 +1527,7 @@ CREATE TABLE IF NOT EXISTS `product_unit` (
   `UnitName` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.product_unit: ~5 rows (approximately)
+-- Dumping data for table cm.product_unit: ~6 rows (approximately)
 DELETE FROM `product_unit`;
 /*!40000 ALTER TABLE `product_unit` DISABLE KEYS */;
 INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
@@ -1649,7 +1694,7 @@ CREATE TABLE IF NOT EXISTS `subdist` (
   PRIMARY KEY (`SubDist_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8861 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.subdist: ~8,073 rows (approximately)
+-- Dumping data for table cm.subdist: ~8,742 rows (approximately)
 DELETE FROM `subdist`;
 /*!40000 ALTER TABLE `subdist` DISABLE KEYS */;
 INSERT INTO `subdist` (`SubDist_ID`, `SubDist_CODE`, `SubDist_NAME`, `Dist_ID`, `Province_ID`, `GEO_ID`) VALUES
