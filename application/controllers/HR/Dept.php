@@ -7,7 +7,7 @@ class Dept extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->model();
+		$this->load->model('HR/HR_Dept_model','hr_dept_m');
 	}
 
 	/******			View			******/
@@ -15,29 +15,178 @@ class Dept extends CI_Controller {
 	public function index()
 	{
 
-}
+		$this->load->library('pagination');
 
+		$config['base_url'] = site_url().'/HR/Dept';
+		$config['total_rows'] = $this->hr_dept_m->countAll();
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 3;
+
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+
+		$config['prev_tag_open'] = '<li class="arrow">';
+		$config['prev_tag_close'] = '</li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';		
+
+		$config['next_tag_open'] = '<li class="arrow">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="current">';
+		$config['cur_tag_close'] = '</li>';
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+
+		$config['uri_segment'] = 3;
+
+		$this->pagination->initialize($config);
+
+		if($this->uri->segment(3)){
+			$page = ($this->uri->segment(3)) ;
+		}else{
+			$page = 0;
+		}
+
+		$data['title'] = 'จัดการแผนก';
+		$data['result'] = $this->hr_dept_m->getAll($config['per_page'],$page);
+		$data['pagination'] = $this->pagination->create_links();
+		$data['mask'] = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
+
+
+		$this->load->view('parts/head',$data);
+		$this->load->view('HR/HR_Dept_list',$data);
+		$this->load->view('parts/footer');
+		$this->load->view('scripts/dept_script');
+	}
 
 	/******			Form			******/
 
 	public function create()
 	{
+		$data['title'] = 'สร้างแผนกใหม่';
+		$data['execute'] = 
+			'<li><input class="button hollow success" type="submit"></li>
+			<li><a class="button hollow warning" href="'.site_url('/HR/Dept').'">ยกเลิก</a></li>
+			<li><a class="button hollow" href="'.site_url('/HR/Dept/create').'">พิมพ์รายงาน</a></li>';
+		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
+		$this->load->view('parts/head',$data);
+		$this->load->view('HR/HR_Dept_form',$data);
+		$this->load->view('parts/footer');
+		$this->load->view('scripts/dept_script');
 	}
 
-	public function data()
+	public function data($id)
 	{
+		$data['title'] = 'แก้ไขแผนก';
+		$data['execute'] = 
+			'<li><input class="button hollow success" type="submit"></li>
+			<li><a class="button hollow warning" href="'.site_url('/HR/Dept').'">ยกเลิก</a></li>
+			<li><a class="button hollow alert delitem" href="'.site_url('/HR/Dept/delete').'/'.$id.'">ลบ</a></li>
+			<li><a class="button hollow" href="'.site_url('/HR/Dept/create').'">พิมพ์รายงาน</a></li>';
+		$data['data'] = $this->hr_dept_m->get($id);
+		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
+		$this->load->view('parts/head',$data);
+		$this->load->view('HR/HR_Dept_form',$data);
+		$this->load->view('parts/footer');
+		$this->load->view('scripts/dept_script');
 	}
+
+
 	/******			Database			******/
 
 	public function add()
 	{
 
+		// --------------- Setting --------------- //
+		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
+
+		// --------------- Validation --------------- //
+		$this->form_validation->set_rules('id','รหัสแผนก','required');
+		$this->form_validation->set_rules('dept_name','ชื่อแผนก','required');
+
+		if ($this->form_validation->run() == TRUE){
+
+			$data = array(
+				'id'           =>	$this->input->post('id'),
+				'dept_name'    =>	$this->input->post('dept_name'),
+				'dept_mother'  =>	$this->input->post('dept_mother'),
+				'dept_manager' =>	$this->input->post('dept_manager'),
+				
+			);
+
+			$this->hr_dept_m->create($data);
+			
+
+			redirect('/HR/Dept/');
+		}else{
+
+			$this->create();
+		}
 	}
 
-	public function edit()
+	public function edit($id)
 	{
 
+		// --------------- Setting --------------- //
+		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
+
+		// --------------- Validation --------------- //
+		$this->form_validation->set_rules('dept_name','ชื่อแผนก','required');
+
+		if ($this->form_validation->run() == TRUE){
+
+			$data = array(
+				'id'           =>	$this->input->post('id'),
+				'dept_name'    =>	$this->input->post('dept_name'),
+				'dept_mother'  =>	$this->input->post('dept_mother'),
+				'dept_manager' =>	$this->input->post('dept_manager'),
+				
+			);
+
+			$this->hr_dept_m->update($data,$id);
+			
+
+			redirect('/HR/Dept/');
+		}else{
+
+			$this->data($id);
+		}
 	}
+
+	public function delete($id){
+		$this->hr_dept_m->delete($id);
+
+		redirect('/HR/Dept/');
+	}
+
+	public function lookup_emp(){
+		$keyword = $this->input->post('lookup');
+		$this->db->SELECT('*');
+		$this->db->FROM('hr_employee_data');
+		$this->db->LIKE('emp_fname',$keyword);
+		$query = $this->db->get()->result();
+
+		echo json_encode($query);
+
+	}
+
+	public function lookup_dept(){
+		$keyword = $this->input->post('lookup');
+		$this->db->SELECT('*');
+		$this->db->FROM('hr_dept');
+		$this->db->LIKE('dept_name',$keyword);
+		$query = $this->db->get()->result();
+
+		echo json_encode($query);
+
+	}
+
 }

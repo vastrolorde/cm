@@ -73,6 +73,7 @@ class Employee extends CI_Controller {
 			'<li><input class="button hollow success" type="submit"></li>
 			<li><a class="button hollow warning" href="'.site_url('/HR/Employee').'">ยกเลิก</a></li>
 			<li><a class="button hollow" href="'.site_url('/HR/Employee/create').'">พิมพ์รายงาน</a></li>';
+		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('HR/HR_Emp_form',$data);
@@ -89,6 +90,7 @@ class Employee extends CI_Controller {
 			<li><a class="button hollow alert delitem" href="'.site_url('/HR/Employee/delete').'/'.$id.'">ลบ</a></li>
 			<li><a class="button hollow" href="'.site_url('/HR/Employee/create').'">พิมพ์รายงาน</a></li>';
 		$data['data'] = $this->hr_emp_m->get($id);
+		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('HR/HR_Emp_form',$data);

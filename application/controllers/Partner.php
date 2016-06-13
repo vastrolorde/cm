@@ -75,11 +75,13 @@ class Partner extends CI_Controller {
 			<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
 			<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
 		$data['bank'] = $this->partner_m->bank();
+		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('partner/partner_form',$data);
 		$this->load->view('parts/footer');	
 		$this->load->view('scripts/partner_script');
+		
 	}
 
 	public function data($id)
@@ -92,8 +94,9 @@ class Partner extends CI_Controller {
 			<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
 		$data['data'] = $this->partner_m->get($id);
 		$data['bank'] = $this->partner_m->bank();
+		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
-		$this->load->view('parts/head');
+		$this->load->view('parts/head',$data);
 		$this->load->view('partner/partner_form',$data);
 		$this->load->view('parts/footer');	
 		$this->load->view('scripts/partner_script');
@@ -115,7 +118,7 @@ class Partner extends CI_Controller {
 		$this->form_validation->set_rules('id','Partner id','required');
 		$this->form_validation->set_rules('partner_name','ชื่อ partner','required');
 		$this->form_validation->set_rules('Postal','รหัสไปรษณีย์','exact_length[5]|integer');
-		$this->form_validation->set_rules('tel','เบอร์โทรศัพท์','regex_match[/^[0-9().-]+$/]');
+		$this->form_validation->set_rules('tel','เบอร์โทรศัพท์','regex_match[/^(?([0-9]{3}))*-([0-9]{3})*-([0-9]{4})$/]');
 		$this->form_validation->set_rules('Fax','Fax','integer','regex_match[/^[0-9().-]+$/]');
 		$this->form_validation->set_rules('email','email','valid_email');
 
@@ -136,6 +139,7 @@ class Partner extends CI_Controller {
 					'Postal'            =>	$this->input->post('Postal'),
 					'Type'              =>	json_encode($this->input->post('Type')),
 					'Bank'              =>	$this->input->post('Bank'),
+					'Acc_name'          =>	$this->input->post('Acc_name'),
 					'Acc_no'            =>	$this->input->post('Acc_no'),
 					'Acc_type'          =>	$this->input->post('Acc_type'),
 					'Acc_branch'        =>	$this->input->post('Acc_branch'),
@@ -186,6 +190,7 @@ class Partner extends CI_Controller {
 					'Postal'            =>	$this->input->post('Postal'),
 					'Type'              =>	json_encode($this->input->post('Type')),
 					'Bank'              =>	$this->input->post('Bank'),
+					'Acc_name'          =>	$this->input->post('Acc_name'),
 					'Acc_no'            =>	$this->input->post('Acc_no'),
 					'Acc_type'          =>	$this->input->post('Acc_type'),
 					'Acc_branch'        =>	$this->input->post('Acc_branch'),

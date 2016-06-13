@@ -12,21 +12,15 @@
     <script src="<?php echo asset_url().'bower/jquery-ui/jquery-ui.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/js/foundation.accordion.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/jquery-mask-plugin/dist/jquery.mask.js'; ?>"></script>
+    <?php
+      if(isset($mask)){
+        echo $mask;
+      }
+    ?>
 
     <style type="text/css">
-      .no-js .top-bar {
-          display: none;
-        }
-
-      @media screen and (min-width: 40em) {
-        .no-js .top-bar {
-          display: block;
-        }
-
-        .no-js .title-bar {
-          display: none;
-        }
-      }
+    
     </style>
   </head>
   <body>
@@ -58,7 +52,7 @@
         <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
         <li><a href="#">สินค้าคงคลัง</a>
             <ul class="vertical menu nested">
-              <li><a href="<?php echo site_url().'/Inventory'; ?>">รายการสินค้าคงคลัง</a></li>
+              <li><a href="<?php echo site_url().'/Inventory'; ?>">รายการเคลื่อนไหวสินค้าคงคลัง</a></li>
               <li><a href="<?php echo site_url().'/Product'; ?>">สินค้า</a></li>
               <li><a href="<?php echo site_url().'/Inventory/Warehouse'; ?>">คลังสินค้า</a></li>
               <li></li>

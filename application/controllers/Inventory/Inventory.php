@@ -14,7 +14,9 @@ class Inventory extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->View('parts/head');
+		$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
+
+		$this->load->View('parts/head',$data);
 		$this->load->view('Inventory/Inventory_list');
 		$this->load->View('parts/footer');
 	}

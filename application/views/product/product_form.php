@@ -4,6 +4,26 @@
   }else{
     echo form_open('/product/edit/'.$data[0]->product_id);
   }
+
+/*
+
+'product_id'             =>  product code,
+'product_unit'           =>  หน่วยนับ,
+'product_name'           =>  ชื่อสินค้า,
+'product_weight'         =>  น้ำหนักต่อชิ้น,
+'product_type'           =>  ประเภท Product,
+'product_Desc'           =>  รายละเอียด,
+'product_stock'          =>  จำนวนสินค้าใน Stock,
+'product_safety'         =>  Safety Stock,
+'product_cost'           =>  ต้นทุน,
+'product_1stSalePrice'   =>  ราคาขายมือ1,
+'product_2ndSalePrice'   =>  ราคาขายมือ2,
+'product_d_RentalPrice'  =>  ราคาเช่ารายวัน,
+'product_GuaranteePrice' =>  ราคาค้ำประกัน,
+'product_Attr'           => คุณลักษณะสินค้า,
+
+*/
+
 ?>
 <div class="row">
   <div class="large-12 column">
@@ -76,7 +96,12 @@
           <div class="large-6 columns">
 
         <?php
-          
+
+          $input_number = array(
+              'type' => 'number',
+              'name' => 'product_weight'
+            );
+
           if(isset($data)){
             //Assign Variable
             $product_name = $data[0]->product_name;
@@ -89,7 +114,7 @@
             echo form_label('น้ำหนักต่อชิ้น')
                 .form_error('product_weight')
                 .'<div class="input-group">'
-                .form_input('product_weight',$product_weight,'class=input-group-field').'<span class="input-group-label">kg</span>
+                .form_input($input_number,$product_weight,'class=input-group-field').'<span class="input-group-label">kg</span>
                   </div>';
           }else{
             echo form_label('ชื่อสินค้า *')
@@ -98,7 +123,7 @@
             echo form_label('น้ำหนักต่อชิ้น')
                 .form_error('product_weight')
                 .'<div class="input-group">'
-                .form_input('product_weight','','class=input-group-field').'<span class="input-group-label">kg</span>
+                .form_input($input_number,'','class=input-group-field').'<span class="input-group-label">kg</span>
                   </div>
             ';
           }
@@ -147,13 +172,63 @@
             //Assign Variable
             $product_Desc = $data[0]->product_Desc;
 
-            echo form_label('รายละเอียด').form_textarea('product_Desc',$product_Desc);
+            echo form_label('รายละเอียด')
+                .form_textarea('product_Desc',$product_Desc);
           }else{
-            echo form_label('รายละเอียด').form_textarea('product_Desc');
+            echo form_label('รายละเอียด')
+                .form_textarea('product_Desc');
           }
 
         ?>
 
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-6 columns">
+
+        <?php
+
+          $input_number = array(
+            'type' => 'number',
+            'name' => 'product_stock'
+          );
+
+          if(isset($data)){
+            //Assign Variable
+            $product_stock = $data[0]->product_stock;
+
+            echo form_label('จำนวนสินค้าใน Stock')
+                .form_input($input_number,$product_stock);
+          }else{
+            echo form_label('จำนวนสินค้าใน Stock')
+                .form_input($input_number);
+          }
+
+        ?>
+          </div>
+
+          <div class="large-6 columns">
+        <?php
+
+
+          $input_number = array(
+            'type' => 'number',
+            'name' => 'product_safety'
+          );
+
+          if(isset($data)){
+            //Assign Variable
+            $product_safety = $data[0]->product_safety;
+
+            echo form_label('Safety Stock')
+                .form_input($input_number,$product_safety);
+          }else{
+            echo form_label('Safety Stock')
+                .form_input($input_number);
+          }
+
+        ?>
           </div>
         </div>
 

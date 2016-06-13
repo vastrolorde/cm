@@ -380,20 +380,20 @@ emp_truck_license_exp
 
                     echo form_label('เบอร์โทรศัพท์ 1')
                         .form_error('emp_tel1')
-                        .form_input('emp_tel1',$emp_tel1);
+                        .form_input('emp_tel1',$emp_tel1,'class="tel"');
                     echo form_label('เบอร์โทรศัพท์ 2')
                         .form_error('emp_tel2')
-                        .form_input('emp_tel2',$emp_tel2);
+                        .form_input('emp_tel2',$emp_tel2,'class="tel"');
                     echo form_label('e-mail')
                         .form_error('emp_email')
                         .form_input('emp_email',$emp_email);
                   }else{
                     echo form_label('เบอร์โทรศัพท์ 1')
                         .form_error('emp_tel1')
-                        .form_input('emp_tel1');
+                        .form_input('emp_tel1','','class="tel"');
                     echo form_label('เบอร์โทรศัพท์ 2')
                         .form_error('emp_tel2')
-                        .form_input('emp_tel2');
+                        .form_input('emp_tel2','','class="tel"');
                     echo form_label('e-mail')
                         .form_error('emp_email')
                         .form_input('emp_email');
@@ -414,13 +414,13 @@ emp_truck_license_exp
                         .form_input('emp_emergency',$emp_emergency);
                     echo form_label('เบอร์โทรศัพท์ติดต่อฉุกเฉิน')
                         .form_error('emp_emer_call')
-                        .form_input('emp_emer_call',$emp_emer_call);
+                        .form_input('emp_emer_call',$emp_emer_call,'class="tel"');
                   }else{
                     echo form_label('บุคคลติดต่อฉุกเฉิน')
                         .form_input('emp_emergency');
                     echo form_label('เบอร์โทรศัพท์ติดต่อฉุกเฉิน')
                         .form_error('emp_emer_call')
-                        .form_input('emp_emer_call');
+                        .form_input('emp_emer_call','','class="tel"');
                   }
                 ?>
               </div>

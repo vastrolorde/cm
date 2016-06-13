@@ -16,7 +16,8 @@
     "tests"
   ],
   "dependencies": {
-  	"foundation-sites": "latest",
-    "jquery": "^2.2.3"
+    "foundation-sites": "latest",
+    "jquery": "^2.2.3",
+    "jquery-mask-plugin": "jQuery-Mask-Plugin#^1.14.0"
   }
 }

@@ -10,7 +10,7 @@
 					<td>'+$i+'</td> \
               <td><input type="text" name="partner_contactor['+$i+'][name]" placeholder="กรอก ชื่อผู้ติดต่อ"></td> \
               <td><input type="text" name="partner_contactor['+$i+'][position]" placeholder="กรอก ตำแหน่ง"></td> \
-              <td><input type="text" name="partner_contactor['+$i+'][tel]" placeholder="กรอก เบอร์โทรศัพท์"></td> \
+              <td><input type="text" name="partner_contactor['+$i+'][tel]" placeholder="กรอก เบอร์โทรศัพท์" class="tel"></td> \
               <td><input type="text" name="partner_contactor['+$i+'][email]" placeholder="กรอก email"></td> \
               <td><input type="text" name="partner_contactor['+$i+'][remark]" placeholder="กรอก หมายเหตุ"></td> \
               <td><a href="#" class="Del_contactor_row">ลบ</a></td> \
@@ -37,7 +37,7 @@
 					dataType: "json",
 					type: "POST",
 					success: function (data) {
-		                response(data.map(function (value) {
+		                response($.map(data,function (value) {
 		                    return {
 		                        'label': value.partner_name,
 		                        'value': value.partner_name
@@ -48,6 +48,5 @@
 			},
 			minLength: 3
 		});
-
 	});	
 </script>

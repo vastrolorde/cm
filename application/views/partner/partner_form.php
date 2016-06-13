@@ -202,22 +202,22 @@
         $Fax = $data[0]->Fax;
         $Email = $data[0]->email;
 
-        echo form_label('เบอร์โทรศัพท์ (ตัวอย่าง 081-234-5678)')
+        echo form_label('เบอร์โทรศัพท์ (ตัวอย่าง 02-345-6789)')
             .form_error('tel')
-            .form_input('tel',$tel);
-        echo form_label('Fax (ตัวอย่าง 081-234-5678)')
+            .form_input('tel',$tel,'class="tel"');
+        echo form_label('Fax (ตัวอย่าง 02-345-6789)')
             .form_error('Fax')
-            .form_input('Fax',$Fax);
+            .form_input('Fax',$Fax,'class="tel"');
         echo form_label('E-mail')
             .form_error('email')
             .form_input('email',$Email);
       }else{
         echo form_label('เบอร์โทรศัพท์ (ตัวอย่าง 081-234-5678)')
             .form_error('tel')
-            .form_input('tel');
+            .form_input('tel','','class="tel"');
         echo form_label('Fax (ตัวอย่าง 081-234-5678)')
             .form_error('Fax')
-            .form_input('Fax');
+            .form_input('Fax','','class="tel"');
         echo form_label('E-mail')
             .form_error('email')
             .form_input('email');
@@ -266,7 +266,7 @@
                       <td>'.$i.'</td>
                       <td><input type="text" name="partner_contactor['.$i.'][name]" value="'.$row->name.'" placeholder="กรอก ชื่อผู้ติดต่อ"></td>
                       <td><input type="text" name="partner_contactor['.$i.'][position]" value="'.$row->position.'" placeholder="กรอก ตำแหน่ง"></td>
-                      <td><input type="text" name="partner_contactor['.$i.'][tel]" value="'.$row->tel.'" placeholder="กรอก เบอร์โทรศัพท์"></td>
+                      <td><input type="text" name="partner_contactor['.$i.'][tel]" value="'.$row->tel.'" placeholder="กรอก เบอร์โทรศัพท์" class="tel"></td>
                       <td><input type="text" name="partner_contactor['.$i.'][email]" value="'.$row->email.'" placeholder="กรอก email"></td>
                       <td><input type="text" name="partner_contactor['.$i.'][remark]" value="'.$row->remark.'" placeholder="กรอก หมายเหตุ"></td>
                       <td><a href="#" class="Del_contactor_row">ลบ</a></td>
@@ -280,7 +280,7 @@
                     <td>'.$i.'</td>
                     <td><input type="text" name="partner_contactor['.$i.'][name]" placeholder="กรอก ชื่อผู้ติดต่อ"></td>
                     <td><input type="text" name="partner_contactor['.$i.'][position]" placeholder="กรอก ตำแหน่ง"></td>
-                    <td><input type="text" name="partner_contactor['.$i.'][tel]" placeholder="กรอก เบอร์โทรศัพท์"></td>
+                    <td><input type="text" name="partner_contactor['.$i.'][tel]" placeholder="กรอก เบอร์โทรศัพท์" class="tel"></td>
                     <td><input type="text" name="partner_contactor['.$i.'][email]" placeholder="กรอก email"></td>
                     <td><input type="text" name="partner_contactor['.$i.'][remark]" placeholder="กรอก หมายเหตุ"></td>
                     <td><a href="#" class="Del_contactor_row">ลบ</a></td>
@@ -317,14 +317,22 @@
 
             if(isset($data)){
               $bank_select = $data[0]->Bank;
+              $Acc_name = $data[0]->Acc_name;
+              $Acc_no = $data[0]->Acc_no;
               $Acc_type_select = $data[0]->Acc_type;
+              $Acc_branch = $data[0]->Acc_branch;
             }
 
-            echo form_label('Bank').form_dropdown('Bank',$banklist,(isset($data))? $bank_select : 'AGR');
-            echo form_label('ชื่อบัญชี').form_input('Acc_name');
-            echo form_label('เลขที่บัญชี').form_input('Acc_no');
-            echo form_label('เลขที่บัญชี').form_dropdown('Acc_type',$options,(isset($data))? $Acc_type_select : 'กระแสรายวัน');
-            echo form_label('สาขาบัญชี').form_input('Acc_branch');
+            echo form_label('Bank')
+                .form_dropdown('Bank',$banklist,(isset($data))? $bank_select : 'AGR');
+            echo form_label('ชื่อบัญชี')
+                .form_input('Acc_name');
+            echo form_label('เลขที่บัญชี')
+                .form_input('Acc_no',(isset($data))? $Acc_no : '','class="bank"');
+            echo form_label('ประเภท')
+                .form_dropdown('Acc_type',$options,(isset($data))? $Acc_type_select : 'กระแสรายวัน');
+            echo form_label('สาขาบัญชี')
+                .form_input('Acc_branch');
 
         ?>
           </div>
