@@ -269,6 +269,18 @@ emp_truck_license_exp
                     'พนักงานฝึกงาน' => 'พนักงานฝึกงาน'
                   );
               
+
+                $dept_no = 0;
+                foreach ($dept as $key) {
+                  $dept_list[$dept[$dept_no]['id']] = $dept[$dept_no]['dept_name'];
+                  $dept_no++;
+                }
+
+                $position_no = 0;
+                foreach ($position as $key) {
+                  $position_list[$position[$position_no]['id']] = $position[$position_no]['position_name'];
+                  $position_no++;
+                }
               if(isset($data)){
                 //Assign Variable
 
@@ -278,16 +290,16 @@ emp_truck_license_exp
 
 
                 echo form_label('ตำแหน่งปัจจุบัน')
-                    .form_input('emp_position_now',$emp_position_now);
+                    .form_dropdown('emp_position_now',$position_list,$emp_position_now);
                 echo form_label('แผนกปัจจุบัน')
-                    .form_input('emp_dept_now',$emp_dept_now);
+                    .form_dropdown('emp_dept_now',$dept_list,$emp_dept_now);
                 echo form_label('ประเภทพนักงาน')
                     .form_dropdown('emp_type',$emp_type_list,$emp_type);
               }else{
                 echo form_label('ตำแหน่งปัจจุบัน')
-                    .form_input('emp_position_now');
+                    .form_dropdown('emp_position_now',$position_list);
                 echo form_label('แผนกปัจจุบัน')
-                    .form_input('emp_dept_now');
+                    .form_dropdown('emp_dept_now',$dept_list);
                 echo form_label('ประเภทพนักงาน')
                     .form_dropdown('emp_type',$emp_type_list);
               }

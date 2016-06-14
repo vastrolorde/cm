@@ -49,11 +49,22 @@ class HR_Emp_model extends CI_Model {
 	}
 
 	public function lookup($keyword){
-		// $this->db->query('SELECT partner_name FROM partner WHERE partner_name LIKE '.$keyword);
 		$this->db->select('partner_name');
 		$this->db->from('hr_employee_data');
 		$this->db->like('partner_name',$keyword);
 		return $this->db->get()->result();
+	}
+
+	public function getDept(){
+		$this->db->select();
+		$query = $this->db->get('hr_dept');
+		return $result = $query->result_array();
+	}
+
+	public function getPosition(){
+		$this->db->select();
+		$query = $this->db->get('hr_position');
+		return $result = $query->result_array();
 	}
 
 }

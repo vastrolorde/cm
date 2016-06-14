@@ -59,5 +59,5 @@ $route['Partner/:num'] = 'Partner';
 
 /* HR */
 $route['HR/Position/:num'] = 'HR/Position';
-$route['HR/Position/:num'] = 'HR/Dept';
+$route['HR/Dept/:num'] = 'HR/Dept';
 $route['HR/Employee/:num'] = 'HR/Employee';

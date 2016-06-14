@@ -19,7 +19,7 @@ class Position extends CI_Controller {
 
 		$config['base_url'] = site_url().'/HR/Position';
 		$config['total_rows'] = $this->hr_Position_m->countAll();
-		$config['per_page'] = 10;
+		$config['per_page'] = 20;
 		$config['uri_segment'] = 3;
 
 		$config['first_tag_open'] = '<li>';
@@ -56,11 +56,13 @@ class Position extends CI_Controller {
 		$data['title'] = 'จัดการตำแหน่ง';
 		$data['result'] = $this->hr_Position_m->getAll($config['per_page'],$page);
 		$data['pagination'] = $this->pagination->create_links();
+		$data['mask'] = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
 
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('HR/HR_Position_list',$data);
 		$this->load->view('parts/footer');
+		$this->load->view('scripts/position_script');
 	}
 
 	/******			Form			******/

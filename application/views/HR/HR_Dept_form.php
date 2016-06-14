@@ -54,7 +54,8 @@
             $dept_mother = $data[0]->dept_mother;
 
             echo form_label('รหัสแผนก')
-                .form_input('id',$id);
+                .form_input('id',$id,'disabled')
+                .form_hidden('id',$id);
             echo form_label('แผนกแม่')
                 .form_error('dept_mother')
                 .form_input('dept_mother',$dept_mother);

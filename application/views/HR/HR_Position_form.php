@@ -46,7 +46,14 @@
       <div class="large-6 columns">
 
         <?php
-          
+       
+
+            $i = 0;
+            foreach ($dept as $key) {
+              $dept_list[$dept[$i]['dept_name']] = $dept[$i]['dept_name'];
+              $i++;
+            }
+
           if(isset($data)){
             //Assign Variable
 
@@ -54,16 +61,17 @@
             $dept_id = $data[0]->dept_id;
 
             echo form_label('รหัสตำแหน่ง')
-                .form_input('id',$id);
+                .form_input('id',$id,'disabled')
+                .form_hidden('id',$id);
             echo form_label('แผนก')
                 .form_error('dept_id')
-                .form_dropdown('dept_id',$dept,$dept_id);
+                .form_dropdown('dept_id',$dept_list,$dept_id);
           }else{
             echo form_label('รหัสตำแหน่ง')
                 .form_input('id');
             echo form_label('แผนก')
                 .form_error('dept_id')
-                .form_dropdown('dept_id',$dept);
+                .form_dropdown('dept_id',$dept_list);
           }
         ?>
 

@@ -19,6 +19,14 @@
   </div>
 </div>
 
+
+<div class="row">
+  <h1 class="text-center">แผนผังโครงสร้างองค์การ</h1>
+  <div class="large-12 columns" id="chart_div">
+    <!-- Code Here -->
+  </div>
+</div>
+
 <table>
 
   <thead>

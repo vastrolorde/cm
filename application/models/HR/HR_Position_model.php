@@ -49,12 +49,9 @@ class HR_Position_model extends CI_Model {
 	}
 
 	public function dept(){
-		$this->db->SELECT('dept_name');
-		$this->db->FROM('hr_dept');
-		$query = $this->db->get()->result();
-
-		echo json_encode($query);
-
+		$this->db->select();
+		$query = $this->db->get('hr_dept');
+		return $result = $query->result_array();
 	}
 
 }
