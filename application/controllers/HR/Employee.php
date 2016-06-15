@@ -74,8 +74,8 @@ class Employee extends CI_Controller {
 			<li><a class="button hollow warning" href="'.site_url('/HR/Employee').'">ยกเลิก</a></li>
 			<li><a class="button hollow" href="'.site_url('/HR/Employee/create').'">พิมพ์รายงาน</a></li>';
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
-		$data['dept'] = $this->hr_emp_m->getDept;
-		$data['position'] = $this->hr_emp_m->getPosition;
+		$data['dept'] = $this->hr_emp_m->getDept();
+		$data['position'] = $this->hr_emp_m->getPosition();
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('HR/HR_Emp_form',$data);

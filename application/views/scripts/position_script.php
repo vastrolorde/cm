@@ -45,6 +45,7 @@
 		<?php 
 				$this->db->SELECT('*');
 				$this->db->FROM('hr_position');
+				$this->db->where('active','Y');
 				$query = $this->db->get()->result();
 
 				echo 'data.addRows([';

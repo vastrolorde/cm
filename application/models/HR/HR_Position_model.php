@@ -6,6 +6,7 @@ class HR_Position_model extends CI_Model {
 	public function getAll($limit,$page){
 		$this->db->limit($limit, $page);
 		$this->db->select("*");
+		$this->db->where('active','Y');
 		$query = $this->db->get("hr_position");
 		$this->db->order_by('id', 'ASC');
 
