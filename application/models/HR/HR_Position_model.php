@@ -5,10 +5,12 @@ class HR_Position_model extends CI_Model {
 
 	public function getAll($limit,$page){
 		$this->db->limit($limit, $page);
-		$this->db->select("*");
+		$this->db->select("pos.id, pos.position_name, pos.dept_id, pos.position_manager,dept.dept_name");
+		$this->db->from('hr_position as pos');
+		$this->db->join('hr_dept as dept','pos.dept_id = dept.id');
 		$this->db->where('active','Y');
-		$query = $this->db->get("hr_position");
 		$this->db->order_by('id', 'ASC');
+		$query = $this->db->get();
 
 		if ($query->num_rows() > 0) {
 			foreach ($query->result() as $row) {

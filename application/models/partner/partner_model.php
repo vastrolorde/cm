@@ -52,7 +52,9 @@ class Partner_model extends CI_Model {
 		$query = $this->db->get('bank');
 		return $result = $query->result_array();
 	}
-
+	
+	/******			Others			******/
+	//Autocomplete Partner Lookup
 	public function lookup($keyword){
 		// $this->db->query('SELECT partner_name FROM partner WHERE partner_name LIKE '.$keyword);
 		$this->db->select('partner_name');

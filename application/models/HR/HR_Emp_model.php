@@ -4,10 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class HR_Emp_model extends CI_Model {
 
 	public function getAll($limit,$page){
+		/*
+		"SELECT hr_employee_data.id,hr_employee_data.emp_prefix,hr_employee_data.emp_fname,hr_employee_data.emp_lname,hr_employee_data.emp_position_now,hr_employee_data.emp_dept_now,
+hr_employee_data.emp_status,hr_position.id, hr_position.position_name FROM hr_employee_data INNER JOIN hr_position ON hr_employee_data.emp_position_now = hr_position.id"
+*/
 		$this->db->limit($limit, $page);
-		$this->db->select("*");
-		$query = $this->db->get("hr_employee_data");
-		$this->db->order_by('id', 'ASC');
+		$this->db->select('emp.id,emp.emp_prefix,emp.emp_fname,emp.emp_lname,emp.emp_position_now,emp.emp_dept_now,
+		emp.emp_status,pos.position_name,dept.dept_name');
+		$this->db->from('hr_employee_data as emp');
+		$this->db->join('hr_position as pos','emp.emp_position_now = pos.id');
+		$this->db->join('hr_dept as dept','emp.emp_dept_now = dept.id');
+		$this->db->order_by('emp.id', 'ASC');
+		$query = $this->db->get();
 
 		if ($query->num_rows() > 0) {
 			foreach ($query->result() as $row) {

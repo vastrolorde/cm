@@ -53,7 +53,7 @@
             <td>'.$i.'</td>
             <td>'.$key->id.'</td>
             <td>'.$key->position_name.'</td>
-            <td>'.$key->dept_id.'</td>
+            <td>'.$key->dept_name.'</td>
             <td>'.$key->position_manager.'</td>
             <td><a href="'.site_url("HR/Position/data/".$key->id).'">Edit</a></td>
           </tr>

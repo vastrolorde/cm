@@ -50,7 +50,7 @@
 
             $i = 0;
             foreach ($dept as $key) {
-              $dept_list[$dept[$i]['dept_name']] = $dept[$i]['dept_name'];
+              $dept_list[$dept[$i]['id']] = $dept[$i]['dept_name'];
               $i++;
             }
 

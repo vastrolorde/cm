@@ -1131,12 +1131,12 @@ CREATE TABLE IF NOT EXISTS `hr_employee_data` (
   `emp_startdate` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_enddate` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_status` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `emp_add1` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emp_add2` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emp_SubDist` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emp_Dist` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emp_add1` text COLLATE utf8_unicode_ci,
+  `emp_add2` text COLLATE utf8_unicode_ci,
+  `emp_SubDist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emp_Dist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_Province` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `emp_Postal` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emp_Postal` int(11) DEFAULT NULL,
   `emp_tel1` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_tel2` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `emp_email` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1168,44 +1168,44 @@ CREATE TABLE IF NOT EXISTS `hr_employee_data` (
 DELETE FROM `hr_employee_data`;
 /*!40000 ALTER TABLE `hr_employee_data` DISABLE KEYS */;
 INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `emp_nickname`, `emp_nation`, `emp_DOB`, `emp_sex`, `emp_position`, `emp_position_now`, `emp_dept_now`, `emp_type`, `emp_startdate`, `emp_enddate`, `emp_status`, `emp_add1`, `emp_add2`, `emp_SubDist`, `emp_Dist`, `emp_Province`, `emp_Postal`, `emp_tel1`, `emp_tel2`, `emp_email`, `emp_emergency`, `emp_emer_call`, `emp_training`, `emp_cid`, `emp_cid_exp`, `emp_passport`, `emp_passport_exp`, `emp_visa`, `emp_visa_exp`, `emp_wp`, `emp_wp_exp`, `emp_driver_license`, `emp_driver_license_exp`, `emp_bike_license`, `emp_bike_license_exp`, `emp_truck_license`, `emp_truck_license_exp`) VALUES
-	('CM-1001', 'นาย', 'ธนิตศักดิ์ ', 'พัชรดิษฐ์ฐากุล', 'มาร์ก', 'ไทย', '24/06/49', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0001', 'MGT', 'พนักงานรายวัน', '01/04/02', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-	('CM-1002', 'นาง', 'ยุวรินทร์  ', 'พัชรดิษฐ์ฐากุล', 'กลาง', 'ไทย', '10/06/52', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0002', 'MGT', 'พนักงานรายวัน', '02/04/02', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-	('CM-1003', 'นาย', 'ภูริวัจน์  ', 'พัชรดิษฐ์ฐากุล', 'ไอซ์', 'ไทย', '19/05/90', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0003', 'MGT', 'พนักงานรายวัน', '01/06/13', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-	('CM-1004', 'นาง', 'นางทัศนีย์', 'มัลลิกาพิพัฒน์', 'ตาล', 'ไทย', '15/11/82', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0004', 'ADM', 'พนักงานรายวัน', '01/06/13', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-	('CM-1005', 'นาย', 'ประพันธ์ ', 'วงษ์อุบล', 'พันธ์', 'ไทย', '01/05/71', 'Male', NULL, '', 'OPT', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1007', 'น.ส.', 'กัลฐิกา', 'บุญเปรื่อง', 'ฟาง', 'ไทย', '20/11/85', 'Female', NULL, '', 'ADM', 'รายเดือน', '05/08/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1008', 'นาย', 'นนท์ตการ', 'มัลลิกาพิพัฒน์', 'มิกซ์', 'ไทย', '30/11/76', 'Male', NULL, '', 'ADM', 'รายเดือน', '01/01/11', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1009', 'นาย', 'เกษม', 'พิมพ์จันทร์', 'เกษม', 'ไทย', '23/07/69', 'Male', NULL, '', 'ADM', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1010', 'นาย', 'ธนพล', 'จันมีชัย', 'ทอง', 'ไทย', '05/10/60', 'Male', NULL, '', 'OPT', 'รายเดือน', '08/07/13', '20/02/16', 'ไล่ออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1011', 'นาย', 'อุทัย', 'ทองเฟื้อง', 'ทัย', 'ไทย', '28/10/81', 'Male', NULL, '', 'OPT', 'รายวัน', '21/07/06', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1013', 'นาย', 'Soe Win Than', '', 'แสน', 'พม่า', '04/02/84', 'Male', NULL, '', 'OPT', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1014', 'นาง', 'Zar Ni Tun', '', 'ปู', 'พม่า', '17/08/83', 'Female', NULL, '', 'OPT', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1015', 'นาย', 'Aw Lan', '', 'ชาติ', 'พม่า', '30/04/86', 'Male', NULL, '', 'OPT', 'รายวัน', '02/12/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1016', 'น.ส.', 'Mi Yin Thein', '', 'นุ้ย', 'พม่า', '06/05/87', 'Female', NULL, '', 'OPT', 'รายวัน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1017', 'น.ส.', 'Kyi Kyi Nyan', '', 'สา', 'พม่า', '19/04/95', 'Female', NULL, '', 'OPT', 'รายวัน', '14/03/16', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1019', 'นาย', 'Aung Tin', '', 'อ๋อง', 'พม่า', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1020', 'นาย', 'Zin Maung Htun', '', 'ซี', 'พม่า', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '13/08/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1021', 'นาย', 'Tun Kyaw', '', 'ทุนโจ', 'พม่า', '29/05/84', 'Male', NULL, '', 'OPT', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1022', 'นาย', 'Hlawn Moe Naing', '', 'นาย', 'พม่า', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '25/07/14', '16/02/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1023', 'นาย', 'Zaw Moe', '', 'ซอม', 'พม่า', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1024', 'นาง', 'พูมะลี', 'สิริปันยา', 'เจ', 'ลาว', '06/11/73', 'Female', NULL, '', 'OPT', 'รายวัน', '01/06/09', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1025', 'นาย', 'นาริน', 'กีม', 'นาริน', 'เขมร', '13/07/78', 'Male', NULL, '', 'OPT', 'รายวัน', '07/10/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1026', 'นาย', 'Foe Sae', '', 'โพ', 'พม่า', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1027', 'นาย', 'Maung Kyaw', '', 'ม่องโจ', 'พม่า', '12/02/87', 'Male', NULL, '', 'OPT', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1028', 'น.ส.', 'เพ็ญโสม ', 'ใจวงค์', 'แคท', 'ไทย', '31/08/90', 'Female', NULL, '', 'PJT', 'รายเดือน', '01/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1029', 'นาย', 'Myat San', '', 'ซ่า', 'พม่า', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '15/01/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1030', 'นาย', 'เอ๊าท์', ' เม็ท', 'เอ๊าท์', 'เขมร', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '05/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1031', 'นาย', 'เล็ท', ' เม็ท', 'เล็ท', 'เขมร', '00/01/00', 'Male', NULL, '', 'OPT', 'รายวัน', '22/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1032', 'นาย', 'มิน', '', 'มิน', 'เขมร', '11/02/75', 'Male', NULL, '', 'OPT', 'รายวัน', '05/01/16', '', 'ทดลองงาน', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1033', 'นาย', 'จักรพันธ์', 'นาคนชม', 'โต้', 'ไทย', '29/01/91', 'Male', NULL, '', 'ADM', 'รายเดือน', '07/05/15', '01/07/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1034', 'นาย', 'สมพงศ์  ', 'นันทไพบูลย์', 'สมพงศ์', 'ไทย', '11/12/52', 'Male', NULL, '', 'ADM', 'รายเดือน', '01/04/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1035', 'น.ส.', 'ทอง', 'ทองทา', 'ทอง', 'ไทย', '25/01/54', 'Female', NULL, '', 'ADM', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1036', 'นาย', 'Way Lin Tun', '', '', 'พม่า', '08/11/89', 'Male', NULL, '', 'OPT', 'รายวัน', '24/08/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1037', 'นาย', 'อัศวเทพ ', 'เริงสำราญ', 'พฤกษ์', 'ไทย', '12/12/90', 'Male', NULL, '', 'PJT', 'รายเดือน', '01/09/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1038', 'นาย', 'ทักษ์ดนัย', 'ชวาลารัตน์', 'ทักษ์', 'ไทย', '22/08/92', 'Male', NULL, '', 'OPT', 'รายเดือน', '16/11/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1039', 'น.ส.', 'Kimsean', 'Sem', 'เซียน', 'เขมร', '16/03/87', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '', 'OPT', 'พนักงานรายวัน', '05/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-	('CM-1041', 'นาย', 'ปอย', '', 'ปอย', 'เขมร', '04/04/91', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '', 'OPT', 'พนักงานรายวัน', '13/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-	('CM-1042', 'นาย', 'ดอนสาม', '', '', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '', 'OPT', 'พนักงานรายวัน', '9/6/2016', '', 'ทดลองงาน', '', '', '', '', '', '', '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '');
+	('CM-1001', 'นาย', 'ธนิตศักดิ์ ', 'พัชรดิษฐ์ฐากุล', 'มาร์ก', 'ไทย', '24/06/49', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0001', 'MGT', 'พนักงานรายวัน', '01/04/02', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1002', 'นาง', 'ยุวรินทร์  ', 'พัชรดิษฐ์ฐากุล', 'กลาง', 'ไทย', '10/06/52', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0002', 'MGT', 'พนักงานรายวัน', '02/04/02', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1003', 'นาย', 'ภูริวัจน์  ', 'พัชรดิษฐ์ฐากุล', 'ไอซ์', 'ไทย', '19/05/90', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0003', 'MGT', 'พนักงานรายวัน', '01/06/13', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1004', 'นาง', 'นางทัศนีย์', 'มัลลิกาพิพัฒน์', 'ตาล', 'ไทย', '15/11/82', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0004', 'ADM', 'พนักงานรายวัน', '01/06/13', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1005', 'นาย', 'ประพันธ์ ', 'วงษ์อุบล', 'พันธ์', 'ไทย', '01/05/71', 'Male', NULL, '0005', 'OPT', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1007', 'น.ส.', 'กัลฐิกา', 'บุญเปรื่อง', 'ฟาง', 'ไทย', '20/11/85', 'Female', NULL, '0010', 'ADM', 'รายเดือน', '05/08/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1008', 'นาย', 'นนท์ตการ', 'มัลลิกาพิพัฒน์', 'มิกซ์', 'ไทย', '30/11/76', 'Male', NULL, '0007', 'ADM', 'รายเดือน', '01/01/11', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1009', 'นาย', 'เกษม', 'พิมพ์จันทร์', 'เกษม', 'ไทย', '23/07/69', 'Male', NULL, '0007', 'ADM', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1010', 'นาย', 'ธนพล', 'จันมีชัย', 'ทอง', 'ไทย', '05/10/60', 'Male', NULL, '0016', 'OPT', 'รายเดือน', '08/07/13', '20/02/16', 'ไล่ออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1011', 'นาย', 'อุทัย', 'ทองเฟื้อง', 'ทัย', 'ไทย', '28/10/81', 'Male', NULL, '0009', 'OPT', 'รายวัน', '21/07/06', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1013', 'นาย', 'Soe Win Than', '', 'แสน', 'พม่า', '04/02/84', 'Male', NULL, '0009', 'OPT', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1014', 'นาง', 'Zar Ni Tun', '', 'ปู', 'พม่า', '17/08/83', 'Female', NULL, '0009', 'OPT', 'รายวัน', '26/02/13', '31/10/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1015', 'นาย', 'Aw Lan', '', 'ชาติ', 'พม่า', '30/04/86', 'Male', NULL, '0009', 'OPT', 'รายวัน', '02/12/13', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1016', 'น.ส.', 'Mi Yin Thein', '', 'นุ้ย', 'พม่า', '06/05/87', 'Female', NULL, '0009', 'OPT', 'รายวัน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1017', 'น.ส.', 'Kyi Kyi Nyan', '', 'สา', 'พม่า', '19/04/95', 'Female', NULL, '0009', 'OPT', 'รายวัน', '14/03/16', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1019', 'นาย', 'Aung Tin', '', 'อ๋อง', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1020', 'นาย', 'Zin Maung Htun', '', 'ซี', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '13/08/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1021', 'นาย', 'Tun Kyaw', '', 'ทุนโจ', 'พม่า', '29/05/84', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1022', 'นาย', 'Hlawn Moe Naing', '', 'นาย', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/02/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1023', 'นาย', 'Zaw Moe', '', 'ซอม', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1024', 'นาง', 'พูมะลี', 'สิริปันยา', 'เจ', 'ลาว', '06/11/73', 'Female', NULL, '0009', 'OPT', 'รายวัน', '01/06/09', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1025', 'นาย', 'นาริน', 'กีม', 'นาริน', 'เขมร', '13/07/78', 'Male', NULL, '0009', 'OPT', 'รายวัน', '07/10/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1026', 'นาย', 'Foe Sae', '', 'โพ', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1027', 'นาย', 'Maung Kyaw', '', 'ม่องโจ', 'พม่า', '12/02/87', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1028', 'น.ส.', 'เพ็ญโสม ', 'ใจวงค์', 'แคท', 'ไทย', '31/08/90', 'Female', NULL, '0006', 'PJT', 'รายเดือน', '01/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1029', 'นาย', 'Myat San', '', 'ซ่า', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '15/01/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1030', 'นาย', 'เอ๊าท์', ' เม็ท', 'เอ๊าท์', 'เขมร', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '05/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1031', 'นาย', 'เล็ท', ' เม็ท', 'เล็ท', 'เขมร', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '22/01/15', '04/04/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1032', 'นาย', 'มิน', '', 'มิน', 'เขมร', '11/02/75', 'Male', NULL, '0009', 'OPT', 'รายวัน', '05/01/16', '', 'ทดลองงาน', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1033', 'นาย', 'จักรพันธ์', 'นาคนชม', 'โต้', 'ไทย', '29/01/91', 'Male', NULL, '0011', 'ADM', 'รายเดือน', '07/05/15', '01/07/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1034', 'นาย', 'สมพงศ์  ', 'นันทไพบูลย์', 'สมพงศ์', 'ไทย', '11/12/52', 'Male', NULL, '0012', 'ADM', 'รายเดือน', '01/04/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1035', 'น.ส.', 'ทอง', 'ทองทา', 'ทอง', 'ไทย', '25/01/54', 'Female', NULL, '0013', 'ADM', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1036', 'นาย', 'Way Lin Tun', '', '', 'พม่า', '08/11/89', 'Male', NULL, '0009', 'OPT', 'รายวัน', '24/08/15', '17/09/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1037', 'นาย', 'อัศวเทพ ', 'เริงสำราญ', 'พฤกษ์', 'ไทย', '12/12/90', 'Male', NULL, '0014', 'PJT', 'รายเดือน', '01/09/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1038', 'นาย', 'ทักษ์ดนัย', 'ชวาลารัตน์', 'ทักษ์', 'ไทย', '22/08/92', 'Male', NULL, '0015', 'OPT', 'รายเดือน', '16/11/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1039', 'น.ส.', 'Kimsean', 'Sem', 'เซียน', 'เขมร', '16/03/87', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'รายวัน', '05/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1041', 'นาย', 'ปอย', '', 'ปอย', 'เขมร', '04/04/91', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'รายวัน', '13/01/16', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1042', 'นาย', 'ดอนสาม', '', '', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'รายวัน', '9/6/2016', '', 'ทดลองงาน', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '');
 /*!40000 ALTER TABLE `hr_employee_data` ENABLE KEYS */;
 
 
@@ -1219,31 +1219,58 @@ CREATE TABLE IF NOT EXISTS `hr_position` (
   `position_obj` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `job_grade` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `job_group` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `active` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.hr_position: ~17 rows (approximately)
 DELETE FROM `hr_position`;
 /*!40000 ALTER TABLE `hr_position` DISABLE KEYS */;
-INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`, `position_obj`, `job_grade`, `job_group`) VALUES
-	('0001', 'President', 'Management', '', NULL, NULL, NULL),
-	('0002', 'Vice President', 'Management', 'President', NULL, NULL, NULL),
-	('0003', 'Corporate Director', 'Management', 'Vice President', NULL, NULL, NULL),
-	('0004', 'Account Cashier', 'Administrative', 'General Manager', NULL, NULL, NULL),
-	('0005', 'Operation Manager', 'Operation', 'Corporate Director', NULL, NULL, NULL),
-	('0006', 'Sales Project Representative', 'Project', 'Corporate Director', NULL, NULL, NULL),
-	('0007', 'Messenger', 'Administrative', 'Account Cashier', NULL, NULL, NULL),
-	('0008', 'Scaffold Inspector', 'Operation', 'Operation Manager', NULL, NULL, NULL),
-	('0009', 'worker', 'Operation', 'Scaffold Supervisor', NULL, NULL, NULL),
-	('0010', 'General Manager', 'Administrative', 'Corporate Director', NULL, NULL, NULL),
-	('0011', 'Accountant', 'Administrative', 'General Manager', NULL, NULL, NULL),
-	('0012', 'Consultant', NULL, NULL, NULL, NULL, NULL),
-	('0013', 'Maid', NULL, NULL, NULL, NULL, NULL),
-	('0014', 'Project Manager', 'Project', 'Sales Project Representative', NULL, NULL, NULL),
-	('0015', 'Store Officer', 'Factory', 'Operation Manager', NULL, NULL, NULL),
-	('0016', 'Scaffold Supervisor', 'Operation', 'Operation Manager', NULL, NULL, NULL),
-	('0017', 'Scaffolder', 'Operation', 'Scaffold Supervisor', NULL, NULL, NULL);
+INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`, `position_obj`, `job_grade`, `job_group`, `active`) VALUES
+	('0001', 'President', 'MGT', '', NULL, NULL, NULL, 'Y'),
+	('0002', 'Vice President', 'MGT', 'President', NULL, NULL, NULL, 'Y'),
+	('0003', 'Corporate Director', 'MGT', 'Vice President', NULL, NULL, NULL, 'Y'),
+	('0004', 'Account Cashier', 'ADM', 'General Manager', NULL, NULL, NULL, 'Y'),
+	('0005', 'Operation Manager', 'OPT', 'Corporate Director', NULL, NULL, NULL, 'Y'),
+	('0006', 'Sales Project Representative', 'PJT', 'Corporate Director', NULL, NULL, NULL, 'Y'),
+	('0007', 'Messenger', 'ADM', 'Account Cashier', NULL, NULL, NULL, 'Y'),
+	('0008', 'Scaffold Inspector', 'OPT', 'Operation Manager', NULL, NULL, NULL, 'Y'),
+	('0009', 'worker', 'OPT', 'Scaffold Supervisor', NULL, NULL, NULL, 'Y'),
+	('0010', 'General Manager', 'ADM', 'Corporate Director', NULL, NULL, NULL, 'Y'),
+	('0011', 'Accountant', 'ADM', 'General Manager', NULL, NULL, NULL, 'Y'),
+	('0012', 'Consultant', NULL, NULL, NULL, NULL, NULL, 'N'),
+	('0013', 'Maid', NULL, NULL, NULL, NULL, NULL, 'N'),
+	('0014', 'Project Manager', 'PJT', 'Sales Project Representative', NULL, NULL, NULL, 'Y'),
+	('0015', 'Store Officer', 'OPT', 'Operation Manager', NULL, NULL, NULL, 'Y'),
+	('0016', 'Scaffold Supervisor', 'OPT', 'Operation Manager', NULL, NULL, NULL, 'Y'),
+	('0017', 'Scaffolder', 'OPT', 'Scaffold Supervisor', NULL, NULL, NULL, 'Y');
 /*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
+
+
+-- Dumping structure for table cm.inventory_move
+DROP TABLE IF EXISTS `inventory_move`;
+CREATE TABLE IF NOT EXISTS `inventory_move` (
+  `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `partner_id` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invent_move_add1` text COLLATE utf8_unicode_ci,
+  `invent_move_add2` text COLLATE utf8_unicode_ci,
+  `invent_move_subDist` text COLLATE utf8_unicode_ci,
+  `invent_move_Dist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invent_move_Province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invent_move_Postal` int(5) DEFAULT NULL,
+  `invent_move_createDate` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invent_move_Date` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invent_move_type` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invent_move_status` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Index 1` (`partner_id`),
+  CONSTRAINT `FK_inventory_move_partner` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table cm.inventory_move: ~0 rows (approximately)
+DELETE FROM `inventory_move`;
+/*!40000 ALTER TABLE `inventory_move` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventory_move` ENABLE KEYS */;
 
 
 -- Dumping structure for table cm.inventory_wh
@@ -1251,15 +1278,15 @@ DROP TABLE IF EXISTS `inventory_wh`;
 CREATE TABLE IF NOT EXISTS `inventory_wh` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `wh_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `wh_add1` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `wh_add2` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wh_add1` text COLLATE utf8_unicode_ci,
+  `wh_add2` text COLLATE utf8_unicode_ci,
   `wh_subDist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `wh_Dist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `wh_Province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `wh_Postal` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_wh: ~0 rows (approximately)
+-- Dumping data for table cm.inventory_wh: ~2 rows (approximately)
 DELETE FROM `inventory_wh`;
 /*!40000 ALTER TABLE `inventory_wh` DISABLE KEYS */;
 INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`, `wh_Dist`, `wh_Province`, `wh_Postal`) VALUES
@@ -1277,8 +1304,8 @@ CREATE TABLE IF NOT EXISTS `partner` (
   `tel` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Fax` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `add1` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `add2` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `add1` text COLLATE utf8_unicode_ci,
+  `add2` text COLLATE utf8_unicode_ci,
   `SubDist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Dist` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1293,13 +1320,15 @@ CREATE TABLE IF NOT EXISTS `partner` (
   `partner_contactor` longtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `Bank` (`Bank`),
+  KEY `partner` (`id`),
   CONSTRAINT `fk_bank` FOREIGN KEY (`Bank`) REFERENCES `bank` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.partner: ~4 rows (approximately)
+-- Dumping data for table cm.partner: ~5 rows (approximately)
 DELETE FROM `partner`;
 /*!40000 ALTER TABLE `partner` DISABLE KEYS */;
 INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `add1`, `add2`, `SubDist`, `Dist`, `Province`, `Postal`, `Type`, `Bank`, `Acc_name`, `Acc_no`, `Acc_type`, `Acc_branch`, `Sector`, `partner_contactor`) VALUES
+	('000', NULL, 'ลูกค้าทั่วไป', '', '', '', '', '', '', '', '', 0, '["customer"]', 'AGR', '', 0, 'กระแสรายวัน', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('101', NULL, 'บริษัท บีแอนด์เอ็มการชุบ จำกัด', '0123456789', '', '', '20/213 หมู่ 6 ถนนพระราม 2', '', 'คอกกระบือ', 'อำเภอเมืองสมุทรสาคร', 'สมุทรสาคร', 11110, '["customer"]', 'LHB', NULL, 0, 'ฝากประจำ', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('102', NULL, 'เอ.ที. เอ็นจิเนียร์ ซัพพลาย บจก.', '02 925 8485', '', '', '14/1929 หมู่ 13 ตลิ่งชัน ถนนสุพรรณบุรี', '', 'บางบัวทอง', 'บางบัวทอง', 'นนทบุรี', 12310, '["customer"]', 'JPM', NULL, 0, 'ออมทรัพย์', '', 'ธุรกิจการเกษตร‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('103', NULL, ' บริษัท ทาคาโอะ อีสเทิร์น จำกัด', '038 954 670', '', '', '58/1 หมู่ 4 อาคาร นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด', '', 'ปลวกแดง', 'ปลวกแดง', 'ระยอง', 12400, 'null', 'GSB', NULL, 0, 'ออมทรัพย์', '', 'ธุรกิจเงินทุนและหลักทรัพย์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),

@@ -43,15 +43,16 @@
 
 		// For each orgchart box, provide the name, manager, and tooltip to show.
 		<?php 
-				$this->db->SELECT('*');
-				$this->db->FROM('hr_position');
+				$this->db->select("pos.id, pos.position_name, pos.dept_id, pos.position_manager,dept.dept_name");
+				$this->db->from('hr_position as pos');
+				$this->db->join('hr_dept as dept','pos.dept_id = dept.id');
 				$this->db->where('active','Y');
 				$query = $this->db->get()->result();
 
 				echo 'data.addRows([';
 
 				foreach ($query as $row) {
-					echo "[{v:'".$row->position_name."',f:'<big><strong>".$row->position_name."</strong></big><p>".$row->dept_id."</p>'},
+					echo "[{v:'".$row->position_name."',f:'<big><strong>".$row->position_name."</strong></big><p>".$row->dept_name."</p>'},
 					'".$row->position_manager."'],";
 				}
 				echo ']);';

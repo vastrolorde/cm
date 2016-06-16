@@ -6,7 +6,7 @@ class HR_Dept_model extends CI_Model {
 	public function getAll($limit,$page){
 		$this->db->limit($limit, $page);
 		$this->db->select("*");
-		$query = $this->db->get("hr_dept");
+		$query = $this->db->get('hr_dept');
 		$this->db->order_by('id', 'ASC');
 
 		if ($query->num_rows() > 0) {

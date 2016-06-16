@@ -18,6 +18,7 @@
   "dependencies": {
     "foundation-sites": "latest",
     "jquery": "^2.2.3",
-    "jquery-mask-plugin": "jQuery-Mask-Plugin#^1.14.0"
+    "jquery-mask-plugin": "jQuery-Mask-Plugin#^1.14.0",
+    "moment": "^2.13.0"
   }
 }

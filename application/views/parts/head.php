@@ -12,6 +12,7 @@
     <script src="<?php echo asset_url().'bower/jquery-ui/jquery-ui.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/js/foundation.accordion.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/moment/moment.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/jquery-mask-plugin/dist/jquery.mask.js'; ?>"></script>
     <?php
       if(isset($mask)){
@@ -19,9 +20,6 @@
       }
     ?>
 
-    <style type="text/css">
-    
-    </style>
   </head>
   <body>
  
@@ -52,7 +50,7 @@
         <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
         <li><a href="#">สินค้าคงคลัง</a>
             <ul class="vertical menu nested">
-              <li><a href="<?php echo site_url().'/Inventory'; ?>">รายการเคลื่อนไหวสินค้าคงคลัง</a></li>
+              <li><a href="<?php echo site_url().'/Inventory/Inventory'; ?>">รายการเคลื่อนไหวสินค้าคงคลัง</a></li>
               <li><a href="<?php echo site_url().'/Product'; ?>">สินค้า</a></li>
               <li><a href="<?php echo site_url().'/Inventory/Warehouse'; ?>">คลังสินค้า</a></li>
               <li></li>

@@ -213,6 +213,9 @@ class Partner extends CI_Controller {
 		redirect('/partner');
 	}
 
+	/******			Others			******/
+	//Autocomplete Partner Lookup
+	
 	public function lookup(){
 		$keyword = $this->input->post('search');
 		$query = $this->partner_m->lookup($keyword);
