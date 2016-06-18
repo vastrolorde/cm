@@ -35,7 +35,7 @@
 
 
 			$('.address input').attr('readonly','readonly');
-			$('.wherehouse').hide();
+			$('.warehouse').hide();
 
 			$('input[name="invent_move_add1"]').val('test2');
 			$('input[name="invent_move_add2"]').val('test2');
@@ -48,7 +48,7 @@
 			var address = $('#delivery_add').val();
 
 			if(address == '!sameAdd'){
-				$('.wherehouse').hide();
+				$('.warehouse').hide();
 				$('input[name="invent_move_add1"]').val('').removeAttr('readonly');
 				$('input[name="invent_move_add2"]').val('').removeAttr('readonly');
 				$('input[name="invent_move_subDist"]').val('').removeAttr('readonly');
@@ -58,7 +58,7 @@
 			}else if(address == 'sameAdd'){
 				$('.address input').attr('readonly','readonly');
 
-				$('.wherehouse').hide();
+				$('.warehouse').hide();
 				$('input[name="invent_move_add1"]').val('test2');
 				$('input[name="invent_move_add2"]').val('test2');
 				$('input[name="invent_move_subDist"]').val('test2');
@@ -68,7 +68,28 @@
 			}else if(address == 'compAdd'){
 				$('.address input').attr('readonly','readonly');
 
-				$('.wherehouse').show();
+				$('#warehouse').autocomplete({
+					source: function(request, response) {
+						$.ajax({
+							url: "<?php echo site_url().'/Inventory/Inventory/warehouse'; ?>",
+							data: $('#warehouse').val(),
+							dataType: "json",
+							type: "POST",
+							success: function (data) {
+								console.log(data);
+								// response($.map(data,function (value) {
+								// 	return {
+								// 		'label': value.wh_nameid,
+								// 		'value': value.id
+								// 	};
+								// }))
+							}
+						});
+					},
+					minLength: 3
+				});
+
+				$('.warehouse').show();
 				$('input[name="invent_move_add1"]').val('93 ซอยอุดมสุข 51');
 				$('input[name="invent_move_add2"]').val('ถนนสุขุมวิท 103');
 				$('input[name="invent_move_subDist"]').val('บางจาก');

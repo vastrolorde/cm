@@ -56,7 +56,7 @@ class Inventory extends CI_Controller {
 		$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
 		$data['result'] = $this->Inventory_m->getAll($config['per_page'],$page);
 		$data['pagination'] = $this->pagination->create_links();
-		$data['partner'] = $this->partnerSearch();
+		$data['partner'] = $this->partner('all');
 
 		$this->load->View('parts/head',$data);
 		$this->load->view('Inventory/Inventory_move_list',$data);
@@ -81,7 +81,8 @@ class Inventory extends CI_Controller {
 			<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/create').'">พิมพ์รายงาน</a></li>';
 		$data['data'] = $this->Inventory_m->get($id);
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
-		$data['partner'] = $this->partnerSearch();
+		$data['partner'] = $this->partner('all');
+		$data['warehouse'] = $this->warehouse('all');
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('Inventory/Inventory_move_form',$data);
@@ -130,12 +131,24 @@ class Inventory extends CI_Controller {
 	}
 
 	/******			Others			******/
-	//Autocomplete Partner Lookup
-	public function partnerSearch()
+	//partner data
+	public function partner($data)
 	{
-		$keyword = $this->input->post('search');
-		$result = $this->Inventory_m->lookup($keyword);
+		$result = $this->Inventory_m->partner($data);
+		return $result;
+	}
 
+	//product data
+	public function product($data)
+	{
+		$result = $this->Inventory_m->product($data);
+		return $result;
+	}
+
+	//warehouse data
+	public function warehouse($data)
+	{
+		$result = $this->Inventory_m->warehouse($data);
 		return $result;
 	}
 

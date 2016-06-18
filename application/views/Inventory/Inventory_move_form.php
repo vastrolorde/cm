@@ -71,8 +71,9 @@ amount => จำนวน
           }
 
           echo form_label('ลูกค้า')
-              .form_error('partner_id')
               .form_dropdown('partner_id',$partner_list);
+
+
         ?>
 
         <!-- ที่อยู่ในการรับส่งสินค้า -->
@@ -84,11 +85,22 @@ amount => จำนวน
             <option value="compAdd">มารับที่บริษัท</option>
           </select>
           
-          <label class="wherehouse">โกดัง</label>
-          <select class="wherehouse">
-            <option>wh1</option>
-            <option>wh2</option> 
-          </select>
+          <?php
+
+            $i = 0;
+            foreach ($warehouse as $key) {
+              $warehouse_list[$warehouse[$i]['id']] = $warehouse[$i]['wh_name'];
+              $i++;
+            }
+
+            $label_attr = array(
+                'class' => 'warehouse'
+              );
+
+            echo form_label('โกดัง','invent_move_wh',$label_attr)
+                .form_dropdown('invent_move_wh',$warehouse_list,'','id="warehouse" class="warehouse"');
+
+          ?>
 
           <div class="row">
             <div class="large-12 columns address">

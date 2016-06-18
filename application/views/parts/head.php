@@ -41,7 +41,7 @@
 
 </div>
 
-<div class="row">
+<div class="row full-width">
   <div class="medium-3 columns">
 
       <ul class="vertical menu" data-accordion-menu>

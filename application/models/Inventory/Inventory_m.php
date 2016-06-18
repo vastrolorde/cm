@@ -43,17 +43,56 @@ class Inventory_m extends CI_Model {
 
 
 	/******			Others			******/
-	//Autocomplete Count all Transaction
+	//Count all Transaction
 	public function countAll(){
 		$result = $this->db->count_all('Inventory_move');
 		return $result;
 	}
-	//Autocomplete Partner Lookup
-	public function lookup($keyword){
-		$this->db->select('*');
-		$this->db->from('partner');
-		$this->db->like("partner_name",$keyword);
-		return $this->db->get()->result_array();
+
+	//partner data
+	public function partner($data){
+		if($data == 'all'){
+			$this->db->select('*');
+			$this->db->from('partner');
+		}else{
+			$this->db->select('*');
+			$this->db->from('partner');
+			$this->db->where('id',$data);
+		}
+
+		$result = $this->db->get();
+		return $result->result_array();
 	}
+
+
+	public function product($data){
+		if($data == 'all'){
+			$this->db->select('*');
+			$this->db->from('product');
+		}else{
+			$this->db->select('*');
+			$this->db->from('product');
+			$this->db->where('id',$data);
+		}
+
+		$result = $this->db->get();
+		return $result->result_array();
+	}
+
+
+	public function warehouse($data){
+		if($data == 'all'){
+			$this->db->select('*');
+			$this->db->from('inventory_wh');
+		}else{
+			$this->db->select('*');
+			$this->db->from('inventory_wh');
+			$this->db->where('id',$data);
+		}
+
+		$result = $this->db->get();
+		return $result->result_array();
+	}
+
 
 }
