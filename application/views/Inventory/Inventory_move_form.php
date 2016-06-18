@@ -59,93 +59,154 @@ amount => จำนวน
 
     <div class="row">
       <div class="large-6 columns">
-      <?php
-        $i = 0;
-        foreach ($partner as $key) {
-          $partner_list[$partner[$i]['id']] = $partner[$i]['partner_name'];
-          $i++;
-        }
+        <fieldset class="fieldset">
 
-        echo form_label('ลูกค้า')
-            .form_error('partner_id')
-            .form_dropdown('partner_id',$partner_list);
-      ?>
+        <legend>ที่อยู่ในการรับส่งสินค้า</legend>
 
-        <!-- ที่อยู่ในการรับส่งสินค้า -->
+        <?php
+          $i = 0;
+          foreach ($partner as $key) {
+            $partner_list[$partner[$i]['id']] = $partner[$i]['partner_name'];
+            $i++;
+          }
 
-        <h5>ที่อยู่ในการรับส่งสินค้า</h5>
-
-        <select name="delivery_add" id="delivery_add">
-          <option type="!sameAdd">ที่จัดส่งคนละที่กับของลูกค้า</option>
-          <option type="sameAdd" selected="selected">ตามที่อยู่ของลูกค้า</option>
-          <option type="comAdd">มารับที่บริษัท</option>
-        </select>
-
-      <?php
-
-
-        echo form_label('ที่อยู่ 1')
-            .form_error('invent_move_add1')
-            .form_input('invent_move_add1','','class="delivery_to"');
-        echo form_label('ที่อยู่ 2')
-            .form_error('invent_move_add2')
-            .form_input('invent_move_add2','','class="delivery_to"');
+          echo form_label('ลูกค้า')
+              .form_error('partner_id')
+              .form_dropdown('partner_id',$partner_list);
         ?>
 
-        <div class="row">
-          <div class="large-6 columns">
-            <?php
-            echo form_label('แขวง/ตำบล')
-                .form_error('invent_move_subDist')
-                .form_input('invent_move_subDist','','class="delivery_to"');
-            echo form_label('อำเภอ/เขต')
-                .form_error('invent_move_Dist')
-                .form_input('invent_move_Dist','','class="delivery_to"');
-            ?>
-          </div>
-          <div class="large-6 columns">
-            <?php
-            echo form_label('จังหวัด')
-                .form_error('invent_move_Province')
-                .form_input('invent_move_Province','','class="delivery_to"');
-            echo form_label('รหัสไปรษณีย์')
-                .form_error('invent_move_Postal')
-                .form_input('invent_move_Postal','','class="delivery_to"');
-            ?>
-          </div>
-        </div>
+        <!-- ที่อยู่ในการรับส่งสินค้า -->
+          
+          <label>ที่อยู่ในการจัดส่ง</label>
+          <select name="delivery_add" id="delivery_add">
+            <option value="!sameAdd">ที่จัดส่งคนละที่กับของลูกค้า</option>
+            <option value="sameAdd" selected="selected">ตามที่อยู่ของลูกค้า</option>
+            <option value="compAdd">มารับที่บริษัท</option>
+          </select>
+          
+          <label class="wherehouse">โกดัง</label>
+          <select class="wherehouse">
+            <option>wh1</option>
+            <option>wh2</option> 
+          </select>
 
+          <div class="row">
+            <div class="large-12 columns address">
+
+            <?php
+              echo form_label('ที่อยู่ 1')
+                  .form_error('invent_move_add1')
+                  .form_input('invent_move_add1');
+              echo form_label('ที่อยู่ 2')
+                  .form_error('invent_move_add2')
+                  .form_input('invent_move_add2');
+              ?>
+
+              <div class="row">
+                <div class="large-6 columns">
+                  <?php
+                  echo form_label('แขวง/ตำบล')
+                      .form_error('invent_move_subDist')
+                      .form_input('invent_move_subDist');
+                  echo form_label('อำเภอ/เขต')
+                      .form_error('invent_move_Dist')
+                      .form_input('invent_move_Dist');
+                  ?>
+                </div>
+                <div class="large-6 columns">
+                  <?php
+                  echo form_label('จังหวัด')
+                      .form_error('invent_move_Province')
+                      .form_input('invent_move_Province');
+                  echo form_label('รหัสไปรษณีย์')
+                      .form_error('invent_move_Postal')
+                      .form_input('invent_move_Postal');
+                  ?>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </fieldset>
       </div>
 
-        <!-- ที่อยู่ในการรับส่งสินค้า -->
+        <!-- ข้อมูลเอกสาร -->
 
       <div class="large-6 columns text-right">
-        <h5>ข้อมูลเอกสาร</h5>
-        
-        <div class="row">
-          <div class="large-6 columns">
-            <b>id:</b><br />
-            <b>วันที่เอกสาร:</b><br />
-            <b>ชนิดรายการ:</b><br />
+        <fieldset class="fieldset">
+          <legend>ข้อมูลเอกสาร</legend>
 
-          </div>
-          <div class="large-6 columns">
             <?php
-              echo $data[0]->id.'<br />';
-              echo $data[0]->invent_move_createDate.'<br />';
-
-
-              if($data[0]->invent_move_type == 'recieve'){
-                echo 'รับสินค้า<br />';
-              }elseif($data[0]->invent_move_type == 'deliver'){
-                echo 'ส่งสินค้า<br />';
-              }
-
-              
+              $id                     = $data[0]->id;
+              $invent_move_createDate = $data[0]->invent_move_createDate;
+              $invent_move_type       = $data[0]->invent_move_type;
             ?>
-          </div>
-        </div>
 
+          <div class="row">
+            <div class="large-6 columns">
+              <label class="middle"><b>id:</b></label>
+            </div>
+            <div class="large-6 columns">
+              <?php
+                echo form_input('id',$id,'readonly');
+              ?>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="large-6 columns">
+              <label class="middle"><b>วันที่เอกสาร:</b></label>
+            </div>
+            <div class="large-6 columns">
+              <?php
+                echo form_input('id',$invent_move_createDate,'readonly');
+              ?>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="large-6 columns">
+              <label class="middle"><b>ชนิดรายการ:</b></label>
+
+            </div>
+            <div class="large-6 columns">
+              <?php
+                $id                     = $data[0]->id;
+                $invent_move_createDate = $data[0]->invent_move_createDate;
+                $invent_move_type       = $data[0]->invent_move_type;
+
+
+                if($invent_move_type == 'recieve'){
+                  echo form_input('invent_move_type','รับสินค้า','readonly');
+                }elseif($invent_move_type == 'deliver'){
+                  echo form_input('invent_move_type','ส่งสินค้า','readonly');
+                }
+              ?>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="large-6 columns">
+              <label class="middle"><b>สถานะรายการ:</b></label>
+            </div>
+            <div class="large-6 columns">
+              <?php
+                $tr_status = array(
+                  'draft' => 'ร่างเอกสาร',
+                  'process' => 'กำลังเตรียมการ',
+                  'done' => 'ดำเนินการแล้ว',
+                  'cancel' =>'ยกเลิก'
+                  );
+
+                $status = $data[0]->invent_move_status;
+
+                echo form_dropdown('invent_move_status',$tr_status,$status);
+              ?>
+            </div>
+          </div>
+
+        </fieldset>
       </div>
     </div>
 
@@ -156,13 +217,14 @@ amount => จำนวน
           
           <div class="row">
             <div class="large-6 columns">
-              <input type="text" name="product_id" placeholder="รายการสินค้า">
+              <input type="text" id="product_id" name="product_id[]" placeholder="รายการสินค้า">
             </div>
             <div class="large-4 columns">
-              <input type="number" name="amount" placeholder="จำนวน">
+              <input type="number" id="amount" name="amount[]" placeholder="จำนวน">
+              <input type="hidden" id="weight" name="weight[]">
             </div>
             <div class="large-2 columns">
-              <a class="button">Add</a>
+              <a class="button" id="addProductRow">Add</a>
             </div>
           </div>
           
@@ -178,6 +240,7 @@ amount => จำนวน
                 </tr>
               </thead>
               <tbody id="inventory_transaction">
+                <tr></tr>
               </tbody>
             </table>
           </div>

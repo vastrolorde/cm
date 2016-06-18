@@ -61,8 +61,7 @@
 
               echo form_label('partner *')
                   .form_error('id')
-                  .form_input('id',$partner_id,'disabled')
-                  .form_hidden('id',$partner_id);
+                  .form_input('id',$partner_id,'readonly');
               echo form_label('ชื่อ partner *')
                   .form_error('partner_name')
                   .form_input('partner_name',$partner_name);

@@ -54,7 +54,6 @@ class Inventory_m extends CI_Model {
 		$this->db->from('partner');
 		$this->db->like("partner_name",$keyword);
 		return $this->db->get()->result_array();
-
 	}
 
 }

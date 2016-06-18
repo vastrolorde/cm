@@ -63,8 +63,7 @@ wh_Postal   => รหัสไปรษณีย์
 
               echo form_label('รหัสคลังสินค้า *')
                   .form_error('id')
-                  .form_input('id',$id,'disabled')
-                  .form_hidden('id',$id);
+                  .form_input('id',$id,'readonly');
               echo form_label('ชื่อคลังสินค้า *')
                   .form_error('wh_name')
                   .form_input('wh_name',$wh_name);

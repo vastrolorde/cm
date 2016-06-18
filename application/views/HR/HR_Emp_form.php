@@ -103,8 +103,7 @@ emp_truck_license_exp
                   $id = $data[0]->id;
 
                   echo form_label('รหัสพนักงาน *')
-                      .form_input('id',$id,'disabled')
-                      .form_hidden('id',$id);
+                      .form_input('id',$id,'readonly');
                 }else{
                   echo form_label('รหัสพนักงาน *')
                       .form_error('id')

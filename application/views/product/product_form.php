@@ -77,8 +77,7 @@
 
             echo form_label('product code *')
                 .form_error('product_id')
-                .form_input('product_id',$product_id,'disabled')
-                .form_hidden('product_id',$product_id);
+                .form_input('product_id',$product_id,'readonly');
             echo form_label('หน่วยนับ *')
                 .form_error('product_unit')
                 .form_input('product_unit',$product_unit);

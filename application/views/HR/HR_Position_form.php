@@ -61,8 +61,7 @@
             $dept_id = $data[0]->dept_id;
 
             echo form_label('รหัสตำแหน่ง')
-                .form_input('id',$id,'disabled')
-                .form_hidden('id',$id);
+                .form_input('id',$id,'readonly');
             echo form_label('แผนก')
                 .form_error('dept_id')
                 .form_dropdown('dept_id',$dept_list,$dept_id);

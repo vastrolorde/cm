@@ -76,9 +76,9 @@ class Inventory extends CI_Controller {
 		$data['title'] = 'ใบรับ/เบิกสินค้า';
 		$data['execute'] = 
 			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('/HR/Dept').'">ยกเลิก</a></li>
-			<li><a class="button hollow alert delitem" href="'.site_url('/HR/Dept/delete').'/'.$id.'">ลบ</a></li>
-			<li><a class="button hollow" href="'.site_url('/HR/Dept/create').'">พิมพ์รายงาน</a></li>';
+			<li><a class="button hollow warning" href="'.site_url('/Inventory/Inventory').'">ยกเลิก</a></li>
+			<li><a class="button hollow alert delitem" href="'.site_url('/Inventory/Inventory/delete').'/'.$id.'">ลบ</a></li>
+			<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/create').'">พิมพ์รายงาน</a></li>';
 		$data['data'] = $this->Inventory_m->get($id);
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 		$data['partner'] = $this->partnerSearch();
@@ -120,7 +120,7 @@ class Inventory extends CI_Controller {
 			redirect('/Inventory/Inventory/data/'.$id);
 		}else{
 
-			$this->create();
+			$this->data($id);
 		}
 	}
 
