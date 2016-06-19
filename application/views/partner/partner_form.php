@@ -133,27 +133,37 @@
           <div class="large-6 columns">
 
         <?php
-          
+
+          $i = 0;
+          foreach($Province_all as $key){
+            $Province_list[$Province_all[$i]['Province_ID']] = $Province_all[$i]['Province_NAME'];
+
+            $i++;
+          }
+
+          $subDist_list = array(
+            'blank' => 'กรุณาเลือกแขวง/ตำบล'
+            );
+
           if(isset($data)){
             //Assign Variable
             $add1 = $data[0]->add1;
             $SubDist = $data[0]->SubDist;
             $Province = $data[0]->Province;
 
-
             echo form_label('ที่อยู่')
                 .form_input('add1',$add1);
             echo form_label('แขวง/ตำบล')
-                .form_input('SubDist',$SubDist);
+                .form_dropdown('SubDist',$subDist_list,$SubDist,'id="SubDist"');
             echo form_label('จังหวัด')
-                .form_input('Province',$Province);
+                .form_dropdown('Province',$Province_list,$Province,'id="Province"');
           }else{
             echo form_label('ที่อยู่')
                 .form_input('add1');
             echo form_label('แขวง/ตำบล')
-                .form_input('SubDist');
+                .form_dropdown('SubDist',$subDist_list,'','id="SubDist"');
             echo form_label('จังหวัด')
-                .form_input('Province');
+                .form_dropdown('Province',$Province_list,'','id="Province"');
           }
         ?>
           </div>
@@ -161,6 +171,11 @@
 
         <?php
           
+          $Dist_list = array(
+            'blank' => 'กรุณาเลือกเขต/อำเภอ'
+            );
+
+
           if(isset($data)){
             //Assign Variable
             $add2 = $data[0]->add2;
@@ -171,14 +186,14 @@
             echo form_label('ที่อยู่2')
                 .form_input('add2',$add2);
             echo form_label('เขต/อำเภอ')
-                .form_input('Dist',$Dist);
+                .form_dropdown('Dist',$Dist_list,$Dist,'id="Dist"');
             echo form_label('รหัสไปรษณีย์')
                 .form_input('Postal',$Postal);
           }else{
             echo form_label('ที่อยู่2')
                 .form_input('add2');
             echo form_label('เขต/อำเภอ')
-                .form_input('Dist');
+                .form_dropdown('Dist',$Dist_list,'','id="Dist"');
             echo form_label('รหัสไปรษณีย์')
                 .form_error('Postal')
                 .form_input('Postal');

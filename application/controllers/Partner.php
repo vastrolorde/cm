@@ -69,11 +69,15 @@ class Partner extends CI_Controller {
 
 	public function create()
 	{
+		$this->load->model('others/Province_m','Province'); //Province Plugin
+
+
 		$data['title'] = 'สร้าง Partner ใหม่';
 		$data['execute'] = 
 			'<li><input class="button hollow success" type="submit"></li>
 			<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
 			<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
+		$data['Province_all'] = $this->Province->province(); //Province Plugin
 		$data['bank'] = $this->partner_m->bank();
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
@@ -86,6 +90,8 @@ class Partner extends CI_Controller {
 
 	public function data($id)
 	{
+		$this->load->model('others/Province_m','Province'); //Province Plugin
+
 		$data['title'] = 'แก้ไข Partner';
 		$data['execute'] = 
 			'<li><input class="button hollow success" type="submit"></li>
@@ -93,6 +99,7 @@ class Partner extends CI_Controller {
 			<li><a class="button hollow alert delitem" href="'.site_url('/partner/delete').'/'.$id.'">ลบ</a></li>
 			<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
 		$data['data'] = $this->partner_m->get($id);
+		$data['Province_all'] = $this->Province->province(); //Province Plugin
 		$data['bank'] = $this->partner_m->bank();
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
