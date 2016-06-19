@@ -34,20 +34,13 @@
 	// change address function
 
 
-			$('.address input').attr('readonly','readonly');
 			$('.warehouse').hide();
-
-			$('input[name="invent_move_add1"]').val('test2');
-			$('input[name="invent_move_add2"]').val('test2');
-			$('input[name="invent_move_subDist"]').val('test2');
-			$('input[name="invent_move_Dist"]').val('test2');
-			$('input[name="invent_move_Province"]').val('test2');
-			$('input[name="invent_move_Postal"]').val('test2');
 
 		$('#delivery_add').change(function(){
 			var address = $('#delivery_add').val();
 
 			if(address == '!sameAdd'){
+
 				$('.warehouse').hide();
 				$('input[name="invent_move_add1"]').val('').removeAttr('readonly');
 				$('input[name="invent_move_add2"]').val('').removeAttr('readonly');
@@ -55,47 +48,105 @@
 				$('input[name="invent_move_Dist"]').val('').removeAttr('readonly');
 				$('input[name="invent_move_Province"]').val('').removeAttr('readonly');
 				$('input[name="invent_move_Postal"]').val('').removeAttr('readonly');
+			
 			}else if(address == 'sameAdd'){
-				$('.address input').attr('readonly','readonly');
 
+				$('.address input').attr('readonly','readonly');
 				$('.warehouse').hide();
-				$('input[name="invent_move_add1"]').val('test2');
-				$('input[name="invent_move_add2"]').val('test2');
-				$('input[name="invent_move_subDist"]').val('test2');
-				$('input[name="invent_move_Dist"]').val('test2');
-				$('input[name="invent_move_Province"]').val('test2');
-				$('input[name="invent_move_Postal"]').val('test2');
-			}else if(address == 'compAdd'){
-				$('.address input').attr('readonly','readonly');
+				
+				// var partner =  $('#partner_id').val();
 
-				$('#warehouse').autocomplete({
-					source: function(request, response) {
-						$.ajax({
-							url: "<?php echo site_url().'/Inventory/Inventory/warehouse'; ?>",
-							data: $('#warehouse').val(),
+				$.ajax({
+							url: "<?php echo site_url().'/Inventory/Inventory/partner_get'; ?>",
+							data: {
+								pid : $('#partner_id').val()
+							},
 							dataType: "json",
 							type: "POST",
 							success: function (data) {
 								console.log(data);
-								// response($.map(data,function (value) {
-								// 	return {
-								// 		'label': value.wh_nameid,
-								// 		'value': value.id
-								// 	};
-								// }))
+								$.each(data,function(key,value){
+									$('input[name="invent_move_add1"]').val(value['add1']);
+									$('input[name="invent_move_add2"]').val(value['add2']);
+									$('input[name="invent_move_subDist"]').val(value['subDist']);
+									$('input[name="invent_move_Dist"]').val(value['Dist']);
+									$('input[name="invent_move_Province"]').val(value['Province']);
+									$('input[name="invent_move_Postal"]').val(value['Postal']);
+								});
+   
+							},
+							error: function (request, status, error) {
+								console.log(error);
+								console.log(status);
+								console.log(request);
 							}
 						});
-					},
-					minLength: 3
+
+				$('#partner_id').on('change',function(){
+
+					$.ajax({
+						url: "<?php echo site_url().'/Inventory/Inventory/partner_get'; ?>",
+						data: {
+							pid : $('#partner_id').val()
+						},
+						dataType: "json",
+						type: "POST",
+						success: function (data) {
+							console.log(data);
+							$.each(data,function(key,value){
+								$('input[name="invent_move_add1"]').val(value['add1']);
+								$('input[name="invent_move_add2"]').val(value['add2']);
+								$('input[name="invent_move_subDist"]').val(value['subDist']);
+								$('input[name="invent_move_Dist"]').val(value['Dist']);
+								$('input[name="invent_move_Province"]').val(value['Province']);
+								$('input[name="invent_move_Postal"]').val(value['Postal']);
+							});
+
+						},
+						error: function (request, status, error) {
+							console.log(error);
+							console.log(status);
+							console.log(request);
+						}
+					});
+
+
 				});
 
+
+			}else if(address == 'compAdd'){
+
+				$('.address input').attr('readonly','readonly');
 				$('.warehouse').show();
-				$('input[name="invent_move_add1"]').val('93 ซอยอุดมสุข 51');
-				$('input[name="invent_move_add2"]').val('ถนนสุขุมวิท 103');
-				$('input[name="invent_move_subDist"]').val('บางจาก');
-				$('input[name="invent_move_Dist"]').val('พระโขนง');
-				$('input[name="invent_move_Province"]').val('กรุงเทพ');
-				$('input[name="invent_move_Postal"]').val('10260');
+
+				$('#warehouse').on('change',function(){
+
+						$.ajax({
+							url: "<?php echo site_url().'/Inventory/Inventory/warehouse_get'; ?>",
+							data: {
+								warehouse : $('#warehouse').val()
+							},
+							dataType: "json",
+							type: "POST",
+							success: function (data) {
+								console.log(data);
+								$.each(data,function(key,value){
+									$('input[name="invent_move_add1"]').val(value['wh_add1']);
+									$('input[name="invent_move_add2"]').val(value['wh_add2']);
+									$('input[name="invent_move_subDist"]').val(value['wh_subDist']);
+									$('input[name="invent_move_Dist"]').val(value['wh_Dist']);
+									$('input[name="invent_move_Province"]').val(value['wh_Province']);
+									$('input[name="invent_move_Postal"]').val(value['wh_Postal']);
+								});
+   
+							},
+							error: function (request, status, error) {
+								console.log(error);
+								console.log(status);
+								console.log(request);
+							}
+						});
+				});
 			};
 		})
 

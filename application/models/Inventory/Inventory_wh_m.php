@@ -40,11 +40,22 @@ class Inventory_wh_m extends CI_Model {
 		$this->db->where('id',$id);
 		$this->db->delete('Inventory_wh');
 	}
-		// Other
 
+	/******			Others			******/
+
+	//Count all Inventory_wh row
 	public function countAll(){
 		$result = $this->db->count_all('Inventory_wh');
 		return $result;
+	}
+
+
+	//query all Inventory_wh
+	public function wh_all(){
+		$this->db->select('*');
+		$this->db->from('Inventory_wh');
+		$result = $this->db->get();
+		return $result->result_array();
 	}
 
 }

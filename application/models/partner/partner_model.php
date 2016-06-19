@@ -39,28 +39,36 @@ class Partner_model extends CI_Model {
 		$this->db->where('id',$id);
 		$this->db->delete('partner');
 	}
+	
+	/******			Others			******/
 
-	// Other
-
+	//Count all Partner row
 	public function countAll(){
 		$result = $this->db->count_all('partner');
 		return $result;
 	}
 	
+	//query bank
 	public function bank(){
 		$this->db->select();
 		$query = $this->db->get('bank');
 		return $result = $query->result_array();
 	}
-	
-	/******			Others			******/
+
 	//Autocomplete Partner Lookup
 	public function lookup($keyword){
-		// $this->db->query('SELECT partner_name FROM partner WHERE partner_name LIKE '.$keyword);
 		$this->db->select('partner_name');
 		$this->db->from('partner');
 		$this->db->like('partner_name',$keyword);
 		return $this->db->get()->result();
+	}
+
+	//query all partner
+	public function partner_all(){
+		$this->db->select('*');
+		$this->db->from('partner');
+		$result = $this->db->get();
+		return $result->result_array();
 	}
 
 }

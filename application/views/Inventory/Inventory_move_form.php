@@ -70,8 +70,10 @@ amount => จำนวน
             $i++;
           }
 
+          $partner_id = $data[0]->partner_id;
+
           echo form_label('ลูกค้า')
-              .form_dropdown('partner_id',$partner_list);
+              .form_dropdown('partner_id',$partner_list,$partner_id,'id="partner_id"');
 
 
         ?>
@@ -80,8 +82,8 @@ amount => จำนวน
           
           <label>ที่อยู่ในการจัดส่ง</label>
           <select name="delivery_add" id="delivery_add">
-            <option value="!sameAdd">ที่จัดส่งคนละที่กับของลูกค้า</option>
-            <option value="sameAdd" selected="selected">ตามที่อยู่ของลูกค้า</option>
+            <option value="!sameAdd" selected="selected">ที่จัดส่งคนละที่กับของลูกค้า</option>
+            <option value="sameAdd">ตามที่อยู่ของลูกค้า</option>
             <option value="compAdd">มารับที่บริษัท</option>
           </select>
           

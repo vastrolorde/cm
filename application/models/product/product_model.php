@@ -41,14 +41,14 @@ class Product_model extends CI_Model {
 		$this->db->delete('product');
 	}
 
-	// Other
-
+	/******			Others			******/
+	//Count all Transaction
 	public function countAll(){
 		$result = $this->db->count_all('product');
 		return $result;
 	}
 
-
+	//Autocomplete product Lookup
 	public function lookup($keyword){
 		$this->db->select('product_name');
 		$this->db->from('product');
@@ -56,5 +56,12 @@ class Product_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	//query all product
+	public function product_all(){
+		$this->db->select('*');
+		$this->db->from('product');
+		$result = $this->db->get();
+		return $result->result_array();
+	}
 
 }

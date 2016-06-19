@@ -56,7 +56,7 @@ class Inventory extends CI_Controller {
 		$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
 		$data['result'] = $this->Inventory_m->getAll($config['per_page'],$page);
 		$data['pagination'] = $this->pagination->create_links();
-		$data['partner'] = $this->partner('all');
+		$data['partner'] = $this->partner();
 
 		$this->load->View('parts/head',$data);
 		$this->load->view('Inventory/Inventory_move_list',$data);
@@ -81,8 +81,8 @@ class Inventory extends CI_Controller {
 			<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/create').'">พิมพ์รายงาน</a></li>';
 		$data['data'] = $this->Inventory_m->get($id);
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
-		$data['partner'] = $this->partner('all');
-		$data['warehouse'] = $this->warehouse('all');
+		$data['partner'] = $this->partner();
+		$data['warehouse'] = $this->warehouse();
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('Inventory/Inventory_move_form',$data);
@@ -132,24 +132,52 @@ class Inventory extends CI_Controller {
 
 	/******			Others			******/
 	//partner data
-	public function partner($data)
+	public function partner()
 	{
-		$result = $this->Inventory_m->partner($data);
+		$this->load->model('partner/partner_model','partner_m');
+		$result = $this->partner_m->partner_all();
 		return $result;
 	}
 
-	//product data
-	public function product($data)
+	public function partner_get()
 	{
-		$result = $this->Inventory_m->product($data);
+		$partner = $this->input->post('pid');
+
+		$this->db->select("*");
+		$this->db->where("id",$partner);
+		$query = $this->db->get('partner');
+		$result = $query->result();
+
+		echo json_encode($result);
+	}
+
+	//product data
+	public function product()
+	{
+		$this->load->model('product/product_model','product_m');
+		$result = $this->product_m->product_all();
 		return $result;
 	}
 
 	//warehouse data
-	public function warehouse($data)
+	public function warehouse()
 	{
-		$result = $this->Inventory_m->warehouse($data);
+		$this->load->model('Inventory/Inventory_wh_m','wh_m');
+		$result = $this->wh_m->wh_all();
 		return $result;
 	}
+
+	public function warehouse_get()
+	{
+		$warehouse = $this->input->post('warehouse');
+
+		$this->db->select("*");
+		$this->db->where("id",$warehouse);
+		$query = $this->db->get('Inventory_wh');
+		$result = $query->result();
+
+		echo json_encode($result);
+	}
+
 
 }
