@@ -22,10 +22,10 @@ class Province_m extends CI_Model {
 		return $query->result();
 	}
 
-	public function subDist($data)
+	public function SubDist($data)
 	{
 		$this->db->select();
-		$this->db->from('subDist');
+		$this->db->from('subdist');
 		$this->db->where('Dist_ID',$data);
 		$query = $this->db->get();
 		return $query->result();

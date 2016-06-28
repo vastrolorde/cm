@@ -119,6 +119,7 @@ class Position extends CI_Controller {
 			$data = array(
 				'id'           =>	$this->input->post('id'),
 				'position_name'    =>	$this->input->post('position_name'),
+				'active'    =>	$this->input->post('active'),
 				'dept_id'  =>	$this->input->post('dept_id'),
 				'position_manager' =>	$this->input->post('position_manager'),
 				
@@ -138,29 +139,16 @@ class Position extends CI_Controller {
 	{
 
 		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('position_name','ชื่อตำแหน่ง','required');
-
-		if ($this->form_validation->run() == TRUE){
-
 			$data = array(
-				'id'           =>	$this->input->post('id'),
-				'position_name'    =>	$this->input->post('position_name'),
+				'active'    =>	$this->input->post('active'),
 				'dept_id'  =>	$this->input->post('dept_id'),
 				'position_manager' =>	$this->input->post('position_manager'),
-				
 			);
 
 			$this->hr_Position_m->update($data,$id);
 			
 
 			redirect('/HR/Position/');
-		}else{
-
-			$this->data($id);
-		}
 	}
 
 	public function delete($id){

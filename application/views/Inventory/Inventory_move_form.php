@@ -9,12 +9,6 @@
 /*
 
 partner_id => ลูกค้า
-invent_move_add1 => ที่อยู่ 1
-invent_move_add2 => ที่อยู่ 2
-invent_move_subDist => แขวง/ตำบล
-invent_move_Dist => อำเภอ/เขต
-invent_move_Province => จังหวัด
-invent_move_Postal => รหัสไปรษณีย์
 id  =>  เลขที่เอกสาร
 invent_move_createDate  =>  วันที่เอกสาร
 invent_move_Date  =>  วันที่ลูกค้ามารับของ
@@ -79,14 +73,6 @@ amount => จำนวน
         ?>
 
         <!-- ที่อยู่ในการรับส่งสินค้า -->
-          
-          <label>ที่อยู่ในการจัดส่ง</label>
-          <select name="delivery_add" id="delivery_add">
-            <option value="!sameAdd" selected="selected">ที่จัดส่งคนละที่กับของลูกค้า</option>
-            <option value="sameAdd">ตามที่อยู่ของลูกค้า</option>
-            <option value="compAdd">มารับที่บริษัท</option>
-          </select>
-          
           <?php
 
             $i = 0;
@@ -100,47 +86,9 @@ amount => จำนวน
               );
 
             echo form_label('โกดัง','invent_move_wh',$label_attr)
-                .form_dropdown('invent_move_wh',$warehouse_list,'','id="warehouse" class="warehouse"');
+                .form_dropdown('invent_move_wh',$warehouse_list,'','id="warehouse"');
 
           ?>
-
-          <div class="row">
-            <div class="large-12 columns address">
-
-            <?php
-              echo form_label('ที่อยู่ 1')
-                  .form_error('invent_move_add1')
-                  .form_input('invent_move_add1');
-              echo form_label('ที่อยู่ 2')
-                  .form_error('invent_move_add2')
-                  .form_input('invent_move_add2');
-              ?>
-
-              <div class="row">
-                <div class="large-6 columns">
-                  <?php
-                  echo form_label('แขวง/ตำบล')
-                      .form_error('invent_move_subDist')
-                      .form_input('invent_move_subDist');
-                  echo form_label('อำเภอ/เขต')
-                      .form_error('invent_move_Dist')
-                      .form_input('invent_move_Dist');
-                  ?>
-                </div>
-                <div class="large-6 columns">
-                  <?php
-                  echo form_label('จังหวัด')
-                      .form_error('invent_move_Province')
-                      .form_input('invent_move_Province');
-                  echo form_label('รหัสไปรษณีย์')
-                      .form_error('invent_move_Postal')
-                      .form_input('invent_move_Postal');
-                  ?>
-                </div>
-              </div>
-
-            </div>
-          </div>
 
         </fieldset>
       </div>
@@ -231,10 +179,10 @@ amount => จำนวน
           
           <div class="row">
             <div class="large-6 columns">
-              <input type="text" id="product_id" name="product_id[]" placeholder="รายการสินค้า">
+              <input type="text" id="product_id" placeholder="รายการสินค้า">
             </div>
             <div class="large-4 columns">
-              <input type="number" id="amount" name="amount[]" placeholder="จำนวน">
+              <input type="number" id="amount" placeholder="จำนวน">
               <input type="hidden" id="weight" name="weight[]">
             </div>
             <div class="large-2 columns">
@@ -243,7 +191,7 @@ amount => จำนวน
           </div>
           
 
-            <table>
+            <table id="transaction">
               <thead>
                 <tr>
                   <th>#</th>

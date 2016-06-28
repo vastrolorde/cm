@@ -125,9 +125,34 @@ class Inventory extends CI_Controller {
 		}
 	}
 
-	public function edit()
+	public function edit($id)
 	{
+		// --------------- Setting --------------- //
+		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
 
+		// --------------- Validation --------------- //
+		$this->form_validation->set_rules('invent_move_Date', 'วันที่ลูกค้ามารับของ','required');
+
+		if ($this->form_validation->run() == TRUE){
+
+			$data = array(
+				'invent_move_status'     =>	$this->input->post('invent_move_status')
+			);
+
+			$data2 = array(
+				'inventory_move_id' =>	$this->input->post('inventory_move_id'),
+				'product_id'        =>	$this->input->post('product_id'),
+				'amount'            =>	$this->input->post('amount')
+			);
+
+			$this->Inventory_m->create($data,$id);
+			
+
+			redirect('/Inventory/Inventory');
+		}else{
+
+			$this->data($id);
+		}
 	}
 
 	/******			Others			******/
@@ -152,11 +177,15 @@ class Inventory extends CI_Controller {
 	}
 
 	//product data
-	public function product()
-	{
+	//Autocomplete
+	
+	public function product_get(){
+		$product_id = $this->input->post('product_id');
+
 		$this->load->model('product/product_model','product_m');
-		$result = $this->product_m->product_all();
-		return $result;
+		$query = $this->product_m->lookup($product_id);
+
+		echo json_encode($query);
 	}
 
 	//warehouse data

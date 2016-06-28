@@ -21,4 +21,9 @@ class get_th extends CI_Controller {
 		echo json_encode($query);
 	}
 
+	public function SubDist(){
+		$Dist = $this->input->post('Dist');
+		$query = $this->Province_m->SubDist($Dist);
+		echo json_encode($query);
+	}
 }

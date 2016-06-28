@@ -10,6 +10,10 @@
             position_name => ชื่อตำแหน่ง
             dept_id => แผนก
             position_manager => ผู้บังคับบัญชา
+            active => active
+            job_grade => job_grade
+            job_group => job_group
+            position_jd => position_jd
 
 */
 ?>
@@ -46,7 +50,40 @@
       <div class="large-6 columns">
 
         <?php
-       
+
+          if(isset($data)){
+            //Assign Variable
+
+            $id = $data[0]->id;
+            $position_name = $data[0]->position_name;
+            $dept_id = $data[0]->dept_id;
+            $active = $data[0]->active;
+
+            echo '<p><big>รหัสตำแหน่ง : </big>'.$id.' <big>ชื่อตำแหน่ง : </big>'.$position_name.'</p>'
+                .'สถานะตำแหน่ง : '.form_checkbox('active','Y',$active).form_label('active');
+          }else{
+            echo form_label('รหัสตำแหน่ง')
+                .form_input('id')
+                .'สถานะตำแหน่ง: '.form_checkbox('active','Y').form_label('active');
+          }
+        ?>
+
+      </div>
+
+      <div class="large-6 columns">
+        <?php
+
+          if(!isset($data)){
+            echo form_label('ชื่อตำแหน่ง')
+                .form_input('position_name');
+            }
+        ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-6 columns">
+        <?php
 
             $i = 0;
             foreach ($dept as $key) {
@@ -56,48 +93,85 @@
 
           if(isset($data)){
             //Assign Variable
-
-            $id = $data[0]->id;
             $dept_id = $data[0]->dept_id;
+            $job_group = $data[0]->job_group;
 
-            echo form_label('รหัสตำแหน่ง')
-                .form_input('id',$id,'readonly');
             echo form_label('แผนก')
                 .form_error('dept_id')
                 .form_dropdown('dept_id',$dept_list,$dept_id);
+            echo form_label('Job Group')
+                .form_error('job_group')
+                .form_input('job_group',$job_group);
+
           }else{
-            echo form_label('รหัสตำแหน่ง')
-                .form_input('id');
             echo form_label('แผนก')
                 .form_error('dept_id')
                 .form_dropdown('dept_id',$dept_list);
+            echo form_label('Job Grade')
+                .form_error('job_group')
+                .form_input('job_group',$job_group);
           }
         ?>
-
       </div>
-
       <div class="large-6 columns">
         <?php
           
           if(isset($data)){
             //Assign Variable
 
-            $position_name = $data[0]->position_name;
+            
             $position_manager = $data[0]->position_manager;
+            $job_grade = $data[0]->job_grade;
 
-            echo form_label('ชื่อตำแหน่ง')
-                .form_input('position_name',$position_name);
             echo form_label('ผู้บังคับบัญชา')
                 .form_error('position_manager')
                 .form_input('position_manager',$position_manager);
+            echo form_label('Job Grade')
+                .form_error('job_grade')
+                .form_input('job_grade',$job_grade);
           }else{
-            echo form_label('ชื่อตำแหน่ง')
-                .form_input('position_name');
             echo form_label('ผู้บังคับบัญชา')
                 .form_error('position_manager')
                 .form_input('position_manager');
+            echo form_label('Job Grade')
+                .form_error('job_grade')
+                .form_input('job_grade',$job_grade);
+
           }
         ?>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+
+      <div class="row">
+        <div class="large-11 columns">
+            <input type="text" name="">
+        </div>
+        <div class="large-1 columns">
+            <a href="#" class="button">เพิ่ม</a>
+        </div>
+      </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ลำดับ</th>
+              <th>รายละเอียด</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
     </div>
 

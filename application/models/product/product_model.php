@@ -31,7 +31,7 @@ class Product_model extends CI_Model {
 		$this->db->insert('product',$data);
 	}
 
-	public function update($data,$id){
+	public function update($data,$data2,$id){
 		$this->db->where('product_id',$id);
 		$this->db->update('product',$data);
 	}
@@ -50,9 +50,9 @@ class Product_model extends CI_Model {
 
 	//Autocomplete product Lookup
 	public function lookup($keyword){
-		$this->db->select('product_name');
+		$this->db->select();
 		$this->db->from('product');
-		$this->db->like('product_name',$keyword);
+		$this->db->like('product_id',$keyword);
 		return $this->db->get()->result();
 	}
 

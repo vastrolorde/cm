@@ -19,7 +19,7 @@ class Employee extends CI_Controller {
 
 		$config['base_url'] = site_url().'/HR/Employee';
 		$config['total_rows'] = $this->hr_emp_m->countAll();
-		$config['per_page'] = 10;
+		$config['per_page'] = 15;
 		$config['uri_segment'] = 3;
 
 		$config['first_tag_open'] = '<li>';
@@ -112,13 +112,17 @@ class Employee extends CI_Controller {
 		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
 		$this->form_validation->set_message('integer','<code style="color:red;">ช่อง %s ต้องเป็นตัวเลข</code>');
 		$this->form_validation->set_message('valid_email','<code style="color:red;">กรุณาตรวจสอบรูปแบบของ %s อีกครั้ง</code>');
-		$this->form_validation->set_message('exact_length','<code style="color:red;">คุณต้องกรอกข้อมูล 5 ตัวอกษร กรุณาตรวจสอบจำนวนตัวอักษรของ %s อีกครั้ง</code>');
+		$this->form_validation->set_message('exact_length','<code style="color:red;">คุณต้องกรอกข้อมูล 5 ตัวอักษร กรุณาตรวจสอบจำนวนตัวอักษรของ %s อีกครั้ง</code>');
 		$this->form_validation->set_message('regex_match','<code style="color:red;">กรุณาตรวจสอบรูปแบบตัวของ %s อีกครั้ง</code>');
 
 		// --------------- Validation --------------- //
 		$this->form_validation->set_rules('id','ชื่อ partner','required');
 		$this->form_validation->set_rules('emp_fname','ชื่อ','required');
-		$this->form_validation->set_rules('emp_lname','นามสกุล','required');
+
+		if($this->input->post('emp_nation') == 'ไทย'){
+			$this->form_validation->set_rules('emp_lname','นามสกุล','required');
+		}
+
 		$this->form_validation->set_rules('emp_nation','สัญชาติ','required');
 
 		$this->form_validation->set_rules('emp_Postal','รหัสไปรษณีย์','exact_length[5]|integer');
@@ -201,7 +205,11 @@ class Employee extends CI_Controller {
 
 		// --------------- Validation --------------- //
 		$this->form_validation->set_rules('emp_fname','ชื่อ','required');
-		$this->form_validation->set_rules('emp_lname','นามสกุล','required');
+
+		if($this->input->post('emp_nation') == 'ไทย'){
+			$this->form_validation->set_rules('emp_lname','นามสกุล','required');
+		}
+
 		$this->form_validation->set_rules('emp_nation','สัญชาติ','required');
 
 		$this->form_validation->set_rules('emp_Postal','รหัสไปรษณีย์','exact_length[5]|integer');
