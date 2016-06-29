@@ -29,6 +29,38 @@
 			minLength: 3
 		});
 
+	$i = $('#job_description tr').length; //Count Row
+	$('#addJDRow').on('click', function(){
+		
+		if($i>1){
+			$('#job_description tr:last').after(' \
+				<tr> \
+				<td>'+$i+'</td> \
+				<td>' + $("#position_jd").val() + '<input type="hidden" name="position_jd[]" value="'+$("#position_jd").val()+'"></td> \
+				<td><a href="#" class="delJDRow">ลบ</a></td> \
+				</tr>'
+			);
+		} else {
+			$('#job_description tbody').append(' \
+				<tr> \
+				<td>'+$i+'</td> \
+				<td>' + $("#position_jd").val() + '<input type="hidden" name="position_jd[]" value="'+$("#position_jd").val()+'"></td> \
+				<td><a href="#" class="delJDRow">ลบ</a></td> \
+				</tr>'
+			);
+		}
+
+		$("#position_jd").val('');
+
+		$i++;
+	});
+
+	// Delete Product Row
+		$('#job_description').on('click','.delJDRow',function(){
+			$(this).closest('tr').remove();
+		});
+
+
 	});
 
 // Google Chart

@@ -10,7 +10,7 @@
   <div class="top-bar-right">
     <ul class="menu">
       <li><a class="hollow button" href="<?php echo site_url('/HR/Position/create'); ?>">เพิ่ม</a></li>
-      <li><a class="hollow button" href="#">พิมพ์</a></li>
+      <li><a class="hollow button" href="<?php echo site_url('/HR/Position/org_chart'); ?>">พิมพ์</a></li>
       <li>
         <input id="search" type="text" name="search" placeholder="Search">
       </li>
@@ -52,7 +52,7 @@
           <tr>
             <td>'.$i.'</td>
             <td>'.$key->id.'</td>
-            <td>'.$key->position_name.'</td>
+            <td><b>'.$key->position_name.'</b></td>
             <td>'.$key->dept_name.'</td>
             <td>'.$key->position_manager.'</td>
             <td><a href="'.site_url("HR/Position/data/".$key->id).'">Edit</a></td>

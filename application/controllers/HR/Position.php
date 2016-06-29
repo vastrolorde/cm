@@ -8,6 +8,7 @@ class Position extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->model('HR/HR_Position_model','hr_Position_m');
+		$this->load->library('pdf'); // Load library
 	}
 
 	/******			View			******/
@@ -122,7 +123,8 @@ class Position extends CI_Controller {
 				'active'    =>	$this->input->post('active'),
 				'dept_id'  =>	$this->input->post('dept_id'),
 				'position_manager' =>	$this->input->post('position_manager'),
-				
+				'position_purpose' =>	$this->input->post('position_purpose'),
+				'position_jd' =>	json_encode($this->input->post('position_jd'))
 			);
 
 			$this->hr_Position_m->create($data);
@@ -143,6 +145,8 @@ class Position extends CI_Controller {
 				'active'    =>	$this->input->post('active'),
 				'dept_id'  =>	$this->input->post('dept_id'),
 				'position_manager' =>	$this->input->post('position_manager'),
+				'position_purpose' =>	$this->input->post('position_purpose'),
+				'position_jd' =>	json_encode($this->input->post('position_jd'))
 			);
 
 			$this->hr_Position_m->update($data,$id);
@@ -167,4 +171,14 @@ class Position extends CI_Controller {
 		echo json_encode($query);
 
 	}
+
+		// --------------- pdf --------------- //
+
+	public function org_chart(){
+		    // Generate PDF by saying hello to the world
+		$this->load->view('HR/pdf/org_chart');
+
+	}	
+
+
 }

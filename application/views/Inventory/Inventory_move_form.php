@@ -202,8 +202,13 @@ amount => จำนวน
                 </tr>
               </thead>
               <tbody id="inventory_transaction">
-                <tr></tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="text-right">น้ำหนักรวม</td>
+                  <td colspan="2" id="totalweight"><!-- <input  type="number" name="totalweight" readonly> --></td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </div>
