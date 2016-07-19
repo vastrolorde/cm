@@ -153,7 +153,7 @@
             
             $position_purpose = $data[0]->position_purpose;
 
-            echo form_label('วัตถุประสงค์ของตำแหน่ง')
+            echo form_label('<h5>วัตถุประสงค์ของตำแหน่ง</h5>')
                 .form_error('position_purpose')
                 .form_textarea('position_purpose',$position_purpose);
           }else{
@@ -168,7 +168,7 @@
 
     <div class="row">
       <div class="large-12 columns">
-
+      <h5>ลักษณะงาน</h5>
       <div class="row">
         <div class="large-11 columns">
             <input type="text" id="position_jd">

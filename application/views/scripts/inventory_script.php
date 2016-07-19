@@ -4,55 +4,52 @@
 		//Total Weight Row
 		$('#totalweight').val(0);
 
-	// Add Product Row
-	$i = $('#inventory_transaction tr').length; //Count Row
-	$('#addProductRow').on('click', function(){
-		
-		if($i > 1){
-			$('#inventory_transaction tr:last').after(' \
-				<tr> \
-				<td>'+$i+'</td> \
-				<td>' + $("#product_id").val() + '<input type="hidden" name="product_id[]" value="'+$("#product_id").val()+'"><input type="hidden" name="inventory_move_id[]" value="'+$("input[name=id]").val()+'"></td> \
-				<td>' + $("#weight").val() + ' kg <input type="hidden" name="weight[]" value="'+$("#weight").val()+'"></td> \
-				<td>' + $("#amount").val() + '<input type="hidden" name="amount[]" value="'+$("#amount").val()+'"></td> \
-				<td><input type="hidden" name="sum[]" value="'+$("#amount").val() * $("#weight").val()+'"><a href="#" class="deltransactionRow">ลบ</a></td> \
-				</tr>'
-			);
-			$i++;
-		} else {
-			$i++;
-			$('#inventory_transaction').append(' \
-				<tr> \
-				<td>'+1+'</td> \
-				<td>' + $("#product_id").val() + '<input type="hidden" name="product_id[]" value="'+$("#product_id").val()+'"><input type="hidden" name="inventory_move_id[]" value="'+$("input[name=id]").val()+'"></td> \
-				<td>' + $("#weight").val() + ' kg <input type="hidden" name="weight[]" value="'+$("#weight").val()+'"></td> \
-				<td>' + $("#amount").val() + '<input type="hidden" name="amount[]" value="'+$("#amount").val()+'"></td> \
-				<td><input type="hidden" name="sum[]" value="'+$("#amount").val() * $("#weight").val()+'"><a href="#" class="deltransactionRow">ลบ</a></td> \
-				</tr>'
-			);
+		// Calculate Function
+
+		function CalcTotal(){
+
+			var total = 0;
+			$('#inventory_transaction tr #sum').each(function(){
+				var weight = $(this).val();
+				total += parseInt(weight);
+			});
+
+			return total;
 		}
 
-		// Calculate weight
+	// Add Product Row
+	$i = $('#inventory_transaction tr').length; //Count Row
+	// $('#addProductRow').on('click', function(){
 
-			var total;
+	// 	$('#inventory_transaction').append(' \
+	// 		<tr> \
+	// 		<td>' + $("#product_id").val() + '<input type="hidden" name="product_id[]" value="'+$("#product_id").val()+'"><input type="hidden" name="inventory_move_id[]" value="'+$("input[name=id]").val()+'"></td> \
+	// 		<td>' + $("#weight").val() + ' kg <input type="hidden" name="weight[]" value="'+$("#weight").val()+'"></td> \
+	// 		<td>' + $("#amount").val() + '<input type="hidden" name="amount[]" value="'+$("#amount").val()+'"></td> \
+	// 		<td>'+$("#amount").val() * $("#weight").val()+'<input type="hidden" name="sum[]" id="sum" value="'+$("#amount").val() * $("#weight").val()+'"></td> \
+	// 		<td><a href="#" class="deltransactionRow">ลบ</a></td> \
+	// 		</tr>'
+	// 	);
 
-	    	$('#inventory_transaction tr').each(function(){
-			      total +=	parseInt($(this).find('input[name=sum]').val(),10); 
-	    	});
+	// 	// Calculate
+	// 	var total = CalcTotal();
+	// 	$('#totalweight').val(total);
+
+	//      //Reset fields after add row
+	// 	$("#product_id").val('');
+	// 	$("#amount").val('');
+	// 	$("#weight").val();
 
 
-	         $('#totalweight').append(total);
-
-	     //Reset fields after add row
-
-		$("#product_id").val('');
-		$("#amount").val('');
-		$("#weight").val();
-
-	});
+	// });
 
 	// Delete Product Row
 		$('#transaction').on('click','.deltransactionRow',function(){
+			
+			// Calculate
+			var total = CalcTotal();
+			$('#totalweight').val(total);
+
 			$(this).closest('tr').remove();
 		});
 

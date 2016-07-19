@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html ng-app>
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8"/>
@@ -10,6 +10,7 @@
 
     <script src="<?php echo asset_url().'bower/jquery/dist/jquery.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/jquery-ui/jquery-ui.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/angular/angular.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/js/foundation.accordion.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/moment/moment.js'; ?>"></script>
@@ -59,9 +60,14 @@
         </li>
         <li><a href="#">HR</a>
           <ul class="vertical menu nested">
-            <li><a href="<?php echo site_url().'/HR/Employee'; ?>">พนักงาน</a></li>
-            <li><a href="<?php echo site_url().'/HR/Dept'; ?>">แผนก</a></li>
-            <li><a href="<?php echo site_url().'/HR/Position'; ?>">ตำแหน่ง</a></li>
+            <li><a href="<?php echo site_url().'/HR/Leave'; ?>">ลา</a></li>
+            <li><a href="#">พนักงาน</a>
+              <ul class="vertical menu nested">
+                <li><a href="<?php echo site_url().'/HR/Employee'; ?>">พนักงาน</a></li>
+                <li><a href="<?php echo site_url().'/HR/Dept'; ?>">แผนก</a></li>
+                <li><a href="<?php echo site_url().'/HR/Position'; ?>">ตำแหน่ง</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>

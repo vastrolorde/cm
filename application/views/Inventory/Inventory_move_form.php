@@ -175,18 +175,47 @@ amount => จำนวน
         <!-- Table -->
 
         <div class="row">
-          <div class="large-12 columns">
-          
-          <div class="row">
-            <div class="large-6 columns">
-              <input type="text" id="product_id" placeholder="รายการสินค้า">
-            </div>
-            <div class="large-4 columns">
-              <input type="number" id="amount" placeholder="จำนวน">
-              <input type="hidden" id="weight" name="weight[]">
-            </div>
+
+<!-- Reveal Add -->
+<div class="reveal" id="addProductRow" data-reveal>
+  <h1>เพิ่มรายการสินค้า</h1>
+
+  <?php
+    form_open();
+  ?>
+    <div class="row">
+      <div class="large-6 columns">
+        <?php
+          echo form_label('รายการสินค้า')
+          .form_input('product_id');
+        ?>
+      </div>
+
+      <div class="large-4 columns">
+        <?php
+          echo form_label('จำนวน')
+          .form_input('product_amount');
+          echo form_label('น้ำหนัก')
+          .form_input('product_weight');
+        ?>
+      </div>
+
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="row">
+      <div class="large-12 columns text-right">
+        <button class="button">เพิ่ม</button>
+        <button class="button alert" data-close aria-label="Close modal">ยกเลิก</button>
+      </div>
+    </div>
+</div>
+
+<!-- Reveal Add -->
+
             <div class="large-2 columns">
-              <a class="button" id="addProductRow">Add</a>
+              <a class="button" data-open="addProductRow">Add</a>
             </div>
           </div>
           
@@ -194,10 +223,10 @@ amount => จำนวน
             <table id="transaction">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>รายการสินค้า</th>
-                  <th>น้ำหนัก</th>
+                  <th>น้ำหนักต่อชิ้น</th>
                   <th>จำนวน</th>
+                  <th>น้ำหนักรวม</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -206,7 +235,7 @@ amount => จำนวน
               <tfoot>
                 <tr>
                   <td colspan="3" class="text-right">น้ำหนักรวม</td>
-                  <td colspan="2" id="totalweight"><!-- <input  type="number" name="totalweight" readonly> --></td>
+                  <td colspan="2"><input  type="number" name="totalweight" readonly id="totalweight"></td>
                 </tr>
               </tfoot>
             </table>
