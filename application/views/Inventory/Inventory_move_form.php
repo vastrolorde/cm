@@ -24,7 +24,7 @@ amount => จำนวน
 ?>
 
 <div class="row">
-  <div class="large-12 column">
+  <div class="large-12 medium-12 small-12 column">
 
         <!--  Sub Topbar -->
         <div class="top-bar sub-top-bar">
@@ -52,7 +52,7 @@ amount => จำนวน
 <!-- Start Form -->
 
     <div class="row">
-      <div class="large-6 columns">
+      <div class="large-6 medium-6 small-6 columns">
         <fieldset class="fieldset">
 
         <legend>ที่อยู่ในการรับส่งสินค้า</legend>
@@ -95,7 +95,7 @@ amount => จำนวน
 
         <!-- ข้อมูลเอกสาร -->
 
-      <div class="large-6 columns text-right">
+      <div class="large-6 medium-6 small-6 columns text-right">
         <fieldset class="fieldset">
           <legend>ข้อมูลเอกสาร</legend>
 
@@ -106,10 +106,10 @@ amount => จำนวน
             ?>
 
           <div class="row">
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <label class="middle"><b>id:</b></label>
             </div>
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <?php
                 echo form_input('id',$id,'readonly');
               ?>
@@ -117,10 +117,10 @@ amount => จำนวน
           </div>
 
           <div class="row">
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <label class="middle"><b>วันที่เอกสาร:</b></label>
             </div>
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <?php
                 echo form_input('id',$invent_move_createDate,'readonly');
               ?>
@@ -128,11 +128,11 @@ amount => จำนวน
           </div>
 
           <div class="row">
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <label class="middle"><b>ชนิดรายการ:</b></label>
 
             </div>
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <?php
                 $id                     = $data[0]->id;
                 $invent_move_createDate = $data[0]->invent_move_createDate;
@@ -149,10 +149,10 @@ amount => จำนวน
           </div>
 
           <div class="row">
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <label class="middle"><b>สถานะรายการ:</b></label>
             </div>
-            <div class="large-6 columns">
+            <div class="large-6 medium-6 small-6 columns">
               <?php
                 $tr_status = array(
                   'draft' => 'ร่างเอกสาร',
@@ -175,47 +175,40 @@ amount => จำนวน
         <!-- Table -->
 
         <div class="row">
+          <div class="large-12 medium-12 small-12 columns">
 
-<!-- Reveal Add -->
-<div class="reveal" id="addProductRow" data-reveal>
-  <h1>เพิ่มรายการสินค้า</h1>
+          <?php
+            form_open();
+          ?>
+            <div class="row">
+              <div class="large-6 medium-6 small-6 columns">
+                <?php
 
-  <?php
-    form_open();
-  ?>
-    <div class="row">
-      <div class="large-6 columns">
-        <?php
-          echo form_label('รายการสินค้า')
-          .form_input('product_id');
-        ?>
-      </div>
+                  $option = array();
 
-      <div class="large-4 columns">
-        <?php
-          echo form_label('จำนวน')
-          .form_input('product_amount');
-          echo form_label('น้ำหนัก')
-          .form_input('product_weight');
-        ?>
-      </div>
+                  $i = 0;
+                  foreach($product as $row){
+                    $option[$row['product_id']] = '('.$row['product_id'].') : '.$row['product_name'];
+                    $i++;
+                  }
 
-      <button class="close-button" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="row">
-      <div class="large-12 columns text-right">
-        <button class="button">เพิ่ม</button>
-        <button class="button alert" data-close aria-label="Close modal">ยกเลิก</button>
-      </div>
-    </div>
-</div>
+                  echo form_dropdown('product_id',$option);
+                ?>
+              </div>
+              <div class="large-4 medium-4 small-4 columns">
+                <?php
+                  echo form_input('product_amount','','placeholder="จำนวน"')
+                ?>
+              </div>
 
-<!-- Reveal Add -->
+              <div class="large-2 medium-2 small-2 columns">
+                <a class="button" id="AddtransactionRow">เพิ่ม</a>
+              </div>
+            </div>
 
-            <div class="large-2 columns">
-              <a class="button" data-open="addProductRow">Add</a>
+          <?php
+            form_close();
+          ?>
             </div>
           </div>
           
@@ -223,6 +216,7 @@ amount => จำนวน
             <table id="transaction">
               <thead>
                 <tr>
+                  <th>รหัสสินค้า</th>
                   <th>รายการสินค้า</th>
                   <th>น้ำหนักต่อชิ้น</th>
                   <th>จำนวน</th>

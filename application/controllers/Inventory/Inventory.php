@@ -8,6 +8,7 @@ class Inventory extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->model('Inventory/Inventory_m','Inventory_m');
+		$this->load->model('product/product_model','product_m');
 	}
 
 	/******			View			******/
@@ -83,6 +84,7 @@ class Inventory extends CI_Controller {
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 		$data['partner'] = $this->partner();
 		$data['warehouse'] = $this->warehouse();
+		$data['product'] = $this->product_m->product_all();
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('Inventory/Inventory_move_form',$data);
@@ -155,6 +157,15 @@ class Inventory extends CI_Controller {
 		}
 	}
 
+
+	// Manage Transaction
+	public function add_tr()
+	{
+
+
+	}
+
+
 	/******			Others			******/
 	//partner data
 	public function partner()
@@ -177,16 +188,6 @@ class Inventory extends CI_Controller {
 	}
 
 	//product data
-	//Autocomplete
-	
-	public function product_get(){
-		$product_id = $this->input->post('product_id');
-
-		$this->load->model('product/product_model','product_m');
-		$query = $this->product_m->lookup($product_id);
-
-		echo json_encode($query);
-	}
 
 	//warehouse data
 	public function warehouse()

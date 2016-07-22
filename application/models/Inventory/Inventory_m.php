@@ -41,6 +41,9 @@ class Inventory_m extends CI_Model {
 		$this->db->delete('Inventory_move');
 	}
 
+	/******			Product Transaction			******/
+	//Add Product
+	
 
 	/******			Others			******/
 	//Count all Transaction
