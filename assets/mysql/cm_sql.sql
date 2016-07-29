@@ -1,14 +1,21 @@
 -- --------------------------------------------------------
 -- Host:                         localhost
--- Server version:               10.1.9-MariaDB - mariadb.org binary distribution
+-- Server version:               10.1.10-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
--- HeidiSQL Version:             9.3.0.4984
+-- HeidiSQL Version:             9.3.0.5107
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Dumping database structure for cm
+DROP DATABASE IF EXISTS `cm`;
+CREATE DATABASE IF NOT EXISTS `cm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `cm`;
 
 -- Dumping structure for table cm.bank
 DROP TABLE IF EXISTS `bank`;
@@ -57,7 +64,6 @@ INSERT INTO `bank` (`id`, `name`) VALUES
 	('TMB', 'ธนาคารทหารไทย จำกัด (มหาชน)'),
 	('UOB', 'ธนาคารยูไนเต็ด โอเวอร์ซีส์ (ไทย) จำกัด (มหาชน)');
 /*!40000 ALTER TABLE `bank` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.dist
 DROP TABLE IF EXISTS `dist`;
@@ -1070,7 +1076,6 @@ INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `
 	(998, '9681', 'อ.บางนรา  จ.นราธิวาส', '00000', 6, 76);
 /*!40000 ALTER TABLE `dist` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.geography
 DROP TABLE IF EXISTS `geography`;
 CREATE TABLE IF NOT EXISTS `geography` (
@@ -1091,7 +1096,6 @@ INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
 	(6, 'ภาคใต้');
 /*!40000 ALTER TABLE `geography` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.hr_dept
 DROP TABLE IF EXISTS `hr_dept`;
 CREATE TABLE IF NOT EXISTS `hr_dept` (
@@ -1111,7 +1115,6 @@ INSERT INTO `hr_dept` (`id`, `dept_name`, `dept_mother`, `dept_manager`) VALUES
 	('OPT', 'Operation', 'Management', 'ประพันธ์  วงษ์อุบล'),
 	('PJT', 'Project', 'Management', 'เพ็ญโสม  ใจวงค์');
 /*!40000 ALTER TABLE `hr_dept` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.hr_employee_data
 DROP TABLE IF EXISTS `hr_employee_data`;
@@ -1208,7 +1211,6 @@ INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `e
 	('CM-1042', 'นาย', 'ดอนสาม', '', 'ดอน', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '9/6/2016', '', 'ทดลองงาน', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '', '', '', '', '');
 /*!40000 ALTER TABLE `hr_employee_data` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.hr_leave
 DROP TABLE IF EXISTS `hr_leave`;
 CREATE TABLE IF NOT EXISTS `hr_leave` (
@@ -1221,9 +1223,9 @@ CREATE TABLE IF NOT EXISTS `hr_leave` (
   `lve_diff` char(5) COLLATE utf8_unicode_ci NOT NULL,
   `lve_reason` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_leave: ~178 rows (approximately)
+-- Dumping data for table cm.hr_leave: ~199 rows (approximately)
 DELETE FROM `hr_leave`;
 /*!40000 ALTER TABLE `hr_leave` DISABLE KEYS */;
 INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_out`, `lve_diff`, `lve_reason`) VALUES
@@ -1425,9 +1427,10 @@ INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_o
 	(196, 'CM-1009', 'Vac', '04/07/2016', '08:00', '17:00', '1', 'ไปเยี่ยมพ่อป่วย'),
 	(197, 'CM-1009', 'Vac', '05/07/2016', '08:00', '17:00', '1', 'ไปเยี่ยมพ่อป่วย'),
 	(198, 'CM-1009', 'Vac', '06/07/2016', '08:00', '17:00', '1', 'ไปเยี่ยมพ่อป่วย'),
-	(199, 'CM-1004', 'Si', '18/07/2016', '08:00', '17:00', '1', 'ท้องเสีย');
+	(199, 'CM-1004', 'Si', '18/07/2016', '08:00', '17:00', '1', 'ท้องเสีย'),
+	(200, 'CM-1038', 'Bis', '25/07/2016', '13:00', '17:00', '0', 'ลงทะเบียนเรียน'),
+	(201, 'CM-1007', 'Bis', '28/07/2016', '13:00', '17:00', '0.5', 'สามีป่วย');
 /*!40000 ALTER TABLE `hr_leave` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.hr_position
 DROP TABLE IF EXISTS `hr_position`;
@@ -1468,7 +1471,6 @@ INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`,
 	('0018', 'Scaffold Vendor', 'OPT', 'Scaffold Supervisor', NULL, NULL, NULL, NULL, 'Y');
 /*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.inventory_move
 DROP TABLE IF EXISTS `inventory_move`;
 CREATE TABLE IF NOT EXISTS `inventory_move` (
@@ -1492,7 +1494,6 @@ INSERT INTO `inventory_move` (`id`, `partner_id`, `invent_move_createDate`, `inv
 	('0002', '104', '18/06/2016 02:19', '23/06/2016', 'recieve', 'done', NULL);
 /*!40000 ALTER TABLE `inventory_move` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.inventory_move_tr
 DROP TABLE IF EXISTS `inventory_move_tr`;
 CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
@@ -1502,14 +1503,20 @@ CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
   `amount` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index 1` (`inventory_move_id`),
-  CONSTRAINT `FK_inventory_move_tr_product` FOREIGN KEY (`inventory_move_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `FK_inventory_move_tr_product` FOREIGN KEY (`inventory_move_id`) REFERENCES `inventory_move` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move_tr: ~0 rows (approximately)
+-- Dumping data for table cm.inventory_move_tr: ~6 rows (approximately)
 DELETE FROM `inventory_move_tr`;
 /*!40000 ALTER TABLE `inventory_move_tr` DISABLE KEYS */;
+INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `product_id`, `amount`) VALUES
+	(6, '0001', 'BL-4224', 200),
+	(8, '0002', 'BM-4206', 45),
+	(10, '0002', 'VC-4806', 120),
+	(11, '0001', 'BM-4218', 500),
+	(13, '0001', 'CB-1209', 124),
+	(14, '0001', 'BM-4211', 122);
 /*!40000 ALTER TABLE `inventory_move_tr` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.inventory_wh
 DROP TABLE IF EXISTS `inventory_wh`;
@@ -1524,7 +1531,7 @@ CREATE TABLE IF NOT EXISTS `inventory_wh` (
   `wh_Postal` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_wh: ~2 rows (approximately)
+-- Dumping data for table cm.inventory_wh: ~3 rows (approximately)
 DELETE FROM `inventory_wh`;
 /*!40000 ALTER TABLE `inventory_wh` DISABLE KEYS */;
 INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`, `wh_Dist`, `wh_Province`, `wh_Postal`) VALUES
@@ -1532,7 +1539,6 @@ INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`,
 	('WH-002', 'โกดังประเวศ', 'ซอย กาญจนาภิเษก 24', '', 'ประเวศ', 'ประเวศ', 'กรุงเทพมหานคร', 10250),
 	('OFF', 'Classmat Office', '93 ซอยอุดมสุข 51', 'สุขุมวิท 103', 'บางจาก', 'พระโขนง', 'กรุงเทพ', 10260);
 /*!40000 ALTER TABLE `inventory_wh` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.partner
 DROP TABLE IF EXISTS `partner`;
@@ -1573,7 +1579,6 @@ INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `ad
 	('103', NULL, ' บริษัท ทาคาโอะ อีสเทิร์น จำกัด', '038-954-670', '', '', '58/1 หมู่ 4 อาคาร นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด', '', '1249', '156', '12', 12400, 'null', 'GSB', '', 0, 'ออมทรัพย์', '', 'ธุรกิจเงินทุนและหลักทรัพย์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('104', NULL, 'บริษัท ไทยโพลิเอททีลีน จำกัด', '', '', '', '1 ถ.ปูนซิเมนต์ไทย', '', '17', '29', '1', 0, '["supplier"]', 'GHB', NULL, 0, 'ฝากประจำ', '', 'ธุรกิจยานยนต์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
 /*!40000 ALTER TABLE `partner` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.product
 DROP TABLE IF EXISTS `product`;
@@ -1802,7 +1807,6 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_type`, `product_un
 	('WR-C', 'สเก็นสลิง  Wire Rope Clip', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, 0, NULL, 'Equipment');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.product_attr
 DROP TABLE IF EXISTS `product_attr`;
 CREATE TABLE IF NOT EXISTS `product_attr` (
@@ -1820,7 +1824,6 @@ INSERT INTO `product_attr` (`id`) VALUES
 	('ยาว'),
 	('เส้นผ่านศูนย์กลาง');
 /*!40000 ALTER TABLE `product_attr` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.product_unit
 DROP TABLE IF EXISTS `product_unit`;
@@ -1840,7 +1843,6 @@ INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
 	('0005', 'ขา'),
 	('0006', 'แผ่น');
 /*!40000 ALTER TABLE `product_unit` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.province
 DROP TABLE IF EXISTS `province`;
@@ -1935,7 +1937,6 @@ INSERT INTO `province` (`Province_ID`, `Province_CODE`, `Province_NAME`, `GEO_ID
 	(77, '97', 'บึงกาฬ', 3);
 /*!40000 ALTER TABLE `province` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.rental
 DROP TABLE IF EXISTS `rental`;
 CREATE TABLE IF NOT EXISTS `rental` (
@@ -1961,7 +1962,6 @@ DELETE FROM `rental`;
 /*!40000 ALTER TABLE `rental` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rental` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.rentaltransaction
 DROP TABLE IF EXISTS `rentaltransaction`;
 CREATE TABLE IF NOT EXISTS `rentaltransaction` (
@@ -1982,7 +1982,6 @@ CREATE TABLE IF NOT EXISTS `rentaltransaction` (
 DELETE FROM `rentaltransaction`;
 /*!40000 ALTER TABLE `rentaltransaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rentaltransaction` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.subdist
 DROP TABLE IF EXISTS `subdist`;
@@ -10861,6 +10860,7 @@ INSERT INTO `subdist` (`SubDist_ID`, `SubDist_CODE`, `SubDist_NAME`, `Dist_ID`, 
 	(8859, '961302', 'บูกิต', 997, 76, 6),
 	(8860, '961303', 'มะรือโบออก', 997, 76, 6);
 /*!40000 ALTER TABLE `subdist` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

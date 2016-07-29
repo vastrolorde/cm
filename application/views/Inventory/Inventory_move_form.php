@@ -111,7 +111,7 @@ amount => จำนวน
             </div>
             <div class="large-6 medium-6 small-6 columns">
               <?php
-                echo form_input('id',$id,'readonly');
+                echo form_input('id',$id,'id="id" readonly');
               ?>
             </div>
           </div>
@@ -122,7 +122,7 @@ amount => จำนวน
             </div>
             <div class="large-6 medium-6 small-6 columns">
               <?php
-                echo form_input('id',$invent_move_createDate,'readonly');
+                echo form_input('invent_move_createDate',$invent_move_createDate,'readonly');
               ?>
             </div>
           </div>
@@ -192,12 +192,12 @@ amount => จำนวน
                     $i++;
                   }
 
-                  echo form_dropdown('product_id',$option);
+                  echo form_dropdown('product_id',$option,'','id="product_id"');
                 ?>
               </div>
               <div class="large-4 medium-4 small-4 columns">
                 <?php
-                  echo form_input('product_amount','','placeholder="จำนวน"')
+                  echo form_input('product_amount','','id="product_amount" placeholder="จำนวน"')
                 ?>
               </div>
 
@@ -211,27 +211,7 @@ amount => จำนวน
           ?>
             </div>
           </div>
-          
-
             <table id="transaction">
-              <thead>
-                <tr>
-                  <th>รหัสสินค้า</th>
-                  <th>รายการสินค้า</th>
-                  <th>น้ำหนักต่อชิ้น</th>
-                  <th>จำนวน</th>
-                  <th>น้ำหนักรวม</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="inventory_transaction">
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="3" class="text-right">น้ำหนักรวม</td>
-                  <td colspan="2"><input  type="number" name="totalweight" readonly id="totalweight"></td>
-                </tr>
-              </tfoot>
             </table>
           </div>
         </div>

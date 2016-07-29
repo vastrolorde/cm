@@ -67,11 +67,6 @@ class Inventory extends CI_Controller {
 
 	/******			Form			******/
 
-	// public function create()
-	// {
-
-	// }
-
 	public function data($id)
 	{
 		$data['title'] = 'ใบรับ/เบิกสินค้า';
@@ -80,17 +75,29 @@ class Inventory extends CI_Controller {
 			<li><a class="button hollow warning" href="'.site_url('/Inventory/Inventory').'">ยกเลิก</a></li>
 			<li><a class="button hollow alert delitem" href="'.site_url('/Inventory/Inventory/delete').'/'.$id.'">ลบ</a></li>
 			<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->Inventory_m->get($id);
+		
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
+		
+		//ดึงข้อมูลรายการใบเบิก
+		$data['data'] = $this->Inventory_m->get($id);
+
+		//ดึงข้อมูล Partner และ Warehouse
 		$data['partner'] = $this->partner();
 		$data['warehouse'] = $this->warehouse();
+
+
 		$data['product'] = $this->product_m->product_all();
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('Inventory/Inventory_move_form',$data);
 		$this->load->view('parts/footer');
 		$this->load->View('scripts/inventory_script');
+	}
 
+	public function data_tr(){
+		$id = $this->input->get('id');
+		$data['invent_tr'] = $this->Inventory_m->qry_tr($id);
+		$this->load->view('Inventory/Inventory_move_table',$data);
 	}
 	/******			Database			******/
 
@@ -129,14 +136,6 @@ class Inventory extends CI_Controller {
 
 	public function edit($id)
 	{
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('invent_move_Date', 'วันที่ลูกค้ามารับของ','required');
-
-		if ($this->form_validation->run() == TRUE){
-
 			$data = array(
 				'invent_move_status'     =>	$this->input->post('invent_move_status')
 			);
@@ -147,24 +146,39 @@ class Inventory extends CI_Controller {
 				'amount'            =>	$this->input->post('amount')
 			);
 
-			$this->Inventory_m->create($data,$id);
+			$this->Inventory_m->update($data,$id);
 			
 
 			redirect('/Inventory/Inventory');
-		}else{
-
-			$this->data($id);
-		}
 	}
 
 
 	// Manage Transaction
 	public function add_tr()
 	{
+		$data = array(
+			'inventory_move_id' =>	$this->input->post('inventory_move_id'),
+			'product_id'        =>	$this->input->post('product_id'),
+			'amount'            =>	$this->input->post('amount')
+		);
 
-
+		$this->Inventory_m->add_tr($data);
 	}
 
+	public function update_tr()
+	{
+		$id = $this->input->get('id');
+		$data = array(
+			'amount'            =>	$this->input->post('amount')
+		);
+		$this->Inventory_m->update_tr($id,$data);
+	}
+
+	public function del_tr()
+	{
+		$id = $this->input->get('id');
+		$this->Inventory_m->del_tr($id);
+	}
 
 	/******			Others			******/
 	//partner data
@@ -186,8 +200,6 @@ class Inventory extends CI_Controller {
 
 		echo json_encode($result);
 	}
-
-	//product data
 
 	//warehouse data
 	public function warehouse()

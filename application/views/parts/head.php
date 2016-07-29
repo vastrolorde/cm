@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?php echo asset_url().'bower/jquery-ui/themes/base/jquery-ui.css'; ?>">
     <link rel="stylesheet" href="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.css'; ?>">
     <link rel="stylesheet" href="<?php echo asset_url().'css/app.css'; ?>">
+    <link rel="stylesheet" href="<?php echo asset_url().'css/foundation-icons.css'; ?>">
 
     <script src="<?php echo asset_url().'bower/jquery/dist/jquery.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/jquery-ui/jquery-ui.js'; ?>"></script>
