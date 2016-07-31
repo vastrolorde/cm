@@ -9,6 +9,7 @@ class Inventory extends CI_Controller {
 		$this->load->database();
 		$this->load->model('Inventory/Inventory_m','Inventory_m');
 		$this->load->model('product/product_model','product_m');
+		$this->load->library('pdf');
 	}
 
 	/******			View			******/
@@ -74,7 +75,7 @@ class Inventory extends CI_Controller {
 			'<li><input class="button hollow success" type="submit"></li>
 			<li><a class="button hollow warning" href="'.site_url('/Inventory/Inventory').'">ยกเลิก</a></li>
 			<li><a class="button hollow alert delitem" href="'.site_url('/Inventory/Inventory/delete').'/'.$id.'">ลบ</a></li>
-			<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/create').'">พิมพ์รายงาน</a></li>';
+			<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/invent_move_pdf').'/'.$id.'">พิมพ์รายงาน</a></li>';
 		
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 		
@@ -94,11 +95,6 @@ class Inventory extends CI_Controller {
 		$this->load->View('scripts/inventory_script');
 	}
 
-	public function data_tr(){
-		$id = $this->input->get('id');
-		$data['invent_tr'] = $this->Inventory_m->qry_tr($id);
-		$this->load->view('Inventory/Inventory_move_table',$data);
-	}
 	/******			Database			******/
 
 	public function add()
@@ -152,8 +148,20 @@ class Inventory extends CI_Controller {
 			redirect('/Inventory/Inventory');
 	}
 
+	public function delete($id){
+		$this->Inventory_m->delete($id);
+
+		redirect('Inventory/Inventory/');
+	}
 
 	// Manage Transaction
+
+	public function data_tr(){
+		$id = $this->input->get('id');
+		$data['invent_tr'] = $this->Inventory_m->qry_tr($id);
+		$this->load->view('Inventory/Inventory_move_table',$data);
+	}
+	
 	public function add_tr()
 	{
 		$data = array(
@@ -166,7 +174,7 @@ class Inventory extends CI_Controller {
 	}
 
 	public function update_tr()
-	{
+	{	
 		$id = $this->input->get('id');
 		$data = array(
 			'amount'            =>	$this->input->post('amount')
@@ -221,5 +229,12 @@ class Inventory extends CI_Controller {
 		echo json_encode($result);
 	}
 
-
+	//PDF
+	public function invent_move_pdf($id)
+	{
+		//ดึงข้อมูลรายการใบเบิก
+		$data['data'] = $this->Inventory_m->get($id);
+		$data['invent_tr'] = $this->Inventory_m->qry_tr($id);
+		$this->load->view('Inventory/pdf/Inventory_move_pdf',$data);
+	}
 }

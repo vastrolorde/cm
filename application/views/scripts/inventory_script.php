@@ -5,37 +5,42 @@
 
 		$('#transaction').load('<?php echo site_url() ?>/Inventory/Inventory/data_tr?id='+inventory_move_id);
 
-		//Total Weight Row
-
-		// colSum();
-
-		// function colSum() {
-		// 	var sum=0;
-		// //iterate through each input and add to sum
-		// 	$('.total_weight').each(function() {     
-		// 		sum += parseInt($(this).html());                     
-		// 	});
-		// //change value of total
-		// 	$('#grandtotal').html(sum);
-
-		// 	console.log(sum);
-		// }
-
 	// Add Product Row
 
 	$i = $('#transaction tr').length; //Count Row
 
 		$('#AddtransactionRow').on('click', function(){
+			//ดึงค่าตัวแปรจาก input
 			var product = $('#product_id').val();
 			var product_amount = $('#product_amount').val();
 
-			var Something = $('#transaction tbody').closest('tr').find('td:eq(1)').text();
+			//สร้างค่าสำหรับเตรียมส่งเข้า db
+			var insert_data = {'inventory_move_id': inventory_move_id,'product_id': product, 'amount': product_amount};
 
-			if(product == Something){
-				alert('รายการซ้ำ กรุณาตรวจสอบ');
+			//สร้างตัวแปรหาค่าซ้ำ
+			var Duplicate_row = [];
+
+			$('#transaction tbody tr td:first-child').each(function(){
+				var ex_product = $(this).text();
+
+				// Push ผลลัพธ์ที่ตรวจสอบออกไป โดย false คือ ค่าซ้ำ true คือค่าไม่ซ้ำ 
+				if(ex_product==product){
+					Duplicate_row.push('false');
+				}else{
+					Duplicate_row.push('true');
+				}
+			});
+
+			// ทำการนับตำนวน ค่า false แล้วเก็บไว้ในตัวแปร
+			var dupNum = jQuery.grep(Duplicate_row, function(a){
+				return a == 'false'
+			}).length // 3
+
+			//หากนับได้มากกว่า 0 ถือว่ามีค่าซ้ำ ไม่ให้บันทึก
+			if(dupNum>0){
+				alert('ข้อมูลซ้ำ');
 			}else{
-				var insert_data = {'inventory_move_id': inventory_move_id,'product_id': product, 'amount': product_amount};
-
+				//Ajax Add
 				$.ajax({
 					url:'<?php echo site_url() ?>/Inventory/Inventory/add_tr',
 					type: 'POST',
@@ -44,31 +49,8 @@
 						$('#transaction').load('<?php echo site_url() ?>/Inventory/Inventory/data_tr?id='+inventory_move_id);
 					}
 				});
-
-				if($i>1){
-					$('#transaction tbody tr:last').after(
-						'<tr> \
-							<td>'+product+'</td> \
-							<td></td> \
-							<td></td> \
-							<td>'+product_amount+'</td> \
-							<td></td> \
-							<td>Edit | Delete</td> \
-						</tr>'
-					);
-				} else{
-					$('#transaction tbody').append(
-						'<tr> \
-							<td>'+product+'</td> \
-							<td></td> \
-							<td></td> \
-							<td>'+product_amount+'</td> \
-							<td></td> \
-							<td>Edit | Delete</td> \
-						</tr>'
-					);
-				}
 			}
+
 		});
 
 	// Edit Product Row
@@ -81,21 +63,25 @@
 	});
 
 	$('#transaction').on('click','.update',function(){
-		var amount = $(this).parent().siblings().find('input');
+		var amount_input = $(this).parent().siblings().find('input');
+		var amount = amount_input.val();
 
 		var id = $(this).attr('id');
 
 		console.log(id);
+		console.log(amount);
+
 		$.ajax({
 			url:'<?php echo site_url() ?>/Inventory/Inventory/update_tr?id='+id,
-				type: 'POST',
-				data: {amount:amount},
+			type: 'POST',
+			data: {amount:amount},
 			success: function(){
 				$('#transaction').load('<?php echo site_url() ?>/Inventory/Inventory/data_tr?id='+inventory_move_id);
+				console.log('success');
 			}
 		});
 
-		amount.attr('readonly','readonly');
+		amount_input.attr('readonly','readonly');
 		$(this).attr('class','edit');
 		$(this).text('Edit');
 	});

@@ -21,9 +21,12 @@ class Inventory_m extends CI_Model {
 	}
 
 	public function get($id){
-		$this->db->select("*");
-		$this->db->where("id",$id);
-		$query = $this->db->get('Inventory_move');
+		$this->db->select("ivtry.id,ivtry.partner_id,ivtry.invent_move_createDate,ivtry.invent_move_Date,ivtry.invent_move_type,ivtry.invent_move_status,ivtry.invent_move_wh");
+		$this->db->select("ptnr.partner_name,ptnr.taxID,ptnr.tel,ptnr.email,ptnr.add1,ptnr.add2,ptnr.SubDist,ptnr.Dist,ptnr.Province,ptnr.Postal");
+		$this->db->where("ivtry.id",$id);
+		$this->db->from("Inventory_move as ivtry");
+		$this->db->join('partner as ptnr','ptnr.id = ivtry.partner_id');
+		$query = $this->db->get();
 		return $result = $query->result();
 	}
 
@@ -44,6 +47,7 @@ class Inventory_m extends CI_Model {
 	/******			Product Transaction			******/
 
 
+	//Inventory Movement
 	public function qry_tr($data){
 		$this->db->select("tr.id,tr.inventory_move_id,tr.product_id,tr.amount,pro.product_id,pro.product_name,pro.product_weight");
 		$this->db->where('inventory_move_id',$data);
@@ -53,7 +57,6 @@ class Inventory_m extends CI_Model {
 		return $result = $query->result();
 	}
 
-	//Add Inventory Movement
 	public function add_tr($data){
 		$this->db->insert('inventory_move_tr',$data);
 	}
@@ -63,7 +66,6 @@ class Inventory_m extends CI_Model {
 		$this->db->update('inventory_move_tr',$data);
 	}
 
-	//Del Inventory Movement
 	public function del_tr($id){
 		$this->db->where('id',$id);
 		$this->db->delete('inventory_move_tr');
