@@ -85,61 +85,29 @@ class Leave extends CI_Controller {
 		}
 	}
 
-	public function edit($id)
+	public function edit()
 	{
+		$id = $this->input->get('id');
+		$data = array(
+			'lve_date'   =>	$this->input->post('lve_date'),
+			'lve_in'     =>	$this->input->post('lve_in'),
+			'lve_out'    =>	$this->input->post('lve_out'),
+			'lve_diff'   =>	$this->input->post('lve_diff')
+		);
 
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('dept_name','ชื่อแผนก','required');
-
-		if ($this->form_validation->run() == TRUE){
-
-			$data = array(
-				'id'           =>	$this->input->post('id'),
-				'dept_name'    =>	$this->input->post('dept_name'),
-				'dept_mother'  =>	$this->input->post('dept_mother'),
-				'dept_manager' =>	$this->input->post('dept_manager'),
-				
-			);
-
-			$this->hr_dept_m->update($data,$id);
-			
-
-			redirect('/HR/Dept/');
-		}else{
-
-			$this->data($id);
-		}
+		$this->HR_Leave_m->update($data,$id);
 	}
 
-	public function delete($id){
-		$this->hr_dept_m->delete($id);
-
-		redirect('/HR/Dept/');
+	public function delete(){
+		$id = $this->input->get('id');
+		$this->HR_Leave_m->delete($id);
 	}
 
-	public function lookup_emp(){
-		$keyword = $this->input->post('lookup');
-		$this->db->SELECT('*');
-		$this->db->FROM('hr_employee_data');
-		$this->db->LIKE('emp_fname',$keyword);
-		$query = $this->db->get()->result();
 
-		echo json_encode($query);
-
-	}
-
-	public function lookup_dept(){
-		$keyword = $this->input->post('lookup');
-		$this->db->SELECT('*');
-		$this->db->FROM('hr_dept');
-		$this->db->LIKE('dept_name',$keyword);
-		$query = $this->db->get()->result();
-
-		echo json_encode($query);
-
+	public function leave_table(){
+		$id = $this->input->get('id');
+		$data['lve'] = $this->HR_Leave_m->get($id);
+		$this->load->view('HR/HR_lve_table',$data);
 	}
 
 }

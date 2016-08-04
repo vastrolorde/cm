@@ -3,21 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inventory_wh_m extends CI_Model {
 
-	public function getAll($limit,$page){
-		$this->db->limit($limit, $page);
+	public function getAll(){
 		$this->db->select("*");
 		$query = $this->db->get("Inventory_wh");
 		$this->db->order_by('id', 'ASC');
 
-		if ($query->num_rows() > 0) {
-			foreach ($query->result() as $row) {
-				$data[] = $row;
-			}
-			return $data;
-		}
-
-		return false;
-
+		return $result = $query->result();
 	}
 
 	public function get($id){

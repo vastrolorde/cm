@@ -1,6 +1,7 @@
 <script src="<?php echo asset_url().'js/js_get_th.js'; ?>"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+	$('#datatable').DataTable();
 
 	// Add Attribute Row
 		$i1 = $('#positions tr').length; //Count Row

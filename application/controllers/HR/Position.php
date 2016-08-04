@@ -16,49 +16,9 @@ class Position extends CI_Controller {
 	public function index()
 	{
 
-		$this->load->library('pagination');
-
-		$config['base_url'] = site_url().'/HR/Position';
-		$config['total_rows'] = $this->hr_Position_m->countAll();
-		$config['per_page'] = 20;
-		$config['uri_segment'] = 3;
-
-		$config['first_tag_open'] = '<li>';
-		$config['first_tag_close'] = '</li>';
-
-		$config['prev_tag_open'] = '<li class="arrow">';
-		$config['prev_tag_close'] = '</li>';
-		
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';		
-
-		$config['next_tag_open'] = '<li class="arrow">';
-		$config['next_tag_close'] = '</li>';
-
-		$config['last_tag_open'] = '<li>';
-		$config['last_tag_close'] = '</li>';
-
-		$config['cur_tag_open'] = '<li class="current">';
-		$config['cur_tag_close'] = '</li>';
-
-		$config['full_tag_open'] = '<ul class="pagination">';
-		$config['full_tag_close'] = '</ul>';
-
-		$config['uri_segment'] = 3;
-
-		$this->pagination->initialize($config);
-
-		if($this->uri->segment(3)){
-			$page = ($this->uri->segment(3)) ;
-		}else{
-			$page = 0;
-		}
-
 		$data['title'] = 'จัดการตำแหน่ง';
-		$data['result'] = $this->hr_Position_m->getAll($config['per_page'],$page);
-		$data['pagination'] = $this->pagination->create_links();
+		$data['result'] = $this->hr_Position_m->getAll();
 		$data['mask'] = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
-
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('HR/HR_Position_list',$data);

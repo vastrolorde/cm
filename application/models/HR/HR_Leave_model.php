@@ -5,6 +5,8 @@ class HR_Leave_model extends CI_Model {
 
 	public function getAll(){
 		$this->db->select("*");
+		$this->db->where('emp_status', 'บรรจุแล้ว');
+		$this->db->or_where('emp_status', 'ทดลองงาน');
 		$query = $this->db->get('hr_employee_data');
 		return $result = $query->result();
 	}

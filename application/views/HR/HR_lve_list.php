@@ -72,15 +72,11 @@
       <li>
         <?php echo $execute; ?>
       </li>
-      <li>
-        <input id="search" type="text" name="search" placeholder="Search">
-      </li>
-      <li><button id="submitsearch" type="button" class="button">Search</button></li>
     </ul>
   </div>
 </div>
 
-<table id="leave">
+<table id="leave datatable">
 
   <thead>
     <tr>

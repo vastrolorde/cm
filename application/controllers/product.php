@@ -16,47 +16,8 @@ $this->db->save_queries = false; // ADD THIS LINE TO SOLVE ISSUE
 
 	public function index()
 	{
-
-		$this->load->library('pagination');
-
-		$config['base_url'] = site_url().'/Product';
-		$config['total_rows'] = $this->product_m->countAll();
-		$config['per_page'] = 15;
-		$config['uri_segment'] = 2;
-
-		$config['first_tag_open'] = '<li>';
-		$config['first_tag_close'] = '</li>';
-
-		$config['prev_tag_open'] = '<li class="arrow">';
-		$config['prev_tag_close'] = '</li>';
-		
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';		
-
-		$config['next_tag_open'] = '<li class="arrow">';
-		$config['next_tag_close'] = '</li>';
-
-		$config['last_tag_open'] = '<li>';
-		$config['last_tag_close'] = '</li>';
-
-		$config['cur_tag_open'] = '<li class="current">';
-		$config['cur_tag_close'] = '</li>';
-
-		$config['full_tag_open'] = '<ul class="pagination">';
-		$config['full_tag_close'] = '</ul>';
-
-		$this->pagination->initialize($config);
-
-		if($this->uri->segment(2)){
-			$page = ($this->uri->segment(2)) ;
-		}else{
-			$page = 0;
-		}
-
 		$data['title'] = 'Product';
-		$data['result'] = $this->product_m->getAll($config['per_page'],$page);
-		$data['pagination'] = $this->pagination->create_links();
-
+		$data['result'] = $this->product_m->getAll();
 
 		$this->load->view('parts/head',$data);
 		$this->load->view('product/product_list',$data);

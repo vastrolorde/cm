@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class HR_Position_model extends CI_Model {
 
-	public function getAll($limit,$page){
-		$this->db->limit($limit, $page);
+	public function getAll(){
 		$this->db->select("pos.id, pos.position_name, pos.dept_id, pos.position_manager,dept.dept_name");
 		$this->db->from('hr_position as pos');
 		$this->db->join('hr_dept as dept','pos.dept_id = dept.id');
@@ -12,15 +11,7 @@ class HR_Position_model extends CI_Model {
 		$this->db->order_by('id', 'ASC');
 		$query = $this->db->get();
 
-		if ($query->num_rows() > 0) {
-			foreach ($query->result() as $row) {
-				$data[] = $row;
-			}
-			return $data;
-		}
-
-		return false;
-
+		return $result = $query->result();
 	}
 
 	public function get($id){

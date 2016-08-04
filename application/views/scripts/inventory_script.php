@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
+	$('#datatable').DataTable();
 
 		var inventory_move_id = $('#id').val();
 

@@ -11,11 +11,12 @@
 
     <script src="<?php echo asset_url().'bower/jquery/dist/jquery.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/jquery-ui/jquery-ui.js'; ?>"></script>
-    <script src="<?php echo asset_url().'bower/angular/angular.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/datatables.net/js/jquery.datatables.min.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/datatables.net-zf/js/dataTables.foundation.min.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/jquery-mask-plugin/dist/jquery.mask.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/dist/foundation.min.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/foundation-sites/js/foundation.accordion.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/moment/moment.js'; ?>"></script>
-    <script src="<?php echo asset_url().'bower/jquery-mask-plugin/dist/jquery.mask.js'; ?>"></script>
     <?php
       if(isset($mask)){
         echo $mask;
@@ -43,8 +44,8 @@
 
 </div>
 
-<div class="row full-width">
-  <div class="medium-3 columns">
+<div class="full-width console">
+  <div class="large-2 medium-3 columns">
 
       <ul class="vertical menu" data-accordion-menu>
         <li><a href="<?php echo site_url(); ?>">Dashboard</a></li>
@@ -61,6 +62,7 @@
         </li>
         <li><a href="#">HR</a>
           <ul class="vertical menu nested">
+            <li><a href="<?php echo site_url().'/HR/Attendance'; ?>">บันทึกเวลา</a></li>
             <li><a href="<?php echo site_url().'/HR/Leave'; ?>">ลา</a></li>
             <li><a href="#">พนักงาน</a>
               <ul class="vertical menu nested">
@@ -76,5 +78,5 @@
     
   </div>
 
-  <div class="medium-9 columns">
+  <div class="large-10 medium-9 columns">
 

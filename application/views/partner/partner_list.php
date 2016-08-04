@@ -11,15 +11,11 @@
     <ul class="menu">
       <li><a class="hollow button" href="<?php echo site_url('/partner/create'); ?>">เพิ่ม</a></li>
       <li><a class="hollow button" href="#">พิมพ์</a></li>
-      <li>
-        <input id="search" type="text" name="search" placeholder="Search">
-      </li>
-      <li><button id="submitsearch" type="button" class="button">Search</button></li>
     </ul>
   </div>
 </div>
 
-<table>
+<table id="datatable">
 
   <thead>
     <tr>
@@ -83,12 +79,6 @@
   ?>
   </tbody>
 </table>
-
-<div class="row">
-  <div class="large-12 columns">
-      <span class="text-center"><?php echo $pagination; ?></span>
-  </div>
-</div>
 
   </div>
 </div>

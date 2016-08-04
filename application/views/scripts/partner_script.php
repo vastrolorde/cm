@@ -2,6 +2,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+	$('#datatable').DataTable();
 
 	// Add Attribute Row
 		$i = $('#contactor tbody tr').length; //Count Row

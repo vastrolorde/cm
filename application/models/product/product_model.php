@@ -3,20 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product_model extends CI_Model {
 
-	public function getAll($limit,$page){
-		$this->db->limit($limit, $page);
+	public function getAll(){
 		$this->db->select("*");
 		$query = $this->db->get("product");
 		$this->db->order_by('product_family', 'DESC');
-
-		if ($query->num_rows() > 0) {
-			foreach ($query->result() as $row) {
-				$data[] = $row;
-			}
-			return $data;
-		}
-
-		return false;
+		return $result = $query->result();
 
 	}
 

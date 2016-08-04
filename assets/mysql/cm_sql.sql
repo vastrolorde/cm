@@ -1,21 +1,20 @@
 -- --------------------------------------------------------
 -- Host:                         localhost
--- Server version:               10.1.10-MariaDB - mariadb.org binary distribution
+-- Server version:               10.1.9-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
--- HeidiSQL Version:             9.3.0.5107
+-- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
 
 -- Dumping database structure for cm
 DROP DATABASE IF EXISTS `cm`;
 CREATE DATABASE IF NOT EXISTS `cm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `cm`;
+
 
 -- Dumping structure for table cm.bank
 DROP TABLE IF EXISTS `bank`;
@@ -64,6 +63,7 @@ INSERT INTO `bank` (`id`, `name`) VALUES
 	('TMB', 'ธนาคารทหารไทย จำกัด (มหาชน)'),
 	('UOB', 'ธนาคารยูไนเต็ด โอเวอร์ซีส์ (ไทย) จำกัด (มหาชน)');
 /*!40000 ALTER TABLE `bank` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.dist
 DROP TABLE IF EXISTS `dist`;
@@ -1076,6 +1076,7 @@ INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `
 	(998, '9681', 'อ.บางนรา  จ.นราธิวาส', '00000', 6, 76);
 /*!40000 ALTER TABLE `dist` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.geography
 DROP TABLE IF EXISTS `geography`;
 CREATE TABLE IF NOT EXISTS `geography` (
@@ -1096,6 +1097,46 @@ INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
 	(6, 'ภาคใต้');
 /*!40000 ALTER TABLE `geography` ENABLE KEYS */;
 
+
+-- Dumping structure for table cm.groups
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table cm.groups: ~2 rows (approximately)
+DELETE FROM `groups`;
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+INSERT INTO `groups` (`id`, `name`, `description`) VALUES
+	(1, 'admin', 'Administrator'),
+	(2, 'members', 'General User');
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+
+
+-- Dumping structure for table cm.hr_att
+DROP TABLE IF EXISTS `hr_att`;
+CREATE TABLE IF NOT EXISTS `hr_att` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `emp_id` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
+  `att_date` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
+  `pnch_in` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
+  `pnch_out` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
+  `pnch_diff` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
+  `remark` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table cm.hr_att: ~1 rows (approximately)
+DELETE FROM `hr_att`;
+/*!40000 ALTER TABLE `hr_att` DISABLE KEYS */;
+INSERT INTO `hr_att` (`id`, `emp_id`, `att_date`, `pnch_in`, `pnch_out`, `pnch_diff`, `remark`) VALUES
+	(1, 'CM-1001', '01/08/2016', '08:00', '17:00', '1', NULL);
+/*!40000 ALTER TABLE `hr_att` ENABLE KEYS */;
+
+
 -- Dumping structure for table cm.hr_dept
 DROP TABLE IF EXISTS `hr_dept`;
 CREATE TABLE IF NOT EXISTS `hr_dept` (
@@ -1115,6 +1156,7 @@ INSERT INTO `hr_dept` (`id`, `dept_name`, `dept_mother`, `dept_manager`) VALUES
 	('OPT', 'Operation', 'Management', 'ประพันธ์  วงษ์อุบล'),
 	('PJT', 'Project', 'Management', 'เพ็ญโสม  ใจวงค์');
 /*!40000 ALTER TABLE `hr_dept` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.hr_employee_data
 DROP TABLE IF EXISTS `hr_employee_data`;
@@ -1188,20 +1230,20 @@ INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `e
 	('CM-1017', 'น.ส.', 'Kyi Kyi Nyan', '', 'สา', 'พม่า', '19/04/95', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '14/03/16', '20/06/2016', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1019', 'นาย', 'Aung', 'Tin', 'อ๋อง', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1020', 'นาย', 'Zin Maung', 'Htun', 'ซี', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '13/08/14', '16/01/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1021', 'นาย', 'Tun', 'Kyaw', 'ทุนโจ', 'พม่า', '29/05/84', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1021', 'นาย', 'Tun', 'Kyaw', 'ทุนโจ', 'พม่า', '29/05/84', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '25/07/14', '20/02/2016', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1022', 'นาย', 'Hlawn Moe', 'Naing', 'นาย', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/02/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1023', 'นาย', 'Zaw', 'Moe', 'ซอม', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1024', 'นาง', 'พูมะลี', 'สิริปันยา', 'เจ', 'ลาว', '06/11/73', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '01/06/09', '17/05/2016', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1025', 'นาย', 'นาริน', 'กีม', 'นาริน', 'เขมร', '13/07/78', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '07/10/14', '', 'บรรจุแล้ว', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '0010261401416', '27/05/2025', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1026', 'นาย', 'Foe', 'Sae', 'โพ', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '16/01/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1027', 'นาย', 'Maung', 'Kyaw', 'ม่องโจ', 'พม่า', '12/02/87', 'Male', NULL, '0009', 'OPT', 'รายวัน', '25/07/14', '', 'บรรจุแล้ว', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1027', 'นาย', 'Maung', 'Kyaw', 'ม่องโจ', 'พม่า', '12/02/87', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '25/07/14', '20/02/2016', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1028', 'น.ส.', 'เพ็ญโสม ', 'ใจวงค์', 'แคท', 'ไทย', '31/08/90', 'Female', NULL, '0006', 'PJT', 'รายเดือน', '01/07/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1029', 'นาย', 'Myat', 'San', 'ซ่า', 'พม่า', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '15/01/15', '17/09/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1030', 'นาย', 'เอ๊าท์', ' เม็ท', 'เอ๊าท์', 'เขมร', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '05/01/15', '04/04/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1031', 'นาย', 'เล็ท', ' เม็ท', 'เล็ท', 'เขมร', '00/01/00', 'Male', NULL, '0009', 'OPT', 'รายวัน', '22/01/15', '04/04/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1032', 'นาย', 'มิน', '', 'มิน', 'เขมร', '11/02/75', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '05/01/16', '', 'บรรจุแล้ว', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', 'E032934', '04/11/2014', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1033', 'นาย', 'จักรพันธ์', 'นาคนชม', 'โต้', 'ไทย', '29/01/91', 'Male', NULL, '0011', 'ADM', 'รายเดือน', '07/05/15', '01/07/15', 'ลาออก', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('CM-1034', 'นาย', 'สมพงศ์  ', 'นันทไพบูลย์', 'สมพงศ์', 'ไทย', '11/12/52', 'Male', NULL, '0012', 'ADM', 'รายเดือน', '01/04/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('CM-1034', 'นาย', 'สมพงศ์  ', 'นันทไพบูลย์', 'สมพงศ์', 'ไทย', '11/12/52', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0012', 'ADM', 'พนักงานรายวัน', '01/04/14', '15/04/2016', 'ลาออก', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1035', 'น.ส.', 'ทอง', 'ทองทา', 'ทอง', 'ไทย', '25/01/54', 'Female', NULL, '0013', 'ADM', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1036', 'นาย', 'Way Lin', 'Tun', '', 'พม่า', '08/11/89', 'Male', NULL, '0009', 'OPT', 'รายวัน', '24/08/15', '17/09/15', 'ลาออก', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1037', 'นาย', 'อัศวเทพ ', 'เริงสำราญ', 'พฤกษ์', 'ไทย', '12/12/90', 'Male', NULL, '0014', 'PJT', 'รายเดือน', '01/09/15', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1210,6 +1252,7 @@ INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `e
 	('CM-1041', 'นาย', 'ปอย', '', 'ปอย', 'เขมร', '04/04/91', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '13/01/16', '', 'บรรจุแล้ว', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '0020041332466', '28/06/2025', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1042', 'นาย', 'ดอนสาม', '', 'ดอน', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '9/6/2016', '', 'ทดลองงาน', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '', '', '', '', '');
 /*!40000 ALTER TABLE `hr_employee_data` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.hr_leave
 DROP TABLE IF EXISTS `hr_leave`;
@@ -1223,9 +1266,9 @@ CREATE TABLE IF NOT EXISTS `hr_leave` (
   `lve_diff` char(5) COLLATE utf8_unicode_ci NOT NULL,
   `lve_reason` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_leave: ~199 rows (approximately)
+-- Dumping data for table cm.hr_leave: ~202 rows (approximately)
 DELETE FROM `hr_leave`;
 /*!40000 ALTER TABLE `hr_leave` DISABLE KEYS */;
 INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_out`, `lve_diff`, `lve_reason`) VALUES
@@ -1429,8 +1472,10 @@ INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_o
 	(198, 'CM-1009', 'Vac', '06/07/2016', '08:00', '17:00', '1', 'ไปเยี่ยมพ่อป่วย'),
 	(199, 'CM-1004', 'Si', '18/07/2016', '08:00', '17:00', '1', 'ท้องเสีย'),
 	(200, 'CM-1038', 'Bis', '25/07/2016', '13:00', '17:00', '0', 'ลงทะเบียนเรียน'),
-	(201, 'CM-1007', 'Bis', '28/07/2016', '13:00', '17:00', '0.5', 'สามีป่วย');
+	(201, 'CM-1007', 'Bis', '28/07/2016', '13:00', '17:00', '0.5', 'สามีป่วย'),
+	(202, 'CM-1007', 'Bis', '02/08/2016', '08:00', '17:00', '1', 'พาแฟนไป CT Scan');
 /*!40000 ALTER TABLE `hr_leave` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.hr_position
 DROP TABLE IF EXISTS `hr_position`;
@@ -1471,6 +1516,7 @@ INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`,
 	('0018', 'Scaffold Vendor', 'OPT', 'Scaffold Supervisor', NULL, NULL, NULL, NULL, 'Y');
 /*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.inventory_move
 DROP TABLE IF EXISTS `inventory_move`;
 CREATE TABLE IF NOT EXISTS `inventory_move` (
@@ -1486,12 +1532,13 @@ CREATE TABLE IF NOT EXISTS `inventory_move` (
   CONSTRAINT `FK_inventory_move_partner` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move: ~2 rows (approximately)
+-- Dumping data for table cm.inventory_move: ~0 rows (approximately)
 DELETE FROM `inventory_move`;
 /*!40000 ALTER TABLE `inventory_move` DISABLE KEYS */;
 INSERT INTO `inventory_move` (`id`, `partner_id`, `invent_move_createDate`, `invent_move_Date`, `invent_move_type`, `invent_move_status`, `invent_move_wh`) VALUES
 	('0001', '102', '17/06/2016 12:35', '15/06/2016', 'recieve', 'draft', NULL);
 /*!40000 ALTER TABLE `inventory_move` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.inventory_move_tr
 DROP TABLE IF EXISTS `inventory_move_tr`;
@@ -1503,9 +1550,9 @@ CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
   PRIMARY KEY (`id`),
   KEY `Index 1` (`inventory_move_id`),
   CONSTRAINT `FK_inventory_move_tr_product` FOREIGN KEY (`inventory_move_id`) REFERENCES `inventory_move` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move_tr: ~0 rows (approximately)
+-- Dumping data for table cm.inventory_move_tr: ~10 rows (approximately)
 DELETE FROM `inventory_move_tr`;
 /*!40000 ALTER TABLE `inventory_move_tr` DISABLE KEYS */;
 INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `product_id`, `amount`) VALUES
@@ -1518,8 +1565,10 @@ INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `product_id`, `amoun
 	(9, '0001', 'WH-08.U', 49),
 	(10, '0001', 'VC-4803', 153),
 	(11, '0001', 'VB-3019', 235),
-	(12, '0001', 'U-001', 4234);
+	(12, '0001', 'U-001', 4234),
+	(13, '0001', 'BM-4206', 450);
 /*!40000 ALTER TABLE `inventory_move_tr` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.inventory_wh
 DROP TABLE IF EXISTS `inventory_wh`;
@@ -1542,6 +1591,23 @@ INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`,
 	('WH-002', 'โกดังประเวศ', 'ซอย กาญจนาภิเษก 24', '', 'ประเวศ', 'ประเวศ', 'กรุงเทพมหานคร', 10250),
 	('OFF', 'Classmat Office', '93 ซอยอุดมสุข 51', 'สุขุมวิท 103', 'บางจาก', 'พระโขนง', 'กรุงเทพ', 10260);
 /*!40000 ALTER TABLE `inventory_wh` ENABLE KEYS */;
+
+
+-- Dumping structure for table cm.login_attempts
+DROP TABLE IF EXISTS `login_attempts`;
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(15) NOT NULL,
+  `login` varchar(100) NOT NULL,
+  `time` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table cm.login_attempts: ~0 rows (approximately)
+DELETE FROM `login_attempts`;
+/*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.partner
 DROP TABLE IF EXISTS `partner`;
@@ -1582,6 +1648,7 @@ INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `ad
 	('103', NULL, ' บริษัท ทาคาโอะ อีสเทิร์น จำกัด', '038-954-670', '', '', '58/1 หมู่ 4 อาคาร นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด', '', '1249', '156', '12', 12400, 'null', 'GSB', '', 0, 'ออมทรัพย์', '', 'ธุรกิจเงินทุนและหลักทรัพย์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('104', NULL, 'บริษัท ไทยโพลิเอททีลีน จำกัด', '', '', '', '1 ถ.ปูนซิเมนต์ไทย', '', '17', '29', '1', 0, '["supplier"]', 'GHB', NULL, 0, 'ฝากประจำ', '', 'ธุรกิจยานยนต์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
 /*!40000 ALTER TABLE `partner` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.product
 DROP TABLE IF EXISTS `product`;
@@ -1811,6 +1878,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_type`, `product_un
 	('WR-C', 'สเก็นสลิง  Wire Rope Clip', 'Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL, 'Equipment');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.product_attr
 DROP TABLE IF EXISTS `product_attr`;
 CREATE TABLE IF NOT EXISTS `product_attr` (
@@ -1828,6 +1896,7 @@ INSERT INTO `product_attr` (`id`) VALUES
 	('ยาว'),
 	('เส้นผ่านศูนย์กลาง');
 /*!40000 ALTER TABLE `product_attr` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.product_unit
 DROP TABLE IF EXISTS `product_unit`;
@@ -1847,6 +1916,7 @@ INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
 	('0005', 'ขา'),
 	('0006', 'แผ่น');
 /*!40000 ALTER TABLE `product_unit` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.province
 DROP TABLE IF EXISTS `province`;
@@ -1941,6 +2011,7 @@ INSERT INTO `province` (`Province_ID`, `Province_CODE`, `Province_NAME`, `GEO_ID
 	(77, '97', 'บึงกาฬ', 3);
 /*!40000 ALTER TABLE `province` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.rental
 DROP TABLE IF EXISTS `rental`;
 CREATE TABLE IF NOT EXISTS `rental` (
@@ -1966,6 +2037,7 @@ DELETE FROM `rental`;
 /*!40000 ALTER TABLE `rental` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rental` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.rentaltransaction
 DROP TABLE IF EXISTS `rentaltransaction`;
 CREATE TABLE IF NOT EXISTS `rentaltransaction` (
@@ -1986,6 +2058,7 @@ CREATE TABLE IF NOT EXISTS `rentaltransaction` (
 DELETE FROM `rentaltransaction`;
 /*!40000 ALTER TABLE `rentaltransaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rentaltransaction` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.subdist
 DROP TABLE IF EXISTS `subdist`;
@@ -10865,6 +10938,59 @@ INSERT INTO `subdist` (`SubDist_ID`, `SubDist_CODE`, `SubDist_NAME`, `Dist_ID`, 
 	(8860, '961303', 'มะรือโบออก', 997, 76, 6);
 /*!40000 ALTER TABLE `subdist` ENABLE KEYS */;
 
+
+-- Dumping structure for table cm.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(45) NOT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `activation_code` varchar(40) DEFAULT NULL,
+  `forgotten_password_code` varchar(40) DEFAULT NULL,
+  `forgotten_password_time` int(11) unsigned DEFAULT NULL,
+  `remember_code` varchar(40) DEFAULT NULL,
+  `created_on` int(11) unsigned NOT NULL,
+  `last_login` int(11) unsigned DEFAULT NULL,
+  `active` tinyint(1) unsigned DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `company` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table cm.users: ~0 rows (approximately)
+DELETE FROM `users`;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
+	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', 'ADMIN', '0');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+
+-- Dumping structure for table cm.users_groups
+DROP TABLE IF EXISTS `users_groups`;
+CREATE TABLE IF NOT EXISTS `users_groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
+  KEY `fk_users_groups_users1_idx` (`user_id`),
+  KEY `fk_users_groups_groups1_idx` (`group_id`),
+  CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table cm.users_groups: ~2 rows (approximately)
+DELETE FROM `users_groups`;
+/*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
+INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
+	(1, 1, 1),
+	(2, 1, 2);
+/*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

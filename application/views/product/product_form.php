@@ -21,6 +21,7 @@
 'product_d_RentalPrice'  =>  ราคาเช่ารายวัน,
 'product_GuaranteePrice' =>  ราคาค้ำประกัน,
 'product_Attr'           => คุณลักษณะสินค้า,
+'product_stock_date'     => วันที่ตรวจนับสินค้า,
 
 */
 
@@ -192,16 +193,25 @@
             'type' => 'number',
             'name' => 'product_stock'
           );
+          $input_number2 = array(
+            'type' => 'number',
+            'name' => 'product_safety'
+          );
 
           if(isset($data)){
             //Assign Variable
             $product_stock = $data[0]->product_stock;
+            $product_safety = $data[0]->product_safety;
 
             echo form_label('จำนวนสินค้าใน Stock')
                 .form_input($input_number,$product_stock);
+            echo form_label('Safety Stock')
+                .form_input($input_number2,$product_safety);
           }else{
             echo form_label('จำนวนสินค้าใน Stock')
                 .form_input($input_number);
+            echo form_label('Safety Stock')
+                .form_input($input_number2);
           }
 
         ?>
@@ -210,21 +220,20 @@
           <div class="large-6 columns">
         <?php
 
-
           $input_number = array(
-            'type' => 'number',
-            'name' => 'product_safety'
+            'type' => 'text',
+            'name' => 'product_stock_date'
           );
 
           if(isset($data)){
             //Assign Variable
-            $product_safety = $data[0]->product_safety;
+            $product_stock_date = $data[0]->product_stock_date;
 
-            echo form_label('Safety Stock')
-                .form_input($input_number,$product_safety);
+            echo form_label('วันที่ตรวจนับสินค้า')
+                .form_input($input_number,$product_stock_date,'class=datepicker');
           }else{
-            echo form_label('Safety Stock')
-                .form_input($input_number);
+            echo form_label('วันที่ตรวจนับสินค้า')
+                .form_input($input_number,'','class=datepicker');
           }
 
         ?>

@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-
+	$('#datatable').DataTable();
 	// Add Attribute Row
 		$i = $('#Product_detail tr').length; //Count Row
 		$('#Add_Product_row').on('click', function(){
@@ -21,29 +21,6 @@
 			}else{
 				alert('เหลือแถวสุดท้ายแล้ว ไม่สามารถลบได้');
 			}
-		});
-
-	// Autocomplete
-		$("#search").autocomplete({
-			source: function(request, response) {
-				$.ajax({
-					url: "<?php echo site_url().'/product/lookup'; ?>",
-					data: {
-						search:	$("#search").val()
-					},
-					dataType: "json",
-					type: "POST",
-					success: function (data) {
-		                response(data.map(function (value) {
-		                    return {
-		                        'label': value.product_name,
-		                        'value': value.product_name
-		                    };
-		            	}))
-		            }
-				});
-			},
-			minLength: 3
 		});
 
 	});	
