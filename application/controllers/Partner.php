@@ -112,7 +112,8 @@ class Partner extends CI_Controller {
 					'Acc_type'          =>	$this->input->post('Acc_type'),
 					'Acc_branch'        =>	$this->input->post('Acc_branch'),
 					'Sector'            =>	$this->input->post('Sector'),
-					'partner_contactor' =>	json_encode($this->input->post('partner_contactor'))
+					'partner_contactor' =>	json_encode($this->input->post('partner_contactor')),
+					'partner_desc'      =>	$this->input->post('partner_desc')
 					);
 
 					$this->partner_m->create($data);
@@ -163,7 +164,8 @@ class Partner extends CI_Controller {
 					'Acc_type'          =>	$this->input->post('Acc_type'),
 					'Acc_branch'        =>	$this->input->post('Acc_branch'),
 					'Sector'            =>	$this->input->post('Sector'),
-					'partner_contactor' =>	json_encode($this->input->post('partner_contactor'))
+					'partner_contactor' =>	json_encode($this->input->post('partner_contactor')),
+					'partner_desc'            =>	$this->input->post('partner_desc')
 					);
 
 

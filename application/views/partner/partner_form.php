@@ -241,6 +241,25 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="large-12 columns">
+    <?php
+      if(isset($data)){
+        //Assign Variable
+        $partner_desc = $data[0]->partner_desc;
+
+      echo form_label('รายละเอียด')
+        .form_textarea('partner_desc',$partner_desc);
+
+      }else{
+      echo form_label('รายละเอียด')
+        .form_textarea('partner_desc');
+      }
+
+    ?>
+  </div>
+</div>
+
       </div>
 
 

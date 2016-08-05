@@ -20,3 +20,22 @@
    margin-right: auto;
    max-width: initial;
 }
+
+/*Login*/
+#login {
+  background-color: #383839;
+}
+
+#panel {
+  margin: 10% 25% 25% 25%;
+}
+
+#copyright{
+  color: white;
+}
+
+#panel article {
+  background-color: white;
+  padding: 5% 10% 5% 10%;
+  border:1px solid #888888;
+}

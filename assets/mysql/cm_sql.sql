@@ -1535,8 +1535,6 @@ CREATE TABLE IF NOT EXISTS `inventory_move` (
 -- Dumping data for table cm.inventory_move: ~0 rows (approximately)
 DELETE FROM `inventory_move`;
 /*!40000 ALTER TABLE `inventory_move` DISABLE KEYS */;
-INSERT INTO `inventory_move` (`id`, `partner_id`, `invent_move_createDate`, `invent_move_Date`, `invent_move_type`, `invent_move_status`, `invent_move_wh`) VALUES
-	('0001', '102', '17/06/2016 12:35', '15/06/2016', 'recieve', 'draft', NULL);
 /*!40000 ALTER TABLE `inventory_move` ENABLE KEYS */;
 
 
@@ -1550,23 +1548,11 @@ CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
   PRIMARY KEY (`id`),
   KEY `Index 1` (`inventory_move_id`),
   CONSTRAINT `FK_inventory_move_tr_product` FOREIGN KEY (`inventory_move_id`) REFERENCES `inventory_move` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move_tr: ~10 rows (approximately)
+-- Dumping data for table cm.inventory_move_tr: ~0 rows (approximately)
 DELETE FROM `inventory_move_tr`;
 /*!40000 ALTER TABLE `inventory_move_tr` DISABLE KEYS */;
-INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `product_id`, `amount`) VALUES
-	(1, '0001', 'BB-4224', 24),
-	(3, NULL, NULL, NULL),
-	(4, NULL, NULL, NULL),
-	(6, NULL, NULL, NULL),
-	(7, '0001', 'BL-4218', 1263),
-	(8, '0001', 'VC-4203', 20),
-	(9, '0001', 'WH-08.U', 49),
-	(10, '0001', 'VC-4803', 153),
-	(11, '0001', 'VB-3019', 235),
-	(12, '0001', 'U-001', 4234),
-	(13, '0001', 'BM-4206', 450);
 /*!40000 ALTER TABLE `inventory_move_tr` ENABLE KEYS */;
 
 
@@ -1625,6 +1611,7 @@ CREATE TABLE IF NOT EXISTS `partner` (
   `Province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Postal` int(5) DEFAULT NULL,
   `Type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `partner_desc` text COLLATE utf8_unicode_ci,
   `Bank` varchar(3) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Acc_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Acc_no` int(10) DEFAULT NULL,
@@ -1638,15 +1625,12 @@ CREATE TABLE IF NOT EXISTS `partner` (
   CONSTRAINT `fk_bank` FOREIGN KEY (`Bank`) REFERENCES `bank` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.partner: ~5 rows (approximately)
+-- Dumping data for table cm.partner: ~2 rows (approximately)
 DELETE FROM `partner`;
 /*!40000 ALTER TABLE `partner` DISABLE KEYS */;
-INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `add1`, `add2`, `SubDist`, `Dist`, `Province`, `Postal`, `Type`, `Bank`, `Acc_name`, `Acc_no`, `Acc_type`, `Acc_branch`, `Sector`, `partner_contactor`) VALUES
-	('000', NULL, 'ลูกค้าทั่วไป', '', '', '', '', '', '', '', '', 0, '["customer"]', 'AGR', '', 0, 'กระแสรายวัน', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
-	('101', NULL, 'บริษัท บีแอนด์เอ็มการชุบ จำกัด', '012-345-6789', '', '', '20/213 หมู่ 6 ถนนพระราม 2', '', '7344', '814', '59', 11110, '["customer"]', 'LHB', '', 0, 'ฝากประจำ', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
-	('102', 2147483647, 'เอ.ที. เอ็นจิเนียร์ ซัพพลาย บจก.', '029-258-485', '', '', '14/1929 หมู่ 13 ตลิ่งชัน ถนนสุพรรณบุรี', '', '327', '61', '3', 12310, '["customer"]', 'JPM', '', 0, 'ออมทรัพย์', '', 'ธุรกิจการเกษตร‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
-	('103', NULL, ' บริษัท ทาคาโอะ อีสเทิร์น จำกัด', '038-954-670', '', '', '58/1 หมู่ 4 อาคาร นิคมอุตสาหกรรมอีสเทิร์นซีบอร์ด', '', '1249', '156', '12', 12400, 'null', 'GSB', '', 0, 'ออมทรัพย์', '', 'ธุรกิจเงินทุนและหลักทรัพย์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
-	('104', NULL, 'บริษัท ไทยโพลิเอททีลีน จำกัด', '', '', '', '1 ถ.ปูนซิเมนต์ไทย', '', '17', '29', '1', 0, '["supplier"]', 'GHB', NULL, 0, 'ฝากประจำ', '', 'ธุรกิจยานยนต์‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
+INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `add1`, `add2`, `SubDist`, `Dist`, `Province`, `Postal`, `Type`, `partner_desc`, `Bank`, `Acc_name`, `Acc_no`, `Acc_type`, `Acc_branch`, `Sector`, `partner_contactor`) VALUES
+	('000', NULL, 'ลูกค้าทั่วไป', '', '', '', '', '', '', '', '', 0, '["customer"]', NULL, 'AGR', '', 0, 'กระแสรายวัน', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
+	('0001', NULL, 'บริษัท รชิต เอ็นจิเนียริ่ง จำกัด', '', '', 'sales.rachita@gmail.com', '106/69-70  หมู่ที่ 9', '', NULL, '136', '11', 20230, '["supplier"]', '- เทปตีเขต Safety\r\n- เทปตีแนว Safety', 'AGR', '', 0, 'กระแสรายวัน', '', 'ธุรกิจวัสดุก่อสร้าง‎', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
 /*!40000 ALTER TABLE `partner` ENABLE KEYS */;
 
 

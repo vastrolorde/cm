@@ -6,7 +6,7 @@ class login extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('ion_auth');
+		require_once APPPATH.'third_party/Ion-Auth/libraries/Ion_auth.php';
 	}
   
   	public function index()
@@ -16,13 +16,14 @@ class login extends CI_Controller {
  
   	public function login()
   	{
-  		$this->data['page_title'] = 'Login';
-		if($this->input->post())
-		{
+  		$data['title'] = 'Login';
+		$this->load->view('login/login',$data);
+  	}
 
-		}
-		$this->load->helper('form');
-		$this->render('admin/login_view','admin_master');
+	public function reset()
+  	{
+  		$data['title'] = 'Reset Password';
+		$this->load->view('login/reset',$data);
   	}
   
   	public function logout()

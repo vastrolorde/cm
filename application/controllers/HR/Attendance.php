@@ -127,8 +127,8 @@ class Attendance extends CI_Controller {
 
 	public function upload(){
 
-		$this->load->library('csvreader');
-        $result =   $this->csvreader->parse_file('att_csv.csv');//path to csv file
+		$this->load->library('csv_import');
+        $result =   $this->csv_import->parse_file('att_csv.csv');//path to csv file
 
         
 	}
