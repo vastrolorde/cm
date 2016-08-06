@@ -14,6 +14,15 @@ class Dept extends CI_Controller {
 
 	public function index()
 	{
+
+
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
+
+			redirect('/login');
+		}else{
+
 		$data['title'] = 'จัดการแผนก';
 		$data['result'] = $this->hr_dept_m->getAll();
 		$data['mask'] = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
@@ -23,6 +32,8 @@ class Dept extends CI_Controller {
 		$this->load->view('HR/HR_Dept_list',$data);
 		$this->load->view('parts/footer');
 		$this->load->view('scripts/dept_script');
+
+		}
 	}
 
 	/******			Form			******/

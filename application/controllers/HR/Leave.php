@@ -15,6 +15,14 @@ class Leave extends CI_Controller {
 	public function index()
 	{
 
+
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
+
+			redirect('/login');
+		}else{
+
 		$data['title'] = 'บันทึกการลา';
 		$data['Lve'] = $this->HR_Leave_m->sumLeave();
 		$data['empAll'] = $this->HR_Leave_m->getAll();
@@ -27,6 +35,7 @@ class Leave extends CI_Controller {
 		$this->load->view('HR/HR_lve_list',$data);
 		$this->load->view('parts/footer');
 		$this->load->view('scripts/leave_script');
+		}
 	}
 
 	/******			Form			******/

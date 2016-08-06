@@ -16,6 +16,14 @@ class Attendance extends CI_Controller {
 	public function index()
 	{
 
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
+
+			redirect('/login');
+		}else{
+
+
 		$data['title'] = 'บันทึกลงเวลา';
 		$data['result'] = $this->HR_Att_m->getAll();
 		$data['emp'] = $this->HR_Emp_m->getAll();
@@ -26,6 +34,8 @@ class Attendance extends CI_Controller {
 		$this->load->view('HR/HR_att_list',$data);
 		$this->load->view('parts/footer');
 		$this->load->view('scripts/att_script');
+
+		}
 	}
 
 	/******			Form			******/

@@ -31,7 +31,7 @@
 
 					<div class="text-center">
 						<button class="button">Reset</button>
-						<a class="button alert" href="<?php echo site_url('login/login') ?>">ย้อนกลับ</a>
+						<a class="button alert" href="<?php echo site_url('login') ?>">ย้อนกลับ</a>
 					</div>
 				</form>
 			</article>

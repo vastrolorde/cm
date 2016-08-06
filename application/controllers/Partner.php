@@ -15,13 +15,21 @@ class Partner extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'partner';
-		$data['result'] = $this->partner_m->getAll();
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('partner/partner_list',$data);
-		$this->load->view('parts/footer');
-		$this->load->view('scripts/partner_script');
+			redirect('/login');
+		}else{
+
+			$data['title'] = 'partner';
+			$data['result'] = $this->partner_m->getAll();
+
+			$this->load->view('parts/head',$data);
+			$this->load->view('partner/partner_list',$data);
+			$this->load->view('parts/footer');
+			$this->load->view('scripts/partner_script');
+		}
 	}
 
 
@@ -30,44 +38,57 @@ class Partner extends CI_Controller {
 
 	public function create()
 	{
-		$this->load->model('others/Province_m','Province'); //Province Plugin
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
+			redirect('/login');
+		}else{
 
-		$data['title'] = 'สร้าง Partner ใหม่';
-		$data['execute'] = 
-			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
-			<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
-		$data['Province_all'] = $this->Province->province(); //Province Plugin
-		$data['bank'] = $this->partner_m->bank();
-		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
+			$this->load->model('others/Province_m','Province'); //Province Plugin
+			$data['title'] = 'สร้าง Partner ใหม่';
+			$data['execute'] = 
+				'<li><input class="button hollow success" type="submit"></li>
+				<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
+				<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
+			$data['Province_all'] = $this->Province->province(); //Province Plugin
+			$data['bank'] = $this->partner_m->bank();
+			$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('partner/partner_form',$data);
-		$this->load->view('parts/footer');	
-		$this->load->view('scripts/partner_script');
+			$this->load->view('parts/head',$data);
+			$this->load->view('partner/partner_form',$data);
+			$this->load->view('parts/footer');	
+			$this->load->view('scripts/partner_script');
+		}
 		
 	}
 
 	public function data($id)
 	{
-		$this->load->model('others/Province_m','Province'); //Province Plugin
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$data['title'] = 'แก้ไข Partner';
-		$data['execute'] = 
-			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
-			<li><a class="button hollow alert delitem" href="'.site_url('/partner/delete').'/'.$id.'">ลบ</a></li>
-			<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->partner_m->get($id);
-		$data['Province_all'] = $this->Province->province(); //Province Plugin
-		$data['bank'] = $this->partner_m->bank();
-		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
+			redirect('/login');
+		}else{
+			$this->load->model('others/Province_m','Province'); //Province Plugin
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('partner/partner_form',$data);
-		$this->load->view('parts/footer');	
-		$this->load->view('scripts/partner_script');
+			$data['title'] = 'แก้ไข Partner';
+			$data['execute'] = 
+				'<li><input class="button hollow success" type="submit"></li>
+				<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
+				<li><a class="button hollow alert delitem" href="'.site_url('/partner/delete').'/'.$id.'">ลบ</a></li>
+				<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
+			$data['data'] = $this->partner_m->get($id);
+			$data['Province_all'] = $this->Province->province(); //Province Plugin
+			$data['bank'] = $this->partner_m->bank();
+			$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
+
+			$this->load->view('parts/head',$data);
+			$this->load->view('partner/partner_form',$data);
+			$this->load->view('parts/footer');	
+			$this->load->view('scripts/partner_script');
+		}
 	}
 
 

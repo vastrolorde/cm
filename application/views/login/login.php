@@ -18,12 +18,31 @@
 					<h2>Classmat System
 					<small><?php echo $title; ?></small></h2>
 				</div>
-				<form>
+				<div class="text-alert">
+					<?php
+						if(isset($_SESSION['error_msg'])){
+							echo $_SESSION['error_msg'];
+						}
+					?>
+				</div>
+				<?php
+						echo form_open('/login/login');
+
+						$production = TRUE;
+
+						if($production == TRUE){
+							$username = 'admin@admin.com';
+							$password = 'password';
+						}else{
+							$username = '';
+							$password = '';
+						}
+					?>
 					<label>Login:
-						<input type="text" name="login">
+						<input type="text" name="login" value="<?php echo $username; ?>">
 					</label>
 					<label>Password:
-						<input type="password" name="password">
+						<input type="password" name="password" value="<?php echo $password; ?>">
 					</label>
 
 					<div class="text-center"><button class="button">Login</button>

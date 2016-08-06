@@ -16,13 +16,21 @@ class Inventory extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
-		$data['result'] = $this->Inventory_m->getAll();
-		$data['partner'] = $this->partner();
 
-		$this->load->View('parts/head',$data);
-		$this->load->view('Inventory/Inventory_move_list',$data);
-		$this->load->View('parts/footer');
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
+
+			redirect('/login');
+		}else{
+			$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
+			$data['result'] = $this->Inventory_m->getAll();
+			$data['partner'] = $this->partner();
+
+			$this->load->View('parts/head',$data);
+			$this->load->view('Inventory/Inventory_move_list',$data);
+			$this->load->View('parts/footer');
+		}
 	}
 
 
@@ -30,29 +38,37 @@ class Inventory extends CI_Controller {
 
 	public function data($id)
 	{
-		$data['title'] = 'ใบรับ/เบิกสินค้า';
-		$data['execute'] = 
-			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('/Inventory/Inventory').'">ยกเลิก</a></li>
-			<li><a class="button hollow alert delitem" href="'.site_url('/Inventory/Inventory/delete').'/'.$id.'">ลบ</a></li>
-			<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/invent_move_pdf').'/'.$id.'">พิมพ์รายงาน</a></li>';
-		
-		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
-		
-		//ดึงข้อมูลรายการใบเบิก
-		$data['data'] = $this->Inventory_m->get($id);
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		//ดึงข้อมูล Partner และ Warehouse
-		$data['partner'] = $this->partner();
-		$data['warehouse'] = $this->warehouse();
+			redirect('/login');
+		}else{
+
+			$data['title'] = 'ใบรับ/เบิกสินค้า';
+			$data['execute'] = 
+				'<li><input class="button hollow success" type="submit"></li>
+				<li><a class="button hollow warning" href="'.site_url('/Inventory/Inventory').'">ยกเลิก</a></li>
+				<li><a class="button hollow alert delitem" href="'.site_url('/Inventory/Inventory/delete').'/'.$id.'">ลบ</a></li>
+				<li><a class="button hollow" href="'.site_url('/Inventory/Inventory/invent_move_pdf').'/'.$id.'">พิมพ์รายงาน</a></li>';
+			
+			$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
+			
+			//ดึงข้อมูลรายการใบเบิก
+			$data['data'] = $this->Inventory_m->get($id);
+
+			//ดึงข้อมูล Partner และ Warehouse
+			$data['partner'] = $this->partner();
+			$data['warehouse'] = $this->warehouse();
 
 
-		$data['product'] = $this->product_m->product_all();
+			$data['product'] = $this->product_m->product_all();
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('Inventory/Inventory_move_form',$data);
-		$this->load->view('parts/footer');
-		$this->load->View('scripts/inventory_script');
+			$this->load->view('parts/head',$data);
+			$this->load->view('Inventory/Inventory_move_form',$data);
+			$this->load->view('parts/footer');
+			$this->load->View('scripts/inventory_script');
+		}
 	}
 
 	/******			Database			******/

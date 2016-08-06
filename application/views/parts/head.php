@@ -36,9 +36,12 @@
 
   <div class="top-bar-right">
     <ul class="menu">
-      <li><a href="#">Username</a></li>
-      <li><a href="#">Settings</a></li>
-      <li><a href="#">Log out</a></li>
+      <li><a href="<?php echo site_url().'/home'; ?>">Home</a></li>
+      <li><a href="#">Username</a></li><?php
+      if($this->ion_auth->is_admin()){
+        echo '<li><a href="'.site_url().'/login/admin'.'">Admin Panel</a></li>';
+      }?>
+      <li><a href="<?php echo site_url().'/login/logout'; ?>">Log out</a></li>
     </ul>
   </div>
 
@@ -48,7 +51,7 @@
   <div class="large-2 medium-3 columns">
 
       <ul class="vertical menu" data-accordion-menu>
-        <li><a href="<?php echo site_url(); ?>">Dashboard</a></li>
+        <li><a href="<?php echo site_url().'/home'; ?>">Dashboard</a></li>
         <li><a href="<?php echo site_url().'/rental'; ?>">งานเช่า</a></li>
         <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
         <li><a href="#">สินค้าคงคลัง</a>

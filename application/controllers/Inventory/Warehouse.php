@@ -14,12 +14,19 @@ class Warehouse extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'คลังสินค้า';
-		$data['result'] = $this->wh_m->getAll();
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('Inventory/Inventory_wh_list',$data);
-		$this->load->View('parts/footer');
+			redirect('/login');
+		}else{
+			$data['title'] = 'คลังสินค้า';
+			$data['result'] = $this->wh_m->getAll();
+
+			$this->load->view('parts/head',$data);
+			$this->load->view('Inventory/Inventory_wh_list',$data);
+			$this->load->View('parts/footer');
+		}
 	}
 
 
@@ -27,30 +34,44 @@ class Warehouse extends CI_Controller {
 
 	public function create()
 	{
-		$data['title'] = 'สร้างคลังสินค้าใหม่';
-		$data['execute'] = 
-			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('Inventory/Warehouse').'">ยกเลิก</a></li>
-			<li><a class="button hollow" href="'.site_url('Inventory/Warehouse/create').'">พิมพ์รายงาน</a></li>';
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('Inventory/Inventory_wh_form',$data);
-		$this->load->view('parts/footer');
+			redirect('/login');
+		}else{
+			$data['title'] = 'สร้างคลังสินค้าใหม่';
+			$data['execute'] = 
+				'<li><input class="button hollow success" type="submit"></li>
+				<li><a class="button hollow warning" href="'.site_url('Inventory/Warehouse').'">ยกเลิก</a></li>
+				<li><a class="button hollow" href="'.site_url('Inventory/Warehouse/create').'">พิมพ์รายงาน</a></li>';
+
+			$this->load->view('parts/head',$data);
+			$this->load->view('Inventory/Inventory_wh_form',$data);
+			$this->load->view('parts/footer');
+		}
 	}
 
 	public function data($id)
 	{
-		$data['title'] = 'แก้ไขคลังสินค้า';
-		$data['execute'] = 
-			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('Inventory/Warehouse').'">ยกเลิก</a></li>
-			<li><a class="button hollow alert delitem" href="'.site_url('Inventory/Warehouse/delete').'/'.$id.'">ลบ</a></li>
-			<li><a class="button hollow" href="'.site_url('Inventory/Warehouse/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->wh_m->get($id);
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('Inventory/Inventory_wh_form',$data);
-		$this->load->view('parts/footer');
+			redirect('/login');
+		}else{
+			$data['title'] = 'แก้ไขคลังสินค้า';
+			$data['execute'] = 
+				'<li><input class="button hollow success" type="submit"></li>
+				<li><a class="button hollow warning" href="'.site_url('Inventory/Warehouse').'">ยกเลิก</a></li>
+				<li><a class="button hollow alert delitem" href="'.site_url('Inventory/Warehouse/delete').'/'.$id.'">ลบ</a></li>
+				<li><a class="button hollow" href="'.site_url('Inventory/Warehouse/create').'">พิมพ์รายงาน</a></li>';
+			$data['data'] = $this->wh_m->get($id);
+
+			$this->load->view('parts/head',$data);
+			$this->load->view('Inventory/Inventory_wh_form',$data);
+			$this->load->view('parts/footer');
+		}
 	}
 
 	/******			Database			******/

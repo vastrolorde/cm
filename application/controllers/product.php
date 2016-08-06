@@ -7,7 +7,7 @@ class Product extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
-$this->db->save_queries = false; // ADD THIS LINE TO SOLVE ISSUE
+		$this->db->save_queries = false; // ADD THIS LINE TO SOLVE ISSUE
 		$this->load->model('product/product_model','product_m');
 		$this->load->helper('string');
 	}
@@ -16,13 +16,21 @@ $this->db->save_queries = false; // ADD THIS LINE TO SOLVE ISSUE
 
 	public function index()
 	{
-		$data['title'] = 'Product';
-		$data['result'] = $this->product_m->getAll();
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('product/product_list',$data);
-		$this->load->view('parts/footer');
-		$this->load->view('scripts/product_script');
+			redirect('/login');
+		}else{
+
+			$data['title'] = 'Product';
+			$data['result'] = $this->product_m->getAll();
+
+			$this->load->view('parts/head',$data);
+			$this->load->view('product/product_list',$data);
+			$this->load->view('parts/footer');
+			$this->load->view('scripts/product_script');
+		}
 	}
 
 
@@ -31,32 +39,46 @@ $this->db->save_queries = false; // ADD THIS LINE TO SOLVE ISSUE
 
 	public function create()
 	{
-		$data['title'] = 'สร้างรายการสินค้าใหม่';
-		$data['execute'] = 
-			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('/product').'">ยกเลิก</a></li>
-			<li><a class="button hollow" href="'.site_url('/product/create').'">พิมพ์รายงาน</a></li>';
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('product/product_form',$data);
-		$this->load->view('parts/footer');
-		$this->load->view('scripts/product_script');
+			redirect('/login');
+		}else{
+			$data['title'] = 'สร้างรายการสินค้าใหม่';
+			$data['execute'] = 
+				'<li><input class="button hollow success" type="submit"></li>
+				<li><a class="button hollow warning" href="'.site_url('/product').'">ยกเลิก</a></li>
+				<li><a class="button hollow" href="'.site_url('/product/create').'">พิมพ์รายงาน</a></li>';
+
+			$this->load->view('parts/head',$data);
+			$this->load->view('product/product_form',$data);
+			$this->load->view('parts/footer');
+			$this->load->view('scripts/product_script');
+		}
 	}
 
 	public function data($id)
 	{
-		$data['title'] = 'แก้ไขรายการสินค้า';
-		$data['execute'] = 
-			'<li><input class="button hollow success" type="submit"></li>
-			<li><a class="button hollow warning" href="'.site_url('/product').'">ยกเลิก</a></li>
-			<li><a class="button hollow alert delitem" href="'.site_url('/product/delete').'/'.$id.'">ลบ</a></li>
-			<li><a class="button hollow" href="'.site_url('/product/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->product_m->get($id);
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
 
-		$this->load->view('parts/head');
-		$this->load->view('product/product_form',$data);
-		$this->load->view('parts/footer');	
-		$this->load->view('scripts/product_script');
+			redirect('/login');
+		}else{
+			$data['title'] = 'แก้ไขรายการสินค้า';
+			$data['execute'] = 
+				'<li><input class="button hollow success" type="submit"></li>
+				<li><a class="button hollow warning" href="'.site_url('/product').'">ยกเลิก</a></li>
+				<li><a class="button hollow alert delitem" href="'.site_url('/product/delete').'/'.$id.'">ลบ</a></li>
+				<li><a class="button hollow" href="'.site_url('/product/create').'">พิมพ์รายงาน</a></li>';
+			$data['data'] = $this->product_m->get($id);
+
+			$this->load->view('parts/head');
+			$this->load->view('product/product_form',$data);
+			$this->load->view('parts/footer');	
+			$this->load->view('scripts/product_script');
+		}
 	}
 	/******			Database			******/
 

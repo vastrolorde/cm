@@ -16,6 +16,14 @@ class Position extends CI_Controller {
 	public function index()
 	{
 
+
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
+
+			redirect('/login');
+		}else{
+
 		$data['title'] = 'จัดการตำแหน่ง';
 		$data['result'] = $this->hr_Position_m->getAll();
 		$data['mask'] = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
@@ -24,6 +32,7 @@ class Position extends CI_Controller {
 		$this->load->view('HR/HR_Position_list',$data);
 		$this->load->view('parts/footer');
 		$this->load->view('scripts/position_script');
+		}
 	}
 
 	/******			Form			******/

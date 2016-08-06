@@ -58,9 +58,6 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-
-require_once APPPATH.'third_party/Ion-Auth/libraries/Ion_auth.php';
-
 $autoload['libraries'] = array('session','form_validation','Ion_Auth');
 
 /*
