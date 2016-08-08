@@ -5,8 +5,8 @@ class Product_model extends CI_Model {
 
 	public function getAll(){
 		$this->db->select("*");
-		$query = $this->db->get("product");
 		$this->db->order_by('product_family', 'DESC');
+		$query = $this->db->get("product");
 		return $result = $query->result();
 
 	}

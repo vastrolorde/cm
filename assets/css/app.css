@@ -21,6 +21,31 @@
    max-width: initial;
 }
 
+/*Panel*/
+.navigation_head{
+  color:white;
+}
+
+.fullHeight-col {
+  min-height:100vh;
+  padding:0;
+  background: #363636;
+}
+
+.fullHeight-col>ul>li>a{
+  margin-left:5%;
+  margin-right:5%;
+  border-top:1px solid #4A4A4A;
+}
+
+.fullHeight-col li:hover{
+  background: #1F1F1F;
+}
+
+.fullHeight-col a:active{
+  color: #F2F0A1;
+}
+
 /*Login*/
 #login {
   background-color: #383839;

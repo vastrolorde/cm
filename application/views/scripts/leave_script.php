@@ -1,7 +1,38 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-	$('#datatable').DataTable();
 
+	$('#calendar').fullCalendar({
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		events:[
+		// For each orgchart box, provide the name, manager, and tooltip to show.
+			<?php 
+				$this->db->select('lve.emp_id,lve.lve_type,emp.id,emp.emp_fname,emp.emp_lname,lve.lve_date,lve.lve_in,lve.lve_out');
+				$this->db->from('hr_leave as lve');
+				$this->db->join('hr_employee_data as emp','lve.emp_id = emp.id');
+				$this->db->where('emp.emp_status','บรรจุแล้ว');
+				$this->db->or_where('emp.emp_status','ทดลองงาน');
+				$query = $this->db->get()->result();
+
+				foreach ($query as $row) {
+
+					// change date format
+					$date = $row->lve_date;
+					$newDate = date("Y-d-m", strtotime($date));
+
+
+					echo "{title:'".$row->emp_fname." ".$row->emp_lname." ".$row->lve_type."',
+					start:'".$newDate." ".$row->lve_in."',
+					end:'".$newDate." ".$row->lve_out."'},";
+				}
+			?>
+		]
+    })
+
+	$('#datatable').DataTable();
 
 		var id = $('#emp_id').val();
 

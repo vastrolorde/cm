@@ -34,8 +34,8 @@
 			<?php
 				if(!isset($user)){
 						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('username').'</div>
-							<div class="large-10 medium-8 small-8 columns">'.form_input('username').'</div></div>';
+							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('email').'</div>
+							<div class="large-10 medium-8 small-8 columns">'.form_input('email').'</div></div>';
 						echo '<div class="row">
 							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('password').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('password').'</div></div>';
@@ -45,17 +45,11 @@
 						echo '<div class="row">
 							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('last_name').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('last_name').'</div></div>';
-						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('email').'</div>
-							<div class="large-10 medium-8 small-8 columns">'.form_input('email').'</div></div>';
 				}else{
 					foreach($user as $row){
 						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('id').'</div>
-							<div class="large-10 medium-8 small-8 columns">'.$row->id.'</div></div>';
-						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('username').'</div>
-							<div class="large-10 medium-8 small-8 columns">'.form_input('username',$row->username).'</div></div>';
+							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('email').'</div>
+							<div class="large-10 medium-8 small-8 columns">'.form_input('email',$row->email).form_hidden('id',$row->id).'</div></div>';
 						echo '<div class="row">
 							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('password').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('password',$row->password).'</div></div>';
@@ -65,9 +59,6 @@
 						echo '<div class="row">
 							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('last_name').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('last_name',$row->last_name).'</div></div>';
-						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('email').'</div>
-							<div class="large-10 medium-8 small-8 columns">'.form_input('email',$row->email).'</div></div>';
 					}
 				}
 			?>

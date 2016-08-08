@@ -76,6 +76,9 @@
   </div>
 </div>
 
+<!-- Calendar -->
+    <div id="calendar"></div>
+
 <table id="leave datatable">
 
   <thead>
@@ -123,6 +126,10 @@
   ?>
   </tbody>
 </table>
+
+</div>
+
+
 
   </div>
 </div>

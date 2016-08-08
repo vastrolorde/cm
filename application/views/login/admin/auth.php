@@ -17,23 +17,22 @@
 	<table id="datatable">
 	  <thead>
 	    <tr>
-	      <th>First name</th>
-	      <th>Last name</th>
 	      <th>email</th>
+	      <th>groups</th>
 	      <th>action</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    
 	    <?php
-	    	foreach($users as $row){
-	    		echo '<tr>';
-	    		echo '<td>'.$row->first_name.'</td>';
-	    		echo '<td>'.$row->last_name.'</td>';
-	    		echo '<td>'.$row->email.'</td>';
-	    		echo '<td><a href="'.site_url().'/login/edit_user/'.$row->id.'">Edit</a> | <a class="delitem" href="'.site_url().'/login/del_user/'.$row->id.'">Delete</a></td>';
-	    		echo '</tr>';
-	    	}
+	    	print_r($result);
+	    	// foreach($result as $row){
+	    	// 	echo '<tr>';
+	    	// 	echo '<td>'.$row->email.'</td>';
+	    	// 	echo '<td>'.$row->group_id.'</td>';
+	    	// 	echo '<td><a href="'.site_url().'/login/edit_user/'.$row->id.'">Edit</a> | <a class="delitem" href="'.site_url().'/login/del_user/'.$row->id.'">Delete</a></td>';
+	    	// 	echo '</tr>';
+	    	// }
 	    ?>
 	  </tbody>
 	</table>

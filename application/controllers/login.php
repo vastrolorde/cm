@@ -86,14 +86,13 @@ class login extends CI_Controller {
             'last_name'  =>  $this->input->post('last_name'),
           );
 
-          $this->ion_auth->register($data);
+          $this->ion_auth->register($username,$password,$email,$additional_data);
           redirect('login/admin');
 
         }
 
         public function update_user($id){
           $data = array(
-            'id'         =>  $this->input->post('id'),
             'username'   =>  $this->input->post('username'),
             'password'   =>  $this->input->post('password'),
             'first_name' =>  $this->input->post('first_name'),
@@ -102,12 +101,14 @@ class login extends CI_Controller {
           );
 
           $this->ion_auth->update($id,$data);
-
           redirect('login/admin');
 
         }
 
-        public function del_user(){}
+        public function del_user($id){
+        	$this->ion_auth->delete_user($id);
+          	redirect('login/admin');
+        }
 
       // Group
 
@@ -122,17 +123,73 @@ class login extends CI_Controller {
         }else{
         
         $data['title'] = 'User Group';
+        $data['groups'] = $this->ion_auth->groups()->result();
         
         $this->load->view('parts/head_admin',$data);
-        // $this->load->view('HR/HR_Position_list',$data);
+        $this->load->view('login/admin/groups',$data);
         $this->load->view('parts/footer');
       }
     }     
 
-    public function edit_group($id){}
-    public function add_group(){}
-    public function update_group(){}
-    public function del_group(){}
+    public function create_group(){
+		if(!$this->ion_auth->is_admin()){
+			echo 'คุณไม่ใช่ Admin';
+			
+			redirect('/group');
+		}else{
+			
+			$data['title'] = 'Group Panel';
+			$data['execute'] = 
+			'<li><input class="button hollow success" type="submit"></li>
+			<li><a class="button hollow warning" href="'.site_url('/login/group').'">ยกเลิก</a></li>';
+			
+			$this->load->view('parts/head_admin',$data);
+			$this->load->view('login/admin/groups_form',$data);
+			$this->load->view('parts/footer');
+		}
+    }
+
+    public function edit_group($id){
+		if(!$this->ion_auth->is_admin()){
+			echo 'คุณไม่ใช่ Admin';
+			
+			redirect('/group');
+		}else{
+			
+			$data['title'] = 'Group Panel';
+			$data['group'] = $this->ion_auth->group($id)->result();
+			$data['execute'] = 
+			'<li><input class="button hollow success" type="submit"></li>
+			<li><a class="button hollow warning" href="'.site_url('/login/group').'">ยกเลิก</a></li>';
+			
+			$this->load->view('parts/head_admin',$data);
+			$this->load->view('login/admin/groups_form',$data);
+			$this->load->view('parts/footer');
+		}
+    }
+
+    public function add_group(){
+		$group = $this->input->post('group');
+		$group_desc = $this->input->post('group_desc');
+		
+		$this->ion_auth->create_group($group,$group_desc);
+		redirect('login/group');
+
+    }
+
+    public function update_group($id){
+		$group = $this->input->post('group');
+		$group_desc = $this->input->post('group_desc');
+		$this->ion_auth->update_group($id,$group,$group_desc);
+
+		redirect('login/group');
+    }
+
+    public function del_group($id){
+		$this->ion_auth->delete_group($id,$group,$group_desc);
+
+		redirect('login/group');
+    }
 
     public function auth()
     {
@@ -140,16 +197,25 @@ class login extends CI_Controller {
       if(!$this->ion_auth->is_admin()){
         echo 'คุณไม่ใช่ Admin';
         
-        redirect('/login');
+		redirect('/login');
         }else{
-        
+
         $data['title'] = 'Authorization';
-        
-        $this->load->view('parts/head_admin',$data);
-        // $this->load->view('HR/HR_Position_list',$data);
-        $this->load->view('parts/footer');
+
+		// $this->db->select('u.id','u.email');
+		// $this->db->from('users_groups as ug');
+		// $this->db->join('users as u','ug.user_id = u.id');
+		// $this->db->join('groups as g','ug.group_id = g.id');
+		// $this->db->select('g.id','g.name');
+		// $this->db->select('ug.user_id','ug.group_id');
+		// $data['result'] = $this->db->get()->result();
+		$data['result'] = $this->ion_auth->get_users_groups(1);
+
+		$this->load->view('parts/head_admin',$data);
+		$this->load->view('login/admin/auth',$data);
+		$this->load->view('parts/footer');
       }
-    } 
+    }
     // Login System
 
     public function login()
