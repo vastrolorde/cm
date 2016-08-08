@@ -49,9 +49,9 @@
   <div class="large-2 medium-3 columns">
 
       <ul class="vertical menu" data-accordion-menu>
-        <li><a href="<?php echo site_url(); ?>">Users</a></li>
-        <li><a href="<?php echo site_url(); ?>">Groups</a></li>
-        <li><a href="<?php echo site_url(); ?>">Authorization</a></li>
+        <li><a href="<?php echo site_url().'/login/admin'; ?>">Users</a></li>
+        <li><a href="<?php echo site_url().'/login/group'; ?>">Groups</a></li>
+        <li><a href="<?php echo site_url().'/login/auth'; ?>">Authorization</a></li>
       </ul>
 
     
