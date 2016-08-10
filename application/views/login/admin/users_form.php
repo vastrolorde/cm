@@ -40,10 +40,10 @@
 							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('password').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('password').'</div></div>';
 						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('first_name').'</div>
+							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('First Name').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('first_name').'</div></div>';
 						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('last_name').'</div>
+							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('Last Name').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('last_name').'</div></div>';
 				}else{
 					foreach($user as $row){
@@ -54,10 +54,10 @@
 							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('password').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('password',$row->password).'</div></div>';
 						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('first_name').'</div>
+							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('First Name').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('first_name',$row->first_name).'</div></div>';
 						echo '<div class="row">
-							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('last_name').'</div>
+							<div class="text-right large-2 medium-4 small-4 columns">'.form_label('Last Name').'</div>
 							<div class="large-10 medium-8 small-8 columns">'.form_input('last_name',$row->last_name).'</div></div>';
 					}
 				}

@@ -10,7 +10,7 @@
 
 partner_id => ลูกค้า
 id  =>  เลขที่เอกสาร
-invent_move_createDate  =>  วันที่เอกสาร
+create_date  =>  วันที่เอกสาร
 invent_move_Date  =>  วันที่ลูกค้ามารับของ
 invent_move_type  =>  ชนิดรายการ
 invent_move_status  =>  สถานะรายการ
@@ -19,6 +19,13 @@ invent_move_wh => โกดัง
 product_id => รายการสินค้า
 amount => จำนวน
 
+*/
+
+// validate
+/*
+id
+partner_id
+invent_move_Date
 */
 
 ?>
@@ -39,16 +46,6 @@ amount => จำนวน
             </ul>
           </div>
         </div>
-
-        <?php
-          if(validation_errors()){
-            echo '<div class="callout alert">
-                    <h5>Error</h5>
-                    <p>มีการกรอกข้อมูลผิดพลาด โปรดตรวจสอบ</p>
-                  </div>';
-          }
-
-        ?>
 <!-- Start Form -->
 
     <div class="row">
@@ -85,8 +82,20 @@ amount => จำนวน
                 'class' => 'warehouse'
               );
 
-            echo form_label('โกดัง','invent_move_wh',$label_attr)
-                .form_dropdown('invent_move_wh',$warehouse_list,'','id="warehouse"');
+            if(!isset($data)){
+              echo form_label('โกดัง','invent_move_wh',$label_attr)
+                  .form_dropdown('invent_move_wh',$warehouse_list,'','id="warehouse"');
+              echo form_label('วันที่รับ/ส่งสินค้า')
+                  .form_input('invent_move_Date','','class="datepicker"');
+            }else{
+              $invent_move_wh = $data[0]->invent_move_wh;
+            $invent_move_Date = $data[0]->invent_move_Date;
+
+              echo form_label('โกดัง','invent_move_wh',$label_attr)
+                  .form_dropdown('invent_move_wh',$warehouse_list,$invent_move_wh,'id="warehouse"');
+              echo form_label('วันที่รับ/ส่งสินค้า')
+                  .form_input('invent_move_Date',$invent_move_Date,'class="datepicker"');
+            }
 
           ?>
 
@@ -100,10 +109,12 @@ amount => จำนวน
           <legend>ข้อมูลเอกสาร</legend>
 
             <?php
-              $id                     = $data[0]->id;
-              $invent_move_createDate = $data[0]->invent_move_createDate;
-              $invent_move_type       = $data[0]->invent_move_type;
+              $id               = $data[0]->id;
+              $create_date      = $data[0]->create_date;
+              $invent_move_type = $data[0]->invent_move_type;
+              $update_date  = $data[0]->update_date;
             ?>
+
 
           <div class="row">
             <div class="large-6 medium-6 small-6 columns">
@@ -119,10 +130,13 @@ amount => จำนวน
           <div class="row">
             <div class="large-6 medium-6 small-6 columns">
               <label class="middle"><b>วันที่เอกสาร:</b></label>
+              <label class="middle"><b>อัพเดตครั้งล่าสุด:</b></label>
             </div>
             <div class="large-6 medium-6 small-6 columns">
               <?php
-                echo form_input('invent_move_createDate',$invent_move_createDate,'readonly');
+                echo form_input('create_date',$create_date,'readonly');
+                echo form_input('update_date_old',$update_date,'readonly');
+                echo '<input type="hidden" name="update_date" class="timestamp">';
               ?>
             </div>
           </div>
@@ -134,15 +148,8 @@ amount => จำนวน
             </div>
             <div class="large-6 medium-6 small-6 columns">
               <?php
-                $id                     = $data[0]->id;
-                $invent_move_createDate = $data[0]->invent_move_createDate;
-                $invent_move_type       = $data[0]->invent_move_type;
-
-
-                if($invent_move_type == 'recieve'){
-                  echo form_input('invent_move_type','รับสินค้า','readonly');
-                }elseif($invent_move_type == 'deliver'){
-                  echo form_input('invent_move_type','ส่งสินค้า','readonly');
+                if(isset($invent_move_type)){
+                  echo form_input('invent_move_type',$invent_move_type,'id="invent_move_type" readonly');
                 }
               ?>
             </div>
@@ -156,14 +163,14 @@ amount => จำนวน
               <?php
                 $tr_status = array(
                   'draft' => 'ร่างเอกสาร',
-                  'process' => 'กำลังเตรียมการ',
+                  'Reserved' => 'จอง',
                   'done' => 'ดำเนินการแล้ว',
                   'cancel' =>'ยกเลิก'
                   );
 
                 $status = $data[0]->invent_move_status;
 
-                echo form_dropdown('invent_move_status',$tr_status,$status);
+                echo form_dropdown('invent_move_status',$tr_status,$status,'id="invent_move_status"');
               ?>
             </div>
           </div>

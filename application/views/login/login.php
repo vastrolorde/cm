@@ -28,7 +28,7 @@
 				<?php
 						echo form_open('/login/login');
 
-						$production = TRUE;
+						$production = False;
 
 						if($production == TRUE){
 							$username = 'admin@admin.com';

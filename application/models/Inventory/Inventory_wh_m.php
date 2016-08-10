@@ -40,7 +40,6 @@ class Inventory_wh_m extends CI_Model {
 		return $result;
 	}
 
-
 	//query all Inventory_wh
 	public function wh_all(){
 		$this->db->select('*');

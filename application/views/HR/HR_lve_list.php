@@ -30,16 +30,16 @@
 
     echo '<div class="row">
       <div class="large-6 columns">'.
-        form_label('เริ่มเวลา').form_input('lve_in','','id="lve_in" class="time" placeholder="00:00"').
+        form_label('เริ่มเวลา').form_input('lve_in','','id="d1" class="time" placeholder="00:00"').
       '</div>
       <div class="large-6 columns">'.
-          form_label('สิ้นสุดเวลา').form_input('lve_out','','id="lve_out" class="time" placeholder="00:00"').
+          form_label('สิ้นสุดเวลา').form_input('lve_out','','id="d2" class="time" placeholder="00:00"').
       '</div>
     </div>';
 
     echo '<div class="row">
       <div class="large-12 columns">'.
-        form_label('จำนวนวัน').form_input('lve_diff','','id="diff" readonly').
+        form_label('จำนวนวัน').form_input('lve_diff','','id="d_diff" readonly').
       '</div>
     </div>';
 
@@ -61,20 +61,20 @@
 <div class="row">
   <div class="large-12 columns">
 
-<div class="top-bar sub-top-bar">
-  <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text"><?php echo $title;?></li>
-    </ul>
-  </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li>
-        <?php echo $execute; ?>
-      </li>
-    </ul>
-  </div>
-</div>
+    <div class="top-bar sub-top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text"><?php echo $title;?></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li>
+            <?php echo $execute; ?>
+          </li>
+        </ul>
+      </div>
+    </div>
 
 <!-- Calendar -->
     <div id="calendar"></div>
@@ -85,10 +85,10 @@
     <tr>
       <th>รหัสพนักงาน</th>
       <th>ชื่อพนักงาน</th>
-      <th>ลาป่วย (30)</th>
-      <th>ลากิจ (6)</th>
-      <th>ลาพักร้อน (10)</th>
-      <th>ลาอบรม (30)</th>
+      <th style="color: #ff5050;">ลาป่วย (30)</th>
+      <th style="color: #3399ff">ลากิจ (6)</th>
+      <th style="color: orange">ลาพักร้อน (10)</th>
+      <th style="color: #66ff99">ลาอบรม (30)</th>
       <th>actions</th>
     </tr>
   </thead>

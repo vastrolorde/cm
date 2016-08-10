@@ -1,8 +1,12 @@
 <?php
+  $attributes = array(
+      'id' => 'validate_form'
+    );
+
   if(!isset($data)){
-    echo form_open('/Inventory/Warehouse/add');
+    echo form_open('/Inventory/Warehouse/add',$attributes);
   }else{
-    echo form_open('/Inventory/Warehouse/edit/'.$data[0]->id);
+    echo form_open('/Inventory/Warehouse/edit/'.$data[0]->id,$attributes);
   }
 
 /*
@@ -15,7 +19,6 @@ wh_add2     => ที่อยู่ 2
 wh_Dist     => อำเภอ/เขต
 wh_Postal   => รหัสไปรษณีย์
 */
-
 ?>
 
 <div class="row">
@@ -35,16 +38,6 @@ wh_Postal   => รหัสไปรษณีย์
       </div>
     </div>
 
-    <?php
-      if(validation_errors()){
-        echo '<div class="callout alert">
-                <h5>Error</h5>
-                <p>มีการกรอกข้อมูลผิดพลาด โปรดตรวจสอบ</p>
-              </div>';
-      }
-
-    ?>
-
 <!-- Warehouse -->
 
     <div class="row">
@@ -55,25 +48,35 @@ wh_Postal   => รหัสไปรษณีย์
 
           <?php
 
+            $id = array(
+              'type'  =>  'text',
+              'name'  =>  'id',
+              'value' =>  (isset($data))? $data[0]->id: '',
+              'readonly'=>'true'
+            );
+            $id2 = array(
+              'type'  =>  'text',
+              'name'  =>  'id',
+              'data-parsley-required' => 'true'
+            );
+
+            $wh_name = array(
+              'type'  =>  'text',
+              'name'  =>  'wh_name',
+              'value'  =>  (isset($data))? $data[0]->wh_name: '',
+              'data-parsley-required' => 'true'
+            );
+
             if(isset($data)){
-            //Assign Variable
-              $id = $data[0]->id;
-              $wh_name = $data[0]->wh_name;
-
-
               echo form_label('รหัสคลังสินค้า *')
-                  .form_error('id')
-                  .form_input('id',$id,'readonly');
+                  .form_input($id);
               echo form_label('ชื่อคลังสินค้า *')
-                  .form_error('wh_name')
-                  .form_input('wh_name',$wh_name);
+                  .form_input($wh_name);
             }else{
               echo form_label('รหัสคลังสินค้า *')
-                  .form_error('id')
-                  .form_input('id');
+                  .form_input($id2);
               echo form_label('ชื่อคลังสินค้า *')
-                  .form_error('wh_name')
-                  .form_input('wh_name');
+                  .form_input($wh_name);
             }
             ?>
 
@@ -92,23 +95,17 @@ wh_Postal   => รหัสไปรษณีย์
 
 
               echo form_label('ที่อยู่ 1')
-                  .form_error('wh_add1')
                   .form_input('wh_add1',$wh_add1);
               echo form_label('ตำบล/แขวง')
-                  .form_error('wh_subDist')
                   .form_input('wh_subDist',$wh_subDist);
               echo form_label('จังหวัด')
-                  .form_error('wh_Province')
                   .form_input('wh_Province',$wh_Province);
             }else{
               echo form_label('ที่อยู่ 1')
-                  .form_error('wh_add1')
                   .form_input('wh_add1');
               echo form_label('ตำบล/แขวง')
-                  .form_error('wh_subDist')
                   .form_input('wh_subDist');
               echo form_label('จังหวัด')
-                  .form_error('wh_Province')
                   .form_input('wh_Province');
             }
             ?>
@@ -116,32 +113,31 @@ wh_Postal   => รหัสไปรษณีย์
       <div class="large-6 columns">
           <?php
 
+            $wh_Postal = array(
+              'type'  =>  'number',
+              'name'  =>  'wh_Postal',
+              'value' =>  (isset($data))? $data[0]->wh_Postal: '00000'
+              );
+
             if(isset($data)){
             //Assign Variable
               $wh_add2 = $data[0]->wh_add2;
               $wh_Dist = $data[0]->wh_Dist;
-              $wh_Postal = $data[0]->wh_Postal;
 
 
               echo form_label('ที่อยู่ 2')
-                  .form_error('wh_add2')
                   .form_input('wh_add2',$wh_add2);
               echo form_label('อำเภอ/เขต')
-                  .form_error('wh_Dist')
                   .form_input('wh_Dist',$wh_Dist);
               echo form_label('รหัสไปรษณีย์')
-                  .form_error('wh_Postal')
-                  .form_input('wh_Postal',$wh_Postal);
+                  .form_input($wh_Postal);
             }else{
               echo form_label('ที่อยู่ 2')
-                  .form_error('wh_add2')
                   .form_input('wh_add2');
               echo form_label('อำเภอ/เขต')
-                  .form_error('wh_Dist')
                   .form_input('wh_Dist');
               echo form_label('รหัสไปรษณีย์')
-                  .form_error('wh_Postal')
-                  .form_input('wh_Postal');
+                  .form_input($wh_Postal);
             }
             ?>
       </div>

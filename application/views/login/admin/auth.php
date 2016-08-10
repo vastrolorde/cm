@@ -6,7 +6,7 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-      <li><a class="hollow button" href="<?php echo site_url('/login/create_user'); ?>">เพิ่ม</a></li>
+      <li><a class="hollow button" href="<?php echo site_url('/login/create_auth'); ?>">เพิ่ม</a></li>
     </ul>
   </div>
 </div>
@@ -17,22 +17,22 @@
 	<table id="datatable">
 	  <thead>
 	    <tr>
-	      <th>email</th>
 	      <th>groups</th>
+	      <th>email</th>
 	      <th>action</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    
 	    <?php
-	    	print_r($result);
-	    	// foreach($result as $row){
-	    	// 	echo '<tr>';
-	    	// 	echo '<td>'.$row->email.'</td>';
-	    	// 	echo '<td>'.$row->group_id.'</td>';
-	    	// 	echo '<td><a href="'.site_url().'/login/edit_user/'.$row->id.'">Edit</a> | <a class="delitem" href="'.site_url().'/login/del_user/'.$row->id.'">Delete</a></td>';
-	    	// 	echo '</tr>';
-	    	// }
+	    	// print_r($result);
+	    	foreach($result as $row){
+	    		echo '<tr>';
+	    		echo '<td>'.$row->name.'</td>';
+	    		echo '<td>'.$row->email.'</td>';
+	    		echo '<td><a href="'.site_url().'/login/edit_auth/'.$row->id.'">Edit</a> | <a class="delitem" href="'.site_url().'/login/del_auth/'.$row->id.'">Delete</a></td>';
+	    		echo '</tr>';
+	    	}
 	    ?>
 	  </tbody>
 	</table>

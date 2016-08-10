@@ -1,6 +1,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 	$('#datatable').DataTable();
+	$('#validate_form').parsley();
 
 		var inventory_move_id = $('#id').val();
 
@@ -12,11 +13,13 @@
 
 		$('#AddtransactionRow').on('click', function(){
 			//ดึงค่าตัวแปรจาก input
-			var product = $('#product_id').val();
-			var product_amount = $('#product_amount').val();
+			var product            = $('#product_id').val();
+			var product_amount     = $('#product_amount').val();
+			var invent_move_type   = $('#invent_move_type').val();
+			var invent_move_status = $('#invent_move_status').val();
 
 			//สร้างค่าสำหรับเตรียมส่งเข้า db
-			var insert_data = {'inventory_move_id': inventory_move_id,'product_id': product, 'amount': product_amount};
+			var insert_data = {'inventory_move_id': inventory_move_id,'product_id': product, 'amount': product_amount, 'type': invent_move_type, 'status': invent_move_status};
 
 			//สร้างตัวแปรหาค่าซ้ำ
 			var Duplicate_row = [];

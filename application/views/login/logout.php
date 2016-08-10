@@ -23,7 +23,7 @@
 				<div class="text-alert">
 					<h3>Log out Suceessfully</h3>
 				</div>
-					<p>คุณกำลังกลับเข้าสู่หน้า Log in อัตโนมัติ ภายใน <span id="counter"></span> วินาที หรือกด <a href="<?php echo site_url().'/login' ?>">ที่นี่</a></p>
+					<p>คุณกำลังกลับเข้าสู่หน้า Log in อัตโนมัติ ภายใน <span id="counter"></span> วินาที หรือกด <big><a href="<?php echo site_url().'/login' ?>">ที่นี่</a></big></p>
 			</article>
 			<p id="copyright" class="text-right">© Classmat 2016</p>
 		</section>

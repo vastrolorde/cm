@@ -20,19 +20,37 @@
 				foreach ($query as $row) {
 
 					// change date format
-					$date = $row->lve_date;
-					$newDate = date("Y-d-m", strtotime($date));
+					$date = strtr($row->lve_date, '/', '-');
+					$newDate = date("Y-m-d", strtotime($date));
 
 
 					echo "{title:'".$row->emp_fname." ".$row->emp_lname." ".$row->lve_type."',
 					start:'".$newDate." ".$row->lve_in."',
-					end:'".$newDate." ".$row->lve_out."'},";
+					end:'".$newDate." ".$row->lve_out."',
+					color: '";
+					switch ($row->lve_type) {
+						case 'Si':
+							echo "#ff5050";
+							break;
+						case 'Bis':
+							echo "#3399ff";
+							break;
+						case 'Vac':
+							echo "orange";
+							break;
+						case 'Tr':
+							echo "#66ff99";
+							break;
+					}
+
+					echo "'},";
 				}
 			?>
 		]
     })
 
 	$('#datatable').DataTable();
+	$('#validate_form').parsley();
 
 		var id = $('#emp_id').val();
 

@@ -84,80 +84,50 @@ class Product extends CI_Controller {
 
 	public function add()
 	{
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-		$this->form_validation->set_message('integer','<code style="color:red;">ช่อง %s ต้องเป็นตัวเลข</code>');
-		
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('product_id','product code','required');
-		$this->form_validation->set_rules('product_unit','หน่วยนับ','required');
-		$this->form_validation->set_rules('product_name','ชื่อสินค้า','required');
-		$this->form_validation->set_rules('product_weight','น้ำหนักต่อชิ้น','integer');
+		$data = array(
+		'product_id'             =>	$this->input->post('product_id'),
+		'product_unit'           =>	$this->input->post('product_unit'),
+		'product_name'           =>	$this->input->post('product_name'),
+		'product_weight'         =>	$this->input->post('product_weight'),
+		'product_type'           =>	$this->input->post('product_type'),
+		'product_Desc'           =>	$this->input->post('product_Desc'),
+		'product_stock'          =>	$this->input->post('product_stock'),
+		'product_safety'         =>	$this->input->post('product_safety'),
+		'product_cost'           =>	$this->input->post('product_cost'),
+		'product_1stSalePrice'   =>	$this->input->post('product_1stSalePrice'),
+		'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),
+		'product_d_RentalPrice'  =>	$this->input->post('product_d_RentalPrice'),
+		'product_GuaranteePrice' =>	$this->input->post('product_GuaranteePrice'),
+		'product_Attr'           =>	json_encode($this->input->post('product_Attr'))
+		);
 
-		if ($this->form_validation->run() == TRUE)
-                {
-					$data = array(
-					'product_id'             =>	$this->input->post('product_id'),
-					'product_unit'           =>	$this->input->post('product_unit'),
-					'product_name'           =>	$this->input->post('product_name'),
-					'product_weight'         =>	$this->input->post('product_weight'),
-					'product_type'           =>	$this->input->post('product_type'),
-					'product_Desc'           =>	$this->input->post('product_Desc'),
-					'product_stock'          =>	$this->input->post('product_stock'),
-					'product_safety'         =>	$this->input->post('product_safety'),
-					'product_cost'           =>	$this->input->post('product_cost'),
-					'product_1stSalePrice'   =>	$this->input->post('product_1stSalePrice'),
-					'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),
-					'product_d_RentalPrice'  =>	$this->input->post('product_d_RentalPrice'),
-					'product_GuaranteePrice' =>	$this->input->post('product_GuaranteePrice'),
-					'product_Attr'           =>	json_encode($this->input->post('product_Attr'))
-					);
+		$this->product_m->create($data);
 
-					$this->product_m->create($data);
-
-					redirect('/product');
-				}else{
-					$this->create();
-				}
+		redirect('/product');
 
 	}
 
 	public function edit($id)
 	{
-		
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-		$this->form_validation->set_message('integer','<code style="color:red;">ช่อง %s ต้องเป็นตัวเลข</code>');
-		
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('product_unit','หน่วยนับ','required');
-		$this->form_validation->set_rules('product_name','ชื่อสินค้า','required');
-		$this->form_validation->set_rules('product_weight','น้ำหนักต่อชิ้น','integer');
+		$data = array(
+		'product_unit'           =>	$this->input->post('product_unit'),
+		'product_family'         =>	$this->input->post('product_family'),
+		'product_name'           =>	$this->input->post('product_name'),
+		'product_weight'         =>	$this->input->post('product_weight'),
+		'product_type'           =>	$this->input->post('product_type'),
+		'product_Desc'           =>	$this->input->post('product_Desc'),
+		'product_stock'          =>	$this->input->post('product_stock'),
+		'product_safety'         =>	$this->input->post('product_safety'),
+		'product_cost'           =>	$this->input->post('product_cost'),
+		'product_1stSalePrice'   =>	$this->input->post('product_1stSalePrice'),
+		'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),
+		'product_d_RentalPrice'  =>	$this->input->post('product_d_RentalPrice'),
+		'product_GuaranteePrice' =>	$this->input->post('product_GuaranteePrice'),
+		'product_Attr'           =>	json_encode($this->input->post('product_Attr'))
+		);
 
-		if ($this->form_validation->run() == TRUE)
-                {
-					$data = array(
-					'product_unit'           =>	$this->input->post('product_unit'),
-					'product_name'           =>	$this->input->post('product_name'),
-					'product_weight'         =>	$this->input->post('product_weight'),
-					'product_type'           =>	$this->input->post('product_type'),
-					'product_Desc'           =>	$this->input->post('product_Desc'),
-					'product_stock'          =>	$this->input->post('product_stock'),
-					'product_safety'         =>	$this->input->post('product_safety'),
-					'product_cost'           =>	$this->input->post('product_cost'),
-					'product_1stSalePrice'   =>	$this->input->post('product_1stSalePrice'),
-					'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),
-					'product_d_RentalPrice'  =>	$this->input->post('product_d_RentalPrice'),
-					'product_GuaranteePrice' =>	$this->input->post('product_GuaranteePrice'),
-					'product_Attr'           =>	json_encode($this->input->post('product_Attr'))
-					);
-
-					$this->product_m->update($data,$id);
-					redirect('/product');
-
-				}else{
-					$this->data($id);
-				}
+		$this->product_m->update($data,$id);
+		redirect('/product');
 	}
 
 	public function delete($id){

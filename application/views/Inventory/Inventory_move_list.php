@@ -20,7 +20,11 @@
   <h4>เพิ่มใหม่</h4>
 
   <?php
-    echo form_open('Inventory/Inventory/add');
+  $attributes = array(
+      'id' => 'validate_form'
+    );
+
+    echo form_open('Inventory/Inventory/add',$attributes);
   ?>
 
   <div class="row">
@@ -32,7 +36,7 @@
 
   <div class="row">
     <div class="large-6 columns ver-divider">
-      
+
       <?php
 
             $i = 0;
@@ -41,16 +45,20 @@
               $i++;
             }
 
+            $id = array(
+                'type'  =>  'text',
+                'name'  =>  'id',
+                'data-parsley-required' =>  'true'
+              );
+
             $tr_type = array(
                 'recieve' => 'รับสินค้า',
                 'deliver' =>'ส่งสินค้า'
               );
 
         echo form_label('เลขที่เอกสาร')
-            .form_error('id')
-            .form_input('id');
+            .form_input($id);
         echo form_label('ลูกค้า')
-            .form_error('partner_id')
             .form_dropdown('partner_id',$partner_list);
         echo form_label('ชนิดรายการ')
             .form_dropdown('invent_move_type',$tr_type);
@@ -69,10 +77,16 @@
           'cancel' =>'ยกเลิก'
         );
 
+      $create_date = array(
+          'name' => 'create_date',
+          'type' => 'text',
+          'class' => 'timestamp',
+          'readonly' => 'true'
+        );
+
         
         echo form_label('วันที่เอกสาร')
-            .'<p><span class="timestamp"></span></p>'
-            .form_hidden('invent_move_createDate');
+            .form_input($create_date);
         echo form_label('วันที่ลูกค้ามารับของ')
             .form_input('invent_move_Date','','class="datepicker"');
         echo form_label('สถานะรายการ')
@@ -89,7 +103,7 @@
     <tr>
       <th>#</th>
       <th>เลขที่เอกสาร</th>
-      <th>วันที่เอกสาร</th>
+      <th>วันที่สร้างเอกสาร</th>
       <th>ชื่อ Partner</th>
       <th>ชนิดรายการ</th>
       <th>สถานะรายการ</th>
@@ -107,7 +121,7 @@
     <tr>
       <td>'.$i.'</td>
       <td>'.$key->id.'</td>
-      <td>'.$key->invent_move_createDate.'</td>
+      <td>'.$key->create_date.'</td>
       <td>'.$key->partner_id.'</td>
       <td>'.$key->invent_move_type.'</td>
       <td>'.$key->invent_move_status.'</td>

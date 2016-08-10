@@ -79,73 +79,36 @@ class Warehouse extends CI_Controller {
 	public function add()
 	{
 
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-		$this->form_validation->set_message('integer','<code style="color:red;">ช่อง %s ต้องเป็นตัวเลข</code>');
-		$this->form_validation->set_message('exact_length','<code style="color:red;">คุณต้องกรอกข้อมูล 5 ตัวอกษร กรุณาตรวจสอบจำนวนตัวอักษรของ %s อีกครั้ง</code>');
+		$data = array(
+			'id'          => $this->input->post('id'),
+			'wh_name'     => $this->input->post('wh_name'),
+			'wh_add1'     => $this->input->post('wh_add1'),
+			'wh_subDist'  => $this->input->post('wh_subDist'),
+			'wh_Province' => $this->input->post('wh_Province'),
+			'wh_add2'     => $this->input->post('wh_add2'),
+			'wh_Dist'     => $this->input->post('wh_Dist'),
+			'wh_Postal'   => $this->input->post('wh_Postal')
+		);
 
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('id','รหัสคลังสินค้า','required');
-		$this->form_validation->set_rules('wh_name','ชื่อคลังสินค้า','required');
-
-		$this->form_validation->set_rules('wh_Postal','รหัสไปรษณีย์','exact_length[5]|integer');
-
-		if ($this->form_validation->run() == TRUE){
-			$data = array(
-				'id'          => $this->input->post('id'),
-				'wh_name'     => $this->input->post('wh_name'),
-				'wh_add1'     => $this->input->post('wh_add1'),
-				'wh_subDist'  => $this->input->post('wh_subDist'),
-				'wh_Province' => $this->input->post('wh_Province'),
-				'wh_add2'     => $this->input->post('wh_add2'),
-				'wh_Dist'     => $this->input->post('wh_Dist'),
-				'wh_Postal'   => $this->input->post('wh_Postal')
-			);
-
-			$this->wh_m->create($data);
-			
-
-			redirect('Inventory/Warehouse/');
-		}else{
-
-			$this->create();
-		}
+		$this->wh_m->create($data);
+		redirect('Inventory/Warehouse/');
 	}
 
 	public function edit($id)
 	{
+		$data = array(
+			'id'          => $this->input->post('id'),
+			'wh_name'     => $this->input->post('wh_name'),
+			'wh_add1'     => $this->input->post('wh_add1'),
+			'wh_subDist'  => $this->input->post('wh_subDist'),
+			'wh_Province' => $this->input->post('wh_Province'),
+			'wh_add2'     => $this->input->post('wh_add2'),
+			'wh_Dist'     => $this->input->post('wh_Dist'),
+			'wh_Postal'   => $this->input->post('wh_Postal')
+		);
 
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-		$this->form_validation->set_message('integer','<code style="color:red;">ช่อง %s ต้องเป็นตัวเลข</code>');
-		$this->form_validation->set_message('exact_length','<code style="color:red;">คุณต้องกรอกข้อมูล 5 ตัวอกษร กรุณาตรวจสอบจำนวนตัวอักษรของ %s อีกครั้ง</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('id','รหัสคลังสินค้า','required');
-		$this->form_validation->set_rules('wh_name','ชื่อคลังสินค้า','required');
-
-		$this->form_validation->set_rules('wh_Postal','รหัสไปรษณีย์','exact_length[5]|integer');
-
-		if ($this->form_validation->run() == TRUE){
-			$data = array(
-				'id'          => $this->input->post('id'),
-				'wh_name'     => $this->input->post('wh_name'),
-				'wh_add1'     => $this->input->post('wh_add1'),
-				'wh_subDist'  => $this->input->post('wh_subDist'),
-				'wh_Province' => $this->input->post('wh_Province'),
-				'wh_add2'     => $this->input->post('wh_add2'),
-				'wh_Dist'     => $this->input->post('wh_Dist'),
-				'wh_Postal'   => $this->input->post('wh_Postal')
-			);
-
-			$this->wh_m->update($data,$id);
-			
-
-			redirect('Inventory/Warehouse/');
-		}else{
-
-			$this->data($id);
-		}
+		$this->wh_m->update($data,$id);
+		redirect('Inventory/Warehouse/');
 	}
 
 

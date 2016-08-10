@@ -12,7 +12,7 @@ class Inventory_m extends CI_Model {
 	}
 
 	public function get($id){
-		$this->db->select("ivtry.id,ivtry.partner_id,ivtry.invent_move_createDate,ivtry.invent_move_Date,ivtry.invent_move_type,ivtry.invent_move_status,ivtry.invent_move_wh");
+		$this->db->select("ivtry.id,ivtry.partner_id,ivtry.create_date,ivtry.update_date,ivtry.invent_move_Date,ivtry.invent_move_type,ivtry.invent_move_status,ivtry.invent_move_wh");
 		$this->db->select("ptnr.partner_name,ptnr.taxID,ptnr.tel,ptnr.email,ptnr.add1,ptnr.add2,ptnr.SubDist,ptnr.Dist,ptnr.Province,ptnr.Postal");
 		$this->db->where("ivtry.id",$id);
 		$this->db->from("Inventory_move as ivtry");
@@ -61,11 +61,18 @@ class Inventory_m extends CI_Model {
 		$this->db->where('id',$id);
 		$this->db->delete('inventory_move_tr');
 	}
+
 	/******			Others			******/
 	//Count all Transaction
 	public function countAll(){
 		$result = $this->db->count_all('Inventory_move');
 		return $result;
+	}
+
+	// Update transaction status
+	public function update_transaction_status($data,$id){
+		$this->db->where('inventory_move_id',$id);
+		$this->db->update('inventory_move_tr',$data);
 	}
 
 }

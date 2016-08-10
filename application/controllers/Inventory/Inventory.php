@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inventory extends CI_Controller {
 
-		public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
@@ -23,7 +23,7 @@ class Inventory extends CI_Controller {
 
 			redirect('/login');
 		}else{
-			$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
+			$data['title'] = 'เบิก/รับสินค้าคงคลัง';
 			$data['result'] = $this->Inventory_m->getAll();
 			$data['partner'] = $this->partner();
 
@@ -33,6 +33,25 @@ class Inventory extends CI_Controller {
 		}
 	}
 
+	public function inv_flow()
+	{
+
+		if(!$this->ion_auth->logged_in()){
+			$_SESSION['error_msg'] = 'คุณยังไม่ได้รับสิทธิ์ในส่วนนี้';
+			$this->session->mark_as_flash('error_msg');
+
+			redirect('/login');
+		}else{
+			$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
+			$data['product'] = $this->product_m->get_flow();
+			// $data['partner'] = $this->partner();
+
+			$this->load->View('parts/head',$data);
+			$this->load->view('Inventory/inventory_flow',$data);
+			$this->load->View('parts/footer');
+			$this->load->View('scripts/inventory_script');
+		}
+	}
 
 	/******			Form			******/
 
@@ -76,49 +95,34 @@ class Inventory extends CI_Controller {
 	public function add()
 	{
 		$id = $this->input->post('id');
-
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('id','เลขที่เอกสาร','required');
-		$this->form_validation->set_rules('partner_id', 'ลูกค้า','required');
-		$this->form_validation->set_rules('invent_move_Date', 'วันที่ลูกค้ามารับของ','required');
-
-		if ($this->form_validation->run() == TRUE){
-
 			$data = array(
-				'id'                     =>	$id,
-				'partner_id'             =>	$this->input->post('partner_id'),
-				'invent_move_createDate' =>	$this->input->post('invent_move_createDate'),
-				'invent_move_Date'       =>	$this->input->post('invent_move_Date'),
-				'invent_move_type'       =>	$this->input->post('invent_move_type'),
-				'invent_move_status'     =>	$this->input->post('invent_move_status')
+				'id'                 =>	$id,
+				'partner_id'         =>	$this->input->post('partner_id'),
+				'create_date'        =>	$this->input->post('create_date'),
+				'invent_move_Date'   =>	$this->input->post('invent_move_Date'),
+				'invent_move_type'   =>	$this->input->post('invent_move_type'),
+				'invent_move_status' =>	$this->input->post('invent_move_status')
 			);
 
-			$this->Inventory_m->create($data);
-			
-
-			redirect('/Inventory/Inventory/data/'.$id);
-		}else{
-
-			$this->data($id);
-		}
+		$this->Inventory_m->create($data);
+		redirect('/Inventory/Inventory/data/'.$id);
 	}
 
 	public function edit($id)
 	{
 			$data = array(
-				'invent_move_status'     =>	$this->input->post('invent_move_status')
+				'update_date'        =>	$this->input->post('update_date'),
+				'invent_move_status' =>	$this->input->post('invent_move_status'),
+				'invent_move_wh'     =>	$this->input->post('invent_move_wh')
 			);
 
-			$data2 = array(
-				'inventory_move_id' =>	$this->input->post('inventory_move_id'),
-				'product_id'        =>	$this->input->post('product_id'),
-				'amount'            =>	$this->input->post('amount')
+			$data_tr = array(
+				'status' =>	$this->input->post('invent_move_status'),
 			);
 
 			$this->Inventory_m->update($data,$id);
+			
+			$this->Inventory_m->update_transaction_status($data_tr,$id);
 			
 
 			redirect('/Inventory/Inventory');
@@ -143,7 +147,9 @@ class Inventory extends CI_Controller {
 		$data = array(
 			'inventory_move_id' =>	$this->input->post('inventory_move_id'),
 			'product_id'        =>	$this->input->post('product_id'),
-			'amount'            =>	$this->input->post('amount')
+			'amount'            =>	$this->input->post('amount'),
+			'type'            =>	$this->input->post('type'),
+			'status'            =>	$this->input->post('status')
 		);
 
 		$this->Inventory_m->add_tr($data);

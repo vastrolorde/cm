@@ -1,8 +1,13 @@
 <?php
+  $attributes = array(
+      'id' => 'validate_form'
+    );
+
+
   if(!isset($data)){
-    echo form_open('/partner/add');
+    echo form_open('/partner/add',$attributes);
   }else{
-    echo form_open('/partner/edit/'.$data[0]->id);
+    echo form_open('/partner/edit/'.$data[0]->id,$attributes);
   }
 ?>
 
@@ -22,16 +27,6 @@
             </ul>
           </div>
         </div>
-
-        <?php
-          if(validation_errors()){
-            echo '<div class="callout alert">
-                    <h5>Error</h5>
-                    <p>มีการกรอกข้อมูลผิดพลาด โปรดตรวจสอบ</p>
-                  </div>';
-          }
-
-        ?>
 <!-- Tab -->
 
     <ul class="tabs" data-tabs id="partner-tabs">
@@ -60,18 +55,14 @@
 
 
               echo form_label('partner *')
-                  .form_error('id')
                   .form_input('id',$partner_id,'readonly');
               echo form_label('ชื่อ partner *')
-                  .form_error('partner_name')
-                  .form_input('partner_name',$partner_name);
+                  .form_input('partner_name',$partner_name,'data-parsley-required');
             }else{
               echo form_label('partner *')
-                  .form_error('id')
-                  .form_input('id');
+                  .form_input('id','','data-parsley-required');
               echo form_label('ชื่อ partner *')
-                  .form_error('partner_name')
-                  .form_input('partner_name');
+                  .form_input('partner_name','','data-parsley-required');
             }
             
             if(isset($data)){
@@ -93,34 +84,17 @@
             <div class="row">
 
         <?php
-          $options = array(
-              'ธุรกิจการเกษตร‎' =>  'ธุรกิจการเกษตร‎',
-              'ธุรกิจการท่องเที่ยวและนันทนาการ‎'  =>  'ธุรกิจการท่องเที่ยวและนันทนาการ‎',
-              'ธุรกิจการแพทย์‎' =>  'ธุรกิจการแพทย์‎',
-              'ธุรกิจขนส่งและโลจิสติกส์‎' =>  'ธุรกิจขนส่งและโลจิสติกส์‎',
-              'ธุรกิจของใช้ส่วนตัวและเวชภัณฑ์‎' =>  'ธุรกิจของใช้ส่วนตัวและเวชภัณฑ์‎',
-              'ธุรกิจเครื่องใช้ในครัวเรือน‎'  =>  'ธุรกิจเครื่องใช้ในครัวเรือน‎',
-              'ธุรกิจเงินทุนและหลักทรัพย์‎' =>  'ธุรกิจเงินทุนและหลักทรัพย์‎',
-              'ธุรกิจเทคโนโลยีสารสนเทศและการสื่อสาร‎' =>  'ธุรกิจเทคโนโลยีสารสนเทศและการสื่อสาร‎',
-              'ธุรกิจแฟชั่น‎' =>  'ธุรกิจแฟชั่น‎',
-              'ธุรกิจวัสดุก่อสร้าง‎'  =>  'ธุรกิจวัสดุก่อสร้าง‎',
-              'ธุรกิจเหมืองแร่‎'  =>  'ธุรกิจเหมืองแร่‎',
-              'ธุรกิจประกันภัยและประกันชีวิต‎'  =>  'ธุรกิจประกันภัยและประกันชีวิต‎',
-              'ธุรกิจปิโตรเลียมและเคมีภัณฑ์‎' =>  'ธุรกิจปิโตรเลียมและเคมีภัณฑ์‎',
-              'ธุรกิจพลังงานและสาธารณูปโภค‎'  =>  'ธุรกิจพลังงานและสาธารณูปโภค‎',
-              'ธุรกิจพัฒนาอสังหาริมทรัพย์‎' =>  'ธุรกิจพัฒนาอสังหาริมทรัพย์‎',
-              'ธุรกิจพาณิชย์‎'  =>  'ธุรกิจพาณิชย์‎',
-              'ธุรกิจยานยนต์‎'  =>  'ธุรกิจยานยนต์‎',
-              'ธุรกิจวัสดุอุตสาหกรรมและเครื่องจักร‎'  =>  'ธุรกิจวัสดุอุตสาหกรรมและเครื่องจักร‎',
-              'ธุรกิจสื่อและสิ่งพิมพ์‎' =>  'ธุรกิจสื่อและสิ่งพิมพ์‎',
-              'ธุรกิจอาหารและเครื่องดื่ม‎'  =>  'ธุรกิจอาหารและเครื่องดื่ม‎'
-          );
+          $options = array();
+
+          foreach($indy as $row){
+            $options[$row->subsector] = $row->subsector;
+          }
 
           if(isset($data)){
               $Type_select = $data[0]->Sector;
             }
 
-            echo '<div class="large-6 columns">'.form_dropdown('Sector',$options,(isset($data))? $Type_select : 'ธุรกิจการเกษตร‎').'</div>';
+            echo '<div class="large-6 columns">'.form_dropdown('Sector',$options,(isset($data))? $Type_select: 'Aerospace').'</div>';
         ?>
             </div>
 
@@ -175,28 +149,36 @@
             'blank' => 'กรุณาเลือกเขต/อำเภอ'
             );
 
-
           if(isset($data)){
             //Assign Variable
             $add2 = $data[0]->add2;
             $Dist = $data[0]->Dist;
-            $Postal = $data[0]->Postal;
-
+            $Postal = array(
+              'type'  => 'number',
+              'name'  => 'Postal',
+              'value' =>  $data[0]->Postal,
+              'data-parsley-length' => '[5, 5]'
+            );
 
             echo form_label('ที่อยู่2')
                 .form_input('add2',$add2);
             echo form_label('เขต/อำเภอ')
                 .form_dropdown('Dist',$Dist_list,$Dist,'id="Dist"');
             echo form_label('รหัสไปรษณีย์')
-                .form_input('Postal',$Postal);
+                .form_input($Postal);
           }else{
+            $Postal = array(
+              'type'  => 'number',
+              'name'  => 'Postal',
+              'value' =>  '00000',
+              'data-parsley-length' => '[5, 5]'
+            );
             echo form_label('ที่อยู่2')
                 .form_input('add2');
             echo form_label('เขต/อำเภอ')
                 .form_dropdown('Dist',$Dist_list,'','id="Dist"');
             echo form_label('รหัสไปรษณีย์')
-                .form_error('Postal')
-                .form_input('Postal');
+                .form_input($Postal);
           }
         ?>
 
@@ -217,24 +199,18 @@
         $Email = $data[0]->email;
 
         echo form_label('เบอร์โทรศัพท์ (ตัวอย่าง 02-345-6789)')
-            .form_error('tel')
             .form_input('tel',$tel,'class="tel"');
         echo form_label('Fax (ตัวอย่าง 02-345-6789)')
-            .form_error('Fax')
             .form_input('Fax',$Fax,'class="tel"');
         echo form_label('E-mail')
-            .form_error('email')
-            .form_input('email',$Email);
+            .form_input('email',$Email,'data-parsley-type="email"');
       }else{
         echo form_label('เบอร์โทรศัพท์ (ตัวอย่าง 081-234-5678)')
-            .form_error('tel')
             .form_input('tel','','class="tel"');
         echo form_label('Fax (ตัวอย่าง 081-234-5678)')
-            .form_error('Fax')
             .form_input('Fax','','class="tel"');
         echo form_label('E-mail')
-            .form_error('email')
-            .form_input('email');
+            .form_input('email','','data-parsley-type="email"');
       }
     ?>
 

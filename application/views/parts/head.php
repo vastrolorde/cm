@@ -13,6 +13,7 @@
     <script src="<?php echo asset_url().'bower/jquery/dist/jquery.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/jquery-ui/jquery-ui.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/moment/moment.js'; ?>"></script>
+    <script src="<?php echo asset_url().'bower/parsleyjs/dist/parsley.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/fullcalendar/dist/fullcalendar.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/datatables.net/js/jquery.datatables.min.js'; ?>"></script>
     <script src="<?php echo asset_url().'bower/datatables.net-zf/js/dataTables.foundation.min.js'; ?>"></script>
@@ -39,10 +40,12 @@
   <div class="top-bar-right">
     <ul class="menu">
       <li><a href="<?php echo site_url().'/home'; ?>">Home</a></li>
-      <li><a href="#">Username</a></li><?php
-      if($this->ion_auth->is_admin()){
-        echo '<li><a href="'.site_url().'/login/admin'.'">Admin Panel</a></li>';
-      }?>
+      <li><a href="#">Username</a></li>
+      <?php
+        if($this->ion_auth->is_admin()){
+          echo '<li><a href="'.site_url().'/login/admin'.'">Admin Panel</a></li>';
+        }
+      ?>
       <li><a href="<?php echo site_url().'/login/logout'; ?>">Log out</a></li>
     </ul>
   </div>
@@ -55,17 +58,36 @@
       <ul class="vertical menu" data-accordion-menu>
         <li><h4 class="text-center navigation_head">Classmat co., ltd.</h4></li>
         <li><a href="<?php echo site_url().'/home'; ?>">Dashboard</a></li>
+        <?php
+          if($this->ion_auth->in_group('Sales')){
+        ?>
         <li><a href="<?php echo site_url().'/rental'; ?>">งานเช่า</a></li>
+        <?php
+          }
+        ?>
+
         <li><a href="<?php echo site_url().'/Partner'; ?>">Partner</a></li>
+
+        <?php
+          if($this->ion_auth->in_group('Store')){
+        ?>
         <li><a href="#">สินค้าคงคลัง</a>
             <ul class="vertical menu nested">
-              <li><a href="<?php echo site_url().'/Inventory/Inventory'; ?>">รายการเคลื่อนไหวสินค้าคงคลัง</a></li>
+              <li><a href="<?php echo site_url().'/Inventory/Inventory/inv_flow'; ?>">รายการเคลื่อนไหวสินค้าคงคลัง</a></li>
+              <li><a href="<?php echo site_url().'/Inventory/Inventory'; ?>">เบิก/รับสินค้าคงคลัง</a></li>
               <li><a href="<?php echo site_url().'/Product'; ?>">สินค้า</a></li>
               <li><a href="<?php echo site_url().'/Inventory/Warehouse'; ?>">คลังสินค้า</a></li>
               <li></li>
               <li></li>
             </ul>
         </li>
+        <?php
+          }
+        ?>
+
+        <?php
+          if($this->ion_auth->in_group('HR')){
+        ?>
         <li><a href="#">HR</a>
           <ul class="vertical menu nested">
             <li><a href="#">บันทึกเวลา</a>
@@ -73,10 +95,10 @@
                 <li><a href="<?php echo site_url().'/HR/Attendance'; ?>">บันทึกลงเวลา</a></li>
                 <li><a href="">ลงเวลาล่วงเวลา</a></li>
                 <li><a href="">เปิดกะ</a></li>
+                <li><a href="<?php echo site_url().'/HR/Leave'; ?>">ลา</a></li>
                 <li><a href="">วันหยุดประจำปี</a></li>
               </ul>
             </li>
-            <li><a href="<?php echo site_url().'/HR/Leave'; ?>">ลา</a></li>
             <li><a href="#">พนักงาน</a>
               <ul class="vertical menu nested">
                 <li><a href="<?php echo site_url().'/HR/Employee'; ?>">พนักงาน</a></li>
@@ -86,6 +108,10 @@
             </li>
           </ul>
         </li>
+        <?php
+          }
+        ?>
+
       </ul>
 
     

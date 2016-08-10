@@ -1,8 +1,12 @@
 <?php
+  $attributes = array(
+      'id' => 'validate_form'
+    );
+
   if(!isset($data)){
-    echo form_open('/product/add');
+    echo form_open('/product/add',$attributes);
   }else{
-    echo form_open('/product/edit/'.$data[0]->product_id);
+    echo form_open('/product/edit/'.$data[0]->product_id,$attributes);
   }
 
 /*
@@ -12,6 +16,7 @@
 'product_name'           =>  ชื่อสินค้า,
 'product_weight'         =>  น้ำหนักต่อชิ้น,
 'product_type'           =>  ประเภท Product,
+'product_family'           =>  family ของ Product,
 'product_Desc'           =>  รายละเอียด,
 'product_stock'          =>  จำนวนสินค้าใน Stock,
 'product_safety'         =>  Safety Stock,
@@ -22,6 +27,11 @@
 'product_GuaranteePrice' =>  ราคาค้ำประกัน,
 'product_Attr'           => คุณลักษณะสินค้า,
 'product_stock_date'     => วันที่ตรวจนับสินค้า,
+
+
+// Validate
+
+// product_weight
 
 */
 
@@ -42,17 +52,6 @@
             </ul>
           </div>
         </div>
-
-        <?php
-          if(validation_errors()){
-            echo '<div class="callout alert">
-                    <h5>Error</h5>
-                    <p>มีการกรอกข้อมูลผิดพลาด โปรดตรวจสอบ</p>
-                  </div>';
-          }
-
-        ?>
-
 <!-- Tab -->
 
     <ul class="tabs" data-tabs id="partner-tabs">
@@ -77,18 +76,14 @@
 
 
             echo form_label('product code *')
-                .form_error('product_id')
-                .form_input('product_id',$product_id,'readonly');
+                .form_input('product_id',$product_id,'readonly data-parsley-required');
             echo form_label('หน่วยนับ *')
-                .form_error('product_unit')
-                .form_input('product_unit',$product_unit);
+                .form_input('product_unit',$product_unit,'data-parsley-required');
           }else{
             echo form_label('product code *')
-                .form_error('product_id')
-                .form_input('product_id');
+                .form_input('product_id','','data-parsley-required');
             echo form_label('หน่วยนับ *')
-                .form_error('product_unit')
-                .form_input('product_unit');
+                .form_input('product_unit','','data-parsley-required');
           }
         ?>
 
@@ -99,7 +94,9 @@
 
           $input_number = array(
               'type' => 'number',
-              'name' => 'product_weight'
+              'name' => 'product_weight',
+              'value' => (isset($data))? $data[0]->product_weight: 0,
+              'class' => 'input-group-field'
             );
 
           if(isset($data)){
@@ -109,21 +106,17 @@
 
 
             echo form_label('ชื่อสินค้า *')
-                .form_error('product_name')
-                .form_input('product_name',$product_name);
+                .form_input('product_name',$product_name,'data-parsley-required');
             echo form_label('น้ำหนักต่อชิ้น')
-                .form_error('product_weight')
                 .'<div class="input-group">'
-                .form_input($input_number,$product_weight,'class=input-group-field').'<span class="input-group-label">kg</span>
+                .form_input($input_number).'<span class="input-group-label">kg</span>
                   </div>';
           }else{
             echo form_label('ชื่อสินค้า *')
-                .form_error('product_name')
-                .form_input('product_name');
+                .form_input('product_name','','data-parsley-required');
             echo form_label('น้ำหนักต่อชิ้น')
-                .form_error('product_weight')
                 .'<div class="input-group">'
-                .form_input($input_number,'','class=input-group-field').'<span class="input-group-label">kg</span>
+                .form_input($input_number).'<span class="input-group-label">kg</span>
                   </div>
             ';
           }
@@ -134,8 +127,8 @@
 <hr />
 
         <div class="row">
-          <div class="large-12 columns">
           <h5>รายละเอียด Product *</h5>
+          <div class="large-6 columns">
 
         <?php
 
@@ -152,14 +145,27 @@
             echo form_label('ประเภท Product *')
                 .form_dropdown('product_type',$options,$product_type);
           }else{
-
             echo form_label('ประเภท Product *')
                 .form_dropdown('product_type',$options);
-
           }
 
         ?>
 
+          </div>
+          <div class="large-6 columns">
+        <?php
+          if(isset($data)){
+            //Assign Variable
+            $product_family = $data[0]->product_family;
+
+            echo form_label('Family ของ Product')
+                .form_input('product_family',$product_family,'data-parsley-required');
+          }else{
+            echo form_label('Family ของ Product')
+                .form_input('product_family','','data-parsley-required');
+          }
+
+        ?>
           </div>
         </div>
 
@@ -189,29 +195,27 @@
 
         <?php
 
-          $input_number = array(
+          $product_stock = array(
             'type' => 'number',
-            'name' => 'product_stock'
+            'name' => 'product_stock',
+            'value' => (isset($data))? $data[0]->product_stock: 0
           );
-          $input_number2 = array(
+          $product_safety = array(
             'type' => 'number',
-            'name' => 'product_safety'
+            'name' => 'product_safety',
+            'value' => (isset($data))? $data[0]->product_safety: 0
           );
 
           if(isset($data)){
-            //Assign Variable
-            $product_stock = $data[0]->product_stock;
-            $product_safety = $data[0]->product_safety;
-
             echo form_label('จำนวนสินค้าใน Stock')
-                .form_input($input_number,$product_stock);
+                .form_input($product_stock);
             echo form_label('Safety Stock')
-                .form_input($input_number2,$product_safety);
+                .form_input($product_safety);
           }else{
             echo form_label('จำนวนสินค้าใน Stock')
-                .form_input($input_number);
+                .form_input($product_stock);
             echo form_label('Safety Stock')
-                .form_input($input_number2);
+                .form_input($product_safety);
           }
 
         ?>
@@ -220,20 +224,20 @@
           <div class="large-6 columns">
         <?php
 
-          $input_number = array(
+          $product_stock_date = array(
             'type' => 'text',
-            'name' => 'product_stock_date'
+            'value' => (isset($data))? $data[0]->product_stock_date: '',
+            'name' => 'product_stock_date',
+            'class' =>  'datepicker'
           );
 
           if(isset($data)){
-            //Assign Variable
-            $product_stock_date = $data[0]->product_stock_date;
 
             echo form_label('วันที่ตรวจนับสินค้า')
-                .form_input($input_number,$product_stock_date,'class=datepicker');
+                .form_input($product_stock_date);
           }else{
             echo form_label('วันที่ตรวจนับสินค้า')
-                .form_input($input_number,'','class=datepicker');
+                .form_input($product_stock_date);
           }
 
         ?>

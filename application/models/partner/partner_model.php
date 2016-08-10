@@ -61,5 +61,12 @@ class Partner_model extends CI_Model {
 		$result = $this->db->get();
 		return $result->result_array();
 	}
+	//query industry sector
+	public function indy_all(){
+		$this->db->select('subsector');
+		$this->db->from('partner_industries');
+		$result = $this->db->get();
+		return $result->result();
+	}
 
 }

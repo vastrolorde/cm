@@ -16,14 +16,13 @@
 </div>
 
 <table id="datatable">
-
   <thead>
     <tr>
       <th>#</th>
       <th>รหัส Product</th>
       <th>ชื่อ Product</th>
-      <th>ประเภท Product</th>
       <th>Family</th>
+      <th>ประเภท Product</th>
       <th>actions</th>
     </tr>
   </thead>
@@ -39,8 +38,8 @@
       <td>'.$i.'</td>
       <td>'.$key->product_id.'</td>
       <td>'.$key->product_name.'</td>
-      <td>'.$key->product_type.'</td>
       <td>'.$key->product_family.'</td>
+      <td>'.$key->product_type.'</td>
       <td><a href="'.site_url("product/data/".$key->product_id).'">Edit</a></td>
     </tr>
       ';
