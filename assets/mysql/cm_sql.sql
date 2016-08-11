@@ -1269,9 +1269,9 @@ CREATE TABLE IF NOT EXISTS `hr_leave` (
   `lve_diff` char(5) COLLATE utf8_unicode_ci NOT NULL,
   `lve_reason` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_leave: ~202 rows (approximately)
+-- Dumping data for table cm.hr_leave: ~203 rows (approximately)
 DELETE FROM `hr_leave`;
 /*!40000 ALTER TABLE `hr_leave` DISABLE KEYS */;
 INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_out`, `lve_diff`, `lve_reason`) VALUES
@@ -1482,7 +1482,8 @@ INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_o
 	(205, 'CM-1008', 'Si', '09/08/2016', '08:00', '17:00', '1', 'หมอนัด'),
 	(206, 'CM-1004', 'Bis', '12/10/2016', '08:00', '17:00', '1', 'พาลูกไปหาหมอ'),
 	(207, 'CM-1007', 'Si', '08/08/2016', '08:00', '17:00', '1', 'ท้องเสีย'),
-	(208, 'CM-1007', 'Bis', '15/08/2016', '08:00', '17:00', '1', 'สามีป่วย');
+	(208, 'CM-1007', 'Bis', '15/08/2016', '08:00', '17:00', '1', 'สามีป่วย'),
+	(209, 'CM-1038', 'Si', '10/08/2016', '08:00', '17:00', '1', '');
 /*!40000 ALTER TABLE `hr_leave` ENABLE KEYS */;
 
 
@@ -11107,15 +11108,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Dumping data for table cm.users: ~0 rows (approximately)
+-- Dumping data for table cm.users: ~1 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1470792672, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1470915342, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 	(2, '::1', NULL, '$2y$08$row7el1PgeqGDPSy8UHXG.xlKDPBQr8WhEChtQhrWU7rgt80POHxi', NULL, 'bhurivaj@classmat.info', NULL, NULL, NULL, NULL, 1470625981, 1470792490, 1, 'Bhurivaj', 'Padcharaditthakul', NULL, NULL),
-	(3, '::1', NULL, '$2y$08$dmsIMZIhCa5GiZhmZrnYuu/xtDzGqrR0ujhfg42tTKuUyFtHuHlzy', NULL, 'pensom@classmat.info', NULL, NULL, NULL, NULL, 1470710534, NULL, 1, 'Pensom', 'Jaiwong', NULL, NULL);
+	(3, '::1', NULL, '$2y$08$dmsIMZIhCa5GiZhmZrnYuu/xtDzGqrR0ujhfg42tTKuUyFtHuHlzy', NULL, 'pensom@classmat.info', NULL, NULL, NULL, NULL, 1470710534, NULL, 1, 'Pensom', 'Jaiwong', NULL, NULL),
+	(4, '::1', NULL, '$2y$08$krhMqY7rwMIppHEbx5tNyuKFSZ.ppQPzyjY44vxWlLOb9JJd8vf6e', NULL, 'takdanai@classmat.info', NULL, NULL, NULL, NULL, 1470879179, 1470879225, 1, 'Takdanai', 'Chawalarat', NULL, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
@@ -11131,9 +11133,9 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   KEY `fk_users_groups_groups1_idx` (`group_id`),
   CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
--- Dumping data for table cm.users_groups: ~7 rows (approximately)
+-- Dumping data for table cm.users_groups: ~9 rows (approximately)
 DELETE FROM `users_groups`;
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
@@ -11143,7 +11145,9 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 	(8, 1, 4),
 	(9, 1, 6),
 	(5, 2, 2),
-	(6, 3, 2);
+	(6, 3, 2),
+	(10, 4, 2),
+	(11, 4, 3);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
