@@ -6,8 +6,8 @@
 	// คำนวณเวลาแตกต่าง
 
 		$('#pnch_out').change(function(){
-			var d2 = $('#pnch_out').val();
 			var d1 = $('#pnch_in').val();
+			var d2 = $('#pnch_out').val();
 
 			s = d1.split(':');
 			e = d2.split(':');

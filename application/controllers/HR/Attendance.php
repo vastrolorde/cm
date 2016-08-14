@@ -7,6 +7,7 @@ class Attendance extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
+		$this->load->library('time');
 		$this->load->model('HR/HR_Att_model','HR_Att_m');
 		$this->load->model('HR/HR_Emp_model','HR_Emp_m');
 	}
@@ -26,7 +27,7 @@ class Attendance extends CI_Controller {
 
 		$data['title'] = 'บันทึกลงเวลา';
 		$data['result'] = $this->HR_Att_m->getAll();
-		$data['emp'] = $this->HR_Emp_m->getAll();
+		$data['empAll'] = $this->HR_Emp_m->getAll();
 		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
 
 
@@ -99,8 +100,7 @@ class Attendance extends CI_Controller {
 
 			$this->hr_dept_m->update($data,$id);
 			
-
-			redirect('/HR/Dept/');
+		redirect('/HR/Attendance');
 		}else{
 
 			$this->data($id);
@@ -110,7 +110,7 @@ class Attendance extends CI_Controller {
 	public function delete($id){
 		$this->hr_dept_m->delete($id);
 
-		redirect('/HR/Dept/');
+		redirect('/HR/Attendance');
 	}
 
 	public function lookup_emp(){
@@ -137,10 +137,32 @@ class Attendance extends CI_Controller {
 
 	public function upload(){
 
-		$this->load->library('csv_import');
-        $result =   $this->csv_import->parse_file('att_csv.csv');//path to csv file
+		$filename=$_FILES["att_csv"]["tmp_name"];
 
-        
+		if($_FILES["att_csv"]["size"] > 0){
+			$file = fopen($filename, "r"); //Open file read only ('r')
+			$header = fgetcsv($file, 10000, ",");
+
+			while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
+			{
+				$emapData = array_combine($header, $emapData);
+				// 'emp_id',
+				// 'att_date',
+				// 'pnch_in',
+				// 'pnch_out',
+				// 'pnch_diff',
+				// 'remark'
+
+				$pnch_in	=	$emapData['pnch_in'];
+				$pnch_out	=	$emapData['pnch_out'];
+				$emapData['pnch_diff']	=	$this->time->timediff_workhour($pnch_in,$pnch_out);
+
+				$this->HR_Att_m->insertCSV($emapData);
+			}
+			fclose($file);
+			redirect('/HR/Attendance');
+		}
+
 	}
 
 }

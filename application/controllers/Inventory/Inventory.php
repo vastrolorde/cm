@@ -117,6 +117,7 @@ class Inventory extends CI_Controller {
 			);
 
 			$data_tr = array(
+				'invent_move_Date' =>	$this->input->post('invent_move_Date'),
 				'status' =>	$this->input->post('invent_move_status'),
 			);
 
@@ -146,6 +147,7 @@ class Inventory extends CI_Controller {
 	{
 		$data = array(
 			'inventory_move_id' =>	$this->input->post('inventory_move_id'),
+			'invent_move_Date' =>	$this->input->post('invent_move_Date'),
 			'product_id'        =>	$this->input->post('product_id'),
 			'amount'            =>	$this->input->post('amount'),
 			'type'            =>	$this->input->post('type'),

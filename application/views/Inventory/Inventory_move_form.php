@@ -94,7 +94,7 @@ invent_move_Date
               echo form_label('โกดัง','invent_move_wh',$label_attr)
                   .form_dropdown('invent_move_wh',$warehouse_list,$invent_move_wh,'id="warehouse"');
               echo form_label('วันที่รับ/ส่งสินค้า')
-                  .form_input('invent_move_Date',$invent_move_Date,'class="datepicker"');
+                  .form_input('invent_move_Date',$invent_move_Date,'class="datepicker" id="invent_move_Date"');
             }
 
           ?>
@@ -112,7 +112,7 @@ invent_move_Date
               $id               = $data[0]->id;
               $create_date      = $data[0]->create_date;
               $invent_move_type = $data[0]->invent_move_type;
-              $update_date  = $data[0]->update_date;
+              $update_date      = $data[0]->update_date;
             ?>
 
 
@@ -161,12 +161,32 @@ invent_move_Date
             </div>
             <div class="large-6 medium-6 small-6 columns">
               <?php
-                $tr_status = array(
-                  'draft' => 'ร่างเอกสาร',
-                  'Reserved' => 'จอง',
-                  'done' => 'ดำเนินการแล้ว',
-                  'cancel' =>'ยกเลิก'
-                  );
+
+                switch ($invent_move_type) {
+                  case 'recieve':
+                    $tr_status = array(
+                      'ซื้อสินค้า'  => array('Purchase' => 'ซื้อเข้า'),
+                      'บริษัทเช่า'  => array('RentIn' => 'เช่าสินค้า'),
+                      'ลูกค้าเช่า'  => array('GotBack' => 'รับคืนสินค้าเช่า')
+                    );
+                    break;
+
+                  case 'deliver':
+                    $tr_status = array(
+                      'ขายสินค้า'  => array(
+                          'Reserved' => 'จองสินค้า',
+                          'Transport' => 'ระหว่างขนส่ง',
+                          'Sale' => 'ขายสินค้า',
+                        ),
+                      'บริษัทเช่า'  => array('SentBack' => 'คืนสินค้าเช่ามา'),
+                      'ลูกค้าเช่า'  => array(
+                          'Reserved' => 'จองสินค้า',
+                          'Transport' => 'ระหว่างขนส่ง',
+                          'RentOut' => 'ปล่อยเช่าสินค้า',
+                        ),
+                    );
+                    break;
+                }
 
                 $status = $data[0]->invent_move_status;
 

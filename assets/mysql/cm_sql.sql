@@ -1,20 +1,21 @@
 -- --------------------------------------------------------
 -- Host:                         localhost
--- Server version:               10.1.9-MariaDB - mariadb.org binary distribution
+-- Server version:               10.1.10-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
--- HeidiSQL Version:             9.3.0.4984
+-- HeidiSQL Version:             9.3.0.5107
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
 
 -- Dumping database structure for cm
 DROP DATABASE IF EXISTS `cm`;
 CREATE DATABASE IF NOT EXISTS `cm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `cm`;
-
 
 -- Dumping structure for table cm.bank
 DROP TABLE IF EXISTS `bank`;
@@ -63,7 +64,6 @@ INSERT INTO `bank` (`id`, `name`) VALUES
 	('TMB', 'ธนาคารทหารไทย จำกัด (มหาชน)'),
 	('UOB', 'ธนาคารยูไนเต็ด โอเวอร์ซีส์ (ไทย) จำกัด (มหาชน)');
 /*!40000 ALTER TABLE `bank` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.dist
 DROP TABLE IF EXISTS `dist`;
@@ -1076,7 +1076,6 @@ INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `
 	(998, '9681', 'อ.บางนรา  จ.นราธิวาส', '00000', 6, 76);
 /*!40000 ALTER TABLE `dist` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.geography
 DROP TABLE IF EXISTS `geography`;
 CREATE TABLE IF NOT EXISTS `geography` (
@@ -1096,7 +1095,6 @@ INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
 	(5, 'ภาคตะวันออก'),
 	(6, 'ภาคใต้');
 /*!40000 ALTER TABLE `geography` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.groups
 DROP TABLE IF EXISTS `groups`;
@@ -1118,7 +1116,6 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 	(6, 'Sales', 'Sales');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.hr_att
 DROP TABLE IF EXISTS `hr_att`;
 CREATE TABLE IF NOT EXISTS `hr_att` (
@@ -1130,15 +1127,12 @@ CREATE TABLE IF NOT EXISTS `hr_att` (
   `pnch_diff` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
   `remark` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_att: ~1 rows (approximately)
+-- Dumping data for table cm.hr_att: ~0 rows (approximately)
 DELETE FROM `hr_att`;
 /*!40000 ALTER TABLE `hr_att` DISABLE KEYS */;
-INSERT INTO `hr_att` (`id`, `emp_id`, `att_date`, `pnch_in`, `pnch_out`, `pnch_diff`, `remark`) VALUES
-	(1, 'CM-1001', '01/08/2016', '08:00', '17:00', '1', NULL);
 /*!40000 ALTER TABLE `hr_att` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.hr_dept
 DROP TABLE IF EXISTS `hr_dept`;
@@ -1159,7 +1153,6 @@ INSERT INTO `hr_dept` (`id`, `dept_name`, `dept_mother`, `dept_manager`) VALUES
 	('OPT', 'Operation', 'Management', 'ประพันธ์  วงษ์อุบล'),
 	('PJT', 'Project', 'Management', 'เพ็ญโสม  ใจวงค์');
 /*!40000 ALTER TABLE `hr_dept` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.hr_employee_data
 DROP TABLE IF EXISTS `hr_employee_data`;
@@ -1256,7 +1249,6 @@ INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `e
 	('CM-1042', 'นาย', 'ดอนสาม', '', 'ดอน', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '9/6/2016', '', 'ทดลองงาน', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '', '', '', '', '');
 /*!40000 ALTER TABLE `hr_employee_data` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.hr_leave
 DROP TABLE IF EXISTS `hr_leave`;
 CREATE TABLE IF NOT EXISTS `hr_leave` (
@@ -1271,7 +1263,7 @@ CREATE TABLE IF NOT EXISTS `hr_leave` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_leave: ~203 rows (approximately)
+-- Dumping data for table cm.hr_leave: ~209 rows (approximately)
 DELETE FROM `hr_leave`;
 /*!40000 ALTER TABLE `hr_leave` DISABLE KEYS */;
 INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_out`, `lve_diff`, `lve_reason`) VALUES
@@ -1486,7 +1478,6 @@ INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_o
 	(209, 'CM-1038', 'Si', '10/08/2016', '08:00', '17:00', '1', '');
 /*!40000 ALTER TABLE `hr_leave` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.hr_position
 DROP TABLE IF EXISTS `hr_position`;
 CREATE TABLE IF NOT EXISTS `hr_position` (
@@ -1526,7 +1517,6 @@ INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`,
 	('0018', 'Scaffold Vendor', 'OPT', 'Scaffold Supervisor', NULL, NULL, NULL, NULL, 'Y');
 /*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.inventory_move
 DROP TABLE IF EXISTS `inventory_move`;
 CREATE TABLE IF NOT EXISTS `inventory_move` (
@@ -1543,42 +1533,40 @@ CREATE TABLE IF NOT EXISTS `inventory_move` (
   CONSTRAINT `FK_inventory_move_partner` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move: ~0 rows (approximately)
+-- Dumping data for table cm.inventory_move: ~2 rows (approximately)
 DELETE FROM `inventory_move`;
 /*!40000 ALTER TABLE `inventory_move` DISABLE KEYS */;
 INSERT INTO `inventory_move` (`id`, `partner_id`, `invent_move_Date`, `invent_move_type`, `invent_move_status`, `invent_move_wh`, `update_date`, `create_date`) VALUES
-	('0001', '000', '10/08/2016', 'recieve', 'done', 'WH-002', '10/08/2016 04:08', '10/08/2016 10:32'),
-	('0002', '0001', '08/08/2016', 'deliver', 'draft', 'WH-001', '10/08/2016 01:31', '10/08/2016 01:30');
+	('0001', '000', '10/08/2016', 'recieve', 'GotBack', 'WH-002', '13/08/2016 09:10', '10/08/2016 10:32'),
+	('0002', '0001', '08/08/2016', 'deliver', 'Reserved', 'WH-001', '13/08/2016 09:07', '10/08/2016 01:30'),
+	('0003', '000', '', 'deliver', 'SentBack', 'WH-001', '13/08/2016 09:07', '12/08/2016 09:55');
 /*!40000 ALTER TABLE `inventory_move` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.inventory_move_tr
 DROP TABLE IF EXISTS `inventory_move_tr`;
 CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inventory_move_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invent_move_Date` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `product_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `amount` int(20) DEFAULT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `amount` int(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index 1` (`inventory_move_id`),
   CONSTRAINT `FK_inventory_move_tr_product` FOREIGN KEY (`inventory_move_id`) REFERENCES `inventory_move` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move_tr: ~6 rows (approximately)
+-- Dumping data for table cm.inventory_move_tr: ~5 rows (approximately)
 DELETE FROM `inventory_move_tr`;
 /*!40000 ALTER TABLE `inventory_move_tr` DISABLE KEYS */;
-INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `product_id`, `amount`, `type`, `status`) VALUES
-	(1, '0001', 'BB-4224', 250, 'recieve', 'done'),
-	(2, '0002', 'BB-4224', 200, 'deliver', 'draft'),
-	(3, '0001', 'BC-4218', 50, 'recieve', 'done'),
-	(4, '0001', 'BM-4206', 350, 'recieve', 'done'),
-	(5, '0001', 'BM-4211', 45, 'recieve', 'done'),
-	(6, '0001', 'BM-4212', 48, 'recieve', 'done'),
-	(7, '0001', 'VC-4208', 300, 'recieve', 'done');
+INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `invent_move_Date`, `product_id`, `type`, `status`, `amount`) VALUES
+	(1, '0001', '10/08/2016', 'BB-4224', 'recieve', 'GotBack', 450),
+	(2, '0002', '08/08/2016', 'BB-4224', 'deliver', 'Reserved', 200),
+	(3, '0001', '10/08/2016', 'BC-4218', 'recieve', 'GotBack', 150),
+	(8, '0003', '12/08/2016', 'BD-4218', 'deliver', 'SentBack', 180),
+	(9, '0003', '12/08/2016', 'BM-4211', 'deliver', 'SentBack', 256);
 /*!40000 ALTER TABLE `inventory_move_tr` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.inventory_wh
 DROP TABLE IF EXISTS `inventory_wh`;
@@ -1602,7 +1590,6 @@ INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`,
 	('OFF', 'Classmat Office', '93 ซอยอุดมสุข 51', 'สุขุมวิท 103', 'บางจาก', 'พระโขนง', 'กรุงเทพ', 10260);
 /*!40000 ALTER TABLE `inventory_wh` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.login_attempts
 DROP TABLE IF EXISTS `login_attempts`;
 CREATE TABLE IF NOT EXISTS `login_attempts` (
@@ -1617,7 +1604,6 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 DELETE FROM `login_attempts`;
 /*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.partner
 DROP TABLE IF EXISTS `partner`;
@@ -1656,7 +1642,6 @@ INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `ad
 	('000', NULL, 'ลูกค้าทั่วไป', '', '', '', '', '', NULL, '1', '1', 0, '["customer"]', '', 'AGR', '', 0, 'กระแสรายวัน', '', 'Aerospace', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
 	('0001', NULL, 'บริษัท รชิต เอ็นจิเนียริ่ง จำกัด', '', '', 'sales.rachita@gmail.com', '106/69-70  หมู่ที่ 9', '', NULL, '136', '11', 20230, '["supplier"]', '- เทปตีเขต Safety\r\n- เทปตีแนว Safety', 'AGR', '', 0, 'กระแสรายวัน', '', 'Building Materials & Fixtures', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
 /*!40000 ALTER TABLE `partner` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.partner_industries
 DROP TABLE IF EXISTS `partner_industries`;
@@ -1787,7 +1772,6 @@ INSERT INTO `partner_industries` (`subsector`, `sector`, `supersector`, `industr
 	('Waste & Disposal Services', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
 	('Water', 'Gas, Water & Multiutilities', 'Utilities', 'Utilities');
 /*!40000 ALTER TABLE `partner_industries` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.product
 DROP TABLE IF EXISTS `product`;
@@ -2026,7 +2010,6 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_family`, `product_
 	('WR-C', 'สเก็นสลิง  Wire Rope Clip', 'Equipment', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.product_attr
 DROP TABLE IF EXISTS `product_attr`;
 CREATE TABLE IF NOT EXISTS `product_attr` (
@@ -2044,7 +2027,6 @@ INSERT INTO `product_attr` (`id`) VALUES
 	('ยาว'),
 	('เส้นผ่านศูนย์กลาง');
 /*!40000 ALTER TABLE `product_attr` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.product_unit
 DROP TABLE IF EXISTS `product_unit`;
@@ -2064,7 +2046,6 @@ INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
 	('0005', 'ขา'),
 	('0006', 'แผ่น');
 /*!40000 ALTER TABLE `product_unit` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.province
 DROP TABLE IF EXISTS `province`;
@@ -2159,7 +2140,6 @@ INSERT INTO `province` (`Province_ID`, `Province_CODE`, `Province_NAME`, `GEO_ID
 	(77, '97', 'บึงกาฬ', 3);
 /*!40000 ALTER TABLE `province` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.rental
 DROP TABLE IF EXISTS `rental`;
 CREATE TABLE IF NOT EXISTS `rental` (
@@ -2185,7 +2165,6 @@ DELETE FROM `rental`;
 /*!40000 ALTER TABLE `rental` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rental` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.rentaltransaction
 DROP TABLE IF EXISTS `rentaltransaction`;
 CREATE TABLE IF NOT EXISTS `rentaltransaction` (
@@ -2206,7 +2185,6 @@ CREATE TABLE IF NOT EXISTS `rentaltransaction` (
 DELETE FROM `rentaltransaction`;
 /*!40000 ALTER TABLE `rentaltransaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rentaltransaction` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.subdist
 DROP TABLE IF EXISTS `subdist`;
@@ -11086,7 +11064,6 @@ INSERT INTO `subdist` (`SubDist_ID`, `SubDist_CODE`, `SubDist_NAME`, `Dist_ID`, 
 	(8860, '961303', 'มะรือโบออก', 997, 76, 6);
 /*!40000 ALTER TABLE `subdist` ENABLE KEYS */;
 
-
 -- Dumping structure for table cm.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -11110,16 +11087,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Dumping data for table cm.users: ~1 rows (approximately)
+-- Dumping data for table cm.users: ~4 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1470915342, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1471190999, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 	(2, '::1', NULL, '$2y$08$row7el1PgeqGDPSy8UHXG.xlKDPBQr8WhEChtQhrWU7rgt80POHxi', NULL, 'bhurivaj@classmat.info', NULL, NULL, NULL, NULL, 1470625981, 1470792490, 1, 'Bhurivaj', 'Padcharaditthakul', NULL, NULL),
 	(3, '::1', NULL, '$2y$08$dmsIMZIhCa5GiZhmZrnYuu/xtDzGqrR0ujhfg42tTKuUyFtHuHlzy', NULL, 'pensom@classmat.info', NULL, NULL, NULL, NULL, 1470710534, NULL, 1, 'Pensom', 'Jaiwong', NULL, NULL),
 	(4, '::1', NULL, '$2y$08$krhMqY7rwMIppHEbx5tNyuKFSZ.ppQPzyjY44vxWlLOb9JJd8vf6e', NULL, 'takdanai@classmat.info', NULL, NULL, NULL, NULL, 1470879179, 1470879225, 1, 'Takdanai', 'Chawalarat', NULL, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-
 
 -- Dumping structure for table cm.users_groups
 DROP TABLE IF EXISTS `users_groups`;
@@ -11149,6 +11125,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 	(10, 4, 2),
 	(11, 4, 3);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

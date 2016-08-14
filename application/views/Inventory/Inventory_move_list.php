@@ -70,12 +70,6 @@
     </div>
     <div class="large-6 columns">
       <?php
-      $tr_status = array(
-          'draft' => 'ร่างเอกสาร',
-          'process' => 'กำลังเตรียมการ',
-          'done' => 'ดำเนินการแล้ว',
-          'cancel' =>'ยกเลิก'
-        );
 
       $create_date = array(
           'name' => 'create_date',
@@ -89,8 +83,7 @@
             .form_input($create_date);
         echo form_label('วันที่ลูกค้ามารับของ')
             .form_input('invent_move_Date','','class="datepicker"');
-        echo form_label('สถานะรายการ')
-            .form_dropdown('invent_move_status',$tr_status);
+        echo form_hidden('invent_move_status','process');
       ?>
     </div>
   </div>

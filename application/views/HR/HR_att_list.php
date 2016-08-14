@@ -7,7 +7,7 @@
     echo form_open('/HR/Attendance/add');
 
     $emp = array();
-    foreach ($emp as $key) {
+    foreach ($empAll as $key) {
       $emp[$key->id] = $key->emp_prefix.' '.$key->emp_fname.' '.$key->emp_lname;
     }
 
@@ -40,6 +40,7 @@
       </div>
     </div>';
 
+    echo form_close();
   ?>
 
   <button class="close-button" data-close aria-label="Close modal" type="button">
@@ -55,13 +56,41 @@
 
   <h3>นำเข้าบันทึกลงเวลา</h3>
 
+  <h4>ขั้นตอนการนำเข้าข้อมูล</h4>
+
+  <ol>
+    <li>ดาวน์โหลด <a>ไฟล์Excelตัวอย่าง</a></li>
+    <li>กรอกข้อมูลในช่อง id date start end remark</li>
+    <li>ช่อง convert ไฟล์จะทำการคำนวณให้เอง ไม่ต้องกรอก</li>
+    <li>ตรวจสอบข้อมูลให้ถูกต้อง
+      <ol>
+        <li>ตรวจสอบการกรอกเวลาว่าถูกต้องหรือไม่</li>
+        <li>วันที่ต้องเป็น Format "dd/mm/yyyy" ปีเป็น ค.ศ. เช่น 14/08/2016 หรือ 01/10/2016</li>
+      </ol>
+    </li>
+    <li>ทำการบันทึกเป็น csv โดย
+      <ol>
+        <li>File>Save as</li>
+        <li>เลือกdirectory ที่ต้องการ save</li>
+        <li>ตั้งชื่อไฟล์ **แนะนำให้ระบุช่วงเวลาของการดึงข้อมูลบันทึกเวลาไว้เป็นชื่อไฟล์ด้วย เช่น ระบุเป็น TA 25 Jan - 25 Feb16 เป็นต้น**</li>
+        <li>เปลี่ยน Save As Type: เป็น CSV (Comma Delimited) (*.csv)</li>
+      </ol>
+    </li>
+    <li>กด Save</li>
+  </ol>
+
   <?php
     echo form_open_multipart('/HR/Attendance/upload');
-  ?>
-  <label>กรุณาเลือกไฟล์บันทึกเวลา <span style="color:red;">(ต้องเป็นไฟล์นามสกุล csv เท่านั้น)</span>
+
+    echo'
+  <label>กรุณาเลือกไฟล์บันทึกเวลา <span style="color:red;">(ต้องเป็นไฟล์นามสกุล csv เท่านั้น)</span><br />
     <input type="file" name="att_csv">
   </label>
-  <input type="submit" class="button">
+  <input type="submit" class="button">';
+    
+    echo form_close();
+
+  ?>
 
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
@@ -98,6 +127,7 @@
       <th>วันที่</th>
       <th>เข้า</th>
       <th>ออก</th>
+      <th>ระยะเวลา(hr)</th>
       <th>หมายเหตุ</th>
       <th>actions</th>
     </tr>
@@ -117,6 +147,7 @@
             <td>'.$key->att_date.'</td>
             <td>'.$key->pnch_in.'</td>
             <td>'.$key->pnch_out.'</td>
+            <td>'.$key->pnch_diff.'</td>
             <td>'.$key->remark.'</td>
             <td><a href="'.site_url("HR/Dept/data/".$key->id).'">Edit</a></td>
           </tr>

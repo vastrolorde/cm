@@ -24,7 +24,7 @@
 		/*2*/	$this->pdf->Cell(60,20,iconv( 'UTF-8','TIS-620',$data[0]->tel),0,0,'L');
 		/*3*/	$this->pdf->Cell(40);
 		/*4*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620','วันที่เอกสาร :'),0,0,'R');
-		/*5*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620',$data[0]->invent_move_createDate),0,0,'L');
+		/*5*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620',$data[0]->create_date),0,0,'L');
 		/*6*/	$this->pdf->Ln(6);
 
 		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','e-mail :'),0,0,'R');

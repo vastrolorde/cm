@@ -21,8 +21,9 @@
     "jquery-mask-plugin": "jQuery-Mask-Plugin#^1.14.0",
     "moment": "^2.13.0",
     "angular": "^1.5.7",
-    "d3": "^4.2.1", // used for graph
-    "parsleyjs": "^2.4.4" //Use for validate
+    "d3": "^4.2.1",
+    "parsleyjs": "^2.4.4",
+    "fullcalendar": "^2.9.1"
   },
   "devDependencies": {
     "datatables.net-zf": "^1.10.12"

@@ -58,10 +58,13 @@ class Product_model extends CI_Model {
 	//query all product
 	public function get_flow(){
 		$this->db->select('p.product_id,p.product_name,p.product_stock');
-		$this->db->select('im.product_id,im.amount');
-		$this->db->from('product as p');
-		$this->db->join('inventory_move_tr as im','p.product_id = im.product_id');
+		$this->db->select('im.product_id,im.type,im.status,im.amount');
+		$this->db->from('inventory_move_tr as im');
+		$this->db->join('product as p','p.product_id = im.product_id');
+		$this->db->select_sum('im.amount');
+		$this->db->group_by('im.product_id');
+		$this->db->group_by('im.status');
 		$result = $this->db->get();
-		return $result->result();
+		return $result->result_array();
 	}
 }

@@ -110,7 +110,7 @@
                 .form_dropdown('dept_id',$dept_list);
             echo form_label('Job Grade')
                 .form_error('job_group')
-                .form_input('job_group',$job_group);
+                .form_input('job_group');
           }
         ?>
       </div>
@@ -136,7 +136,7 @@
                 .form_input('position_manager');
             echo form_label('Job Grade')
                 .form_error('job_grade')
-                .form_input('job_grade',$job_grade);
+                .form_input('job_grade');
 
           }
         ?>

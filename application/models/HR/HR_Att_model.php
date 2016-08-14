@@ -24,6 +24,10 @@ class HR_Att_model extends CI_Model {
 		$this->db->insert('hr_att',$data);
 	}
 
+	public function insertCSV($data){
+		$this->db->insert('hr_att',$data);
+	}
+
 	public function update($data,$id){
 		$this->db->where('id',$id);
 		$this->db->update('hr_att',$data);
