@@ -165,4 +165,14 @@ class Attendance extends CI_Controller {
 
 	}
 
+	public function example(){
+		$this->load->helper('download');
+
+		$name = 'example.xlsx';
+		$path = file_get_contents(base_url()."assets/files/example.xlsx");;
+
+		force_download($name,$path);
+
+	}
+
 }

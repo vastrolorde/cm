@@ -59,7 +59,7 @@
   <h4>ขั้นตอนการนำเข้าข้อมูล</h4>
 
   <ol>
-    <li>ดาวน์โหลด <a>ไฟล์Excelตัวอย่าง</a></li>
+    <li>ดาวน์โหลด <a href="<?php echo site_url().'/HR/Attendance/example' ?>">ไฟล์Excelตัวอย่าง</a></li>
     <li>กรอกข้อมูลในช่อง id date start end remark</li>
     <li>ช่อง convert ไฟล์จะทำการคำนวณให้เอง ไม่ต้องกรอก</li>
     <li>ตรวจสอบข้อมูลให้ถูกต้อง
