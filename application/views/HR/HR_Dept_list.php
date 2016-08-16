@@ -63,7 +63,7 @@
     }else{
       echo '
         <tr>
-          <td colspan="7"> No Data </td>
+          <td colspan="6"> No Data </td>
         </tr>
       ';
     }

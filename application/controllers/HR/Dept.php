@@ -75,61 +75,32 @@ class Dept extends CI_Controller {
 
 	public function add()
 	{
-
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('id','รหัสแผนก','required');
-		$this->form_validation->set_rules('dept_name','ชื่อแผนก','required');
-
-		if ($this->form_validation->run() == TRUE){
-
-			$data = array(
-				'id'           =>	$this->input->post('id'),
-				'dept_name'    =>	$this->input->post('dept_name'),
-				'dept_mother'  =>	$this->input->post('dept_mother'),
-				'dept_manager' =>	$this->input->post('dept_manager'),
-				
-			);
-
-			$this->hr_dept_m->create($data);
+		$data = array(
+			'id'           =>	$this->input->post('id'),
+			'dept_name'    =>	$this->input->post('dept_name'),
+			'dept_mother'  =>	$this->input->post('dept_mother'),
+			'dept_manager' =>	$this->input->post('dept_manager'),
 			
+		);
 
-			redirect('/HR/Dept/');
-		}else{
-
-			$this->create();
-		}
+		$this->hr_dept_m->create($data);
+		
+		redirect('/HR/Dept/');
 	}
 
 	public function edit($id)
 	{
-
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('dept_name','ชื่อแผนก','required');
-
-		if ($this->form_validation->run() == TRUE){
-
-			$data = array(
-				'id'           =>	$this->input->post('id'),
-				'dept_name'    =>	$this->input->post('dept_name'),
-				'dept_mother'  =>	$this->input->post('dept_mother'),
-				'dept_manager' =>	$this->input->post('dept_manager'),
-				
-			);
-
-			$this->hr_dept_m->update($data,$id);
+		$data = array(
+			'id'           =>	$this->input->post('id'),
+			'dept_name'    =>	$this->input->post('dept_name'),
+			'dept_mother'  =>	$this->input->post('dept_mother'),
+			'dept_manager' =>	$this->input->post('dept_manager'),
 			
+		);
 
-			redirect('/HR/Dept/');
-		}else{
-
-			$this->data($id);
-		}
+		$this->hr_dept_m->update($data,$id);
+		
+		redirect('/HR/Dept/');
 	}
 
 	public function delete($id){

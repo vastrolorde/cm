@@ -92,11 +92,11 @@
           <ul class="vertical menu nested">
             <li><a href="#">บันทึกเวลา</a>
               <ul class="vertical menu nested">
-                <li><a href="<?php echo site_url().'/HR/Attendance'; ?>">บันทึกลงเวลา</a></li>
-                <li><a href="">ลงเวลาล่วงเวลา</a></li>
                 <li><a href="">เปิดกะ</a></li>
-                <li><a href="<?php echo site_url().'/HR/Leave'; ?>">ลา</a></li>
-                <li><a href="">วันหยุดประจำปี</a></li>
+                <li><a href="<?php echo site_url().'/HR/Attendance'; ?>">บันทึกลงเวลา</a></li>
+                <li><a href="">บันทึกล่วงเวลา</a></li>
+                <li><a href="<?php echo site_url().'/HR/Leave'; ?>">บันทึกลา</a></li>
+                <li><a href="<?php echo site_url().'/HR/Holiday'; ?>">วันหยุดประจำปี</a></li>
               </ul>
             </li>
             <li><a href="#">พนักงาน</a>

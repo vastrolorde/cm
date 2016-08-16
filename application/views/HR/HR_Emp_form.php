@@ -1,26 +1,31 @@
 <?php
+
+  $attributes = array(
+      'id' => 'validate_form'
+    );
+
   if(!isset($data)){
-    echo form_open('/HR/Employee/add');
+    echo form_open('/HR/Employee/add',$attributes);
   }else{
-    echo form_open('/HR/Employee/edit/'.$data[0]->id);
+    echo form_open('/HR/Employee/edit/'.$data[0]->id,$attributes);
   }
 /*
 
-id
+*id
 emp_prefix
-emp_fname
+*emp_fname
 emp_lname
 emp_nickname
-emp_nation
-emp_DOB
-emp_sex
+*emp_nation
+*emp_DOB
+*emp_sex
 emp_position_now
-emp_dept_now
-emp_position
-emp_type
-emp_startdate
+*emp_dept_now
+*emp_position
+*emp_type
+*emp_startdate
 emp_enddate
-emp_status
+*emp_status
 emp_add1
 emp_add2
 emp_SubDist
@@ -67,15 +72,7 @@ emp_truck_license_exp
             </ul>
           </div>
         </div>
-        <?php
-          if(validation_errors()){
-            echo '<div class="callout alert">
-                    <h5>Error</h5>
-                    <p>มีการกรอกข้อมูลผิดพลาด โปรดตรวจสอบ</p>
-                  </div>';
-          }
 
-        ?>
 <!-- Tab -->
 
     <ul class="tabs" data-tabs id="employee-tabs">
@@ -100,14 +97,24 @@ emp_truck_license_exp
 
                 if(isset($data)){
                 //Assign Variable
-                  $id = $data[0]->id;
+                  $id = array(
+                    'type' => 'text',
+                    'name' => 'id',
+                    'value' => $data[0]->id,
+                    'readonly' => 'readonly'
+                    );
 
                   echo form_label('รหัสพนักงาน *')
-                      .form_input('id',$id,'readonly');
+                      .form_input($id);
                 }else{
+                  $id = array(
+                    'type' => 'text',
+                    'name' => 'id',
+                    'data-parsley-required' => 'true'
+                  );
+
                   echo form_label('รหัสพนักงาน *')
-                      .form_error('id')
-                      .form_input('id');
+                      .form_input($id);
                 }
                 ?>
           </div>
@@ -124,27 +131,37 @@ emp_truck_license_exp
             if(isset($data)){
               //Assign Variable
               $emp_prefix = $data[0]->emp_prefix;
-              $emp_fname  = $data[0]->emp_fname;
+
+              $emp_fname = array(
+                'type'                  => 'text',
+                'name'                  => 'emp_fname',
+                'value'             => $data[0]->emp_fname,
+                'data-parsley-required' => 'true'
+              );
+
               $emp_lname  = $data[0]->emp_lname;
 
               echo '<div class="large-2 columns">'
-                
                     .form_label('คำนำหน้าชื่อ *')
                     .form_dropdown('emp_prefix',$prefixoptions,$emp_prefix)
                 .'</div>';
               echo '<div class="large-3 columns">'
-                
                     .form_label('ชื่อ *')
-                    .form_error('emp_fname')
-                    .form_input('emp_fname',$emp_fname)
+                    .form_input($emp_fname)
                 .'</div>';
               echo '<div class="large-7 columns">'
                 
                     .form_label('นามสกุล *')
-                    .form_error('emp_lname')
                     .form_input('emp_lname',$emp_lname)
                 .'</div>';
             }else{
+
+              $emp_fname = array(
+                'type'                  => 'text',
+                'name'                  => 'emp_fname',
+                'data-parsley-required' => 'true'
+              );
+
               echo '<div class="large-2 columns">'
                 
                     .form_label('คำนำหน้าชื่อ *')
@@ -153,13 +170,11 @@ emp_truck_license_exp
               echo '<div class="large-3 columns">'
                 
                     .form_label('ชื่อ *')
-                    .form_error('emp_fname')
                     .form_input('emp_fname')
                 .'</div>';
               echo '<div class="large-7 columns">'
                 
                     .form_label('นามสกุล *')
-                    .form_error('emp_lname')
                     .form_input('emp_lname')
                 .'</div>';
             }
@@ -173,18 +188,24 @@ emp_truck_license_exp
               if(isset($data)){
                 //Assign Variable
                 $emp_nickname = $data[0]->emp_nickname;
-                $emp_nation = $data[0]->emp_nation;
+                $emp_nation = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_nation',
+                  'value' => $data[0]->emp_nation,
+                  );
 
                 echo form_label('ชื่อเล่น')
                     .form_input('emp_nickname',$emp_nickname);
                 echo form_label('สัญชาติ')
-                    .form_error('emp_nation')
-                    .form_input('emp_nation',$emp_nation);
+                    .form_input($emp_nation);
               }else{
+                $emp_nation = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_nation',
+                  );
                 echo form_label('ชื่อเล่น')
                     .form_input('emp_nickname');
                 echo form_label('สัญชาติ')
-                    .form_error('emp_nation')
                     .form_input('emp_nation');
               }
             ?>
@@ -201,17 +222,28 @@ emp_truck_license_exp
               if(isset($data)){
                 //Assign Variable
                 $emp_sex = $data[0]->emp_sex;
-                $emp_DOB = $data[0]->emp_DOB;
+                $emp_DOB = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_DOB',
+                  'value' => $data[0]->emp_DOB,
+                  'class' => 'datepicker'
+                  );
 
                 echo form_label('เพศสภาพ')
                     .form_dropdown('emp_sex',$sex,$emp_sex);
                 echo form_label('วันเดือนปี เกิด')
-                    .form_input('emp_DOB',$emp_DOB,'class=datepicker');
+                    .form_input($emp_DOB);
               }else{
+                $emp_DOB = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_DOB',
+                  'class' => 'datepicker'
+                  );
+
                 echo form_label('เพศสภาพ')
                     .form_dropdown('emp_sex',$sex);
                 echo form_label('วันเดือนปี เกิด')
-                    .form_input('emp_DOB','','class=datepicker');
+                    .form_input($emp_DOB);
               }
             ?>
 
@@ -235,22 +267,44 @@ emp_truck_license_exp
               if(isset($data)){
                 //Assign Variable
 
-                $emp_startdate = $data[0]->emp_startdate;
-                $emp_enddate = $data[0]->emp_enddate;
+                $emp_startdate = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_startdate',
+                  'value' => $data[0]->emp_startdate,
+                  'class' => 'datepicker'
+                  );
+                $emp_enddate = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_enddate',
+                  'value' => $data[0]->emp_enddate,
+                  'class' => 'datepicker'
+                  );
+
                 $emp_status = $data[0]->emp_status;
 
 
                 echo form_label('วันเริ่มทำงาน *')
-                    .form_input('emp_startdate',$emp_startdate,'class=datepicker');
+                    .form_input($emp_startdate);
                 echo form_label('วันสิ้นสุดการทำงาน *')
-                    .form_input('emp_enddate',$emp_enddate,'class=datepicker');
+                    .form_input($emp_enddate);
                 echo form_label('สถานะ')
                     .form_dropdown('emp_status',$emp_status_list,$emp_status);
               }else{
+                $emp_startdate = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_startdate',
+                  'class' => 'datepicker'
+                  );
+                $emp_enddate = array(
+                  'type'  => 'text',
+                  'name'  => 'emp_enddate',
+                  'class' => 'datepicker'
+                  );
+
                 echo form_label('วันเริ่มทำงาน *')
-                    .form_input('emp_startdate','','class=datepicker');
+                    .form_input($emp_startdate);
                 echo form_label('วันสิ้นสุดการทำงาน *')
-                    .form_input('emp_enddate','','class=datepicker');
+                    .form_input($emp_enddate);
                 echo form_label('สถานะ *')
                     .form_dropdown('emp_status',$emp_status_list);
               }
@@ -319,6 +373,17 @@ emp_truck_license_exp
               <div class="large-6 columns">
 
                 <?php
+                
+                  $i = 0;
+                  foreach($Province_all as $key){
+                  $Province_list[$Province_all[$i]['Province_ID']] = $Province_all[$i]['Province_NAME'];
+                  
+                  $i++;
+                  }
+                  
+                  $subDist_list = array(
+                  'blank' => 'กรุณาเลือกแขวง/ตำบล'
+                  );
                   
                   if(isset($data)){
                     //Assign Variable
@@ -326,48 +391,63 @@ emp_truck_license_exp
                     $emp_SubDist = $data[0]->emp_SubDist;
                     $emp_Province = $data[0]->emp_Province;
 
+                    $SubDist_opt = array(
+                                    'id' => 'SubDist',
+                                    'sel' => $emp_SubDist, // Used for get id value in js
+                                  );
 
                     echo form_label('ที่อยู่ *')
                         .form_input('emp_add1',$emp_add1);
                     echo form_label('แขวง/ตำบล *')
-                        .form_input('emp_SubDist',$emp_SubDist);
+                        .form_dropdown('emp_SubDist',$subDist_list,$emp_SubDist,$SubDist_opt);
+            
                     echo form_label('จังหวัด *')
-                        .form_input('emp_Province',$emp_Province);
+                        .form_dropdown('emp_Province',$Province_list,$emp_Province,'id="Province"');
                   }else{
                     echo form_label('ที่อยู่ *')
                         .form_input('emp_add1');
                     echo form_label('แขวง/ตำบล *')
-                        .form_input('emp_SubDist');
+                        .form_dropdown('emp_SubDist',$subDist_list,'','id="SubDist"');
                     echo form_label('จังหวัด *')
-                        .form_input('emp_Province');
+                        .form_dropdown('emp_Province',$Province_list,'','id="Province"');
                   }
                 ?>
               </div>
               <div class="large-6 columns">
 
                 <?php
-                  
+                  $Dist_list = array(
+                  'blank' => 'กรุณาเลือกเขต/อำเภอ'
+                  );
+
                   if(isset($data)){
                     //Assign Variable
                     $emp_add2 = $data[0]->emp_add2;
                     $emp_Dist = $data[0]->emp_Dist;
-                    $emp_Postal = $data[0]->emp_Postal;
+                    $emp_Postal = array(
+                      'type'  => 'number',
+                      'name'  => 'emp_Postal',
+                      'value' =>  $data[0]->emp_Postal,
+                      'data-parsley-length' => '[5, 5]'
+                    );
 
+                    $Dist_opt = array(
+                        'id' => 'Dist',
+                        'sel' => $emp_Dist,
+                      );
 
                     echo form_label('ที่อยู่2 *')
                         .form_input('emp_add2',$emp_add2);
                     echo form_label('เขต/อำเภอ *')
-                        .form_input('emp_Dist',$emp_Dist);
+                        .form_dropdown('emp_Dist',$Dist_list,$emp_Dist,$Dist_opt);
                     echo form_label('รหัสไปรษณีย์ *')
-                        .form_error('emp_Postal')
-                        .form_input('emp_Postal',$emp_Postal);
+                        .form_input($emp_Postal);
                   }else{
                     echo form_label('ที่อยู่2 *')
                         .form_input('emp_add2');
                     echo form_label('เขต/อำเภอ *')
-                        .form_input('emp_Dist');
+                        .form_dropdown('emp_Dist',$Dist_list,'','id="Dist"');
                     echo form_label('รหัสไปรษณีย์ *')
-                        .form_error('emp_Postal')
                         .form_input('emp_Postal');
                   }
                 ?>
@@ -390,23 +470,17 @@ emp_truck_license_exp
 
 
                     echo form_label('เบอร์โทรศัพท์ 1')
-                        .form_error('emp_tel1')
                         .form_input('emp_tel1',$emp_tel1,'class="tel"');
                     echo form_label('เบอร์โทรศัพท์ 2')
-                        .form_error('emp_tel2')
                         .form_input('emp_tel2',$emp_tel2,'class="tel"');
                     echo form_label('e-mail')
-                        .form_error('emp_email')
                         .form_input('emp_email',$emp_email);
                   }else{
                     echo form_label('เบอร์โทรศัพท์ 1')
-                        .form_error('emp_tel1')
                         .form_input('emp_tel1','','class="tel"');
                     echo form_label('เบอร์โทรศัพท์ 2')
-                        .form_error('emp_tel2')
                         .form_input('emp_tel2','','class="tel"');
                     echo form_label('e-mail')
-                        .form_error('emp_email')
                         .form_input('emp_email');
                   }
                 ?>
@@ -424,13 +498,11 @@ emp_truck_license_exp
                     echo form_label('บุคคลติดต่อฉุกเฉิน')
                         .form_input('emp_emergency',$emp_emergency);
                     echo form_label('เบอร์โทรศัพท์ติดต่อฉุกเฉิน')
-                        .form_error('emp_emer_call')
                         .form_input('emp_emer_call',$emp_emer_call,'class="tel"');
                   }else{
                     echo form_label('บุคคลติดต่อฉุกเฉิน')
                         .form_input('emp_emergency');
                     echo form_label('เบอร์โทรศัพท์ติดต่อฉุกเฉิน')
-                        .form_error('emp_emer_call')
                         .form_input('emp_emer_call','','class="tel"');
                   }
                 ?>
