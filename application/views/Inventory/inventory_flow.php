@@ -32,8 +32,7 @@
 			<thead>
 				<tr>
 					<th rowspan="2">id</th>
-					<!-- <th rowspan="2">รายการสินค้า</th> -->
-					<!-- <th rowspan="2">stock</th> -->
+					<th rowspan="2">stock</th>
 					<th colspan="3" class="text-center">เข้า</th>
 					<th colspan="5" class="text-center">ออก</th>
 					<th rowspan="2">คงเหลือ</th>
@@ -60,19 +59,28 @@
 
 				    	$id = $key['product_id'];
 				    	$name = $key['product_name'];
+				    	$product_stock = $key['product_stock'];
 				    	$type = $key['type'];
 				    	$status = $key['status'];
 				    	$amount = $key['amount'];
 
 				    	$flow[$id][$type][$status] = $amount;
 				    	$flow[$id]['name'] = $name;
+				    	$flow[$id]['product_stock'] = $product_stock;
 				    }
 
 				    $totalrow = 0;
 
 				    foreach ($flow as $key => $value) {
 				    	echo '<tr>';
-					    	echo '<td><p><span data-tooltip aria-haspopup="true" class="has-tip right" data-disable-hover="false" tabindex="1" title="'.$value['name'].'">'.$key.'</span></p></td>';
+					    	echo '<td>
+					    			<p><span data-tooltip aria-haspopup="true" class="has-tip right" data-disable-hover="false" tabindex="1" title="'.$value['name'].'">'.$key.'</span></p>
+					    		</td>
+					    		<td>
+									'.$value['product_stock'].'
+					    		</td>';
+					    		$totalrow += $value['product_stock'];
+
 						    	if(isset($value["recieve"]['Purchase'])){
 						    		echo '<td>'.$value["recieve"]['Purchase'].'</td>';
 						    		$totalrow += $value["recieve"]['Purchase'];
@@ -137,7 +145,7 @@
 			    }else{
 			      echo '
 			        <tr>
-			          <td colspan="6"> No Data </td>
+			          <td colspan="14"> No Data </td>
 			        </tr>
 			      ';
 			    }

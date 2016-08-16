@@ -1,9 +1,15 @@
 <?php
+
+  $attributes = array(
+      'id' => 'validate_form'
+    );
+
   if(!isset($data)){
-    echo form_open('/HR/Position/add');
+    echo form_open('/HR/Position/add',$attributes);
   }else{
-    echo form_open('/HR/Position/edit/'.$data[0]->id);
+    echo form_open('/HR/Position/edit/'.$data[0]->id,$attributes);
   }
+
 /*
 
             id => รหัสตำแหน่ง
@@ -35,15 +41,6 @@
             </ul>
           </div>
         </div>
-        <?php
-          if(validation_errors()){
-            echo '<div class="callout alert">
-                    <h5>Error</h5>
-                    <p>มีการกรอกข้อมูลผิดพลาด โปรดตรวจสอบ</p>
-                  </div>';
-          }
-
-        ?>
 
 <!-- Info -->
 
@@ -63,8 +60,15 @@
             echo '<p><big>รหัสตำแหน่ง : </big><u>'.$id.'</u> <big>ชื่อตำแหน่ง : </big><u>'.$position_name.'</u></p>'
                 .'สถานะตำแหน่ง : '.form_checkbox('active','Y',$active).form_label('active');
           }else{
+
+            $id = array(
+              'type' => 'text',
+              'name' => 'id',
+              'data-parsley-required' => 'true'
+              );
+
             echo form_label('รหัสตำแหน่ง')
-                .form_input('id')
+                .form_input($id)
                 .'สถานะตำแหน่ง: '.form_checkbox('active','Y').form_label('active');
           }
         ?>
@@ -75,8 +79,15 @@
         <?php
 
           if(!isset($data)){
+
+            $position_name = array(
+              'type' => 'text',
+              'name' => 'position_name',
+              'data-parsley-required' => 'true'
+              );
+
             echo form_label('ชื่อตำแหน่ง')
-                .form_input('position_name');
+                .form_input($position_name);
             }
         ?>
       </div>

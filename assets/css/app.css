@@ -105,11 +105,11 @@ textarea.parsley-error {
 }
 
 /* ตีเส้นแบ่งตาราง stock */
-.stockFlow>tbody>tr>td:nth-child(4),.stockFlow>tbody>tr>td:nth-child(9){
+.stockFlow>tbody>tr>td:nth-child(2),.stockFlow>tbody>tr>td:nth-child(5),.stockFlow>tbody>tr>td:nth-child(10){
   border-right: 3px solid #23cee8;
 }
 
-.stockFlow>thead>tr:nth-child(2)>th:nth-child(3),.stockFlow>thead>tr:nth-child(2)>th:nth-child(8){
+.stockFlow>thead>tr:first-child>th:nth-child(2),.stockFlow>thead>tr:nth-child(2)>th:nth-child(3),.stockFlow>thead>tr:nth-child(2)>th:nth-child(8){
   border-right: 3px solid #23cee8;
 }
 /* 

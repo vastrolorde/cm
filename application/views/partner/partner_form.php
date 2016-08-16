@@ -59,8 +59,6 @@
               echo form_label('ชื่อ partner *')
                   .form_input('partner_name',$partner_name,'data-parsley-required');
             }else{
-              echo form_label('partner *')
-                  .form_input('id','','data-parsley-required');
               echo form_label('ชื่อ partner *')
                   .form_input('partner_name','','data-parsley-required');
             }
@@ -83,19 +81,19 @@
           <h5>ธุรกิจของ Partner</h5>
             <div class="row">
 
-        <?php
-          $options = array();
+              <?php
+                $options = array();
 
-          foreach($indy as $row){
-            $options[$row->subsector] = $row->subsector;
-          }
+                foreach($indy as $row){
+                  $options[$row->subsector] = $row->subsector;
+                }
 
-          if(isset($data)){
-              $Type_select = $data[0]->Sector;
-            }
+                if(isset($data)){
+                    $Type_select = $data[0]->Sector;
+                  }
 
-            echo '<div class="large-6 columns">'.form_dropdown('Sector',$options,(isset($data))? $Type_select: 'Aerospace').'</div>';
-        ?>
+                  echo '<div class="large-6 columns">'.form_dropdown('Sector',$options,(isset($data))? $Type_select: 'Aerospace').'</div>';
+              ?>
             </div>
 
 
@@ -125,10 +123,15 @@
             $SubDist = $data[0]->SubDist;
             $Province = $data[0]->Province;
 
+            $SubDist_opt = array(
+                'id' => 'SubDist',
+                'sel' => $SubDist, // Used for get id value in js
+              );
+
             echo form_label('ที่อยู่')
                 .form_input('add1',$add1);
             echo form_label('แขวง/ตำบล')
-                .form_dropdown('SubDist',$subDist_list,$SubDist,'id="SubDist"');
+                .form_dropdown('SubDist',$subDist_list,$SubDist,$SubDist_opt);
             echo form_label('จังหวัด')
                 .form_dropdown('Province',$Province_list,$Province,'id="Province"');
           }else{
@@ -160,10 +163,15 @@
               'data-parsley-length' => '[5, 5]'
             );
 
+            $Dist_opt = array(
+                'id' => 'Dist',
+                'sel' => $Dist,
+              );
+
             echo form_label('ที่อยู่2')
                 .form_input('add2',$add2);
             echo form_label('เขต/อำเภอ')
-                .form_dropdown('Dist',$Dist_list,$Dist,'id="Dist"');
+                .form_dropdown('Dist',$Dist_list,'',$Dist_opt);
             echo form_label('รหัสไปรษณีย์')
                 .form_input($Postal);
           }else{

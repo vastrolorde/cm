@@ -1,21 +1,20 @@
 -- --------------------------------------------------------
 -- Host:                         localhost
--- Server version:               10.1.10-MariaDB - mariadb.org binary distribution
+-- Server version:               10.1.9-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
--- HeidiSQL Version:             9.3.0.5107
+-- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
 
 -- Dumping database structure for cm
 DROP DATABASE IF EXISTS `cm`;
 CREATE DATABASE IF NOT EXISTS `cm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `cm`;
+
 
 -- Dumping structure for table cm.bank
 DROP TABLE IF EXISTS `bank`;
@@ -64,6 +63,7 @@ INSERT INTO `bank` (`id`, `name`) VALUES
 	('TMB', 'ธนาคารทหารไทย จำกัด (มหาชน)'),
 	('UOB', 'ธนาคารยูไนเต็ด โอเวอร์ซีส์ (ไทย) จำกัด (มหาชน)');
 /*!40000 ALTER TABLE `bank` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.dist
 DROP TABLE IF EXISTS `dist`;
@@ -1076,6 +1076,7 @@ INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `
 	(998, '9681', 'อ.บางนรา  จ.นราธิวาส', '00000', 6, 76);
 /*!40000 ALTER TABLE `dist` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.geography
 DROP TABLE IF EXISTS `geography`;
 CREATE TABLE IF NOT EXISTS `geography` (
@@ -1095,6 +1096,7 @@ INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
 	(5, 'ภาคตะวันออก'),
 	(6, 'ภาคใต้');
 /*!40000 ALTER TABLE `geography` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.groups
 DROP TABLE IF EXISTS `groups`;
@@ -1116,6 +1118,7 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 	(6, 'Sales', 'Sales');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.hr_att
 DROP TABLE IF EXISTS `hr_att`;
 CREATE TABLE IF NOT EXISTS `hr_att` (
@@ -1127,12 +1130,15 @@ CREATE TABLE IF NOT EXISTS `hr_att` (
   `pnch_diff` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
   `remark` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_att: ~0 rows (approximately)
+-- Dumping data for table cm.hr_att: ~1 rows (approximately)
 DELETE FROM `hr_att`;
 /*!40000 ALTER TABLE `hr_att` DISABLE KEYS */;
+INSERT INTO `hr_att` (`id`, `emp_id`, `att_date`, `pnch_in`, `pnch_out`, `pnch_diff`, `remark`) VALUES
+	(1, 'CM-1001', '01/08/2016', '08:00', '17:00', '1', NULL);
 /*!40000 ALTER TABLE `hr_att` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.hr_dept
 DROP TABLE IF EXISTS `hr_dept`;
@@ -1153,6 +1159,7 @@ INSERT INTO `hr_dept` (`id`, `dept_name`, `dept_mother`, `dept_manager`) VALUES
 	('OPT', 'Operation', 'Management', 'ประพันธ์  วงษ์อุบล'),
 	('PJT', 'Project', 'Management', 'เพ็ญโสม  ใจวงค์');
 /*!40000 ALTER TABLE `hr_dept` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.hr_employee_data
 DROP TABLE IF EXISTS `hr_employee_data`;
@@ -1211,7 +1218,7 @@ DELETE FROM `hr_employee_data`;
 INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `emp_nickname`, `emp_nation`, `emp_DOB`, `emp_sex`, `emp_position`, `emp_position_now`, `emp_dept_now`, `emp_type`, `emp_startdate`, `emp_enddate`, `emp_status`, `emp_add1`, `emp_add2`, `emp_SubDist`, `emp_Dist`, `emp_Province`, `emp_Postal`, `emp_tel1`, `emp_tel2`, `emp_email`, `emp_emergency`, `emp_emer_call`, `emp_training`, `emp_cid`, `emp_cid_exp`, `emp_passport`, `emp_passport_exp`, `emp_visa`, `emp_visa_exp`, `emp_wp`, `emp_wp_exp`, `emp_driver_license`, `emp_driver_license_exp`, `emp_bike_license`, `emp_bike_license_exp`, `emp_truck_license`, `emp_truck_license_exp`) VALUES
 	('CM-1001', 'นาย', 'ธนิตศักดิ์ ', 'พัชรดิษฐ์ฐากุล', 'มาร์ก', 'ไทย', '24/06/49', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0001', 'MGT', 'พนักงานรายวัน', '01/04/02', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1002', 'นาง', 'ยุวรินทร์  ', 'พัชรดิษฐ์ฐากุล', 'กลาง', 'ไทย', '10/06/52', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0002', 'MGT', 'พนักงานรายวัน', '02/04/02', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-	('CM-1003', 'นาย', 'ภูริวัจน์  ', 'พัชรดิษฐ์ฐากุล', 'ไอซ์', 'ไทย', '19/05/90', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0003', 'MGT', 'พนักงานรายวัน', '01/06/13', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+	('CM-1003', 'นาย', 'ภูริวัจน์  ', 'พัชรดิษฐ์ฐากุล', 'ไอซ์', 'ไทย', '19/05/90', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0003', 'MGT', 'พนักงานรายวัน', '01/06/13', '', 'บรรจุแล้ว', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', '63', '9', '1', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1004', 'นาง', 'นางทัศนีย์', 'มัลลิกาพิพัฒน์', 'ตาล', 'ไทย', '15/11/82', 'Female', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0004', 'ADM', 'พนักงานรายวัน', '01/06/13', '', 'บรรจุแล้ว', '', '', '', '', '', 0, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 	('CM-1005', 'นาย', 'ประพันธ์ ', 'วงษ์อุบล', 'พันธ์', 'ไทย', '01/05/71', 'Male', NULL, '0005', 'OPT', 'รายเดือน', '02/04/02', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('CM-1007', 'น.ส.', 'กัลฐิกา', 'บุญเปรื่อง', 'ฟาง', 'ไทย', '20/11/85', 'Female', NULL, '0010', 'ADM', 'รายเดือน', '05/08/14', '', 'บรรจุแล้ว', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1249,6 +1256,40 @@ INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `e
 	('CM-1042', 'นาย', 'ดอนสาม', '', 'ดอน', 'กัมพูชา', '6/02/1993', 'Male', '{"1":{"position":"","date":"","dept":"","salary":"","remark":""}}', '0009', 'OPT', 'พนักงานรายวัน', '9/6/2016', '', 'ทดลองงาน', '93 ซอยอุดมสุข 51', 'ถนนสุขุมวิท', 'บางจาก', 'พระโขนง', 'กรุงเทพมหานคร', 10260, '', '', '', '', '', '{"1":{"subject":"","date":"","institute":"","cert_no":"","remark":""}}', '', '', '0020041331257', '10/05/2025', '', '', '', '', '', '', '', '', '', '');
 /*!40000 ALTER TABLE `hr_employee_data` ENABLE KEYS */;
 
+
+-- Dumping structure for table cm.hr_holiday
+DROP TABLE IF EXISTS `hr_holiday`;
+CREATE TABLE IF NOT EXISTS `hr_holiday` (
+  `id` int(25) NOT NULL AUTO_INCREMENT,
+  `hol_date` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hol_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hol_remark` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table cm.hr_holiday: ~16 rows (approximately)
+DELETE FROM `hr_holiday`;
+/*!40000 ALTER TABLE `hr_holiday` DISABLE KEYS */;
+INSERT INTO `hr_holiday` (`id`, `hol_date`, `hol_name`, `hol_remark`) VALUES
+	(1, '01/01/2016', 'วันขี้นปีใหม่', ''),
+	(2, '02/01/2016', 'ชดเชยวันขี้นปีใหม่', ''),
+	(3, '08/02/2016', 'ตรุษจีน', ''),
+	(4, '22/02/2016', 'มาฆบูชา', ''),
+	(5, '12/04/2016', 'หยุดต่อเนื่องวันสงกรานต์', 'ชดเชยวันจักรี'),
+	(6, '13/04/2016', 'วันสงกรานต์', ''),
+	(7, '14/04/2016', 'ชดเชยวันสงกรานต์', ''),
+	(8, '15/04/2016', 'ชดเชยวันสงกรานต์', ''),
+	(9, '16/04/2016', 'หยุดต่อเนื่องวันสงกรานต์', 'ย้ายจากวันอาสาฬหบูชา'),
+	(10, '02/05/2016', 'วันแรงงาน', ''),
+	(11, '20/05/2016', 'วันวิสาขบูชา', ''),
+	(12, '20/07/2016', 'วันเข้าพรรษา', ''),
+	(13, '12/08/2016', 'วันแม่แห่งชาติ', ''),
+	(14, '13/08/2016', 'หยุดต่อเนื่องวันแม่แห่งชาติ', 'ชดเชยวันปิยะ'),
+	(15, '05/12/2016', 'วันพ่อแห่งชาติ', ''),
+	(16, '31/12/2016', 'วันสิ้นปี', '');
+/*!40000 ALTER TABLE `hr_holiday` ENABLE KEYS */;
+
+
 -- Dumping structure for table cm.hr_leave
 DROP TABLE IF EXISTS `hr_leave`;
 CREATE TABLE IF NOT EXISTS `hr_leave` (
@@ -1261,9 +1302,9 @@ CREATE TABLE IF NOT EXISTS `hr_leave` (
   `lve_diff` char(5) COLLATE utf8_unicode_ci NOT NULL,
   `lve_reason` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_leave: ~209 rows (approximately)
+-- Dumping data for table cm.hr_leave: ~203 rows (approximately)
 DELETE FROM `hr_leave`;
 /*!40000 ALTER TABLE `hr_leave` DISABLE KEYS */;
 INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_out`, `lve_diff`, `lve_reason`) VALUES
@@ -1475,8 +1516,10 @@ INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_o
 	(206, 'CM-1004', 'Bis', '12/10/2016', '08:00', '17:00', '1', 'พาลูกไปหาหมอ'),
 	(207, 'CM-1007', 'Si', '08/08/2016', '08:00', '17:00', '1', 'ท้องเสีย'),
 	(208, 'CM-1007', 'Bis', '15/08/2016', '08:00', '17:00', '1', 'สามีป่วย'),
-	(209, 'CM-1038', 'Si', '10/08/2016', '08:00', '17:00', '1', '');
+	(209, 'CM-1038', 'Si', '10/08/2016', '08:00', '17:00', '1', ''),
+	(210, 'CM-1038', 'Bis', '18/08/2016', '08:00', '12:00', '0.5', 'ไปต่ออายุใบขับขี่');
 /*!40000 ALTER TABLE `hr_leave` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.hr_position
 DROP TABLE IF EXISTS `hr_position`;
@@ -1517,6 +1560,7 @@ INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`,
 	('0018', 'Scaffold Vendor', 'OPT', 'Scaffold Supervisor', NULL, NULL, NULL, NULL, 'Y');
 /*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.inventory_move
 DROP TABLE IF EXISTS `inventory_move`;
 CREATE TABLE IF NOT EXISTS `inventory_move` (
@@ -1533,40 +1577,42 @@ CREATE TABLE IF NOT EXISTS `inventory_move` (
   CONSTRAINT `FK_inventory_move_partner` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move: ~2 rows (approximately)
+-- Dumping data for table cm.inventory_move: ~0 rows (approximately)
 DELETE FROM `inventory_move`;
 /*!40000 ALTER TABLE `inventory_move` DISABLE KEYS */;
 INSERT INTO `inventory_move` (`id`, `partner_id`, `invent_move_Date`, `invent_move_type`, `invent_move_status`, `invent_move_wh`, `update_date`, `create_date`) VALUES
-	('0001', '000', '10/08/2016', 'recieve', 'GotBack', 'WH-002', '13/08/2016 09:10', '10/08/2016 10:32'),
-	('0002', '0001', '08/08/2016', 'deliver', 'Reserved', 'WH-001', '13/08/2016 09:07', '10/08/2016 01:30'),
-	('0003', '000', '', 'deliver', 'SentBack', 'WH-001', '13/08/2016 09:07', '12/08/2016 09:55');
+	('0001', '000', '10/08/2016', 'recieve', 'done', 'WH-002', '10/08/2016 04:08', '10/08/2016 10:32'),
+	('0002', '000', '08/08/2016', 'deliver', 'draft', 'WH-001', '10/08/2016 01:31', '10/08/2016 01:30');
 /*!40000 ALTER TABLE `inventory_move` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.inventory_move_tr
 DROP TABLE IF EXISTS `inventory_move_tr`;
 CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inventory_move_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `invent_move_Date` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `product_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `amount` int(20) DEFAULT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `amount` int(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index 1` (`inventory_move_id`),
   CONSTRAINT `FK_inventory_move_tr_product` FOREIGN KEY (`inventory_move_id`) REFERENCES `inventory_move` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move_tr: ~5 rows (approximately)
+-- Dumping data for table cm.inventory_move_tr: ~6 rows (approximately)
 DELETE FROM `inventory_move_tr`;
 /*!40000 ALTER TABLE `inventory_move_tr` DISABLE KEYS */;
-INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `invent_move_Date`, `product_id`, `type`, `status`, `amount`) VALUES
-	(1, '0001', '10/08/2016', 'BB-4224', 'recieve', 'GotBack', 450),
-	(2, '0002', '08/08/2016', 'BB-4224', 'deliver', 'Reserved', 200),
-	(3, '0001', '10/08/2016', 'BC-4218', 'recieve', 'GotBack', 150),
-	(8, '0003', '12/08/2016', 'BD-4218', 'deliver', 'SentBack', 180),
-	(9, '0003', '12/08/2016', 'BM-4211', 'deliver', 'SentBack', 256);
+INSERT INTO `inventory_move_tr` (`id`, `inventory_move_id`, `product_id`, `amount`, `type`, `status`) VALUES
+	(1, '0001', 'BB-4224', 250, 'recieve', 'done'),
+	(2, '0002', 'BB-4224', 200, 'deliver', 'draft'),
+	(3, '0001', 'BC-4218', 50, 'recieve', 'done'),
+	(4, '0001', 'BM-4206', 350, 'recieve', 'done'),
+	(5, '0001', 'BM-4211', 45, 'recieve', 'done'),
+	(6, '0001', 'BM-4212', 48, 'recieve', 'done'),
+	(7, '0001', 'VC-4208', 300, 'recieve', 'done');
 /*!40000 ALTER TABLE `inventory_move_tr` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.inventory_wh
 DROP TABLE IF EXISTS `inventory_wh`;
@@ -1590,6 +1636,7 @@ INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`,
 	('OFF', 'Classmat Office', '93 ซอยอุดมสุข 51', 'สุขุมวิท 103', 'บางจาก', 'พระโขนง', 'กรุงเทพ', 10260);
 /*!40000 ALTER TABLE `inventory_wh` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.login_attempts
 DROP TABLE IF EXISTS `login_attempts`;
 CREATE TABLE IF NOT EXISTS `login_attempts` (
@@ -1605,10 +1652,11 @@ DELETE FROM `login_attempts`;
 /*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.partner
 DROP TABLE IF EXISTS `partner`;
 CREATE TABLE IF NOT EXISTS `partner` (
-  `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `id` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `taxID` int(15) DEFAULT NULL,
   `partner_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1639,14 +1687,16 @@ CREATE TABLE IF NOT EXISTS `partner` (
 DELETE FROM `partner`;
 /*!40000 ALTER TABLE `partner` DISABLE KEYS */;
 INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `add1`, `add2`, `SubDist`, `Dist`, `Province`, `Postal`, `Type`, `partner_desc`, `Bank`, `Acc_name`, `Acc_no`, `Acc_type`, `Acc_branch`, `Sector`, `partner_contactor`) VALUES
-	('000', NULL, 'ลูกค้าทั่วไป', '', '', '', '', '', NULL, '1', '1', 0, '["customer"]', '', 'AGR', '', 0, 'กระแสรายวัน', '', 'Aerospace', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
-	('0001', NULL, 'บริษัท รชิต เอ็นจิเนียริ่ง จำกัด', '', '', 'sales.rachita@gmail.com', '106/69-70  หมู่ที่ 9', '', NULL, '136', '11', 20230, '["supplier"]', '- เทปตีเขต Safety\r\n- เทปตีแนว Safety', 'AGR', '', 0, 'กระแสรายวัน', '', 'Building Materials & Fixtures', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
+	('000', NULL, 'ลูกค้าทั่วไป', '', '', '', '', '', '8', '1', '1', 10000, '["customer"]', '', 'AGR', '', 0, 'กระแสรายวัน', '', 'Building Materials & Fixtures', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
+	('SP-IN-00001', NULL, 'บริษัท รชิต เอ็นจิเนียริ่ง จำกัด', '', '', 'sales.rachita@gmail.com', '106/69-70  หมู่ที่ 9', '', '1165', '142', '11', 20230, '["supplier"]', '- เทปตีเขต Safety\r\n- เทปตีแนว Safety', 'AGR', '', 0, 'กระแสรายวัน', '', 'Building Materials & Fixtures', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
 /*!40000 ALTER TABLE `partner` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.partner_industries
 DROP TABLE IF EXISTS `partner_industries`;
 CREATE TABLE IF NOT EXISTS `partner_industries` (
   `subsector` char(50) COLLATE utf8_unicode_ci NOT NULL,
+  `code` text COLLATE utf8_unicode_ci,
   `sector` text COLLATE utf8_unicode_ci,
   `supersector` text COLLATE utf8_unicode_ci,
   `industry` text COLLATE utf8_unicode_ci,
@@ -1656,122 +1706,123 @@ CREATE TABLE IF NOT EXISTS `partner_industries` (
 -- Dumping data for table cm.partner_industries: ~114 rows (approximately)
 DELETE FROM `partner_industries`;
 /*!40000 ALTER TABLE `partner_industries` DISABLE KEYS */;
-INSERT INTO `partner_industries` (`subsector`, `sector`, `supersector`, `industry`) VALUES
-	('Aerospace', 'Aerospace & Defense', 'Industrial Goods & Services', 'Industrials'),
-	('Airlines', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
-	('Alternative Electricity', 'Electricity', 'Utilities', 'Utilities'),
-	('Alternative Fuels', 'Alternative Energy', 'Oil & Gas', 'Oil & Gas'),
-	('Aluminum', 'Industrial Metals & Mining', 'Basic Resources', 'Basic Materials'),
-	('Apparel Retailers', 'General Retailers', 'Retail', 'Consumer Services'),
-	('Asset Managers', 'Financial Services', 'Financial Services', 'Financials'),
-	('Auto Parts', 'Automobiles & Parts', 'Automobiles & Parts', 'Consumer Goods'),
-	('Automobiles', 'Automobiles & Parts', 'Automobiles & Parts', 'Consumer Goods'),
-	('Banks', 'Banks', 'Banks', 'Financials'),
-	('Biotechnology', 'Pharmaceuticals & Biotechnology', 'Health Care', 'Health Care'),
-	('Brewers', 'Beverages', 'Food & Beverage', 'Consumer Goods'),
-	('Broadcasting & Entertainment', 'Media', 'Media', 'Consumer Services'),
-	('Broadline Retailers', 'General Retailers', 'Retail', 'Consumer Services'),
-	('Building Materials & Fixtures', 'Construction & Materials', 'Construction & Materials', 'Industrials'),
-	('Business Support Services', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
-	('Business Training & Employment Agencies', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
-	('Clothing & Accessories', 'Personal Goods', 'Personal & Household Goods', 'Consumer Goods'),
-	('Coal', 'Mining', 'Basic Resources', 'Basic Materials'),
-	('Commercial Vehicles & Trucks', 'Industrial Engineering', 'Industrial Goods & Services', 'Industrials'),
-	('Commodity Chemicals', 'Chemicals', 'Chemicals', 'Basic Materials'),
-	('Computer Hardware', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
-	('Computer Services', 'Software & Computer Services', 'Technology', 'Technology'),
-	('Consumer Electronics', 'Leisure Goods', 'Personal & Household Goods', 'Consumer Goods'),
-	('Consumer Finance', 'Financial Services', 'Financial Services', 'Financials'),
-	('Containers & Packaging', 'General Industrials', 'Industrial Goods & Services', 'Industrials'),
-	('Conventional Electricity', 'Electricity', 'Utilities', 'Utilities'),
-	('Defense', 'Aerospace & Defense', 'Industrial Goods & Services', 'Industrials'),
-	('Delivery Services', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
-	('Diamonds & Gemstones', 'Mining', 'Basic Resources', 'Basic Materials'),
-	('Distillers & Vintners', 'Beverages', 'Food & Beverage', 'Consumer Goods'),
-	('Diversified Industrials', 'General Industrials', 'Industrial Goods & Services', 'Industrials'),
-	('Diversified REITs', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
-	('Drug Retailers', 'Food & Drug Retailers', 'Retail', 'Consumer Services'),
-	('Durable Household Products', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
-	('Electrical Components & Equipment', 'Electronic & Electrical Equipment', 'Industrial Goods & Services', 'Industrials'),
-	('Electronic Equipment', 'Electronic & Electrical Equipment', 'Industrial Goods & Services', 'Industrials'),
-	('Electronic Office Equipment', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
-	('Equity Investment Instruments', 'Equity Investment Instruments', 'Financial Services', 'Financials'),
-	('Exploration & Production', 'Oil & Gas Producers', 'Oil & Gas', 'Oil & Gas'),
-	('Farming & Fishing', 'Food Producers', 'Food & Beverage', 'Consumer Goods'),
-	('Financial Administration', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
-	('Fixed Line Telecommunications', 'Fixed Line Telecommunications', 'Telecommunications', 'Telecommunications'),
-	('Food Products', 'Food Producers', 'Food & Beverage', 'Consumer Goods'),
-	('Food Retailers & Wholesalers', 'Food & Drug Retailers', 'Retail', 'Consumer Services'),
-	('Footwear', 'Personal Goods', 'Personal & Household Goods', 'Consumer Goods'),
-	('Forestry', 'Forestry & Paper', 'Basic Resources', 'Basic Materials'),
-	('Full Line Insurance', 'Nonlife Insurance', 'Insurance', 'Financials'),
-	('Furnishings', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
-	('Gambling', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
-	('Gas Distribution', 'Gas, Water & Multiutilities', 'Utilities', 'Utilities'),
-	('General Mining', 'Mining', 'Basic Resources', 'Basic Materials'),
-	('Gold Mining', 'Mining', 'Basic Resources', 'Basic Materials'),
-	('Health Care Providers', 'Health Care Equipment & Services', 'Health Care', 'Health Care'),
-	('Heavy Construction', 'Construction & Materials', 'Construction & Materials', 'Industrials'),
-	('Home Construction', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
-	('Home Improvement Retailers', 'General Retailers', 'Retail', 'Consumer Services'),
-	('Hotel & Lodging REITs', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
-	('Hotels', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
-	('Industrial & Office REITs', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
-	('Industrial Machinery', 'Industrial Engineering', 'Industrial Goods & Services', 'Industrials'),
-	('Industrial Suppliers', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
-	('Insurance Brokers', 'Nonlife Insurance', 'Insurance', 'Financials'),
-	('Integrated Oil & Gas', 'Oil & Gas Producers', 'Oil & Gas', 'Oil & Gas'),
-	('Internet', 'Software & Computer Services', 'Technology', 'Technology'),
-	('Investment Services', 'Financial Services', 'Financial Services', 'Financials'),
-	('Iron & Steel', 'Industrial Metals & Mining', 'Basic Resources', 'Basic Materials'),
-	('Life Insurance', 'Life Insurance', 'Insurance', 'Financials'),
-	('Marine Transportation', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
-	('Media Agencies', 'Media', 'Media', 'Consumer Services'),
-	('Medical Equipment', 'Health Care Equipment & Services', 'Health Care', 'Health Care'),
-	('Medical Supplies', 'Health Care Equipment & Services', 'Health Care', 'Health Care'),
-	('Mobile Telecommunications', 'Mobile Telecommunications', 'Telecommunications', 'Telecommunications'),
-	('Mortgage Finance', 'Financial Services', 'Financial Services', 'Financials'),
-	('Mortgage REITs', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
-	('Multiutilities', 'Gas, Water & Multiutilities', 'Utilities', 'Utilities'),
-	('Nondurable Household Products', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
-	('Nonequity Investment Instruments', 'Nonequity Investment Instruments', 'Financial Services', 'Financials'),
-	('Nonferrous Metals', 'Industrial Metals & Mining', 'Basic Resources', 'Basic Materials'),
-	('Oil Equipment & Services', 'Oil Equipment, Services & Distribution', 'Oil & Gas', 'Oil & Gas'),
-	('Paper', 'Forestry & Paper', 'Basic Resources', 'Basic Materials'),
-	('Personal Products', 'Personal Goods', 'Personal & Household Goods', 'Consumer Goods'),
-	('Pharmaceuticals', 'Pharmaceuticals & Biotechnology', 'Health Care', 'Health Care'),
-	('Pipelines', 'Oil Equipment, Services & Distribution', 'Oil & Gas', 'Oil & Gas'),
-	('Platinum & Precious Metals', 'Mining', 'Basic Resources', 'Basic Materials'),
-	('Property & Casualty Insurance', 'Nonlife Insurance', 'Insurance', 'Financials'),
-	('Publishing', 'Media', 'Media', 'Consumer Services'),
-	('Railroads', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
-	('Real Estate Holding & Development', 'Real Estate Investment & Services', 'Real Estate', 'Financials'),
-	('Real Estate Services', 'Real Estate Investment & Services', 'Real Estate', 'Financials'),
-	('Recreational Products', 'Leisure Goods', 'Personal & Household Goods', 'Consumer Goods'),
-	('Recreational Services', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
-	('Reinsurance', 'Nonlife Insurance', 'Insurance', 'Financials'),
-	('Renewable Energy Equipment', 'Alternative Energy', 'Oil & Gas', 'Oil & Gas'),
-	('Residential REITs', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
-	('Restaurants & Bars', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
-	('Retail REITs', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
-	('Semiconductors', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
-	('Soft Drinks', 'Beverages', 'Food & Beverage', 'Consumer Goods'),
-	('Software', 'Software & Computer Services', 'Technology', 'Technology'),
-	('Specialized Consumer Services', 'General Retailers', 'Retail', 'Consumer Services'),
-	('Specialty Chemicals', 'Chemicals', 'Chemicals', 'Basic Materials'),
-	('Specialty Finance', 'Financial Services', 'Financial Services', 'Financials'),
-	('Specialty REITs', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
-	('Specialty Retailers', 'General Retailers', 'Retail', 'Consumer Services'),
-	('Telecommunications Equipment', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
-	('Tires', 'Automobiles & Parts', 'Automobiles & Parts', 'Consumer Goods'),
-	('Tobacco', 'Tobacco', 'Personal & Household Goods', 'Consumer Goods'),
-	('Toys', 'Leisure Goods', 'Personal & Household Goods', 'Consumer Goods'),
-	('Transportation Services', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
-	('Travel & Tourism', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
-	('Trucking', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
-	('Waste & Disposal Services', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
-	('Water', 'Gas, Water & Multiutilities', 'Utilities', 'Utilities');
+INSERT INTO `partner_industries` (`subsector`, `code`, `sector`, `supersector`, `industry`) VALUES
+	('Aerospace', 'IN', 'Aerospace & Defense', 'Industrial Goods & Services', 'Industrials'),
+	('Airlines', 'CS', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
+	('Alternative Electricity', 'UL', 'Electricity', 'Utilities', 'Utilities'),
+	('Alternative Fuels', 'OG', 'Alternative Energy', 'Oil & Gas', 'Oil & Gas'),
+	('Aluminum', 'BM', 'Industrial Metals & Mining', 'Basic Resources', 'Basic Materials'),
+	('Apparel Retailers', 'CS', 'General Retailers', 'Retail', 'Consumer Services'),
+	('Asset Managers', 'FN', 'Financial Services', 'Financial Services', 'Financials'),
+	('Auto Parts', 'CG', 'Automobiles & Parts', 'Automobiles & Parts', 'Consumer Goods'),
+	('Automobiles', 'CG', 'Automobiles & Parts', 'Automobiles & Parts', 'Consumer Goods'),
+	('Banks', 'FN', 'Banks', 'Banks', 'Financials'),
+	('Biotechnology', 'HC', 'Pharmaceuticals & Biotechnology', 'Health Care', 'Health Care'),
+	('Brewers', 'CG', 'Beverages', 'Food & Beverage', 'Consumer Goods'),
+	('Broadcasting & Entertainment', 'CS', 'Media', 'Media', 'Consumer Services'),
+	('Broadline Retailers', 'CS', 'General Retailers', 'Retail', 'Consumer Services'),
+	('Building Materials & Fixtures', 'IN', 'Construction & Materials', 'Construction & Materials', 'Industrials'),
+	('Business Support Services', 'IN', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
+	('Business Training & Employment Agencies', 'IN', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
+	('Clothing & Accessories', 'CG', 'Personal Goods', 'Personal & Household Goods', 'Consumer Goods'),
+	('Coal', 'BM', 'Mining', 'Basic Resources', 'Basic Materials'),
+	('Commercial Vehicles & Trucks', 'IN', 'Industrial Engineering', 'Industrial Goods & Services', 'Industrials'),
+	('Commodity Chemicals', 'BM', 'Chemicals', 'Chemicals', 'Basic Materials'),
+	('Computer Hardware', 'TH', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
+	('Computer Services', 'TH', 'Software & Computer Services', 'Technology', 'Technology'),
+	('Consumer Electronics', 'CG', 'Leisure Goods', 'Personal & Household Goods', 'Consumer Goods'),
+	('Consumer Finance', 'FN', 'Financial Services', 'Financial Services', 'Financials'),
+	('Containers & Packaging', 'IN', 'General Industrials', 'Industrial Goods & Services', 'Industrials'),
+	('Conventional Electricity', 'UL', 'Electricity', 'Utilities', 'Utilities'),
+	('Defense', 'IN', 'Aerospace & Defense', 'Industrial Goods & Services', 'Industrials'),
+	('Delivery Services', 'IN', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
+	('Diamonds & Gemstones', 'BM', 'Mining', 'Basic Resources', 'Basic Materials'),
+	('Distillers & Vintners', 'CG', 'Beverages', 'Food & Beverage', 'Consumer Goods'),
+	('Diversified Industrials', 'IN', 'General Industrials', 'Industrial Goods & Services', 'Industrials'),
+	('Diversified REITs', 'FN', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
+	('Drug Retailers', 'CS', 'Food & Drug Retailers', 'Retail', 'Consumer Services'),
+	('Durable Household Products', 'CG', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
+	('Electrical Components & Equipment', 'IN', 'Electronic & Electrical Equipment', 'Industrial Goods & Services', 'Industrials'),
+	('Electronic Equipment', 'IN', 'Electronic & Electrical Equipment', 'Industrial Goods & Services', 'Industrials'),
+	('Electronic Office Equipment', 'TH', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
+	('Equity Investment Instruments', 'FN', 'Equity Investment Instruments', 'Financial Services', 'Financials'),
+	('Exploration & Production', 'OG', 'Oil & Gas Producers', 'Oil & Gas', 'Oil & Gas'),
+	('Farming & Fishing', 'CG', 'Food Producers', 'Food & Beverage', 'Consumer Goods'),
+	('Financial Administration', 'IN', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
+	('Fixed Line Telecommunications', 'TC', 'Fixed Line Telecommunications', 'Telecommunications', 'Telecommunications'),
+	('Food Products', 'CG', 'Food Producers', 'Food & Beverage', 'Consumer Goods'),
+	('Food Retailers & Wholesalers', 'CS', 'Food & Drug Retailers', 'Retail', 'Consumer Services'),
+	('Footwear', 'CG', 'Personal Goods', 'Personal & Household Goods', 'Consumer Goods'),
+	('Forestry', 'BM', 'Forestry & Paper', 'Basic Resources', 'Basic Materials'),
+	('Full Line Insurance', 'FN', 'Nonlife Insurance', 'Insurance', 'Financials'),
+	('Furnishings', 'CG', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
+	('Gambling', 'CS', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
+	('Gas Distribution', 'UL', 'Gas, Water & Multiutilities', 'Utilities', 'Utilities'),
+	('General Mining', 'BM', 'Mining', 'Basic Resources', 'Basic Materials'),
+	('Gold Mining', 'BM', 'Mining', 'Basic Resources', 'Basic Materials'),
+	('Health Care Providers', 'HC', 'Health Care Equipment & Services', 'Health Care', 'Health Care'),
+	('Heavy Construction', 'IN', 'Construction & Materials', 'Construction & Materials', 'Industrials'),
+	('Home Construction', 'CG', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
+	('Home Improvement Retailers', 'CS', 'General Retailers', 'Retail', 'Consumer Services'),
+	('Hotel & Lodging REITs', 'FN', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
+	('Hotels', 'CS', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
+	('Industrial & Office REITs', 'FN', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
+	('Industrial Machinery', 'IN', 'Industrial Engineering', 'Industrial Goods & Services', 'Industrials'),
+	('Industrial Suppliers', 'IN', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
+	('Insurance Brokers', 'FN', 'Nonlife Insurance', 'Insurance', 'Financials'),
+	('Integrated Oil & Gas', 'OG', 'Oil & Gas Producers', 'Oil & Gas', 'Oil & Gas'),
+	('Internet', 'TH', 'Software & Computer Services', 'Technology', 'Technology'),
+	('Investment Services', 'FN', 'Financial Services', 'Financial Services', 'Financials'),
+	('Iron & Steel', 'BM', 'Industrial Metals & Mining', 'Basic Resources', 'Basic Materials'),
+	('Life Insurance', 'FN', 'Life Insurance', 'Insurance', 'Financials'),
+	('Marine Transportation', 'IN', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
+	('Media Agencies', 'CS', 'Media', 'Media', 'Consumer Services'),
+	('Medical Equipment', 'HC', 'Health Care Equipment & Services', 'Health Care', 'Health Care'),
+	('Medical Supplies', 'HC', 'Health Care Equipment & Services', 'Health Care', 'Health Care'),
+	('Mobile Telecommunications', 'TC', 'Mobile Telecommunications', 'Telecommunications', 'Telecommunications'),
+	('Mortgage Finance', 'FN', 'Financial Services', 'Financial Services', 'Financials'),
+	('Mortgage REITs', 'FN', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
+	('Multiutilities', 'UL', 'Gas, Water & Multiutilities', 'Utilities', 'Utilities'),
+	('Nondurable Household Products', 'CG', 'Household Goods & Home Construction', 'Personal & Household Goods', 'Consumer Goods'),
+	('Nonequity Investment Instruments', 'FN', 'Nonequity Investment Instruments', 'Financial Services', 'Financials'),
+	('Nonferrous Metals', 'BM', 'Industrial Metals & Mining', 'Basic Resources', 'Basic Materials'),
+	('Oil Equipment & Services', 'OG', 'Oil Equipment, Services & Distribution', 'Oil & Gas', 'Oil & Gas'),
+	('Paper', 'BM', 'Forestry & Paper', 'Basic Resources', 'Basic Materials'),
+	('Personal Products', 'CG', 'Personal Goods', 'Personal & Household Goods', 'Consumer Goods'),
+	('Pharmaceuticals', 'HC', 'Pharmaceuticals & Biotechnology', 'Health Care', 'Health Care'),
+	('Pipelines', 'OG', 'Oil Equipment, Services & Distribution', 'Oil & Gas', 'Oil & Gas'),
+	('Platinum & Precious Metals', 'BM', 'Mining', 'Basic Resources', 'Basic Materials'),
+	('Property & Casualty Insurance', 'FN', 'Nonlife Insurance', 'Insurance', 'Financials'),
+	('Publishing', 'CS', 'Media', 'Media', 'Consumer Services'),
+	('Railroads', 'IN', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
+	('Real Estate Holding & Development', 'FN', 'Real Estate Investment & Services', 'Real Estate', 'Financials'),
+	('Real Estate Services', 'FN', 'Real Estate Investment & Services', 'Real Estate', 'Financials'),
+	('Recreational Products', 'CG', 'Leisure Goods', 'Personal & Household Goods', 'Consumer Goods'),
+	('Recreational Services', 'CS', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
+	('Reinsurance', 'FN', 'Nonlife Insurance', 'Insurance', 'Financials'),
+	('Renewable Energy Equipment', 'OG', 'Alternative Energy', 'Oil & Gas', 'Oil & Gas'),
+	('Residential REITs', 'FN', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
+	('Restaurants & Bars', 'CS', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
+	('Retail REITs', 'FN', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
+	('Semiconductors', 'TH', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
+	('Soft Drinks', 'CG', 'Beverages', 'Food & Beverage', 'Consumer Goods'),
+	('Software', 'TH', 'Software & Computer Services', 'Technology', 'Technology'),
+	('Specialized Consumer Services', 'CS', 'General Retailers', 'Retail', 'Consumer Services'),
+	('Specialty Chemicals', 'BM', 'Chemicals', 'Chemicals', 'Basic Materials'),
+	('Specialty Finance', 'FN', 'Financial Services', 'Financial Services', 'Financials'),
+	('Specialty REITs', 'FN', 'Real Estate Investment Trusts', 'Real Estate', 'Financials'),
+	('Specialty Retailers', 'CS', 'General Retailers', 'Retail', 'Consumer Services'),
+	('Telecommunications Equipment', 'TH', 'Technology Hardware & Equipment', 'Technology', 'Technology'),
+	('Tires', 'CG', 'Automobiles & Parts', 'Automobiles & Parts', 'Consumer Goods'),
+	('Tobacco', 'CG', 'Tobacco', 'Personal & Household Goods', 'Consumer Goods'),
+	('Toys', 'CG', 'Leisure Goods', 'Personal & Household Goods', 'Consumer Goods'),
+	('Transportation Services', 'IN', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
+	('Travel & Tourism', 'CS', 'Travel & Leisure', 'Travel & Leisure', 'Consumer Services'),
+	('Trucking', 'IN', 'Industrial Transportation', 'Industrial Goods & Services', 'Industrials'),
+	('Waste & Disposal Services', 'IN', 'Support Services', 'Industrial Goods & Services', 'Industrials'),
+	('Water', 'UL', 'Gas, Water & Multiutilities', 'Utilities', 'Utilities');
 /*!40000 ALTER TABLE `partner_industries` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.product
 DROP TABLE IF EXISTS `product`;
@@ -1851,7 +1902,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_family`, `product_
 	('DF-1204', 'Frame กว้าง 1219x490', 'DF', '	Assets', NULL, 6, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('DF-1209', 'Frame กว้าง 1219x915', 'DF', '	Assets', NULL, 9, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('DF-1212', 'Frame กว้าง 1219x1219', 'DF', '	Assets', NULL, 12, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
-	('DF-1217', 'Frame กว้าง 1219x1700', 'DF', '	Assets', NULL, 14, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
+	('DF-1217', 'Frame กว้าง 1219x1700', 'DF', 'Assets', 'ขา', 14, 0, 1350, 1100, 0, 0, '', 0, '', 0, '{"1":{"Name":"","Desc":""}}'),
 	('F-1503-B', 'ผ้าเนื้อ สีดำ 1.5x03', 'Others', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('F-1504-B', 'ผ้าเนื้อ สีดำ 1.5x04', 'Others', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('F-1505-B', 'ผ้าเนื้อ สีดำ 1.5x05', 'Others', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
@@ -1996,8 +2047,8 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_family`, `product_
 	('VC-4830.5', 'เสา Ø1-1/2" 3 m', 'col', '	Assets', NULL, 13, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('WF-1515-6', 'WF 150x75x5x7x6', 'Material', '	Assets', NULL, 84, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('WF-2020-6', 'WF 200x100x5.5x8x6', 'Material', '	Assets', NULL, 128, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
-	('WH-06.B', 'ล้อ 6" แบบมีเบรค', 'Support', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
-	('WH-08.B', 'ล้อ 8" แบบมีเบรค', 'Support', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
+	('WH-06.B', 'ล้อ 6" แบบมีเบรค', 'Support', 'Assets', 'ลูก', 0, 0, 350, 0, 0, 0, '', 0, '', 0, '{"1":{"Name":"","Desc":""}}'),
+	('WH-08.B', 'ล้อ 8" แบบมีเบรค', 'Support', 'Assets', 'ลูก', 0, 0, 380, 0, 0, 0, '', 0, '', 0, '{"1":{"Name":"","Desc":""}}'),
 	('WH-08.U', 'ล้อ 8" ยูรีเธน', 'Support', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('WP-2120', 'แผ่นปู 2x.21 m แผ่นไม้กระดาน', 'Panel', '	Assets', NULL, 7, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('WP-2130', 'แผ่นปู 3x.21 m แผ่นไม้กระดาน', 'Panel', '	Assets', NULL, 11, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
@@ -2009,6 +2060,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_family`, `product_
 	('WR-0', 'สลิง Wire Rope', 'Equipment', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL),
 	('WR-C', 'สเก็นสลิง  Wire Rope Clip', 'Equipment', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '', 0, NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.product_attr
 DROP TABLE IF EXISTS `product_attr`;
@@ -2028,6 +2080,7 @@ INSERT INTO `product_attr` (`id`) VALUES
 	('เส้นผ่านศูนย์กลาง');
 /*!40000 ALTER TABLE `product_attr` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.product_unit
 DROP TABLE IF EXISTS `product_unit`;
 CREATE TABLE IF NOT EXISTS `product_unit` (
@@ -2046,6 +2099,7 @@ INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
 	('0005', 'ขา'),
 	('0006', 'แผ่น');
 /*!40000 ALTER TABLE `product_unit` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.province
 DROP TABLE IF EXISTS `province`;
@@ -2140,6 +2194,7 @@ INSERT INTO `province` (`Province_ID`, `Province_CODE`, `Province_NAME`, `GEO_ID
 	(77, '97', 'บึงกาฬ', 3);
 /*!40000 ALTER TABLE `province` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.rental
 DROP TABLE IF EXISTS `rental`;
 CREATE TABLE IF NOT EXISTS `rental` (
@@ -2165,6 +2220,7 @@ DELETE FROM `rental`;
 /*!40000 ALTER TABLE `rental` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rental` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.rentaltransaction
 DROP TABLE IF EXISTS `rentaltransaction`;
 CREATE TABLE IF NOT EXISTS `rentaltransaction` (
@@ -2185,6 +2241,7 @@ CREATE TABLE IF NOT EXISTS `rentaltransaction` (
 DELETE FROM `rentaltransaction`;
 /*!40000 ALTER TABLE `rentaltransaction` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rentaltransaction` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.subdist
 DROP TABLE IF EXISTS `subdist`;
@@ -11064,6 +11121,7 @@ INSERT INTO `subdist` (`SubDist_ID`, `SubDist_CODE`, `SubDist_NAME`, `Dist_ID`, 
 	(8860, '961303', 'มะรือโบออก', 997, 76, 6);
 /*!40000 ALTER TABLE `subdist` ENABLE KEYS */;
 
+
 -- Dumping structure for table cm.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -11087,15 +11145,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Dumping data for table cm.users: ~4 rows (approximately)
+-- Dumping data for table cm.users: ~0 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1471190999, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1471312264, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 	(2, '::1', NULL, '$2y$08$row7el1PgeqGDPSy8UHXG.xlKDPBQr8WhEChtQhrWU7rgt80POHxi', NULL, 'bhurivaj@classmat.info', NULL, NULL, NULL, NULL, 1470625981, 1470792490, 1, 'Bhurivaj', 'Padcharaditthakul', NULL, NULL),
 	(3, '::1', NULL, '$2y$08$dmsIMZIhCa5GiZhmZrnYuu/xtDzGqrR0ujhfg42tTKuUyFtHuHlzy', NULL, 'pensom@classmat.info', NULL, NULL, NULL, NULL, 1470710534, NULL, 1, 'Pensom', 'Jaiwong', NULL, NULL),
 	(4, '::1', NULL, '$2y$08$krhMqY7rwMIppHEbx5tNyuKFSZ.ppQPzyjY44vxWlLOb9JJd8vf6e', NULL, 'takdanai@classmat.info', NULL, NULL, NULL, NULL, 1470879179, 1470879225, 1, 'Takdanai', 'Chawalarat', NULL, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
 
 -- Dumping structure for table cm.users_groups
 DROP TABLE IF EXISTS `users_groups`;
@@ -11125,7 +11184,6 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 	(10, 4, 2),
 	(11, 4, 3);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
-
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

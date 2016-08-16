@@ -80,8 +80,8 @@ class Partner extends CI_Controller {
 				<li><a class="button hollow warning" href="'.site_url('/partner').'">ยกเลิก</a></li>
 				<li><a class="button hollow alert delitem" href="'.site_url('/partner/delete').'/'.$id.'">ลบ</a></li>
 				<li><a class="button hollow" href="'.site_url('/partner/create').'">พิมพ์รายงาน</a></li>';
-			$data['data'] = $this->partner_m->get($id);
 			$data['Province_all'] = $this->Province->province(); //Province Plugin
+			$data['data'] = $this->partner_m->get($id);
 			$data['bank'] = $this->partner_m->bank();
 			$data['indy'] = $this->partner_m->indy_all();
 			$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
@@ -99,8 +99,40 @@ class Partner extends CI_Controller {
 	public function add()
 	{
 
+		// Generate ID
+
+		//Get Type Code
+		$type = $this->input->post('Type');
+		$Sector = $this->input->post('Sector');
+
+		//Get Sector Code
+		$this->db->select('code');
+		$this->db->where('subsector',$Sector);
+		$this->db->from('partner_industries');
+		$sector_code = $this->db->get()->result_array();
+
+		//run Code
+		$this->db->select();
+		$this->db->where('Sector',$Sector);
+		$this->db->from('partner');
+		$num = sprintf("%05d",$this->db->get()->num_rows()+1);
+
+		if(in_array('supplier', $type)){
+
+			$id = 'SP'.'-'.$sector_code[0]['code'].'-'.$num;
+		
+		}elseif (in_array('customer', $type)) {
+
+			$id = 'CS'.'-'.$sector_code[0]['code'].'-'.$num;
+		
+		}elseif (in_array('customer', $type) && in_array('supplier', $type)) {
+
+			$id = 'PT'.'-'.$sector_code[0]['code'].'-'.$num;
+		
+		}
+
 		$data = array(
-		'id'                =>	$this->input->post('id'),
+		'id'                =>	$id,
 		'taxID'             =>	$this->input->post('taxID'),
 		'partner_name'      =>	$this->input->post('partner_name'),
 		'tel'               =>	$this->input->post('tel'),
@@ -151,7 +183,7 @@ class Partner extends CI_Controller {
 		'Acc_branch'        =>	$this->input->post('Acc_branch'),
 		'Sector'            =>	$this->input->post('Sector'),
 		'partner_contactor' =>	json_encode($this->input->post('partner_contactor')),
-		'partner_desc'            =>	$this->input->post('partner_desc')
+		'partner_desc'      =>	$this->input->post('partner_desc')
 		);
 
 
