@@ -39,12 +39,6 @@
 
       <?php
 
-            $i = 0;
-            foreach ($partner as $key) {
-              $partner_list[$partner[$i]['id']] = $partner[$i]['partner_name'];
-              $i++;
-            }
-
             $id = array(
                 'type'  =>  'text',
                 'name'  =>  'id',
@@ -56,10 +50,17 @@
                 'deliver' =>'ส่งสินค้า'
               );
 
+            $refdoc_id = array(
+                'type'  =>  'text',
+                'name'  =>  'refdoc_id',
+                'id' =>  'refdoc_id',
+                'data-parsley-required' =>  'true'
+              );
+
         echo form_label('เลขที่เอกสาร')
             .form_input($id);
-        echo form_label('ลูกค้า')
-            .form_dropdown('partner_id',$partner_list);
+        echo form_label('รหัสอ้างอิง')
+            .form_input($refdoc_id);
         echo form_label('ชนิดรายการ')
             .form_dropdown('invent_move_type',$tr_type);
       ?>
@@ -115,7 +116,7 @@
       <td>'.$i.'</td>
       <td>'.$key->id.'</td>
       <td>'.$key->create_date.'</td>
-      <td>'.$key->partner_id.'</td>
+      <td>'.$key->refdoc_id.'</td>
       <td>'.$key->invent_move_type.'</td>
       <td>'.$key->invent_move_status.'</td>
       <td><a href="'.site_url("Inventory/Inventory/data/".$key->id).'">Edit</a></td>

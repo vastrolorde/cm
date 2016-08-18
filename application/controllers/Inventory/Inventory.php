@@ -25,7 +25,6 @@ class Inventory extends CI_Controller {
 		}else{
 			$data['title'] = 'เบิก/รับสินค้าคงคลัง';
 			$data['result'] = $this->Inventory_m->getAll();
-			$data['partner'] = $this->partner();
 
 			$this->load->View('parts/head',$data);
 			$this->load->view('Inventory/Inventory_move_list',$data);
@@ -44,7 +43,6 @@ class Inventory extends CI_Controller {
 		}else{
 			$data['title'] = 'รายการเคลื่อนไหวสินค้าคงคลัง';
 			$data['product'] = $this->product_m->get_flow();
-			// $data['partner'] = $this->partner();
 
 			$this->load->View('parts/head',$data);
 			$this->load->view('Inventory/inventory_flow',$data);
@@ -76,8 +74,7 @@ class Inventory extends CI_Controller {
 			//ดึงข้อมูลรายการใบเบิก
 			$data['data'] = $this->Inventory_m->get($id);
 
-			//ดึงข้อมูล Partner และ Warehouse
-			$data['partner'] = $this->partner();
+			//ดึงข้อมูล Warehouse
 			$data['warehouse'] = $this->warehouse();
 
 
@@ -97,7 +94,7 @@ class Inventory extends CI_Controller {
 		$id = $this->input->post('id');
 			$data = array(
 				'id'                 =>	$id,
-				'partner_id'         =>	$this->input->post('partner_id'),
+				'refdoc_id'         =>	$this->input->post('refdoc_id'),
 				'create_date'        =>	$this->input->post('create_date'),
 				'invent_move_Date'   =>	$this->input->post('invent_move_Date'),
 				'invent_move_type'   =>	$this->input->post('invent_move_type'),
@@ -111,6 +108,7 @@ class Inventory extends CI_Controller {
 	public function edit($id)
 	{
 			$data = array(
+				'refdoc_id'         =>	$this->input->post('refdoc_id'),
 				'update_date'        =>	$this->input->post('update_date'),
 				'invent_move_status' =>	$this->input->post('invent_move_status'),
 				'invent_move_wh'     =>	$this->input->post('invent_move_wh')
@@ -173,13 +171,6 @@ class Inventory extends CI_Controller {
 	}
 
 	/******			Others			******/
-	//partner data
-	public function partner()
-	{
-		$this->load->model('partner/partner_model','partner_m');
-		$result = $this->partner_m->partner_all();
-		return $result;
-	}
 
 	public function partner_get()
 	{

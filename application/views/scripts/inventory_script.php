@@ -113,4 +113,25 @@
 		});
 	});// End jquery
 
+	//autocomplete รหัสอ้งอิง
+	$('#refdoc_id').autocomplete({
+			source: function(req,res){
+				$.ajax({
+					url:'<?php echo site_url() ?>/settings/search/lookup',
+					data: {search: $('#refdoc_id').val()},
+					dataType:"json",
+					type:"POST",
+					success: function(data){
+						res(data.map(function(value){
+								return {
+									'label' : value.partner_name,
+									'value' : value.id
+								}
+						}));
+					}
+				})
+			},
+			minLength: 2
+	});
+
 </script>

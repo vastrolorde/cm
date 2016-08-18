@@ -8,7 +8,7 @@
 
 /*
 
-partner_id => ลูกค้า
+refdoc_id => รหัสอ้งอิง
 id  =>  เลขที่เอกสาร
 create_date  =>  วันที่เอกสาร
 invent_move_Date  =>  วันที่ลูกค้ามารับของ
@@ -24,7 +24,7 @@ amount => จำนวน
 // validate
 /*
 id
-partner_id
+refdoc_id
 invent_move_Date
 */
 
@@ -55,16 +55,16 @@ invent_move_Date
         <legend>ที่อยู่ในการรับส่งสินค้า</legend>
 
         <?php
-          $i = 0;
-          foreach ($partner as $key) {
-            $partner_list[$partner[$i]['id']] = $partner[$i]['partner_name'];
-            $i++;
-          }
+          $refdoc_id = array(
+              'type'  =>  'text',
+              'name'  =>  'refdoc_id',
+              'value'  =>  $data[0]->refdoc_id,
+              'id' =>  'refdoc_id',
+              'data-parsley-required' =>  'true'
+            );
 
-          $partner_id = $data[0]->partner_id;
-
-          echo form_label('ลูกค้า')
-              .form_dropdown('partner_id',$partner_list,$partner_id,'id="partner_id"');
+          echo form_label('รหัสอ้างอิง')
+              .form_input($refdoc_id);
 
 
         ?>
