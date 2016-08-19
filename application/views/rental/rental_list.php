@@ -32,28 +32,28 @@
 <?php
   $i=1;
 
-  if($result != null){
+  // if($result != null){
 
-    for ($i; $i < 5; $i++) { 
-      echo '
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      ';
-    }
+  //   for ($i; $i < 5; $i++) { 
+  //     echo '
+  //     <tr>
+  //       <td></td>
+  //       <td></td>
+  //       <td></td>
+  //       <td></td>
+  //       <td></td>
+  //       <td></td>
+  //     </tr>
+  //     ';
+  //   }
 
-  }else{
-      echo '
-        <tr>
-          <td colspan="6"> No Data </td>
-        </tr>
-      ';
-  }
+  // }else{
+  //     echo '
+  //       <tr>
+  //         <td colspan="6"> No Data </td>
+  //       </tr>
+  //     ';
+  // }
 
 
 ?>

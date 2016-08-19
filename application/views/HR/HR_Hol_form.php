@@ -37,10 +37,18 @@
 
         <?php
           
+            $year_opt = array();
+
+            for ($i=0; $i < 50; $i++) { 
+              $year = 2015;
+              $year_opt[$year+$i] = $year+$i;
+            }
+
           if(isset($data)){
             //Assign Variable
 
             $hol_date = $data[0]->hol_date;
+            $fisyear = $data[0]->fisyear;
 
             $date_input = array(
                 'type' => 'text',
@@ -51,14 +59,19 @@
 
             echo form_label('วันที่หยุด')
                 .form_input($date_input);
+            echo form_label('งวดปีหยุด')
+                .form_dropdown('fisyear',$year_opt,$fisyear);
           }else{
             $date_input = array(
                 'type' => 'text',
                 'name' => 'hol_date',
                 'class' => 'datepicker'
               );
+
             echo form_label('วันที่หยุด')
                 .form_input($date_input);
+            echo form_label('งวดปีหยุด')
+                .form_dropdown('fisyear',$year_opt);
           }
         ?>
 

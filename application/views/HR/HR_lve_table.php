@@ -13,12 +13,9 @@
           <?php
             foreach ($lve as $key) {
 
-              $date = strtr($key["lve_date"], '/', '-');
-              $newDate = date("d-m-Y", strtotime($date));
-
               echo '
               <tr>
-                <td><input class="datepicker" name="lve_date" id="lve_date" type="text" value="'.$newDate.'" readonly></td>
+                <td><input class="datepicker" name="lve_date" id="lve_date" type="text" value="'.$key["lve_date"].'" readonly></td>
                 <td><input class="time"       name="lve_in"   id="lve_in"   type="text" value="'.$key["lve_in"].'" readonly></td>
                 <td><input class="time"       name="lve_out"  id="lve_out"  type="text" value="'.$key["lve_out"].'" readonly></td>
                 <td><input                    name="diff"     id="diff"     type="text" value="'.$key["lve_diff"].'" disabled></td>

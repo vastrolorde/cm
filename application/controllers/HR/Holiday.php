@@ -75,6 +75,7 @@ class Holiday extends CI_Controller {
 		$data = array(
 			'hol_date' => $this->input->post('hol_date'),
 			'hol_name' => $this->input->post('hol_name'),
+			'fisyear' => $this->input->post('fisyear'),
 			'hol_remark' => $this->input->post('hol_remark')
 		);
 
@@ -91,6 +92,7 @@ class Holiday extends CI_Controller {
 		$data = array(
 			'hol_date' => $this->input->post('hol_date'),
 			'hol_name' => $this->input->post('hol_name'),
+			'fisyear' => $this->input->post('fisyear'),
 			'hol_remark' => $this->input->post('hol_remark')
 		);
 

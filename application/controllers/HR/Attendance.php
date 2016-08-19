@@ -32,7 +32,7 @@ class Attendance extends CI_Controller {
 
 
 		$this->load->view('parts/head',$data);
-		$this->load->view('HR/HR_att_list',$data);
+		$this->load->view('HR/HR_lookup_date',$data);
 		$this->load->view('parts/footer');
 		$this->load->view('scripts/att_script');
 
@@ -43,20 +43,12 @@ class Attendance extends CI_Controller {
 
 	public function data()
 	{
+		$emp_id =	$this->input->post('emp');
+		$since  =	$this->input->post('since');
+		$until  =	$this->input->post('until');
 
-		$id = $this->uri->segment(4);
-		$data['title'] = 'จัดการการลารายบุคคล';
-		$data['execute'] = 
-			'<li><a class="button hollow success" data-open="Add">เพิ่ม</a></li>
-			<li><a class="button hollow warning" href="'.site_url('/HR/Leave').'">กลับ</a></li>
-			<li><a class="button hollow" href="'.site_url('/HR/Leave/create').'">พิมพ์รายงาน</a></li>';
-		$data['data'] = $this->HR_Att_model->get($id);
-		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
+		
 
-		$this->load->view('parts/head',$data);
-		$this->load->view('HR/HR_lve_form',$data);
-		$this->load->view('parts/footer');
-		$this->load->view('scripts/leave_script');
 	}
 
 
@@ -146,12 +138,6 @@ class Attendance extends CI_Controller {
 			while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE)
 			{
 				$emapData = array_combine($header, $emapData);
-				// 'emp_id',
-				// 'att_date',
-				// 'pnch_in',
-				// 'pnch_out',
-				// 'pnch_diff',
-				// 'remark'
 
 				$pnch_in	=	$emapData['pnch_in'];
 				$pnch_out	=	$emapData['pnch_out'];
@@ -162,7 +148,6 @@ class Attendance extends CI_Controller {
 			fclose($file);
 			redirect('/HR/Attendance');
 		}
-
 	}
 
 	public function example(){
