@@ -22,7 +22,16 @@ hr_employee_data.emp_status,hr_position.id, hr_position.position_name FROM hr_em
 	}
 
 	public function get($id){
-		$this->db->select("*");
+		$this->db->select();
+		$this->db->select("DATE_FORMAT(emp_DOB,'%d/%m/%Y') as emp_DOB ");
+		$this->db->select("DATE_FORMAT(emp_startdate,'%d/%m/%Y') as emp_startdate ");
+		$this->db->select("DATE_FORMAT(emp_enddate,'%d/%m/%Y') as emp_enddate ");
+		$this->db->select("DATE_FORMAT(emp_passport_exp,'%d/%m/%Y') as emp_passport_exp ");
+		$this->db->select("DATE_FORMAT(emp_visa_exp,'%d/%m/%Y') as emp_visa_exp ");
+		$this->db->select("DATE_FORMAT(emp_wp_exp,'%d/%m/%Y') as emp_wp_exp ");
+		$this->db->select("DATE_FORMAT(emp_driver_license_exp,'%d/%m/%Y') as emp_driver_license_exp ");
+		$this->db->select("DATE_FORMAT(emp_bike_license_exp,'%d/%m/%Y') as emp_bike_license_exp ");
+		$this->db->select("DATE_FORMAT(emp_truck_license_exp,'%d/%m/%Y') as emp_truck_license_exp ");
 		$this->db->where("id",$id);
 		$query = $this->db->get('hr_employee_data');
 		return $result = $query->result();

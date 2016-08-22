@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class HR_Att_model extends CI_Model {
 
 	public function getAll(){
-		$this->db->select("*");
+		$this->db->select();
+		$this->db->select("DATE_FORMAT(att_date,'%d/%m/%Y') as att_date");
 		$this->db->from("hr_att as att");
 		$this->db->join("hr_employee_data as emp","att.emp_id = emp.id");
 		$query = $this->db->get();
@@ -13,9 +14,10 @@ class HR_Att_model extends CI_Model {
 
 	public function get($id){
 		$this->db->select();
+		$this->db->select("DATE_FORMAT(att_date,'%d/%m/%Y') as att_date");
 		$this->db->from('hr_att');
 		$this->db->where("emp_id",$id);
-		$this->db->order_by('lve_date', 'ASC');
+		$this->db->order_by('hr_att.att_date', 'ASC');
 		$query = $this->db->get();
 		return $result = $query->result_array();
 	}

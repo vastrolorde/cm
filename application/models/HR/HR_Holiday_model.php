@@ -5,15 +5,17 @@ class HR_Holiday_model extends CI_Model {
 
 	public function getAll(){
 		$this->db->select();
+		$this->db->select("DATE_FORMAT(hol_date,'%d/%m/%Y') as hol_date");
 		$this->db->from('hr_holiday');
-		$this->db->order_by('hol_date', 'ASC');
+		$this->db->order_by('hr_holiday.hol_date', 'ASC');
 		$query = $this->db->get();
 
 		return $result = $query->result();
 	}
 
 	public function get($id){
-		$this->db->select("*");
+		$this->db->select();
+		$this->db->select("DATE_FORMAT(hol_date,'%d/%m/%Y') as hol_date");
 		$this->db->where("id",$id);
 		$query = $this->db->get('hr_holiday');
 		return $result = $query->result();

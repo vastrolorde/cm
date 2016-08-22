@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class HR_Leave_model extends CI_Model {
 
 	public function getAll(){
-		$this->db->select("*");
+		$this->db->select();
 		$this->db->where('emp_status', 'บรรจุแล้ว');
 		$this->db->or_where('emp_status', 'ทดลองงาน');
 		$query = $this->db->get('hr_employee_data');
@@ -13,9 +13,10 @@ class HR_Leave_model extends CI_Model {
 
 	public function get($id){
 		$this->db->select();
+		$this->db->select("DATE_FORMAT(lve_date,'%d/%m/%Y') as lve_date");
 		$this->db->from('hr_leave');
 		$this->db->where("emp_id",$id);
-		$this->db->order_by('lve_date', 'ASC');
+		$this->db->order_by('hr_leave.lve_date', 'ASC');
 		$query = $this->db->get();
 		return $result = $query->result_array();
 	}
