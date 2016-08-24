@@ -92,11 +92,14 @@ class Inventory extends CI_Controller {
 	public function add()
 	{
 		$id = $this->input->post('id');
+
+		$date = str_replace('/', '-', $this->input->post('invent_move_Date'));
+
 			$data = array(
 				'id'                 =>	$id,
 				'refdoc_id'         =>	$this->input->post('refdoc_id'),
 				'create_date'        =>	$this->input->post('create_date'),
-				'invent_move_Date'   =>	$this->input->post('invent_move_Date'),
+				'invent_move_Date'   =>	date('Y-m-d', strtotime($date)),
 				'invent_move_type'   =>	$this->input->post('invent_move_type'),
 				'invent_move_status' =>	$this->input->post('invent_move_status')
 			);
@@ -143,9 +146,11 @@ class Inventory extends CI_Controller {
 	
 	public function add_tr()
 	{
+		$date = str_replace('/', '-', $this->input->post('invent_move_Date'));
+
 		$data = array(
 			'inventory_move_id' =>	$this->input->post('inventory_move_id'),
-			'invent_move_Date' =>	$this->input->post('invent_move_Date'),
+			'invent_move_Date'   =>	date('Y-m-d', strtotime($date)),
 			'product_id'        =>	$this->input->post('product_id'),
 			'amount'            =>	$this->input->post('amount'),
 			'type'            =>	$this->input->post('type'),

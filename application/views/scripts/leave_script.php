@@ -19,14 +19,9 @@
 
 				foreach ($query as $row) {
 
-					// change date format
-					$date = strtr($row->lve_date, '/', '-');
-					$newDate = date("Y-m-d", strtotime($date));
-
-
 					echo "{title:'".$row->emp_fname." ".$row->emp_lname." ".$row->lve_type."',
-					start:'".$newDate." ".$row->lve_in."',
-					end:'".$newDate." ".$row->lve_out."',
+					start:'".$row->lve_date." ".$row->lve_in."',
+					end:'".$row->lve_date." ".$row->lve_out."',
 					color: '";
 					switch ($row->lve_type) {
 						case 'Si':

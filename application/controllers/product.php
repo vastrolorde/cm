@@ -84,6 +84,8 @@ class Product extends CI_Controller {
 
 	public function add()
 	{
+		$date = str_replace('/', '-', $this->input->post('product_stock_date'));
+
 		$data = array(
 		'product_id'             =>	$this->input->post('product_id'),
 		'product_unit'           =>	$this->input->post('product_unit'),
@@ -93,7 +95,7 @@ class Product extends CI_Controller {
 		'product_Desc'           =>	$this->input->post('product_Desc'),
 		'product_stock'          =>	$this->input->post('product_stock'),
 		'product_safety'         =>	$this->input->post('product_safety'),
-		'product_stock_date'     =>	$this->input->post('product_stock_date'),
+		'product_stock_date'     =>	date('Y-m-d', strtotime($date)),
 		'product_cost'           =>	$this->input->post('product_cost'),
 		'product_1stSalePrice'   =>	$this->input->post('product_1stSalePrice'),
 		'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),
@@ -110,6 +112,8 @@ class Product extends CI_Controller {
 
 	public function edit($id)
 	{
+		$date = str_replace('/', '-', $this->input->post('product_stock_date'));
+		
 		$data = array(
 		'product_unit'           =>	$this->input->post('product_unit'),
 		'product_family'         =>	$this->input->post('product_family'),
@@ -119,7 +123,7 @@ class Product extends CI_Controller {
 		'product_Desc'           =>	$this->input->post('product_Desc'),
 		'product_stock'          =>	$this->input->post('product_stock'),
 		'product_safety'         =>	$this->input->post('product_safety'),
-		'product_stock_date'     =>	$this->input->post('product_stock_date'),
+		'product_stock_date'     =>	date('Y-m-d', strtotime($date)),
 		'product_cost'           =>	$this->input->post('product_cost'),
 		'product_1stSalePrice'   =>	$this->input->post('product_1stSalePrice'),
 		'product_2ndSalePrice'   =>	$this->input->post('product_2ndSalePrice'),

@@ -81,6 +81,19 @@ class Employee extends CI_Controller {
 
 	public function add()
 	{
+
+		$date = array(
+			'emp_DOB'                =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_DOB')))),
+			'emp_startdate'          =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_startdate')))),
+			'emp_enddate'            =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_enddate')))),
+			'emp_passport_exp'       =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_passport_exp')))),
+			'emp_visa_exp'           =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_visa_exp')))),
+			'emp_wp_exp'             =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_wp_exp')))),
+			'emp_driver_license_exp' =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_driver_license_exp')))),
+			'emp_bike_license_exp'   =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_bike_license_exp')))),
+			'emp_truck_license_exp'  =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_truck_license_exp'))))
+			);
+
 		$data = array(
 			'id'               =>	$this->input->post('id'),
 			'emp_prefix'       =>	$this->input->post('emp_prefix'),
@@ -88,14 +101,14 @@ class Employee extends CI_Controller {
 			'emp_lname'        =>	$this->input->post('emp_lname'),
 			'emp_nickname'     =>	$this->input->post('emp_nickname'),
 			'emp_nation'       =>	$this->input->post('emp_nation'),
-			'emp_DOB'          =>	$this->input->post('emp_DOB'),
+			'emp_DOB'          =>	$date['emp_DOB'],
 			'emp_sex'          =>	$this->input->post('emp_sex'),
 			'emp_position_now' =>	$this->input->post('emp_position_now'),
 			'emp_dept_now'     =>	$this->input->post('emp_dept_now'),
 			'emp_position'     =>	json_encode($this->input->post('emp_position')),
 			'emp_type'         =>	$this->input->post('emp_type'),
-			'emp_startdate'    =>	$this->input->post('emp_startdate'),
-			'emp_enddate'      =>	$this->input->post('emp_enddate'),
+			'emp_startdate'    =>	$date['emp_startdate'],
+			'emp_enddate'      =>	$date['emp_enddate'],
 			'emp_status'       =>	$this->input->post('emp_status'),
 
 			'emp_add1'        =>	$this->input->post('emp_add1'),
@@ -114,20 +127,20 @@ class Employee extends CI_Controller {
 			'emp_training'    =>	json_encode($this->input->post('emp_training')),
 			
 			'emp_cid'          =>	$this->input->post('emp_cid'),
-			'emp_cid_exp'      =>	$this->input->post('emp_cid_exp'),
+			'emp_cid_exp'      =>	$date['emp_cid_exp'],
 			'emp_passport'     =>	$this->input->post('emp_passport'),
-			'emp_passport_exp' =>	$this->input->post('emp_passport_exp'),
+			'emp_passport_exp' =>	$date['emp_passport_exp'],
 			'emp_visa'         =>	$this->input->post('emp_visa'),
-			'emp_visa_exp'     =>	$this->input->post('emp_visa_exp'),
+			'emp_visa_exp'     =>	$date['emp_visa_exp'],
 			'emp_wp'           =>	$this->input->post('emp_wp'),
-			'emp_wp_exp'       =>	$this->input->post('emp_wp_exp'),
+			'emp_wp_exp'       =>	$date['emp_wp_exp'],
 			
 			'emp_driver_license'     =>	$this->input->post('emp_driver_license'),
-			'emp_driver_license_exp' =>	$this->input->post('emp_driver_license_exp'),
+			'emp_driver_license_exp' =>	$date['emp_driver_license_exp'],
 			'emp_bike_license'       =>	$this->input->post('emp_bike_license'),
-			'emp_bike_license_exp'   =>	$this->input->post('emp_bike_license_exp'),
+			'emp_bike_license_exp'   =>	$date['emp_bike_license_exp'],
 			'emp_truck_license'      =>	$this->input->post('emp_truck_license'),
-			'emp_truck_license_exp'  =>	$this->input->post('emp_truck_license_exp'),
+			'emp_truck_license_exp'  =>	$date['emp_truck_license_exp'],
 		);
 
 		$this->hr_emp_m->create($data);
@@ -137,20 +150,32 @@ class Employee extends CI_Controller {
 
 	public function edit($id)
 	{
+		$date = array(
+			'emp_DOB'                =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_DOB')))),
+			'emp_startdate'          =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_startdate')))),
+			'emp_enddate'            =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_enddate')))),
+			'emp_passport_exp'       =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_passport_exp')))),
+			'emp_visa_exp'           =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_visa_exp')))),
+			'emp_wp_exp'             =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_wp_exp')))),
+			'emp_driver_license_exp' =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_driver_license_exp')))),
+			'emp_bike_license_exp'   =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_bike_license_exp')))),
+			'emp_truck_license_exp'  =>	date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('emp_truck_license_exp'))))
+			);
+
 		$data = array(
 			'emp_prefix'       =>	$this->input->post('emp_prefix'),
 			'emp_fname'        =>	$this->input->post('emp_fname'),
 			'emp_lname'        =>	$this->input->post('emp_lname'),
 			'emp_nickname'     =>	$this->input->post('emp_nickname'),
 			'emp_nation'       =>	$this->input->post('emp_nation'),
-			'emp_DOB'          =>	$this->input->post('emp_DOB'),
+			'emp_DOB'          =>	$date['emp_DOB'],
 			'emp_sex'          =>	$this->input->post('emp_sex'),
 			'emp_position_now' =>	$this->input->post('emp_position_now'),
 			'emp_dept_now'     =>	$this->input->post('emp_dept_now'),
 			'emp_position'     =>	json_encode($this->input->post('emp_position')),
 			'emp_type'         =>	$this->input->post('emp_type'),
-			'emp_startdate'    =>	$this->input->post('emp_startdate'),
-			'emp_enddate'      =>	$this->input->post('emp_enddate'),
+			'emp_startdate'    =>	$date['emp_startdate'],
+			'emp_enddate'      =>	$date['emp_enddate'],
 			'emp_status'       =>	$this->input->post('emp_status'),
 
 			'emp_add1'        =>	$this->input->post('emp_add1'),
@@ -169,20 +194,20 @@ class Employee extends CI_Controller {
 			'emp_training'    =>	json_encode($this->input->post('emp_training')),
 			
 			'emp_cid'          =>	$this->input->post('emp_cid'),
-			'emp_cid_exp'      =>	$this->input->post('emp_cid_exp'),
+			'emp_cid_exp'      =>	$date['emp_cid_exp'],
 			'emp_passport'     =>	$this->input->post('emp_passport'),
-			'emp_passport_exp' =>	$this->input->post('emp_passport_exp'),
+			'emp_passport_exp' =>	$date['emp_passport_exp'],
 			'emp_visa'         =>	$this->input->post('emp_visa'),
-			'emp_visa_exp'     =>	$this->input->post('emp_visa_exp'),
+			'emp_visa_exp'     =>	$date['emp_visa_exp'],
 			'emp_wp'           =>	$this->input->post('emp_wp'),
-			'emp_wp_exp'       =>	$this->input->post('emp_wp_exp'),
+			'emp_wp_exp'       =>	$date['emp_wp_exp'],
 			
 			'emp_driver_license'     =>	$this->input->post('emp_driver_license'),
-			'emp_driver_license_exp' =>	$this->input->post('emp_driver_license_exp'),
+			'emp_driver_license_exp' =>	$date['emp_driver_license_exp'],
 			'emp_bike_license'       =>	$this->input->post('emp_bike_license'),
-			'emp_bike_license_exp'   =>	$this->input->post('emp_bike_license_exp'),
+			'emp_bike_license_exp'   =>	$date['emp_bike_license_exp'],
 			'emp_truck_license'      =>	$this->input->post('emp_truck_license'),
-			'emp_truck_license_exp'  =>	$this->input->post('emp_truck_license_exp'),
+			'emp_truck_license_exp'  =>	$date['emp_truck_license_exp'],
 		);
 
 		$this->hr_emp_m->update($data,$id);

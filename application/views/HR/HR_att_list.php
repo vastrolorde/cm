@@ -112,9 +112,26 @@
   <div class="top-bar-right">
     <ul class="menu">
       <li><a class="hollow button success" data-open="Att">เพิ่ม</a></li>
+      <li><a class="button hollow warning" href="<?php echo site_url('/HR/Attendance'); ?>">กลับ</a></li>
       <li><a class="hollow button" data-open="Att_file">นำเข้า</a></li>
       <li><a class="hollow button" href="#">พิมพ์</a></li>
     </ul>
+  </div>
+</div>
+
+<?php
+    $since = $this->input->post('since');
+    $until = $this->input->post('until');
+
+    $StartDate = date('Y-m-d', strtotime(str_replace('/', '-', $since))); //2016-08-13
+    $EndDate   = date('Y-m-d', strtotime(str_replace('/', '-', $until))); //2016-08-13
+
+?>
+
+<div class="row">
+  <div class="large-12 columns text-left">
+    <p><big>รหัส : </big><?php echo $this->input->post('emp'); ?></p>
+    <big>ระหว่างวันที่ : </big><?php echo $this->input->post('since').' - '.$this->input->post('until'); ?>
   </div>
 </div>
 
@@ -122,9 +139,8 @@
 
   <thead>
     <tr>
-      <th>รหัสพนักงาน</th>
-      <th>ชื่อพนักงาน</th>
       <th>วันที่</th>
+      <th>สถานะ</th>
       <th>เข้า</th>
       <th>ออก</th>
       <th>ระยะเวลา(hr)</th>
@@ -136,30 +152,56 @@
   <tbody>
   
   <?php
-    
-    if($result != null){
-      foreach ($result as $key){
 
-        echo '
-          <tr>
-            <td>'.$key->emp_id.'</td>
-            <td>'.$key->emp_fname.'  '.$key->emp_lname.'</td>
-            <td>'.$key->att_date.'</td>
+
+// แปลง format text -> date
+
+foreach ($result as $key) {
+
+    while($StartDate <= $EndDate){
+      $DayOfWeek = date("w", strtotime($StartDate)); //แปลงวันที่เป็นเลขวันในสัปดาห์ 0-6
+
+      if ($DayOfWeek == 0) {
+
+            echo '
+            <tr>
+              <td>'.date("d/m/Y", strtotime($StartDate)).'</td>
+              <td><span style="text:red">วันหยุด</span></td>';
+
+        if (date("d/m/Y", strtotime($StartDate)) == $key->att) {
+          echo '
             <td>'.$key->pnch_in.'</td>
             <td>'.$key->pnch_out.'</td>
             <td>'.$key->pnch_diff.'</td>
             <td>'.$key->remark.'</td>
-            <td><a href="'.site_url("HR/Dept/data/".$key->id).'">Edit</a></td>
-          </tr>
-            ';
+            <td></td>
+      </tr>
+          ';
+        }
+
+      }else{
+
+            echo '
+            <tr>
+              <td>'.date("d/m/Y", strtotime($StartDate)).'</td>
+              <td><span style="text:red">วันทำงาน</span></td>';
+
+        if (date("d/m/Y", strtotime($StartDate)) == $key->att) {
+          echo '
+            <td>'.$key->pnch_in.'</td>
+            <td>'.$key->pnch_out.'</td>
+            <td>'.$key->pnch_diff.'</td>
+            <td>'.$key->remark.'</td>
+            <td></td>
+      </tr>
+          ';
+        }
       }
-    }else{
-      echo '
-        <tr>
-          <td colspan="7"> No Data </td>
-        </tr>
-      ';
+
+
+    $StartDate = date('Y-m-d',strtotime($StartDate . "+1 days")); //บวกวันเพิ่มจาก StartDate 1 วัน
     }
+}
 
   ?>
   </tbody>

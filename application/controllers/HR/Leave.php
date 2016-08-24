@@ -64,41 +64,29 @@ class Leave extends CI_Controller {
 	public function add()
 	{
 
+		$date = str_replace('/', '-', $this->input->post('lve_date'));
 
-		$id =	$this->input->post('emp_id');
+		$data = array(
+			'emp_id'     =>	$this->input->post('emp_id'),
+			'lve_date'   =>	date('Y-m-d', strtotime($date)),
+			'lve_type'   =>	$this->input->post('lve_type'),
+			'lve_reason' =>	$this->input->post('lve_reason'),
+			'lve_in'     =>	$this->input->post('lve_in'),
+			'lve_out'    =>	$this->input->post('lve_out'),
+			'lve_diff'   =>	$this->input->post('lve_diff')
+		);
 
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
-
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('lve_date','รหัสแผนก','required');
-		$this->form_validation->set_rules('lve_in','ชื่อแผนก','required');
-		$this->form_validation->set_rules('lve_out','ชื่อแผนก','required');
-
-		if ($this->form_validation->run() == TRUE){
-
-			$data = array(
-				'emp_id'     =>	$id,
-				'lve_date'   =>	$this->input->post('lve_date'),
-				'lve_type'   =>	$this->input->post('lve_type'),
-				'lve_reason' =>	$this->input->post('lve_reason'),
-				'lve_in'     =>	$this->input->post('lve_in'),
-				'lve_out'    =>	$this->input->post('lve_out'),
-				'lve_diff'   =>	$this->input->post('lve_diff')
-			);
-
-			$this->HR_Leave_m->create($data);
-			
-
-			redirect('/HR/Leave/data/'.$id);
-		}
+		$this->HR_Leave_m->create($data);
+		redirect('/HR/Leave/data/'.$id);
 	}
 
 	public function edit()
 	{
 		$id = $this->input->get('id');
+		$date = str_replace('/', '-', $this->input->post('lve_date'));
+		
 		$data = array(
-			'lve_date'   =>	$this->input->post('lve_date'),
+			'lve_date'   =>	date('Y-m-d', strtotime($date)),
 			'lve_in'     =>	$this->input->post('lve_in'),
 			'lve_out'    =>	$this->input->post('lve_out'),
 			'lve_diff'   =>	$this->input->post('lve_diff')

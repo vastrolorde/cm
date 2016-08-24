@@ -32,7 +32,7 @@ class Attendance extends CI_Controller {
 
 
 		$this->load->view('parts/head',$data);
-		$this->load->view('HR/HR_lookup_date',$data);
+		$this->load->view('HR/HR_att_lookup_date',$data);
 		$this->load->view('parts/footer');
 		$this->load->view('scripts/att_script');
 
@@ -44,10 +44,20 @@ class Attendance extends CI_Controller {
 	public function data()
 	{
 		$emp_id =	$this->input->post('emp');
-		$since  =	$this->input->post('since');
-		$until  =	$this->input->post('until');
 
-		
+		$since     = str_replace('/', '-', $this->input->post('since'));
+		$datesince = date('Y-m-d', strtotime($since));
+		$until     = str_replace('/', '-', $this->input->post('until'));
+		$dateuntil = date('Y-m-d', strtotime($until));
+
+		$data['title'] = 'บันทึกลงเวลา';
+		$data['result'] = $this->HR_Att_m->get($emp_id,$datesince,$dateuntil);
+		$data['mask'] = '<script language="javascript" src="'.asset_url().'js/js_mask_helper.js'.'""></script>';
+
+		$this->load->view('parts/head',$data);
+		$this->load->view('HR/HR_att_list',$data);
+		$this->load->view('parts/footer');
+		$this->load->view('scripts/att_script');
 
 	}
 
@@ -56,10 +66,11 @@ class Attendance extends CI_Controller {
 
 	public function add()
 	{
+		$date = str_replace('/', '-', $this->input->post('att_date'));
 
 		$data = array(
 			'emp_id'    =>	$this->input->post('emp_id'),
-			'att_date'  =>	$this->input->post('att_date'),
+			'att_date'  =>	date('Y-m-d', strtotime($date)),
 			'pnch_in'   =>	$this->input->post('pnch_in'),
 			'pnch_out'  =>	$this->input->post('pnch_out'),
 			'pnch_diff' =>	$this->input->post('pnch_diff')
@@ -74,29 +85,19 @@ class Attendance extends CI_Controller {
 	public function edit($id)
 	{
 
-		// --------------- Setting --------------- //
-		$this->form_validation->set_message('required','<code style="color:red;">คุณไม่ได้กรอก %s</code>');
+		$date = str_replace('/', '-', $this->input->post('att_date'));
+		
+		$data = array(
+			'att_date'  =>	date('Y-m-d', strtotime($date)),
+			'pnch_in'   =>	$this->input->post('pnch_in'),
+			'pnch_out'  =>	$this->input->post('pnch_out'),
+			'pnch_diff' =>	$this->input->post('pnch_diff')
+			
+		);
 
-		// --------------- Validation --------------- //
-		$this->form_validation->set_rules('dept_name','ชื่อแผนก','required');
-
-		if ($this->form_validation->run() == TRUE){
-
-			$data = array(
-				'id'           =>	$this->input->post('id'),
-				'dept_name'    =>	$this->input->post('dept_name'),
-				'dept_mother'  =>	$this->input->post('dept_mother'),
-				'dept_manager' =>	$this->input->post('dept_manager'),
-				
-			);
-
-			$this->hr_dept_m->update($data,$id);
+		$this->hr_dept_m->update($data,$id);
 			
 		redirect('/HR/Attendance');
-		}else{
-
-			$this->data($id);
-		}
 	}
 
 	public function delete($id){
