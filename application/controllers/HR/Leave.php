@@ -77,7 +77,7 @@ class Leave extends CI_Controller {
 		);
 
 		$this->HR_Leave_m->create($data);
-		redirect('/HR/Leave/data/'.$id);
+		redirect('/HR/Leave/data/'.$this->input->post('emp_id'));
 	}
 
 	public function edit()

@@ -13,10 +13,9 @@ class Inventory_m extends CI_Model {
 
 	public function get($id){
 		$this->db->select("ivtry.id,ivtry.refdoc_id,ivtry.create_date,ivtry.update_date,ivtry.invent_move_Date,ivtry.invent_move_type,ivtry.invent_move_status,ivtry.invent_move_wh");
-		$this->db->select("ptnr.partner_name,ptnr.taxID,ptnr.tel,ptnr.email,ptnr.add1,ptnr.add2,ptnr.SubDist,ptnr.Dist,ptnr.Province,ptnr.Postal");
+
 		$this->db->where("ivtry.id",$id);
 		$this->db->from("Inventory_move as ivtry");
-		$this->db->join('partner as ptnr','ptnr.id = ivtry.refdoc_id');
 		$query = $this->db->get();
 		return $result = $query->result();
 	}

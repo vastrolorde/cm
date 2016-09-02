@@ -1,3 +1,25 @@
+<?php
+  $attributes = array(
+      'id' => 'validate_form'
+    );
+
+  if(isset($data)){
+    echo form_open('/rental/edit/'.$data[0]->id,$attributes);
+  }
+
+ // id
+// partner_id
+// create_date
+// ref_doc
+// start_contract
+// expire_contract
+// paymentType
+// guaranteeType
+// paymentAmount
+// guaranteeAmount
+// VAT
+// panaltyPerDa 
+?>
 <div class="row">
   <div class="large-12 column">
 
@@ -15,221 +37,280 @@
           </div>
         </div>
 
-<!-- Tab -->
-
-    <ul class="tabs" data-tabs id="rental-tabs">
-      <li class="tabs-title is-active"><a href="#info" aria-selected="true">Info</a></li>
-      <li class="tabs-title"><a href="#inv">Invoice Detail</a></li>
-      <li class="tabs-title"><a href="#contract">Contract Detail</a></li>
-    </ul>
-
     <div class="tabs-content" data-tabs-content="rental-tabs">
       <div class="tabs-panel is-active" id="info">
 
 <!-- Content -->
 
-        <?php echo form_open('/rental/add') ?>
-
         <div class="row">
-          <div class="large-6 columns">
+          <div class="large-5 columns">
+
         <?php
+          
+          if(isset($data)){
+            //Assign Variable
+            $partner_id = array(
+                'type'  =>  'text',
+                'name'  =>  'partner_id',
+                'value' =>  $data[0]->partner_id,
+                'id' => 'partner_id',
+                'data-parsley-required' =>  'true',
+              );
+            $start_contract = array(
+                'type'  =>  'text',
+                'name'  =>  'start_contract',
+                'id'  =>  'start_contract',
+                'value' => $data[0]->start,
+                'data-parsley-required' =>  'true',
+                'class' =>  'datepicker',
+                'readonly' => 'true'
+              );
 
-          $fields = array(
-            'partner' => 'partner_id',
-            'ที่อยู่' => 'address',
-            'ที่อยู่2' => 'address2',
-          );
+            $expire_contract = array(
+                'type'  =>  'text',
+                'name'  =>  'expire_contract',
+                'id'  =>  'expire_contract',
+                'value' => $data[0]->exp,
+                'data-parsley-required' =>  'true',
+                'class' =>  'datepicker',
+                'readonly' => 'true'
+              );
 
-          foreach ($fields as $key => $value) {
-            echo form_label($key).form_input($value);
+            $duration = array(
+                'type'  =>  'text',
+                'name'  =>  'duration',
+                'id'  =>  'duration',
+              );
+
+            echo form_label('ลูกค้า *')
+                .form_input($partner_id);
+            echo form_label('วันที่เริ่มสัญญา *')
+                .form_input($start_contract);
+            echo form_label('วันที่สิ้นสุดสัญญา *')
+                .form_input($expire_contract);
+            echo form_label('ระยะเวลา')
+                .form_input($duration);
           }
-
         ?>
 
           </div>
-          <div class="large-6 columns">
-
+          <div class="large-4 columns">
         <?php
+          
+          if(isset($data)){
+            //Assign Variable
+            $id = $data[0]->id;
+            $create_date = $data[0]->create_date;
+            $ref_doc = $data[0]->ref_doc;
 
-          $fields = array(
-            'เลขที่เอกสาร' => 'id',
-            'วันที่สร้างเอกสาร' => 'create_date',
-            'เอกสารอ้างอิง' => 'ref_doc'
-          );
-
-          foreach ($fields as $key => $value) {
-            echo form_label($key).form_input($value);
+            echo form_label('เลขที่เอกสาร')
+                .form_input('id',$id,'readonly id="id"');
+            echo form_label('วันที่สร้างเอกสาร')
+                .form_input('create_date',$create_date,'readonly');
+            echo form_label('เอกสารอ้างอิง')
+                .form_input('ref_doc',$ref_doc);
           }
-
         ?>
-
           </div>                                                                     
         </div>
 
+        <!-- การจ่ายเงินค้ำประกัน -->
+        <h5>ประเภทการจ่ายเงินค้ำประกัน</h5>
+        <div class="row">
+
+        <?php
+
+        $guaranteeType = array(
+            'เงินสด' => 'เงินสด',
+            'เช็ค' => 'เช็ค',
+            'โอน' => 'โอน',
+          );
+
+          $tranferDate = array(
+              'type'  =>  'text',
+              'name'  =>  'tranferDate',
+              'id'  =>  'tranferDate',
+              'value' => $data[0]->trDate,
+              'data-parsley-required' =>  'true',
+              'class' =>  'datepicker'
+            );
+
+
+          echo '
+
+          <div class="large-2 columns">
+            <label for="middle-label" class="text-right middle">ประเภทการจ่าย</label>
+          </div>
+          <div class="large-4 columns">';
+
+          echo form_dropdown('guaranteeType', $guaranteeType, $data[0]->guaranteeType).'</div>';
+
+          echo '
+          <div class="large-2 columns">
+            <label for="middle-label" class="text-right middle">ลงวันที่</label>
+          </div>
+          <div class="large-4 columns">';
+          echo form_input($tranferDate).'</div>';
+
+        ?>
+        
+        </div>
+
+        <div class="row">
+        <?php
+
+          $i = 0;
+          foreach ($bank as $key) {
+            $banklist[$bank[$i]['id']] = $bank[$i]['name'];
+            $i++;
+          }
+
+          $branch = array(
+              'type'  =>  'text',
+              'name'  =>  'branch',
+              'id'  =>  'branch',
+              'value' => $data[0]->branch
+            );
+
+          echo '
+
+          <div class="large-2 columns">
+            <label for="middle-label" class="text-right middle">สาขา</label>
+          </div>
+          <div class="large-4 columns">';
+
+          echo form_input($branch).'</div>';
+
+          echo '
+          <div class="large-2 columns">
+            <label for="middle-label" class="text-right middle">ธนาคาร</label>
+          </div>
+          <div class="large-4 columns">';
+          echo form_dropdown('Bank', $banklist, $data[0]->Bank).'</div>';
+        ?>
+
+        </div>
+
+        <div class="row">
+        <?php
+
+          $tranferNote = array(
+              'type'  =>  'number',
+              'name'  =>  'tranferNote',
+              'id'  =>  'tranferNote',
+              'value' => $data[0]->tranferNote
+            );
+
+          $Acc_no = array(
+              'type'  =>  'text',
+              'name'  =>  'Acc_no',
+              'id'  =>  'Acc_no',
+              'value' => $data[0]->Acc_no,
+              'class' =>  'bank'
+            );
+
+          echo '
+
+          <div class="large-2 columns">
+            <label for="middle-label" class="text-right middle">เลขที่เช็ค/อ้างอิง</label>
+          </div>
+          <div class="large-4 columns">';
+
+          echo form_input($tranferNote);
+
+          echo '</div>
+          <div class="large-2 columns">
+            <label for="middle-label" class="text-right middle">เลขที่บัญชี</label>
+          </div>
+          <div class="large-4 columns">';
+          echo form_input($Acc_no);
+          echo '</div>';
+        ?>
+
+        </div>
+
+        <!-- การจ่ายเงินค้ำประกัน -->
+
 <hr />
+        <h5>รายการสินค้า</h5>
+
+        <div class="row">
+          <div class="large-12 medium-12 small-12 columns">
+
+          <?php
+            form_open();
+          ?>
+            <div class="row">
+              <div class="large-6 medium-6 small-6 columns">
+                <?php
+
+                  $option = array();
+
+                  $i = 0;
+                  foreach($product as $row){
+                    $option[$row['product_id']] = '('.$row['product_id'].') : '.$row['product_name'];
+                    $i++;
+                  }
+
+                  echo form_dropdown('product_id',$option,'','id="product_id"');
+                ?>
+              </div>
+              <div class="large-4 medium-4 small-4 columns">
+                <?php
+                  echo form_input('product_amount','','id="product_amount" placeholder="จำนวน"')
+                ?>
+              </div>
+
+              <div class="large-2 medium-2 small-2 columns">
+                <a class="button" id="AddtransactionRow">เพิ่ม</a>
+              </div>
+            </div>
+
+          <?php
+            form_close();
+          ?>
+            </div>
+          </div>
+
+<?php
+/*
+  total_rental
+  discount
+  subtotal  = total_rental - discount
+  VAT = subtotal * VATType
+  grandtotal = subtotal + VAT
+
+*/
+    if(isset($data)){
+      //Assign Variable
+    $discount_db = array(
+      'type'  => 'hidden',
+      'name'  => 'discount_db',
+      'value' => $data[0]->discount,
+      'id'    => 'discount_db'
+    );
+      //Assign Variable
+    $VATType_db = array(
+      'type'  => 'hidden',
+      'name'  => 'VATType_db',
+      'value' => $data[0]->VATType,
+      'id'    => 'VATType_db'
+    );
+
+      echo form_input($discount_db);
+      echo form_input($VATType_db);
+
+    }
+
+?>
 
         <div class="row">
             <div class="large-12 columns">
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>รายการสินค้า</th>
-                    <th>จำนวน</th>
-                    <th>หน่วย</th>
-                    <th>ค่าเช่า</th>
-                    <th>ค้ำประกัน</th>
-                    <th>รวม</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td><input type="text" name="product_name" placeholder=""></td>
-                    <td><input type="text" name="product_amount" placeholder=""></td>
-                    <td><input type="text" name="product_unit" placeholder=""></td>
-                    <td><input type="text" name="product_rentalPrice" placeholder=""></td>
-                    <td><input type="text" name="product_GuaranteePrice" placeholder=""></td>
-                    <td></td>
-                    <td><a href="#">Add</a></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="#">Delete</a></td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="4" class="text-right">รวม</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tfoot>
+              <table id="transaction">
               </table>
-
-              <hr />
-
-              <div class="row">
-                <div class="large-6 columns">
-              <?php
-
-                $fields = array(
-                  'วันที่เริ่มสัญญา' => 'start_contract',
-                  'ค่าปรับต่อวันในกรณีเช่าเกิน' => 'paneltyperday'
-                );
-
-                foreach ($fields as $key => $value) {
-                  echo form_label($key).form_input($value);
-                }
-
-              ?>
-                </div>
-
-                <div class="large-6 columns">
-                 <!-- Blank -->
-                </div>
-              </div>
-            
             </div>
         </div>
-
-      </div>
-
-      <div class="tabs-panel" id="inv">
-
-        <h4>รายละเอียดการเรียกเก็บเงิน</h4>
-
-        <div class="row">
-          <div class="large-12 columns">
-            <h5>ค้ำประกัน</h5>
-              <?php
-
-              $options = array(
-                'ca' => 'เงินสด',
-                'tr' => 'เงินโอน',
-                'ch' => 'เช็ค'
-                );
-              echo form_label('การจ่ายเงินค้ำประกัน','GuaranteeType');
-              echo form_dropdown('GuaranteeType',$options);
-
-                $fields = array(
-                  'จำนวนเงินค่าค้ำประกัน' => 'GuaranteeAmount'
-                );
-
-                foreach ($fields as $key => $value) {
-                  echo form_label($key).form_input($value);
-                }
-
-              ?>
-          </div>
-        </div>
-
-        <hr />
-
-        <h5>ค่าเช่า</h5>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>เลขที่ Invoice</th>
-              <th>วันที่ของ Invoice</th>
-              <th>จำนวนเงิน Invoice</th>
-              <th>การชำระเงิน</th>
-              <th>หมายเหตุ</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td><input type="text" name="inv_id" placeholder="กรอก เลขที่ Invoice"></td>
-              <td><input type="text" name="inv_date" placeholder="กรอก วันที่ของ Invoice"></td>
-              <td><input type="text" name="inv_amount" placeholder="กรอก จำนวนเงิน"></td>
-              <td><input type="text" name="inv_payment" placeholder="กรอก วิธีการชำระเงิน"></td>
-              <td><input type="text" name="inv_remark" placeholder="กรอก หมายเหตุ"></td>
-              <td><a href="#">เพิ่ม</a></td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-      <div class="tabs-panel" id="contract">
-        <h4>รายละเอียดการต่อสัญญา</h4>
-
-        <div class="row">
-          <div class="large-12 columns">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>วันสิ้นสุดสัญญาเดิม</th>
-                  <th>วันสิ้นสุดสัญญาใหม่</th>
-                  <th>วันต่อสัญญา</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td><input type="text" name="cont_old_expdate"></td>
-                  <td><input type="text" name="cont_new_expdate"></td>
-                  <td><input type="text" name="cont_moddate"></td>
-                  <td><a href="#">Create</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-      </div>
-
+        
     </div>
 
 

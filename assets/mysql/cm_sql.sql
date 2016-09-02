@@ -13,22 +13,21 @@
 
 
 -- Dumping database structure for cm
-DROP DATABASE IF EXISTS `cm`;
 CREATE DATABASE IF NOT EXISTS `cm` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `cm`;
 
 -- Dumping structure for table cm.bank
-DROP TABLE IF EXISTS `bank`;
 CREATE TABLE IF NOT EXISTS `bank` (
   `id` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.bank: ~34 rows (approximately)
+-- Dumping data for table cm.bank: ~35 rows (approximately)
 DELETE FROM `bank`;
 /*!40000 ALTER TABLE `bank` DISABLE KEYS */;
 INSERT INTO `bank` (`id`, `name`) VALUES
+	('000', '- - -'),
 	('AGR', 'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร'),
 	('AMR', 'ธนาคารเอบีเอ็น แอมโร เอ็น.วี.'),
 	('BA', 'ธนาคารแห่งอเมริกา เนชั่นแนล แอสโซซิเอชั่น'),
@@ -66,7 +65,6 @@ INSERT INTO `bank` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `bank` ENABLE KEYS */;
 
 -- Dumping structure for table cm.dist
-DROP TABLE IF EXISTS `dist`;
 CREATE TABLE IF NOT EXISTS `dist` (
   `Dist_ID` int(5) NOT NULL AUTO_INCREMENT,
   `Dist_CODE` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
@@ -1077,7 +1075,6 @@ INSERT INTO `dist` (`Dist_ID`, `Dist_CODE`, `Dist_NAME`, `POSTCODE`, `GEO_ID`, `
 /*!40000 ALTER TABLE `dist` ENABLE KEYS */;
 
 -- Dumping structure for table cm.geography
-DROP TABLE IF EXISTS `geography`;
 CREATE TABLE IF NOT EXISTS `geography` (
   `GEO_ID` int(5) NOT NULL AUTO_INCREMENT,
   `GEO_NAME` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -1097,7 +1094,6 @@ INSERT INTO `geography` (`GEO_ID`, `GEO_NAME`) VALUES
 /*!40000 ALTER TABLE `geography` ENABLE KEYS */;
 
 -- Dumping structure for table cm.groups
-DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
@@ -1117,7 +1113,6 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
 -- Dumping structure for table cm.hr_att
-DROP TABLE IF EXISTS `hr_att`;
 CREATE TABLE IF NOT EXISTS `hr_att` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `emp_id` char(10) COLLATE utf8_unicode_ci DEFAULT '0',
@@ -1135,7 +1130,6 @@ DELETE FROM `hr_att`;
 /*!40000 ALTER TABLE `hr_att` ENABLE KEYS */;
 
 -- Dumping structure for table cm.hr_dept
-DROP TABLE IF EXISTS `hr_dept`;
 CREATE TABLE IF NOT EXISTS `hr_dept` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `dept_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1155,7 +1149,6 @@ INSERT INTO `hr_dept` (`id`, `dept_name`, `dept_mother`, `dept_manager`) VALUES
 /*!40000 ALTER TABLE `hr_dept` ENABLE KEYS */;
 
 -- Dumping structure for table cm.hr_employee_data
-DROP TABLE IF EXISTS `hr_employee_data`;
 CREATE TABLE IF NOT EXISTS `hr_employee_data` (
   `id` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `emp_prefix` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -1250,7 +1243,6 @@ INSERT INTO `hr_employee_data` (`id`, `emp_prefix`, `emp_fname`, `emp_lname`, `e
 /*!40000 ALTER TABLE `hr_employee_data` ENABLE KEYS */;
 
 -- Dumping structure for table cm.hr_holiday
-DROP TABLE IF EXISTS `hr_holiday`;
 CREATE TABLE IF NOT EXISTS `hr_holiday` (
   `id` int(25) NOT NULL AUTO_INCREMENT,
   `hol_date` date DEFAULT NULL,
@@ -1283,7 +1275,6 @@ INSERT INTO `hr_holiday` (`id`, `hol_date`, `hol_name`, `hol_remark`, `fisyear`)
 /*!40000 ALTER TABLE `hr_holiday` ENABLE KEYS */;
 
 -- Dumping structure for table cm.hr_leave
-DROP TABLE IF EXISTS `hr_leave`;
 CREATE TABLE IF NOT EXISTS `hr_leave` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `emp_id` char(20) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1294,9 +1285,9 @@ CREATE TABLE IF NOT EXISTS `hr_leave` (
   `lve_diff` char(5) COLLATE utf8_unicode_ci NOT NULL,
   `lve_reason` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.hr_leave: ~213 rows (approximately)
+-- Dumping data for table cm.hr_leave: ~222 rows (approximately)
 DELETE FROM `hr_leave`;
 /*!40000 ALTER TABLE `hr_leave` DISABLE KEYS */;
 INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_out`, `lve_diff`, `lve_reason`) VALUES
@@ -1512,11 +1503,19 @@ INSERT INTO `hr_leave` (`id`, `emp_id`, `lve_type`, `lve_date`, `lve_in`, `lve_o
 	(210, 'CM-1038', 'Bis', '2016-08-18', '08:00', '12:00', '0.5', 'ไปต่ออายุใบขับขี่'),
 	(211, 'CM-1038', 'TR', '2016-08-25', '08:00', '12:00', '0.5', 'สอบซ่อม วิชา ACC3353'),
 	(212, 'CM-1038', 'TR', '2016-08-29', '08:00', '17:00', '1', 'สอบซ่อม วิชา ENS3202'),
-	(213, 'CM-1037', 'Si', '2016-08-16', '08:00', '17:00', '1', 'ไข้ขึ้น');
+	(213, 'CM-1037', 'Si', '2016-08-16', '08:00', '17:00', '1', 'ไข้ขึ้น'),
+	(214, 'CM-1007', 'Bis', '2016-08-25', '08:00', '12:00', '0.5', 'รถติดมาสาย'),
+	(215, 'CM-1004', 'Bis', '2016-08-31', '08:00', '17:00', '1', 'ย้ายห้อง'),
+	(216, 'CM-1008', 'Bis', '2016-08-31', '08:00', '17:00', '1', 'ย้ายห้อง'),
+	(217, 'CM-1004', 'Vac', '2016-09-06', '08:00', '17:00', '1', ''),
+	(218, 'CM-1004', 'Vac', '2016-09-07', '08:00', '17:00', '1', ''),
+	(219, 'CM-1004', 'Vac', '2016-09-08', '08:00', '17:00', '1', ''),
+	(220, 'CM-1004', 'Bis', '2016-08-30', '12:00', '17:00', '0.5', 'ไปหาห้องเช่า'),
+	(221, 'CM-1008', 'Si', '2016-09-06', '08:00', '17:00', '1', 'หมอนัด'),
+	(222, 'CM-1008', 'Vac', '2016-09-08', '08:00', '17:00', '1', '');
 /*!40000 ALTER TABLE `hr_leave` ENABLE KEYS */;
 
 -- Dumping structure for table cm.hr_position
-DROP TABLE IF EXISTS `hr_position`;
 CREATE TABLE IF NOT EXISTS `hr_position` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `position_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1537,7 +1536,7 @@ INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`,
 	('0001', 'President', 'MGT', '', NULL, NULL, NULL, NULL, 'Y'),
 	('0002', 'Vice President', 'MGT', 'President', NULL, NULL, NULL, NULL, 'Y'),
 	('0003', 'Corporate Director', 'MGT', 'Vice President', NULL, NULL, '["\\u0e01\\u0e33\\u0e2b\\u0e19\\u0e14\\u0e27\\u0e34\\u0e2a\\u0e31\\u0e22\\u0e17\\u0e31\\u0e28\\u0e19\\u0e4c \\u0e01\\u0e25\\u0e22\\u0e38\\u0e17\\u0e18\\u0e4c \\u0e41\\u0e25\\u0e30\\u0e19\\u0e42\\u0e22\\u0e1a\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\\u0e1b\\u0e0f\\u0e34\\u0e1a\\u0e31\\u0e15\\u0e34\\u0e07\\u0e32\\u0e19","\\u0e27\\u0e32\\u0e07\\u0e41\\u0e1c\\u0e19\\u0e41\\u0e25\\u0e30\\u0e02\\u0e31\\u0e49\\u0e19\\u0e15\\u0e2d\\u0e19\\u0e01\\u0e32\\u0e23\\u0e17\\u0e33\\u0e07\\u0e32\\u0e19\\u0e43\\u0e19\\u0e41\\u0e15\\u0e48\\u0e25\\u0e30\\u0e2a\\u0e48\\u0e27\\u0e19","\\u0e0a\\u0e35\\u0e49\\u0e41\\u0e19\\u0e30\\u0e41\\u0e19\\u0e27\\u0e17\\u0e32\\u0e07\\u0e01\\u0e32\\u0e23\\u0e41\\u0e01\\u0e49\\u0e44\\u0e02\\u0e1b\\u0e31\\u0e0d\\u0e2b\\u0e32","\\u0e15\\u0e23\\u0e27\\u0e08\\u0e2a\\u0e2d\\u0e1a\\u0e01\\u0e32\\u0e23\\u0e17\\u0e33\\u0e07\\u0e32\\u0e19\\u0e43\\u0e19\\u0e41\\u0e15\\u0e48\\u0e25\\u0e30\\u0e2a\\u0e48\\u0e27\\u0e19","\\u0e27\\u0e32\\u0e07\\u0e41\\u0e1c\\u0e19\\u0e2b\\u0e23\\u0e37\\u0e2d\\u0e2a\\u0e23\\u0e23\\u0e2b\\u0e32\\u0e42\\u0e2d\\u0e01\\u0e32\\u0e2a\\u0e43\\u0e19\\u0e01\\u0e32\\u0e23\\u0e25\\u0e07\\u0e17\\u0e38\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e42\\u0e04\\u0e23\\u0e07\\u0e01\\u0e32\\u0e23\\u0e15\\u0e48\\u0e32\\u0e07\\u0e46"]', NULL, 'Y'),
-	('0004', 'Account Cashier', 'ADM', 'General Manager', NULL, NULL, '["\\u0e23\\u0e31\\u0e1a\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32\\u0e2b\\u0e19\\u0e49\\u0e32\\u0e23\\u0e49\\u0e32\\u0e19","\\u0e43\\u0e2b\\u0e49\\u0e04\\u0e33\\u0e1b\\u0e23\\u0e36\\u0e01\\u0e29\\u0e32 \\u0e41\\u0e25\\u0e30\\u0e23\\u0e31\\u0e1a\\u0e1c\\u0e34\\u0e14\\u0e0a\\u0e2d\\u0e1a\\u0e07\\u0e32\\u0e19\\u0e2a\\u0e48\\u0e27\\u0e19\\u0e02\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23\\u0e40\\u0e0a\\u0e48\\u0e32","\\u0e08\\u0e31\\u0e14\\u0e17\\u0e33\\u0e40\\u0e2d\\u0e01\\u0e2a\\u0e32\\u0e23\\u0e01\\u0e32\\u0e23\\u0e40\\u0e0a\\u0e48\\u0e32 ","\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e07\\u0e32\\u0e19\\u0e2a\\u0e23\\u0e38\\u0e1b\\u0e1c\\u0e25\\u0e01\\u0e32\\u0e23\\u0e40\\u0e0a\\u0e48\\u0e32\\u0e41\\u0e25\\u0e30\\u0e23\\u0e30\\u0e22\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e40\\u0e0a\\u0e48\\u0e32","\\u0e1b\\u0e23\\u0e30\\u0e2a\\u0e32\\u0e19\\u0e07\\u0e32\\u0e19\\u0e01\\u0e31\\u0e1a\\u0e1c\\u0e39\\u0e49\\u0e14\\u0e39\\u0e41\\u0e25\\u0e04\\u0e25\\u0e31\\u0e07\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e43\\u0e19\\u0e01\\u0e32\\u0e23\\u0e17\\u0e33\\u0e40\\u0e1a\\u0e34\\u0e01-\\u0e23\\u0e31\\u0e1a\\u0e04\\u0e37\\u0e19\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32 ","\\u0e08\\u0e31\\u0e14\\u0e17\\u0e33\\u0e2a\\u0e23\\u0e38\\u0e1b\\u0e04\\u0e48\\u0e32\\u0e40\\u0e0a\\u0e48\\u0e32\\u0e43\\u0e2b\\u0e49\\u0e01\\u0e31\\u0e1a\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32","\\u0e15\\u0e23\\u0e27\\u0e08\\u0e2a\\u0e2d\\u0e1a\\u0e2a\\u0e20\\u0e32\\u0e1e\\u0e41\\u0e25\\u0e30\\u0e1b\\u0e23\\u0e30\\u0e40\\u0e21\\u0e34\\u0e19\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e2b\\u0e25\\u0e31\\u0e07\\u0e23\\u0e31\\u0e1a\\u0e04\\u0e37\\u0e19","\\u0e08\\u0e31\\u0e14\\u0e17\\u0e33\\u0e40\\u0e1a\\u0e34\\u0e01\\u0e40\\u0e07\\u0e34\\u0e19\\u0e04\\u0e49\\u0e33\\u0e1b\\u0e23\\u0e30\\u0e01\\u0e31\\u0e19\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e04\\u0e37\\u0e19\\u0e43\\u0e19\\u0e01\\u0e23\\u0e13\\u0e35\\u0e08\\u0e1a\\u0e40\\u0e0a\\u0e48\\u0e32\\u0e41\\u0e25\\u0e30\\u0e23\\u0e31\\u0e1a\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e04\\u0e37\\u0e19\\u0e40\\u0e23\\u0e35\\u0e22\\u0e1a\\u0e23\\u0e49\\u0e2d\\u0e22\\u0e41\\u0e25\\u0e49\\u0e27","\\u0e2d\\u0e2d\\u0e01\\u0e43\\u0e1a\\u0e41\\u0e08\\u0e49\\u0e07\\u0e2b\\u0e19\\u0e35\\u0e49\\/\\u0e01\\u0e33\\u0e01\\u0e31\\u0e1a\\u0e20\\u0e32\\u0e29\\u0e35","\\u0e04\\u0e27\\u0e1a\\u0e04\\u0e38\\u0e21\\u0e23\\u0e30\\u0e22\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e40\\u0e01\\u0e47\\u0e1a\\u0e40\\u0e07\\u0e34\\u0e19\\u0e25\\u0e39\\u0e01\\u0e2b\\u0e19\\u0e35\\u0e49 \\u0e2d\\u0e37\\u0e48\\u0e19\\u0e46","\\u0e17\\u0e33\\u0e40\\u0e2d\\u0e01\\u0e2a\\u0e32\\u0e23\\u0e40\\u0e02\\u0e49\\u0e32 Site \\u0e07\\u0e32\\u0e19\\u0e15\\u0e48\\u0e32\\u0e07\\u0e46"]', NULL, 'Y'),
+	('0004', 'Account Cashier', 'ADM', 'General Manager', NULL, NULL, '["\\u0e23\\u0e31\\u0e1a\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32\\u0e2b\\u0e19\\u0e49\\u0e32\\u0e23\\u0e49\\u0e32\\u0e19","\\u0e43\\u0e2b\\u0e49\\u0e04\\u0e33\\u0e1b\\u0e23\\u0e36\\u0e01\\u0e29\\u0e32 \\u0e41\\u0e25\\u0e30\\u0e23\\u0e31\\u0e1a\\u0e1c\\u0e34\\u0e14\\u0e0a\\u0e2d\\u0e1a\\u0e07\\u0e32\\u0e19\\u0e2a\\u0e48\\u0e27\\u0e19\\u0e02\\u0e2d\\u0e07\\u0e01\\u0e32\\u0e23\\u0e40\\u0e0a\\u0e48\\u0e32","\\u0e08\\u0e31\\u0e14\\u0e17\\u0e33\\u0e40\\u0e2d\\u0e01\\u0e2a\\u0e32\\u0e23\\u0e01\\u0e32\\u0e23\\u0e40\\u0e0a\\u0e48\\u0e32 ","\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e07\\u0e32\\u0e19\\u0e2a\\u0e23\\u0e38\\u0e1b\\u0e1c\\u0e25\\u0e01\\u0e32\\u0e23\\u0e40\\u0e0a\\u0e48\\u0e32\\u0e41\\u0e25\\u0e30\\u0e23\\u0e30\\u0e22\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e40\\u0e0a\\u0e48\\u0e32","\\u0e1b\\u0e23\\u0e30\\u0e2a\\u0e32\\u0e19\\u0e07\\u0e32\\u0e19\\u0e01\\u0e31\\u0e1a\\u0e1c\\u0e39\\u0e49\\u0e14\\u0e39\\u0e41\\u0e25\\u0e04\\u0e25\\u0e31\\u0e07\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e43\\u0e19\\u0e01\\u0e32\\u0e23\\u0e17\\u0e33\\u0e40\\u0e1a\\u0e34\\u0e01-\\u0e23\\u0e31\\u0e1a\\u0e04\\u0e37\\u0e19\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32 ","\\u0e08\\u0e31\\u0e14\\u0e17\\u0e33\\u0e2a\\u0e23\\u0e38\\u0e1b\\u0e04\\u0e48\\u0e32\\u0e40\\u0e0a\\u0e48\\u0e32\\u0e43\\u0e2b\\u0e49\\u0e01\\u0e31\\u0e1a\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32","\\u0e15\\u0e23\\u0e27\\u0e08\\u0e2a\\u0e2d\\u0e1a\\u0e2a\\u0e20\\u0e32\\u0e1e\\u0e41\\u0e25\\u0e30\\u0e1b\\u0e23\\u0e30\\u0e40\\u0e21\\u0e34\\u0e19\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e2b\\u0e25\\u0e31\\u0e07\\u0e23\\u0e31\\u0e1a\\u0e04\\u0e37\\u0e19","\\u0e08\\u0e31\\u0e14\\u0e17\\u0e33\\u0e40\\u0e1a\\u0e34\\u0e01\\u0e40\\u0e07\\u0e34\\u0e19\\u0e04\\u0e49\\u0e33\\u0e1b\\u0e23\\u0e30\\u0e01\\u0e31\\u0e19\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e04\\u0e37\\u0e19\\u0e43\\u0e19\\u0e01\\u0e23\\u0e13\\u0e35\\u0e08\\u0e1a\\u0e40\\u0e0a\\u0e48\\u0e32\\u0e41\\u0e25\\u0e30\\u0e23\\u0e31\\u0e1a\\u0e2a\\u0e34\\u0e19\\u0e04\\u0e49\\u0e32\\u0e04\\u0e37\\u0e19\\u0e40\\u0e23\\u0e35\\u0e22\\u0e1a\\u0e23\\u0e49\\u0e2d\\u0e22\\u0e41\\u0e25\\u0e49\\u0e27","\\u0e2d\\u0e2d\\u0e01\\u0e43\\u0e1a\\u0e41\\u0e08\\u0e49\\u0e07\\u0e2b\\u0e19\\u0e35\\u0e49\\/\\u0e01\\u0e33\\u0e01\\u0e31\\u0e1a\\u0e20\\u0e32\\u0e29\\u0e35","\\u0e04\\u0e27\\u0e1a\\u0e04\\u0e38\\u0e21\\u0e23\\u0e30\\u0e22\\u0e30\\u0e40\\u0e27\\u0e25\\u0e32\\u0e40\\u0e01\\u0e47\\u0e1a\\u0e40\\u0e07\\u0e34\\u0e19\\u0e25\\u0e39\\u0e01\\u0e2b\\u0e19\\u0e35\\u0e49 \\u0e2d\\u0e37\\u0e48\\u0e19\\u0e46"]', '', 'Y'),
 	('0005', 'Operation Manager', 'OPT', 'Corporate Director', NULL, NULL, NULL, NULL, 'Y'),
 	('0006', 'Sales & Marketing Manager', 'PJT', 'Corporate Director', NULL, NULL, '["\\u0e01\\u0e33\\u0e2b\\u0e19\\u0e14\\u0e41\\u0e25\\u0e30\\u0e27\\u0e32\\u0e07\\u0e41\\u0e1c\\u0e19\\u0e19\\u0e42\\u0e22\\u0e1a\\u0e32\\u0e22\\u0e43\\u0e2b\\u0e49\\u0e2a\\u0e2d\\u0e14\\u0e04\\u0e25\\u0e49\\u0e2d\\u0e07\\u0e01\\u0e31\\u0e1a\\u0e40\\u0e1b\\u0e49\\u0e32\\u0e2b\\u0e21\\u0e32\\u0e22\\u0e02\\u0e2d\\u0e07\\u0e1a\\u0e23\\u0e34\\u0e29\\u0e31\\u0e17","\\u0e01\\u0e33\\u0e2b\\u0e19\\u0e14\\u0e41\\u0e25\\u0e30\\u0e27\\u0e32\\u0e07\\u0e41\\u0e19\\u0e27\\u0e17\\u0e32\\u0e07\\u0e43\\u0e19\\u0e01\\u0e32\\u0e23\\u0e14\\u0e33\\u0e40\\u0e19\\u0e34\\u0e19\\u0e07\\u0e32\\u0e19","\\u0e27\\u0e32\\u0e07\\u0e41\\u0e1c\\u0e19\\u0e01\\u0e25\\u0e22\\u0e38\\u0e17\\u0e18\\u0e4c\\u0e01\\u0e32\\u0e23\\u0e17\\u0e33\\u0e15\\u0e25\\u0e32\\u0e14","\\u0e15\\u0e34\\u0e14\\u0e15\\u0e48\\u0e2d \\u0e1b\\u0e23\\u0e30\\u0e2a\\u0e32\\u0e19\\u0e07\\u0e32\\u0e19\\u0e01\\u0e31\\u0e1a\\u0e25\\u0e39\\u0e01\\u0e04\\u0e49\\u0e32","\\u0e01\\u0e33\\u0e2b\\u0e19\\u0e14 \\u0e27\\u0e32\\u0e07\\u0e41\\u0e1c\\u0e19\\u0e41\\u0e25\\u0e30\\u0e15\\u0e23\\u0e27\\u0e08\\u0e2a\\u0e2d\\u0e1a\\u0e23\\u0e32\\u0e22\\u0e25\\u0e30\\u0e40\\u0e2d\\u0e35\\u0e22\\u0e14\\u0e15\\u0e48\\u0e32\\u0e07\\u0e46\\u0e02\\u0e2d\\u0e07\\u0e42\\u0e04\\u0e23\\u0e07\\u0e01\\u0e32\\u0e23 \\u0e40\\u0e1e\\u0e37\\u0e48\\u0e2d\\u0e43\\u0e2b\\u0e49\\u0e42\\u0e04\\u0e23\\u0e07\\u0e01\\u0e32\\u0e23\\u0e17\\u0e38\\u0e01\\u0e42\\u0e04\\u0e23\\u0e07\\u0e01\\u0e32\\u0e23\\u0e25\\u0e38\\u0e25\\u0e48\\u0e27\\u0e07"]', '', 'Y'),
 	('0007', 'Messenger', 'ADM', 'Account Cashier', NULL, NULL, NULL, NULL, 'Y'),
@@ -1555,7 +1554,6 @@ INSERT INTO `hr_position` (`id`, `position_name`, `dept_id`, `position_manager`,
 /*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
 
 -- Dumping structure for table cm.inventory_move
-DROP TABLE IF EXISTS `inventory_move`;
 CREATE TABLE IF NOT EXISTS `inventory_move` (
   `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `refdoc_id` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1569,13 +1567,12 @@ CREATE TABLE IF NOT EXISTS `inventory_move` (
   KEY `Index 1` (`refdoc_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.inventory_move: ~0 rows (approximately)
+-- Dumping data for table cm.inventory_move: ~1 rows (approximately)
 DELETE FROM `inventory_move`;
 /*!40000 ALTER TABLE `inventory_move` DISABLE KEYS */;
 /*!40000 ALTER TABLE `inventory_move` ENABLE KEYS */;
 
 -- Dumping structure for table cm.inventory_move_tr
-DROP TABLE IF EXISTS `inventory_move_tr`;
 CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inventory_move_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1587,7 +1584,7 @@ CREATE TABLE IF NOT EXISTS `inventory_move_tr` (
   PRIMARY KEY (`id`),
   KEY `Index 1` (`inventory_move_id`),
   CONSTRAINT `FK_inventory_move_tr_product` FOREIGN KEY (`inventory_move_id`) REFERENCES `inventory_move` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.inventory_move_tr: ~0 rows (approximately)
 DELETE FROM `inventory_move_tr`;
@@ -1595,7 +1592,6 @@ DELETE FROM `inventory_move_tr`;
 /*!40000 ALTER TABLE `inventory_move_tr` ENABLE KEYS */;
 
 -- Dumping structure for table cm.inventory_wh
-DROP TABLE IF EXISTS `inventory_wh`;
 CREATE TABLE IF NOT EXISTS `inventory_wh` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `wh_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -1617,7 +1613,6 @@ INSERT INTO `inventory_wh` (`id`, `wh_name`, `wh_add1`, `wh_add2`, `wh_subDist`,
 /*!40000 ALTER TABLE `inventory_wh` ENABLE KEYS */;
 
 -- Dumping structure for table cm.login_attempts
-DROP TABLE IF EXISTS `login_attempts`;
 CREATE TABLE IF NOT EXISTS `login_attempts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(15) NOT NULL,
@@ -1632,9 +1627,8 @@ DELETE FROM `login_attempts`;
 /*!40000 ALTER TABLE `login_attempts` ENABLE KEYS */;
 
 -- Dumping structure for table cm.partner
-DROP TABLE IF EXISTS `partner`;
 CREATE TABLE IF NOT EXISTS `partner` (
-  `id` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `taxID` int(15) DEFAULT NULL,
   `partner_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1666,11 +1660,10 @@ DELETE FROM `partner`;
 /*!40000 ALTER TABLE `partner` DISABLE KEYS */;
 INSERT INTO `partner` (`id`, `taxID`, `partner_name`, `tel`, `Fax`, `email`, `add1`, `add2`, `SubDist`, `Dist`, `Province`, `Postal`, `Type`, `partner_desc`, `Bank`, `Acc_name`, `Acc_no`, `Acc_type`, `Acc_branch`, `Sector`, `partner_contactor`) VALUES
 	('000', NULL, 'ลูกค้าทั่วไป', '', '', '', '', '', '8', '1', '1', 10000, '["customer"]', '', 'AGR', '', 0, 'กระแสรายวัน', '', 'Building Materials & Fixtures', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}'),
-	('SP-IN-00001', NULL, 'บริษัท รชิต เอ็นจิเนียริ่ง จำกัด', '', '', 'sales.rachita@gmail.com', '106/69-70  หมู่ที่ 9', '', '1165', '142', '11', 20230, '["supplier"]', '- เทปตีเขต Safety\r\n- เทปตีแนว Safety', 'AGR', '', 0, 'กระแสรายวัน', '', 'Building Materials & Fixtures', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
+	('SP-IN-00001', NULL, 'บริษัท รชิต เอ็นจิเนียริ่ง จำกัด', '038-109-162', '', 'sales.rachita@gmail.com', '106/69-70  หมู่ที่ 9', '', '1165', '142', '11', 20230, '["supplier"]', '- เทปตีเขต Safety\r\n- เทปตีแนว Safety', 'BOT', '', 0, 'กระแสรายวัน', '', 'Building Materials & Fixtures', '{"1":{"name":"","position":"","tel":"","email":"","remark":""}}');
 /*!40000 ALTER TABLE `partner` ENABLE KEYS */;
 
 -- Dumping structure for table cm.partner_industries
-DROP TABLE IF EXISTS `partner_industries`;
 CREATE TABLE IF NOT EXISTS `partner_industries` (
   `subsector` char(50) COLLATE utf8_unicode_ci NOT NULL,
   `code` text COLLATE utf8_unicode_ci,
@@ -1801,7 +1794,6 @@ INSERT INTO `partner_industries` (`subsector`, `code`, `sector`, `supersector`, 
 /*!40000 ALTER TABLE `partner_industries` ENABLE KEYS */;
 
 -- Dumping structure for table cm.product
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `product_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1851,7 +1843,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_family`, `product_
 	('CB-1809', 'Cross Brace 1829x914x2045', 'CB', '	Assets', NULL, 3, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('CB-1812', 'Cross Brace 1829x1219x2198', 'CB', '	Assets', NULL, 3, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('CC-BS', 'Beam Swivel Clamp', 'Connection', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
-	('CC-F', 'Clamp - Fix Press Clamp', 'Connection', '	Assets', NULL, 1, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
+	('CC-F', 'Clamp - Fix Press Clamp', 'Connection', 'Assets', 'ตัว', 1, 0, 35, 0, 5, 0, '', 0, '1970-01-01', 0, '{"1":{"Name":"","Desc":""}}'),
 	('CC-HF', 'Heavy Duty Clamp - Fix Clamp', 'Connection', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('CC-HS', 'Heavy Duty Clamp - Swivel Clamp', 'Connection', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('CC-PC', 'Plank Clamp', 'Connection', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
@@ -1878,7 +1870,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_family`, `product_
 	('DF-1204', 'Frame กว้าง 1219x490', 'DF', '	Assets', NULL, 6, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('DF-1209', 'Frame กว้าง 1219x915', 'DF', '	Assets', NULL, 9, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('DF-1212', 'Frame กว้าง 1219x1219', 'DF', '	Assets', NULL, 12, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
-	('DF-1217', 'Frame กว้าง 1219x1700', 'DF', 'Assets', 'ขา', 14, 0, 1350, 1100, 0, 0, '', 0, '0000-00-00', 0, '{"1":{"Name":"","Desc":""}}'),
+	('DF-1217', 'Frame กว้าง 1219x1700', 'DF', 'Assets', 'ขา', 14, 0, 1350, 1100, 50, 500, '', 0, '1970-01-01', 0, '{"1":{"Name":"","Desc":""}}'),
 	('F-1503-B', 'ผ้าเนื้อ สีดำ 1.5x03', 'Others', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('F-1504-B', 'ผ้าเนื้อ สีดำ 1.5x04', 'Others', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
 	('F-1505-B', 'ผ้าเนื้อ สีดำ 1.5x05', 'Others', '	Assets', NULL, 0, NULL, 0, 0, 0, 0, '', 0, '0000-00-00', 0, NULL),
@@ -2038,7 +2030,6 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_family`, `product_
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 -- Dumping structure for table cm.product_attr
-DROP TABLE IF EXISTS `product_attr`;
 CREATE TABLE IF NOT EXISTS `product_attr` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
@@ -2056,7 +2047,6 @@ INSERT INTO `product_attr` (`id`) VALUES
 /*!40000 ALTER TABLE `product_attr` ENABLE KEYS */;
 
 -- Dumping structure for table cm.product_unit
-DROP TABLE IF EXISTS `product_unit`;
 CREATE TABLE IF NOT EXISTS `product_unit` (
   `UnitID` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `UnitName` varchar(50) COLLATE utf8_unicode_ci NOT NULL
@@ -2075,7 +2065,6 @@ INSERT INTO `product_unit` (`UnitID`, `UnitName`) VALUES
 /*!40000 ALTER TABLE `product_unit` ENABLE KEYS */;
 
 -- Dumping structure for table cm.province
-DROP TABLE IF EXISTS `province`;
 CREATE TABLE IF NOT EXISTS `province` (
   `Province_ID` int(5) NOT NULL AUTO_INCREMENT,
   `Province_CODE` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
@@ -2168,23 +2157,31 @@ INSERT INTO `province` (`Province_ID`, `Province_CODE`, `Province_NAME`, `GEO_ID
 /*!40000 ALTER TABLE `province` ENABLE KEYS */;
 
 -- Dumping structure for table cm.rental
-DROP TABLE IF EXISTS `rental`;
 CREATE TABLE IF NOT EXISTS `rental` (
-  `id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `partner_id` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `id` char(50) COLLATE utf8_unicode_ci NOT NULL,
+  `partner_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ref_doc` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `start_contract` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `start_contract` date NOT NULL,
   `expire_contract` date DEFAULT NULL,
+  `duration` int(3) DEFAULT NULL,
   `paymentType` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `guaranteeType` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `paymentAmount` int(30) DEFAULT NULL,
-  `guaranteeAmount` int(30) DEFAULT NULL,
+  `tranferDate` date DEFAULT NULL,
+  `tranferNote` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Bank` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `branch` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Acc_no` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `daily_rental` int(30) DEFAULT NULL,
+  `total_rental` int(30) DEFAULT NULL,
+  `total_guarantee` int(30) DEFAULT NULL,
+  `discount` int(20) DEFAULT NULL,
+  `VATType` tinytext COLLATE utf8_unicode_ci NOT NULL,
   `VAT` int(2) NOT NULL,
-  `panaltyPerDay` int(20) NOT NULL,
+  `grandtotal` int(20) NOT NULL,
+  `active` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `partner_id` (`partner_id`),
-  CONSTRAINT `fk_partner_id` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`) ON UPDATE CASCADE
+  KEY `partner_id` (`partner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table cm.rental: ~0 rows (approximately)
@@ -2192,29 +2189,25 @@ DELETE FROM `rental`;
 /*!40000 ALTER TABLE `rental` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rental` ENABLE KEYS */;
 
--- Dumping structure for table cm.rentaltransaction
-DROP TABLE IF EXISTS `rentaltransaction`;
-CREATE TABLE IF NOT EXISTS `rentaltransaction` (
-  `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `Rentalid` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `productid` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ProductAmount` int(8) DEFAULT NULL,
-  `ProductDescription` int(8) DEFAULT NULL,
-  `ProductRentalDuration` int(5) NOT NULL,
+-- Dumping structure for table cm.rental_tr
+CREATE TABLE IF NOT EXISTS `rental_tr` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `Rental_id` char(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_id` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `amount` int(8) DEFAULT NULL,
+  `desc` int(8) DEFAULT NULL,
+  `duration` int(5) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `Rentalid` (`Rentalid`),
-  KEY `productid` (`productid`),
-  CONSTRAINT `rentaltransaction_ibfk_1` FOREIGN KEY (`Rentalid`) REFERENCES `rental` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `rentaltransaction_ibfk_2` FOREIGN KEY (`productid`) REFERENCES `product` (`product_id`) ON UPDATE CASCADE
+  KEY `Rentalid` (`Rental_id`),
+  KEY `productid` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table cm.rentaltransaction: ~0 rows (approximately)
-DELETE FROM `rentaltransaction`;
-/*!40000 ALTER TABLE `rentaltransaction` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rentaltransaction` ENABLE KEYS */;
+-- Dumping data for table cm.rental_tr: ~0 rows (approximately)
+DELETE FROM `rental_tr`;
+/*!40000 ALTER TABLE `rental_tr` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rental_tr` ENABLE KEYS */;
 
 -- Dumping structure for table cm.subdist
-DROP TABLE IF EXISTS `subdist`;
 CREATE TABLE IF NOT EXISTS `subdist` (
   `SubDist_ID` int(5) NOT NULL AUTO_INCREMENT,
   `SubDist_CODE` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
@@ -11092,7 +11085,6 @@ INSERT INTO `subdist` (`SubDist_ID`, `SubDist_CODE`, `SubDist_NAME`, `Dist_ID`, 
 /*!40000 ALTER TABLE `subdist` ENABLE KEYS */;
 
 -- Dumping structure for table cm.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) NOT NULL,
@@ -11112,22 +11104,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- Dumping data for table cm.users: ~6 rows (approximately)
+-- Dumping data for table cm.users: ~8 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1471784838, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1472809878, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 	(2, '::1', NULL, '$2y$08$row7el1PgeqGDPSy8UHXG.xlKDPBQr8WhEChtQhrWU7rgt80POHxi', NULL, 'bhurivaj@classmat.info', NULL, NULL, NULL, NULL, 1470625981, 1471577168, 1, 'Bhurivaj', 'Padcharaditthakul', NULL, NULL),
 	(3, '::1', NULL, '$2y$08$dmsIMZIhCa5GiZhmZrnYuu/xtDzGqrR0ujhfg42tTKuUyFtHuHlzy', NULL, 'pensom@classmat.info', NULL, NULL, NULL, NULL, 1470710534, NULL, 1, 'Pensom', 'Jaiwong', NULL, NULL),
 	(4, '::1', NULL, '$2y$08$krhMqY7rwMIppHEbx5tNyuKFSZ.ppQPzyjY44vxWlLOb9JJd8vf6e', NULL, 'takdanai@classmat.info', NULL, NULL, NULL, NULL, 1470879179, 1471415798, 1, 'Takdanai', 'Chawalarat', NULL, NULL),
 	(5, '::1', NULL, '$2y$08$cZ6gY8Ep4wwtgMc9R3r1n.NZBHXL.Xrq7FIgIRyz8pxe5B5JHEGk6', NULL, 'bhuripanair@gmail.com', NULL, NULL, NULL, NULL, 1471576429, NULL, 1, 'Bhuripan', 'Padcharaditthakul', NULL, NULL),
-	(6, '::1', NULL, '$2y$08$Lb.fX/ZpdHcPpEcYqMWwyuRiBJ7JCM5zjPA0N9isRO4R6RSxSZCna', NULL, 'prapan@classmat.info', NULL, NULL, NULL, NULL, 1471576481, NULL, 1, 'Prapan', 'Wongubol', NULL, NULL);
+	(6, '::1', NULL, '$2y$08$Lb.fX/ZpdHcPpEcYqMWwyuRiBJ7JCM5zjPA0N9isRO4R6RSxSZCna', NULL, 'prapan@classmat.info', NULL, NULL, NULL, NULL, 1471576481, NULL, 1, 'Prapan', 'Wongubol', NULL, NULL),
+	(7, '::1', NULL, '$2y$08$0BoQ/PeTeWc159R/0aNGFuSxmjP3jEmo2p9VFU.0vMcAGi9uWbT/e', NULL, 'assawathape@classmat.info', NULL, NULL, NULL, NULL, 1472785167, NULL, 1, 'Assawathape', 'Ruengsamran', NULL, NULL),
+	(8, '::1', NULL, '$2y$08$haxUJ486vHuQoJ6UJEEvW.cO.8wIgGtmeE.u40saxDKxvKDgoW.zm', NULL, 'kultika@classmat.info', NULL, NULL, NULL, NULL, 1472785193, NULL, 1, 'Kultika', 'Boonpruang', NULL, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table cm.users_groups
-DROP TABLE IF EXISTS `users_groups`;
 CREATE TABLE IF NOT EXISTS `users_groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -11140,7 +11133,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Dumping data for table cm.users_groups: ~13 rows (approximately)
+-- Dumping data for table cm.users_groups: ~15 rows (approximately)
 DELETE FROM `users_groups`;
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
@@ -11156,7 +11149,9 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 	(10, 4, 2),
 	(11, 4, 3),
 	(12, 5, 2),
-	(13, 6, 2);
+	(13, 6, 2),
+	(14, 7, 2),
+	(15, 8, 2);
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

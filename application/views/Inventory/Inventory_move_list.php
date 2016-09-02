@@ -50,17 +50,9 @@
                 'deliver' =>'ส่งสินค้า'
               );
 
-            $refdoc_id = array(
-                'type'  =>  'text',
-                'name'  =>  'refdoc_id',
-                'id' =>  'refdoc_id',
-                'data-parsley-required' =>  'true'
-              );
 
         echo form_label('เลขที่เอกสาร')
             .form_input($id);
-        echo form_label('รหัสอ้างอิง')
-            .form_input($refdoc_id);
         echo form_label('ชนิดรายการ')
             .form_dropdown('invent_move_type',$tr_type);
       ?>

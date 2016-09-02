@@ -5,7 +5,6 @@
     echo form_open('/Inventory/Inventory/edit/'.$data[0]->id);
   }
 
-
 /*
 
 refdoc_id => รหัสอ้งอิง

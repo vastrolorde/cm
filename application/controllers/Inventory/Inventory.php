@@ -76,8 +76,6 @@ class Inventory extends CI_Controller {
 
 			//ดึงข้อมูล Warehouse
 			$data['warehouse'] = $this->warehouse();
-
-
 			$data['product'] = $this->product_m->product_all();
 
 			$this->load->view('parts/head',$data);

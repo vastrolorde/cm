@@ -151,57 +151,29 @@
 
   <tbody>
   
-  <?php
+<?php
 
+    $date_array = array();
 
-// แปลง format text -> date
-
-foreach ($result as $key) {
-
-    while($StartDate <= $EndDate){
-      $DayOfWeek = date("w", strtotime($StartDate)); //แปลงวันที่เป็นเลขวันในสัปดาห์ 0-6
-
-      if ($DayOfWeek == 0) {
-
-            echo '
-            <tr>
-              <td>'.date("d/m/Y", strtotime($StartDate)).'</td>
-              <td><span style="text:red">วันหยุด</span></td>';
-
-        if (date("d/m/Y", strtotime($StartDate)) == $key->att) {
-          echo '
-            <td>'.$key->pnch_in.'</td>
-            <td>'.$key->pnch_out.'</td>
-            <td>'.$key->pnch_diff.'</td>
-            <td>'.$key->remark.'</td>
-            <td></td>
-      </tr>
-          ';
-        }
-
-      }else{
-
-            echo '
-            <tr>
-              <td>'.date("d/m/Y", strtotime($StartDate)).'</td>
-              <td><span style="text:red">วันทำงาน</span></td>';
-
-        if (date("d/m/Y", strtotime($StartDate)) == $key->att) {
-          echo '
-            <td>'.$key->pnch_in.'</td>
-            <td>'.$key->pnch_out.'</td>
-            <td>'.$key->pnch_diff.'</td>
-            <td>'.$key->remark.'</td>
-            <td></td>
-      </tr>
-          ';
-        }
-      }
-
-
-    $StartDate = date('Y-m-d',strtotime($StartDate . "+1 days")); //บวกวันเพิ่มจาก StartDate 1 วัน
+  while($StartDate <= $EndDate){
+    $DayOfWeek = date("w", strtotime($StartDate)); //แปลงวันที่เป็นเลขวันในสัปดาห์ 0-6
+    if ($DayOfWeek == 0) { //วันหยุด
+      $date_array[$StartDate] = 'วันหยุด';
+    }else{//วันทำงาน
+      $date_array[$StartDate] = 'วันทำงาน';
     }
-}
+  $StartDate = date('Y-m-d',strtotime($StartDate . "+1 days")); //บวกวันเพิ่มจาก StartDate 1 วัน
+  }
+
+  foreach ($result as $key) {
+    echo $key->att;
+  }
+
+  echo '<br />';
+  print_r($date_array);
+  echo '<br />';
+  print_r($result);
+
 
   ?>
   </tbody>

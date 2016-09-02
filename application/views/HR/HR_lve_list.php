@@ -77,7 +77,11 @@
     </div>
 
 <!-- Calendar -->
-    <div id="calendar"></div>
+    <div class="row">
+      <div class="large-8 large-centered columns">
+        <div id="calendar"></div>
+      </div>
+    </div>
 
 <table id="leave datatable">
 

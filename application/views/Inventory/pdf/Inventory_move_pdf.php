@@ -13,7 +13,7 @@
 		$this->pdf->Cell(0,12,iconv( 'UTF-8','TIS-620','ใบรับ/เบิกสินค้า'),0,1,"C");
 
 		$this->pdf->SetFont('angsa','B',14);
-		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','รายชื่อลูกค้า :'),0,0,'R');
+		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','ชื่อลูกค้า :'),0,0,'R');
 		/*2*/	$this->pdf->Cell(60,20,iconv( 'UTF-8','TIS-620',$data[0]->partner_name.'('.$data[0]->partner_id.')'),0,0,'L');
 		/*3*/	$this->pdf->Cell(40);
 		/*4*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620','เลขที่เอกสาร :'),0,0,'R');
