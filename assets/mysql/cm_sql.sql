@@ -11110,7 +11110,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1472809878, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+	(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1472994038, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 	(2, '::1', NULL, '$2y$08$row7el1PgeqGDPSy8UHXG.xlKDPBQr8WhEChtQhrWU7rgt80POHxi', NULL, 'bhurivaj@classmat.info', NULL, NULL, NULL, NULL, 1470625981, 1471577168, 1, 'Bhurivaj', 'Padcharaditthakul', NULL, NULL),
 	(3, '::1', NULL, '$2y$08$dmsIMZIhCa5GiZhmZrnYuu/xtDzGqrR0ujhfg42tTKuUyFtHuHlzy', NULL, 'pensom@classmat.info', NULL, NULL, NULL, NULL, 1470710534, NULL, 1, 'Pensom', 'Jaiwong', NULL, NULL),
 	(4, '::1', NULL, '$2y$08$krhMqY7rwMIppHEbx5tNyuKFSZ.ppQPzyjY44vxWlLOb9JJd8vf6e', NULL, 'takdanai@classmat.info', NULL, NULL, NULL, NULL, 1470879179, 1471415798, 1, 'Takdanai', 'Chawalarat', NULL, NULL),

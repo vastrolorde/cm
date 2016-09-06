@@ -43,10 +43,8 @@
 <!-- Content -->
 
         <div class="row">
-          <div class="large-5 columns">
-
-        <?php
-          
+          <div class="large-3 columns">
+        <?php      
           if(isset($data)){
             //Assign Variable
             $partner_id = array(
@@ -56,6 +54,37 @@
                 'id' => 'partner_id',
                 'data-parsley-required' =>  'true',
               );
+
+            echo form_label('ลูกค้า *')
+            .form_input($partner_id);
+          }
+        ?>           
+          </div>
+          <div class="large-4 columns" id="#customer">
+            
+          </div>
+          <div class="large-4 columns">
+        <?php
+          
+          if(isset($data)){
+            //Assign Variable
+            $id = $data[0]->id;
+
+            echo form_label('เลขที่เอกสาร')
+                .form_input('id',$id,'readonly id="id"');
+
+          }
+        ?>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-5 columns">
+
+        <?php
+          
+          if(isset($data)){
+            //Assign Variable
             $start_contract = array(
                 'type'  =>  'text',
                 'name'  =>  'start_contract',
@@ -82,8 +111,6 @@
                 'id'  =>  'duration',
               );
 
-            echo form_label('ลูกค้า *')
-                .form_input($partner_id);
             echo form_label('วันที่เริ่มสัญญา *')
                 .form_input($start_contract);
             echo form_label('วันที่สิ้นสุดสัญญา *')
@@ -99,12 +126,9 @@
           
           if(isset($data)){
             //Assign Variable
-            $id = $data[0]->id;
             $create_date = $data[0]->create_date;
             $ref_doc = $data[0]->ref_doc;
 
-            echo form_label('เลขที่เอกสาร')
-                .form_input('id',$id,'readonly id="id"');
             echo form_label('วันที่สร้างเอกสาร')
                 .form_input('create_date',$create_date,'readonly');
             echo form_label('เอกสารอ้างอิง')
@@ -175,7 +199,7 @@
           echo '
 
           <div class="large-2 columns">
-            <label for="middle-label" class="text-right middle">สาขา</label>
+            <label for="branch" class="text-right middle">สาขา</label>
           </div>
           <div class="large-4 columns">';
 
@@ -183,7 +207,7 @@
 
           echo '
           <div class="large-2 columns">
-            <label for="middle-label" class="text-right middle">ธนาคาร</label>
+            <label for="Bank" class="text-right middle">ธนาคาร</label>
           </div>
           <div class="large-4 columns">';
           echo form_dropdown('Bank', $banklist, $data[0]->Bank).'</div>';
@@ -212,7 +236,7 @@
           echo '
 
           <div class="large-2 columns">
-            <label for="middle-label" class="text-right middle">เลขที่เช็ค/อ้างอิง</label>
+            <label for="tranferNote" class="text-right middle">เลขที่เช็ค/อ้างอิง</label>
           </div>
           <div class="large-4 columns">';
 
@@ -220,7 +244,7 @@
 
           echo '</div>
           <div class="large-2 columns">
-            <label for="middle-label" class="text-right middle">เลขที่บัญชี</label>
+            <label for="Acc_no" class="text-right middle">เลขที่บัญชี</label>
           </div>
           <div class="large-4 columns">';
           echo form_input($Acc_no);

@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$('#validate_form').parsley();
 
 
-		//autocomplete ลูกค้า
+//autocomplete ลูกค้า
 	$('#partner_id').autocomplete({
 			source: function(req,res){
 				$.ajax({
@@ -25,7 +25,7 @@ $(document).ready(function(){
 			minLength: 2
 	});
 
-	//Call View
+//Call View
 	var inventory_move_id = $('#id').val();
 	$('#transaction').load('<?php echo site_url() ?>/rental/data_tr?id='+inventory_move_id,
 		function(){
@@ -38,19 +38,19 @@ $(document).ready(function(){
 		Date_calc();
 	});
 
-	//Date Date_calc
-function Date_calc(){
-	var start = $('#start_contract').datepicker('getDate');
-	var end   = $('#expire_contract').datepicker('getDate');
-	var days   = (end - start)/1000/60/60/24;
-	
-	$('#duration').val(days+1);
-}
+//Date Date_calc
+	function Date_calc(){
+		var start = $('#start_contract').datepicker('getDate');
+		var end   = $('#expire_contract').datepicker('getDate');
+		var days   = (end - start)/1000/60/60/24;
+		
+		$('#duration').val(days+1);
+	}
 
-function VAT_calc(){
+// Vat calculation
+	function VAT_calc(){
 
 
-	// Vat calculation
 		var daily_rental = $('#daily_rental').val();
 		var total_rental = parseFloat(daily_rental)*parseFloat($('#duration').val());
 		var discount = $('#discount_db').val();
@@ -86,9 +86,9 @@ function VAT_calc(){
 			$('#VAT').val(VAT);
 			$('#grandtotal').val(grandtotal);
 		});
-}
+	}
 
-	//Add
+//Add
 
 	$i = $('#transaction tr').length; //Count Row
 
@@ -142,7 +142,7 @@ function VAT_calc(){
 
 		});
 
-	// Edit Product Row
+// Edit Product Row
 	$('#transaction').on('click','.edit',function(){
 		var amount = $(this).parent().siblings().find('input');
 
@@ -179,7 +179,7 @@ function VAT_calc(){
 		$(this).text('Edit');
 	});
 
-	// Delete Product Row
+// Delete Product Row
 		$('#transaction').on('click','.DeltransactionRow',function(){
 
 		var answer = confirm("คุณต้องการลบหรือไม่?");
@@ -200,5 +200,41 @@ function VAT_calc(){
 
 		});
 
+// Control Peyment
+	$('select[name="guaranteeType"]').each(function(){
+
+				if($(this).val() == 'โอน'){
+					$('input[name="tranferNote"]').attr('readonly',true);
+					$('input[name="Acc_no"]').removeAttr('readonly');
+					$('input[name="Acc_no"]').val('');
+				}else if($(this).val() == 'เงินสด'){
+					$('input[name="tranferNote"]').attr('readonly',true);
+					$('input[name="Acc_no"]').attr('readonly',true);
+					$('input[name="branch"]').attr('readonly',true);
+				}else if($(this).val() == 'เช็ค'){
+					$('input[name="tranferNote"]').removeAttr('readonly');
+					$('input[name="Acc_no"]').removeAttr('readonly');
+					$('input[name="branch"]').removeAttr('readonly');
+					$('input[name="tranferNote"]').val('');
+					$('input[name="Acc_no"]').val('');
+					$('input[name="branch"]').val('');
+				}
+
+			$(this).on('change',function(){
+				if($(this).val() == 'โอน'){
+					$('input[name="tranferNote"]').attr('readonly',true);
+					$('input[name="Acc_no"]').removeAttr('readonly');
+				}else if($(this).val() == 'เงินสด'){
+					$('input[name="tranferNote"]').attr('readonly',true);
+					$('input[name="Acc_no"]').attr('readonly',true);
+					$('input[name="branch"]').attr('readonly',true);
+				}else if($(this).val() == 'เช็ค'){
+					$('input[name="tranferNote"]').removeAttr('readonly');
+					$('input[name="Acc_no"]').removeAttr('readonly');
+					$('input[name="branch"]').removeAttr('readonly');
+				}
+			});
+		});
+	
 });
 </script>
