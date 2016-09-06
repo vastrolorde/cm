@@ -43,7 +43,7 @@
 <!-- Content -->
 
         <div class="row">
-          <div class="large-3 columns">
+          <div class="large-2 columns">
         <?php      
           if(isset($data)){
             //Assign Variable
@@ -61,7 +61,22 @@
         ?>           
           </div>
           <div class="large-4 columns" id="#customer">
-            
+        <?php
+          
+          if(isset($data)){
+            $desc = array(
+                'type'  =>  'text',
+                'name'  =>  'desc',
+                'value' =>  $data[0]->desc,
+                'id' => 'desc',
+                'data-parsley-required' =>  'true',
+              );
+
+            echo form_label('รายละเอียด')
+                .form_input($desc);
+
+          }
+        ?>
           </div>
           <div class="large-4 columns">
         <?php
@@ -268,15 +283,13 @@
               <div class="large-6 medium-6 small-6 columns">
                 <?php
 
-                  $option = array();
+                $product_search = array(
+                    'type' => 'text',
+                    'name' => 'product_search',
+                    'id' => 'product_search'
+                  );
 
-                  $i = 0;
-                  foreach($product as $row){
-                    $option[$row['product_id']] = '('.$row['product_id'].') : '.$row['product_name'];
-                    $i++;
-                  }
-
-                  echo form_dropdown('product_id',$option,'','id="product_id"');
+                  echo form_input($product_search);
                 ?>
               </div>
               <div class="large-4 medium-4 small-4 columns">

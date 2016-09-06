@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Rental_model extends CI_Model {
 
 	public function getAll(){
-		$this->db->select('rental.id, rental.start_contract, rental.expire_contract, pt.partner_name');
+		$this->db->select('rental.id, rental.desc, rental.start_contract, rental.expire_contract, pt.partner_name');
 		$this->db->select("DATE_FORMAT(start_contract,'%d/%m/%Y') as start");
 		$this->db->select("DATE_FORMAT(expire_contract,'%d/%m/%Y') as exp");
 		$this->db->where('active','Y');
@@ -17,7 +17,7 @@ class Rental_model extends CI_Model {
 
 
 	public function get($id){
-		$this->db->select('rental.id, rental.partner_id, rental.create_date, rental.ref_doc, rental.start_contract, rental.expire_contract, rental.duration, rental.paymentType, rental.guaranteeType, rental.tranferDate,rental.Acc_no , rental.tranferNote, rental.Bank, rental.branch, rental.daily_rental, rental.total_rental, rental.total_guarantee, rental.discount, rental.VATType, rental.VAT, rental.grandtotal, rental.active ');
+		$this->db->select('rental.id, rental.partner_id, rental.desc, rental.create_date, rental.ref_doc, rental.start_contract, rental.expire_contract, rental.duration, rental.paymentType, rental.guaranteeType, rental.tranferDate,rental.Acc_no , rental.tranferNote, rental.Bank, rental.branch, rental.daily_rental, rental.total_rental, rental.total_guarantee, rental.discount, rental.VATType, rental.VAT, rental.grandtotal, rental.active ');
 		$this->db->select('pt.partner_name, pt.tel, pt.email');
 		$this->db->select('bank.name as bankname');
 		$this->db->select("DATE_FORMAT(rental.start_contract, '%d/%m/%Y') as start");

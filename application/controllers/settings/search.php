@@ -23,4 +23,16 @@ class Search extends CI_Controller {
 		echo json_encode($result);
 	}
 
+		//lookup product data
+	public function lookup_product()
+	{
+		$search = $this->input->post('search');
+		$this->db->select('product_id,product_name');
+		$this->db->from('product');
+		$this->db->like('product_id',$search);
+		$this->db->or_like('product_name',$search);
+		$result = $this->db->get()->result();
+		echo json_encode($result);
+	}
+
 }

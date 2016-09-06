@@ -120,6 +120,7 @@ class Rental extends CI_Controller {
 		'expire_contract' =>	date('Y-m-d', strtotime( str_replace('/', '-', $this->input->post('expire_contract')) ) ),
 		'duration'        =>	$this->input->post('duration'),
 		'partner_id'      =>	$this->input->post('partner_id'),
+		'desc'            =>	$this->input->post('desc'),
 		'discount'        =>	$this->input->post('discount'),
 		'daily_rental'    =>	$this->input->post('daily_rental'),
 		'total_rental'    =>	$this->input->post('total_rental'),

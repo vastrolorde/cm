@@ -23,18 +23,22 @@
 		/*5*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620',$data[0]->id),0,0,'L');
 		/*6*/	$this->pdf->Ln(6);
 
-		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','เบอร์ติดต่อ :'),0,0,'R');
-		/*2*/	$this->pdf->Cell(60,20,iconv( 'UTF-8','TIS-620',$data[0]->tel),0,0,'L');
+		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','รายละเอียด :'),0,0,'R');
+		/*2*/	$this->pdf->Cell(60,20,iconv( 'UTF-8','TIS-620',$data[0]->desc),0,0,'L');
 		/*3*/	$this->pdf->Cell(40);
 		/*4*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620','วันที่เอกสาร :'),0,0,'R');
 		/*5*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620',$data[0]->create_date),0,0,'L');
 		/*6*/	$this->pdf->Ln(6);
 
-		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','e-mail :'),0,0,'R');
-		/*2*/	$this->pdf->Cell(60,20,iconv( 'UTF-8','TIS-620',$data[0]->email),0,0,'L');
+		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','เบอร์ติดต่อ :'),0,0,'R');
+		/*2*/	$this->pdf->Cell(60,20,iconv( 'UTF-8','TIS-620',$data[0]->tel),0,0,'L');
 		/*3*/	$this->pdf->Cell(40);
 		/*4*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620','เอกสารอ้างอิง :'),0,0,'R');
-		/*4*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620',$data[0]->ref_doc),0,0,'L');
+		/*5*/	$this->pdf->Cell(20,20,iconv( 'UTF-8','TIS-620',$data[0]->ref_doc),0,0,'L');
+		/*6*/	$this->pdf->Ln(6);
+
+		/*1*/	$this->pdf->Cell(30,20,iconv( 'UTF-8','TIS-620','e-mail :'),0,0,'R');
+		/*2*/	$this->pdf->Cell(60,20,iconv( 'UTF-8','TIS-620',$data[0]->email),0,0,'L');
 		/*5*/	$this->pdf->Ln(18);
 
 				$this->pdf->Cell(192,6,iconv( 'UTF-8','TIS-620','ระยะเวลาสัญญา'),1,0,'C');

@@ -25,6 +25,27 @@ $(document).ready(function(){
 			minLength: 2
 	});
 
+//autocomplete ลูกค้า
+	$('#product_search').autocomplete({
+			source: function(req,res){
+				$.ajax({
+					url:'<?php echo site_url() ?>/settings/search/lookup_product',
+					data: {search: $('#product_search').val()},
+					dataType:"json",
+					type:"POST",
+					success: function(data){
+						res(data.map(function(value){
+								return {
+									'label' : value.product_name,
+									'value' : value.product_id
+								}
+						}));
+					}
+				})
+			},
+			minLength: 2
+	});
+
 //Call View
 	var inventory_move_id = $('#id').val();
 	$('#transaction').load('<?php echo site_url() ?>/rental/data_tr?id='+inventory_move_id,
